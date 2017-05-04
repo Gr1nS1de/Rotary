@@ -39,22 +39,13 @@ public class GameController : Controller
 					break;
 				}
 
-
-			case N.GearsColliderTriggered_____:
-				{
-					//var obstacleView = (ObstacleView)data [0];
-					//var collisionPoint = (Vector2)data [1];
-
-					break;
-				}
-
 			case N.GameOver:
 				{
 					var collisionPoint = (Vector2)data [0];
 
 					GameOver (collisionPoint);
 
-					game.model.gameState = GameState.GAMEOVER;
+					game.model.gameState = GameState.GAME_OVER;
 
 					break;
 				}
@@ -127,7 +118,7 @@ public class GameController : Controller
 */
 	private void GameOver( Vector2 collisionPoint )
 	{
-		if (game.model.gameState == GameState.GAMEOVER)
+		if (game.model.gameState == GameState.GAME_OVER)
 			return;
 
 		//ReportScoreToLeaderboard(point);

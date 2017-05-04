@@ -24,7 +24,7 @@ public class UIMenuController : Controller
 	#region Public methods
 	public void ButtonGenerateLevel()
 	{
-		Notify (N.StartGenerateLevel);
+		Notify (N.StartGame);
 	}
 	#endregion
 

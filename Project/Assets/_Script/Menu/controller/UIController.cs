@@ -83,13 +83,5 @@ public class UIController : Controller
 				complete();
 		});*/
 	}
-
-	public void OnClickedStart()
-	{
-		Notify (N.UIClickedStart, NotifyType.GAME);
-
-		OnStartGame(null);
-
-	}
 		
 }

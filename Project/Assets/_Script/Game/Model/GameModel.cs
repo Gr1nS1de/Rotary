@@ -6,7 +6,8 @@ public enum GameState
 {
 	MAIN_MENU,
 	PLAYING,
-	GAMEOVER
+	PAUSE,
+	GAME_OVER
 }
 
 public class GameModel : Model

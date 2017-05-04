@@ -12,13 +12,13 @@ public class InputController : Controller
 		{
 			_isMovedStarted = true;
 
-			Notify (N.OnInputGear___, NotifyType.GAME, e.Selection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
+			Notify (N.OnGameInput___, NotifyType.GAME, e.Selection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
 		}
 
 		if ((_isMovedStarted || _isStationaryStarted) && e.Phase == FingerMotionPhase.Updated)
 		{
 			//Null selected sended bcs it is currentGearView
-			Notify (N.OnInputGear___, NotifyType.GAME, null, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
+			Notify (N.OnGameInput___, NotifyType.GAME, null, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
 		}
 			
 
@@ -31,7 +31,7 @@ public class InputController : Controller
 		{
 			_isStationaryStarted = true;
 
-			Notify (N.OnInputGear___, NotifyType.GAME, e.Selection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
+			Notify (N.OnGameInput___, NotifyType.GAME, e.Selection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
 		}
 		
 	}
@@ -42,7 +42,7 @@ public class InputController : Controller
 		{
 			_isMovedStarted = false;
 			_isStationaryStarted = false;
-			Notify (N.OnInputGear___, NotifyType.GAME, null, Camera.main.ScreenToWorldPoint(e.Position), FingerMotionPhase.Ended);
+			Notify (N.OnGameInput___, NotifyType.GAME, null, Camera.main.ScreenToWorldPoint(e.Position), FingerMotionPhase.Ended);
 		}
 	}
 
