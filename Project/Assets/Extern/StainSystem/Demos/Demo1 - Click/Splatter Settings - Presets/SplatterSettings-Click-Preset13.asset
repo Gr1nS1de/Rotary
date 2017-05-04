@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bbf7ec794347c49beaec86c5345ec, type: 3}
+  m_Name: SplatterSettings-Click-Preset13
+  m_EditorClassIdentifier: 
+  mode: 1
+  directionMode: 0
+  spanAngle: 90
+  directionReference: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  orientation: 0
+  numBranchesMean: 4.13
+  numBranchesVariance: 2.96
+  branchChildrenMean: 7.91
+  branchChildrenVariance: 0
+  scaleMean: 0.8
+  scaleVariance: 0.967
+  scaleMin: 0.1
+  centerPositionRange: 0.014
+  randomRotation: 0
+  moveSpeedMean: 0.32
+  moveSpeedVariance: 0.704
+  stepDuration: 0.01
+  damping: 0.432
+  colorMode: 1
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0.9921569, g: 0.9450981, b: 0.2627451, a: 0}
+  multiplyColor: 0
+  fadeOutBranches: 0
+  brightnessVariation: 0.494
+  hueVariation: 0.478
+  saturationVariation: 0.475
+  particleMode: 1
+  particleTexture: {fileID: 0}
+  maxParticles: 5000
+  removeParticles: 0
+  particleLifetime: 0.5
+  sortingLayerName: Default

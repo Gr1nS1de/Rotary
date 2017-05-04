@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bbf7ec794347c49beaec86c5345ec, type: 3}
+  m_Name: SplatterSettings-Turret-Preset2-DrawLeaves
+  m_EditorClassIdentifier: 
+  mode: 1
+  directionMode: 0
+  spanAngle: 180
+  directionReference: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  orientation: 0
+  numBranchesMean: 2.67
+  numBranchesVariance: 1.83
+  branchChildrenMean: 4.98
+  branchChildrenVariance: 1.39
+  scaleMean: 1.34
+  scaleVariance: 0.106
+  scaleMin: 0.1
+  centerPositionRange: 0.273
+  randomRotation: 1
+  moveSpeedMean: 0.189
+  moveSpeedVariance: 0.3
+  stepDuration: 0.01
+  damping: 0.3
+  colorMode: 0
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0.23529413, g: 0.5176471, b: 0.16862746, a: 0}
+  - {r: 0.34552488, g: 0.50735295, b: 0.19025736, a: 0}
+  - {r: 0.40726045, g: 0.5441177, b: 0.22404845, a: 0}
+  multiplyColor: 0
+  fadeOutBranches: 0
+  brightnessVariation: 0.014
+  hueVariation: 0.011
+  saturationVariation: 0.005
+  particleMode: 2
+  particleTexture: {fileID: 2800000, guid: 74303a3f542a94914bcd5193961cd78f, type: 3}
+  maxParticles: 10000
+  removeParticles: 0
+  particleLifetime: 10
+  sortingLayerName: Default

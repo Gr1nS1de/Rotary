@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bbf7ec794347c49beaec86c5345ec, type: 3}
+  m_Name: SplatterSettings-Platformer-Preset6-StainsLarge
+  m_EditorClassIdentifier: 
+  mode: 1
+  directionMode: 0
+  spanAngle: 90
+  directionReference: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  orientation: 0
+  numBranchesMean: 1
+  numBranchesVariance: 0.99
+  branchChildrenMean: 1
+  branchChildrenVariance: 1.07
+  scaleMean: 2
+  scaleVariance: 0.038
+  scaleMin: 0.1
+  centerPositionRange: 0.097
+  randomRotation: 1
+  moveSpeedMean: 0.029
+  moveSpeedVariance: 0.077
+  stepDuration: 0.014
+  damping: 0.01
+  colorMode: 0
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0.8745099, g: 0.14117648, b: 0.31764707, a: 0}
+  - {r: 0.8745099, g: 0.27772814, b: 0.14117646, a: 0}
+  - {r: 0.8745099, g: 0.3991075, b: 0.14117646, a: 0}
+  - {r: 0.8745099, g: 0.5811766, b: 0.14117646, a: 0}
+  multiplyColor: 0
+  fadeOutBranches: 0
+  brightnessVariation: 0.01
+  hueVariation: 0
+  saturationVariation: 0
+  particleMode: 2
+  particleTexture: {fileID: 2800000, guid: 74303a3f542a94914bcd5193961cd78f, type: 3}
+  maxParticles: 10000
+  removeParticles: 0
+  particleLifetime: 10
+  sortingLayerName: Default

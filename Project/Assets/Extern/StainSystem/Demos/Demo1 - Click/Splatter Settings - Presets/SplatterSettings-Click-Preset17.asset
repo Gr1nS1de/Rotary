@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bbf7ec794347c49beaec86c5345ec, type: 3}
+  m_Name: SplatterSettings-Click-Preset17
+  m_EditorClassIdentifier: 
+  mode: 1
+  directionMode: 0
+  spanAngle: 90
+  directionReference: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  orientation: 0
+  numBranchesMean: 17
+  numBranchesVariance: 4.11
+  branchChildrenMean: 10.4
+  branchChildrenVariance: 2.5
+  scaleMean: 0.6
+  scaleVariance: 0.1
+  scaleMin: 0.1
+  centerPositionRange: 0.4
+  randomRotation: 0
+  moveSpeedMean: 0.82
+  moveSpeedVariance: 0.3
+  stepDuration: 0.01
+  damping: 0.3
+  colorMode: 0
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0.27058825, g: 0.58431375, b: 0.5882353, a: 0}
+  - {r: 0.9568628, g: 0.83921576, b: 0.49803925, a: 0}
+  - {r: 0.9058824, g: 0.41176474, b: 0.32156864, a: 0}
+  - {r: 0.8745099, g: 0.14117648, b: 0.31764707, a: 0}
+  - {r: 0.61960787, g: 0.17254902, b: 0.41176474, a: 0}
+  multiplyColor: 0
+  fadeOutBranches: 0
+  brightnessVariation: 0.072
+  hueVariation: 0.127
+  saturationVariation: 0
+  particleMode: 0
+  particleTexture: {fileID: 0}
+  maxParticles: 5000
+  removeParticles: 0
+  particleLifetime: 2
+  sortingLayerName: Default

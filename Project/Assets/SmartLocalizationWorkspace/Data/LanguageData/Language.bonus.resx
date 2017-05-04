@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root><!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader><data name="PickedUp" xml:space="preserve">
+<value>picked up</value>
+</data>
+<data name="TK_ACAM_1_NAME" xml:space="preserve">
+<value>camouflage</value>
+</data>
+<data name="TK_ACAM_10_NAME" xml:space="preserve">
+<value>camouflage 9</value>
+</data>
+<data name="TK_ACAM_2_NAME" xml:space="preserve">
+<value>camouflage 1</value>
+</data>
+<data name="TK_ACAM_3_NAME" xml:space="preserve">
+<value>camouflage 2</value>
+</data>
+<data name="TK_ACAM_4_NAME" xml:space="preserve">
+<value>camouflage 3</value>
+</data>
+<data name="TK_ACAM_5_NAME" xml:space="preserve">
+<value>camouflage 4</value>
+</data>
+<data name="TK_ACAM_6_NAME" xml:space="preserve">
+<value>camouflage 5</value>
+</data>
+<data name="TK_ACAM_7_NAME" xml:space="preserve">
+<value>camouflage 6</value>
+</data>
+<data name="TK_ACAM_8_NAME" xml:space="preserve">
+<value>camouflage 7</value>
+</data>
+<data name="TK_ACAM_9_NAME" xml:space="preserve">
+<value>camouflage 8</value>
+</data>
+<data name="TK_ACCUR/EFFECT_NAME" xml:space="preserve">
+<value>Accuracy / EFFECTIVENESS</value>
+</data>
+<data name="TK_ACCURACY_NAME" xml:space="preserve">
+<value>ACCURACY</value>
+</data>
+<data name="TK_ACHIEVMENT_NAME" xml:space="preserve">
+<value>ACHIEVEMENTS</value>
+</data>
+<data name="TK_AGAIN_NAME" xml:space="preserve">
+<value>AGAIN?</value>
+</data>
+<data name="TK_AK_NAME" xml:space="preserve">
+<value>AK-74M</value>
+</data>
+<data name="TK_ALLIANCE_NAME" xml:space="preserve">
+<value>ALLIANCE</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_1_NAME" xml:space="preserve">
+<value>inkassator1</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_2_NAME" xml:space="preserve">
+<value>inkassator2</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_3_NAME" xml:space="preserve">
+<value>inkassator3</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_4_NAME" xml:space="preserve">
+<value>inkassator4</value>
+</data>
+<data name="TK_ARMORY_NAME" xml:space="preserve">
+<value>weapon</value>
+</data>
+<data name="TK_ARMORY10_NAME" xml:space="preserve">
+<value>ratnik9</value>
+</data>
+<data name="TK_ARMORY6_NAME" xml:space="preserve">
+<value>ratnik5</value>
+</data>
+<data name="TK_ARMORY7_NAME" xml:space="preserve">
+<value>ratnik6</value>
+</data>
+<data name="TK_ARMORY8_NAME" xml:space="preserve">
+<value>ratnik7</value>
+</data>
+<data name="TK_ARMORY9_NAME" xml:space="preserve">
+<value>ratnik8</value>
+</data>
+<data name="TK_AUG_NAME" xml:space="preserve">
+<value>aug</value>
+</data>
+<data name="TK_AUTHORS_NAME" xml:space="preserve">
+<value>AUTHORS</value>
+</data>
+<data name="TK_BATTLEMODE_AREA_NAME" xml:space="preserve">
+<value>CONTROL AREA</value>
+</data>
+<data name="TK_BATTLEMODE_EVERYONE_NAME" xml:space="preserve">
+<value>AGAINST EVERYONE</value>
+</data>
+<data name="TK_BATTLEMODE_TEAM_NAME" xml:space="preserve">
+<value>TEAM FIGHT</value>
+</data>
+<data name="TK_BATTLES_NAME" xml:space="preserve">
+<value>BATTLES</value>
+</data>
+<data name="TK_CHARGER_NAME" xml:space="preserve">
+<value>charger</value>
+</data>
+<data name="TK_CHAT_NAME" xml:space="preserve">
+<value>CHAT</value>
+</data>
+<data name="TK_CHOOSEBATTLEMODE_NAME" xml:space="preserve">
+<value>on a mission</value>
+</data>
+<data name="TK_COMEIN_NAME" xml:space="preserve">
+<value>TO COME IN</value>
+</data>
+<data name="TK_CONDITIONQUEST_NAME" xml:space="preserve">
+<value>CONDITION JOB</value>
+</data>
+<data name="TK_CONTINUE_NAME" xml:space="preserve">
+<value>CONTINUE</value>
+</data>
+<data name="TK_COSTSTAMINA_NAME" xml:space="preserve">
+<value>It requires energy</value>
+</data>
+<data name="TK_COUNTBATTLE_NAME" xml:space="preserve">
+<value>FIGHTS</value>
+</data>
+<data name="TK_CREDITS" xml:space="preserve">
+<value>Production:>>VGTRK>>>>Developers:>>Petr Ivanov>>Alex Petrov>>Zhitel Zemli>>>>Designers:>>Alex Samokrytkin>>Teodor Makrin>>Mark Lizerginov>>>>SEO:>>Karl Marks>>Zanoschivii Karl</value>
+</data>
+<data name="TK_CUPSCUP_NAME" xml:space="preserve">
+<value>Cup Winners' Cup</value>
+</data>
+<data name="TK_CUPSSQUARD_NAME" xml:space="preserve">
+<value>CUP SQUAD</value>
+</data>
+<data name="TK_CUPSWORLD_NAME" xml:space="preserve">
+<value>WORLD CUP</value>
+</data>
+<data name="TK_DAMAGE_NAME" xml:space="preserve">
+<value>DAMAGE</value>
+</data>
+<data name="TK_DEATHMATCH_NAME" xml:space="preserve">
+<value>Against everyone</value>
+</data>
+<data name="TK_DIFFICULTY_NAME" xml:space="preserve">
+<value>DIFFICULTY LEVEL</value>
+</data>
+<data name="TK_EDITPROFILE_NAME" xml:space="preserve">
+<value>EDIT PROFILE</value>
+</data>
+<data name="TK_EQUIPMENT_NAME" xml:space="preserve">
+<value>equipment</value>
+</data>
+<data name="TK_FAMAS_NAME" xml:space="preserve">
+<value>famas</value>
+</data>
+<data name="TK_FLAG_NAME" xml:space="preserve">
+<value>FLAG</value>
+</data>
+<data name="TK_GAMESETTINGS_NAME" xml:space="preserve">
+<value>game settings</value>
+</data>
+<data name="TK_GUN_NAME" xml:space="preserve">
+<value>RIFLE</value>
+</data>
+<data name="TK_HELMETS_NAME" xml:space="preserve">
+<value>HELMETS</value>
+</data>
+<data name="TK_HIGHESTACHIVE_NAME" xml:space="preserve">
+<value>the highest achievement</value>
+</data>
+<data name="TK_IDPLAYER_NAME" xml:space="preserve">
+<value>Player ID</value>
+</data>
+<data name="TK_INFODEATH" xml:space="preserve">
+<value>KILLED</value>
+</data>
+<data name="TK_INFORMATION_NAME" xml:space="preserve">
+<value>INFORMATION</value>
+</data>
+<data name="TK_INFOSHOT" xml:space="preserve">
+<value>SHOOT</value>
+</data>
+<data name="TK_INVATE_NAME" xml:space="preserve">
+<value>INVITATIONS</value>
+</data>
+<data name="TK_KILL/HEADSHOT_NAME" xml:space="preserve">
+<value>Kill / MIND</value>
+</data>
+<data name="TK_L115_NAME" xml:space="preserve">
+<value>l115</value>
+</data>
+<data name="TK_L85_NAME" xml:space="preserve">
+<value>l85</value>
+</data>
+<data name="TK_LANGUAGE_NAME" xml:space="preserve">
+<value>LANGUAGE</value>
+</data>
+<data name="TK_LEAVEGAME_NAME" xml:space="preserve">
+<value>leave the game</value>
+</data>
+<data name="TK_LEVEL_NAME" xml:space="preserve">
+<value>LEVEL</value>
+</data>
+<data name="TK_LEVEL1_NAME" xml:space="preserve">
+<value>Syria</value>
+</data>
+<data name="TK_LEVEL2_NAME" xml:space="preserve">
+<value>Military training</value>
+</data>
+<data name="TK_LEVEL3_NAME" xml:space="preserve">
+<value>Sea port</value>
+</data>
+<data name="TK_LEVEL4_NAME" xml:space="preserve">
+<value>Sugar factory</value>
+</data>
+<data name="TK_LEVEL5_NAME" xml:space="preserve">
+<value>Republic Torgo</value>
+</data>
+<data name="TK_LEVEL99_NAME" xml:space="preserve">
+<value>The test room</value>
+</data>
+<data name="TK_LOSE_NAME" xml:space="preserve">
+<value>DEFEAT</value>
+</data>
+<data name="TK_M16_NAME" xml:space="preserve">
+<value>M16</value>
+</data>
+<data name="TK_MAXPLAYERS_NAME" xml:space="preserve">
+<value>MAXIMUM OF PLAYERS</value>
+</data>
+<data name="TK_MSGKILLED_NAME" xml:space="preserve">
+<value>YOU KILLED</value>
+</data>
+<data name="TK_MUSIC_NAME" xml:space="preserve">
+<value>MUSIC</value>
+</data>
+<data name="TK_MYPROFILE_NAME" xml:space="preserve">
+<value>profile</value>
+</data>
+<data name="TK_OF_NAME" xml:space="preserve">
+<value>OF</value>
+</data>
+<data name="TK_ONLINE_NAME" xml:space="preserve">
+<value>ONLINE</value>
+</data>
+<data name="TK_ORSIS_NAME" xml:space="preserve">
+<value>orsis</value>
+</data>
+<data name="TK_PARTICIPANTS_NAME" xml:space="preserve">
+<value>PARTICIPANTS</value>
+</data>
+<data name="TK_RATINGS_NAME" xml:space="preserve">
+<value>RATINGS</value>
+</data>
+<data name="TK_RATNIK_NAME" xml:space="preserve">
+<value>ratnik</value>
+</data>
+<data name="TK_REPORTERROR_NAME" xml:space="preserve">
+<value>Report an error</value>
+</data>
+<data name="TK_REQUEST_NAME" xml:space="preserve">
+<value>REQUESTS</value>
+</data>
+<data name="TK_RESETPROGRESS_NAME" xml:space="preserve">
+<value>RESET PROGRESS</value>
+</data>
+<data name="TK_RESP_NAME" xml:space="preserve">
+<value>to revive</value>
+</data>
+<data name="TK_REWARD_NAME" xml:space="preserve">
+<value>REWARD</value>
+</data>
+<data name="TK_SAVE_NAME" xml:space="preserve">
+<value>SAVE</value>
+</data>
+<data name="TK_SETTINGS_NAME" xml:space="preserve">
+<value>SETTINGS</value>
+</data>
+<data name="TK_SHOP_NAME" xml:space="preserve">
+<value>SCORE</value>
+</data>
+<data name="TK_SHOT/TARGET_NAME" xml:space="preserve">
+<value>SHOTS / The TARGET</value>
+</data>
+<data name="TK_SOUND_NAME" xml:space="preserve">
+<value>SOUND</value>
+</data>
+<data name="TK_SPEED_NAME" xml:space="preserve">
+<value>SPEED</value>
+</data>
+<data name="TK_SQUADMATCH_NAME" xml:space="preserve">
+<value>team fight</value>
+</data>
+<data name="TK_SQUARD_NAME" xml:space="preserve">
+<value>squad</value>
+</data>
+<data name="TK_STAMINA_NAME" xml:space="preserve">
+<value>ENERGY</value>
+</data>
+<data name="TK_STATISTIC_NAME" xml:space="preserve">
+<value>STATISTICS</value>
+</data>
+<data name="TK_STEYR_NAME" xml:space="preserve">
+<value>Steyr</value>
+</data>
+<data name="TK_SVD_NAME" xml:space="preserve">
+<value>SVD</value>
+</data>
+<data name="TK_TERRITORY_NAME" xml:space="preserve">
+<value>Battle for territory</value>
+</data>
+<data name="TK_THEWORLDCUP_NAME" xml:space="preserve">
+<value>The WORLD CUP</value>
+</data>
+<data name="TK_TITLEQUEST_NAME" xml:space="preserve">
+<value>Completing quests and get:</value>
+</data>
+<data name="TK_TYPESQUARD_NAME" xml:space="preserve">
+<value>TYPE OF PARTICIPATION</value>
+</data>
+<data name="TK_VICTORIES_NAME" xml:space="preserve">
+<value>VICTORIES</value>
+</data>
+<data name="TK_VINTOREZ_NAME" xml:space="preserve">
+<value>Vintorez</value>
+</data>
+<data name="TK_WCAM_1_NAME" xml:space="preserve">
+<value>multicam</value>
+</data>
+<data name="TK_WCAM_10_NAME" xml:space="preserve">
+<value>multicam9</value>
+</data>
+<data name="TK_WCAM_2_NAME" xml:space="preserve">
+<value>multicam1</value>
+</data>
+<data name="TK_WCAM_3_NAME" xml:space="preserve">
+<value>multicam2</value>
+</data>
+<data name="TK_WCAM_4_NAME" xml:space="preserve">
+<value>multicam3</value>
+</data>
+<data name="TK_WCAM_5_NAME" xml:space="preserve">
+<value>multicam4</value>
+</data>
+<data name="TK_WCAM_6_NAME" xml:space="preserve">
+<value>multicam5</value>
+</data>
+<data name="TK_WCAM_7_NAME" xml:space="preserve">
+<value>multicam6</value>
+</data>
+<data name="TK_WCAM_8_NAME" xml:space="preserve">
+<value>multicam7</value>
+</data>
+<data name="TK_WCAM_9_NAME" xml:space="preserve">
+<value>multicam8</value>
+</data>
+<data name="TK_WIN_NAME" xml:space="preserve">
+<value>VICTORY!</value>
+</data>
+<data name="TK_ZOOM_NAME" xml:space="preserve">
+<value>INCREASE</value>
+</data>
+<data name="##EMPTY_KEY №121##" xml:space="preserve">
+<value>en</value>
+</data>
+</root>

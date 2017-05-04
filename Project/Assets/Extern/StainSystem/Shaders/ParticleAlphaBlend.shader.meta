@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6082fb966e192476fbcf03a37a63aad2
+labels:
+- Blood
+- Effect
+- Paint
+- Splash
+- Stencil
+timeCreated: 1467811999
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

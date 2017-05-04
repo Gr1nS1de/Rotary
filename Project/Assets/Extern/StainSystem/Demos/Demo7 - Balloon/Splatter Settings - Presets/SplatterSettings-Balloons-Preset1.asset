@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735bbf7ec794347c49beaec86c5345ec, type: 3}
+  m_Name: SplatterSettings-Balloons-Preset1
+  m_EditorClassIdentifier: 
+  mode: 1
+  directionMode: 0
+  spanAngle: 90
+  directionReference: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  orientation: 0
+  numBranchesMean: 20
+  numBranchesVariance: 1
+  branchChildrenMean: 7
+  branchChildrenVariance: 1.5
+  scaleMean: 3
+  scaleVariance: 0.697
+  scaleMin: 0.1
+  centerPositionRange: 0.1
+  randomRotation: 0
+  moveSpeedMean: 0.9
+  moveSpeedVariance: 0.659
+  stepDuration: 0.03
+  damping: 0.075
+  colorMode: 0
+  startColor: {r: 1, g: 0, b: 0, a: 1}
+  colors:
+  - {r: 0.23529413, g: 0.32941177, b: 0.3137255, a: 0}
+  multiplyColor: 0
+  fadeOutBranches: 0
+  brightnessVariation: 0
+  hueVariation: 0
+  saturationVariation: 0
+  particleMode: 1
+  particleTexture: {fileID: 2800000, guid: 74303a3f542a94914bcd5193961cd78f, type: 3}
+  maxParticles: 5000
+  removeParticles: 0
+  particleLifetime: 10
+  sortingLayerName: Default

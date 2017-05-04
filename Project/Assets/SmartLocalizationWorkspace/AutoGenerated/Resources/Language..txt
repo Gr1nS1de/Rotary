@@ -1,0 +1,3739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root><!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader><data name="Bonus" xml:space="preserve">
+<value>##EMPTY[Bonus]##</value>
+</data>
+<data name="PickedUp" xml:space="preserve">
+<value>##EMPTY[PickedUp]##</value>
+</data>
+<data name="TK_CAMOUFLAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMOUFLAGE_NAME]##</value>
+</data>
+<data name="TK_ACAM_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_1_NAME]##</value>
+</data>
+<data name="TK_ACAM_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_2_NAME]##</value>
+</data>
+<data name="TK_ACAM_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_3_NAME]##</value>
+</data>
+<data name="TK_ACAM_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_4_NAME]##</value>
+</data>
+<data name="TK_ACAM_5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_5_NAME]##</value>
+</data>
+<data name="TK_ACAM_6_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_6_NAME]##</value>
+</data>
+<data name="TK_ACAM_7_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACAM_7_NAME]##</value>
+</data>
+<data name="TK_COPY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_COPY_DESC]##</value>
+</data>
+<data name="TK_COPY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COPY_NAME]##</value>
+</data>
+<data name="TK_ACCUR/EFFECT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCUR/EFFECT_NAME]##</value>
+</data>
+<data name="TK_ACCURACY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURACY_NAME]##</value>
+</data>
+<data name="TK_ACHIEVMENT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACHIEVMENT_NAME]##</value>
+</data>
+<data name="TK_AGAIN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AGAIN_NAME]##</value>
+</data>
+<data name="TK_AK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AK_NAME]##</value>
+</data>
+<data name="TK_ALLIANCE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ALLIANCE_NAME]##</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_COLLECTOR_1_NAME]##</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_COLLECTOR_2_NAME]##</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_COLLECTOR_3_NAME]##</value>
+</data>
+<data name="TK_ARMORY_COLLECTOR_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_COLLECTOR_4_NAME]##</value>
+</data>
+<data name="TK_ARMORY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_NAME]##</value>
+</data>
+<data name="TK_ARMORY10_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY10_NAME]##</value>
+</data>
+<data name="TK_ARMORY6_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY6_NAME]##</value>
+</data>
+<data name="TK_ARMORY7_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY7_NAME]##</value>
+</data>
+<data name="TK_ARMORY8_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY8_NAME]##</value>
+</data>
+<data name="TK_ARMORY9_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY9_NAME]##</value>
+</data>
+<data name="TK_AUG_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AUG_NAME]##</value>
+</data>
+<data name="TK_AUTHORS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AUTHORS_NAME]##</value>
+</data>
+<data name="TK_BATTLEMODE_AREA_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLEMODE_AREA_NAME]##</value>
+</data>
+<data name="TK_BATTLEMODE_EVERYONE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLEMODE_EVERYONE_NAME]##</value>
+</data>
+<data name="TK_BATTLEMODE_TEAM_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLEMODE_TEAM_NAME]##</value>
+</data>
+<data name="TK_BATTLES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLES_NAME]##</value>
+</data>
+<data name="TK_CHARGER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CHARGER_NAME]##</value>
+</data>
+<data name="TK_CHAT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CHAT_NAME]##</value>
+</data>
+<data name="TK_CHOOSEBATTLEMODE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CHOOSEBATTLEMODE_NAME]##</value>
+</data>
+<data name="TK_COMEIN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COMEIN_NAME]##</value>
+</data>
+<data name="TK_CONDITIONQUEST_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CONDITIONQUEST_NAME]##</value>
+</data>
+<data name="TK_CONTINUE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CONTINUE_NAME]##</value>
+</data>
+<data name="TK_STARTBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STARTBATTLE_NAME]##</value>
+</data>
+<data name="TK_COSTSTAMINA_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COSTSTAMINA_NAME]##</value>
+</data>
+<data name="TK_LEFT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEFT_NAME]##</value>
+</data>
+<data name="TK_COUNTBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COUNTBATTLE_NAME]##</value>
+</data>
+<data name="TK_CREDITS" xml:space="preserve">
+<value>##EMPTY[TK_CREDITS]##</value>
+</data>
+<data name="TK_CUPSCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CUPSCUP_NAME]##</value>
+</data>
+<data name="TK_CUPSSQUARD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CUPSSQUARD_NAME]##</value>
+</data>
+<data name="TK_CUPSWORLD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CUPSWORLD_NAME]##</value>
+</data>
+<data name="TK_DAMAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_DAMAGE_NAME]##</value>
+</data>
+<data name="TK_BATTLERESULTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLERESULTS_NAME]##</value>
+</data>
+<data name="TK_DIFFICULTY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_DIFFICULTY_NAME]##</value>
+</data>
+<data name="TK_EDITPROFILE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_EDITPROFILE_NAME]##</value>
+</data>
+<data name="TK_EQUIPMENT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_EQUIPMENT_NAME]##</value>
+</data>
+<data name="TK_FAMAS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FAMAS_NAME]##</value>
+</data>
+<data name="TK_FLAG_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FLAG_NAME]##</value>
+</data>
+<data name="TK_GAMESETTINGS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_GAMESETTINGS_NAME]##</value>
+</data>
+<data name="TK_GUN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_GUN_NAME]##</value>
+</data>
+<data name="TK_HELMETS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_HELMETS_NAME]##</value>
+</data>
+<data name="TK_HIGHESTACHIVE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_HIGHESTACHIVE_NAME]##</value>
+</data>
+<data name="TK_IDPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_IDPLAYER_NAME]##</value>
+</data>
+<data name="TK_INFODEATH" xml:space="preserve">
+<value>##EMPTY[TK_INFODEATH]##</value>
+</data>
+<data name="TK_INFORMATION_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INFORMATION_NAME]##</value>
+</data>
+<data name="TK_INFOSHOT" xml:space="preserve">
+<value>##EMPTY[TK_INFOSHOT]##</value>
+</data>
+<data name="TK_INVATE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INVATE_NAME]##</value>
+</data>
+<data name="TK_KILL/HEADSHOT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_KILL/HEADSHOT_NAME]##</value>
+</data>
+<data name="TK_WEAPON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WEAPON_NAME]##</value>
+</data>
+<data name="TK_L115_NAME" xml:space="preserve">
+<value>##EMPTY[TK_L115_NAME]##</value>
+</data>
+<data name="TK_L85_NAME" xml:space="preserve">
+<value>##EMPTY[TK_L85_NAME]##</value>
+</data>
+<data name="TK_LANGUAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LANGUAGE_NAME]##</value>
+</data>
+<data name="TK_LEAVEGAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEAVEGAME_NAME]##</value>
+</data>
+<data name="TK_LEVEL_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL_NAME]##</value>
+</data>
+<data name="TK_LEVEL1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL1_NAME]##</value>
+</data>
+<data name="TK_LEVEL2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL2_NAME]##</value>
+</data>
+<data name="TK_LEVEL3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL3_NAME]##</value>
+</data>
+<data name="TK_LEVEL4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL4_NAME]##</value>
+</data>
+<data name="TK_LEVEL5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL5_NAME]##</value>
+</data>
+<data name="TK_LEVEL99_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEVEL99_NAME]##</value>
+</data>
+<data name="TK_MISSION_COMPLETED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MISSION_COMPLETED_NAME]##</value>
+</data>
+<data name="TK_M16_NAME" xml:space="preserve">
+<value>##EMPTY[TK_M16_NAME]##</value>
+</data>
+<data name="TK_MAXPLAYERS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MAXPLAYERS_NAME]##</value>
+</data>
+<data name="TK_MSGKILLED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MSGKILLED_NAME]##</value>
+</data>
+<data name="TK_MUSIC_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MUSIC_NAME]##</value>
+</data>
+<data name="TK_MYPROFILE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MYPROFILE_NAME]##</value>
+</data>
+<data name="TK_OF_NAME" xml:space="preserve">
+<value>##EMPTY[TK_OF_NAME]##</value>
+</data>
+<data name="TK_ONLINE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ONLINE_NAME]##</value>
+</data>
+<data name="TK_ORSIS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ORSIS_NAME]##</value>
+</data>
+<data name="TK_PARTICIPANTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PARTICIPANTS_NAME]##</value>
+</data>
+<data name="TK_RATINGS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RATINGS_NAME]##</value>
+</data>
+<data name="TK_RATNIK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RATNIK_NAME]##</value>
+</data>
+<data name="TK_REPORTERROR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REPORTERROR_NAME]##</value>
+</data>
+<data name="TK_REQUEST_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REQUEST_NAME]##</value>
+</data>
+<data name="TK_RESETPROGRESS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RESETPROGRESS_NAME]##</value>
+</data>
+<data name="TK_RESP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RESP_NAME]##</value>
+</data>
+<data name="TK_REWARD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REWARD_NAME]##</value>
+</data>
+<data name="TK_SAVE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SAVE_NAME]##</value>
+</data>
+<data name="TK_SETTINGS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SETTINGS_NAME]##</value>
+</data>
+<data name="TK_SHOP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SHOP_NAME]##</value>
+</data>
+<data name="TK_SHOT/TARGET_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SHOT/TARGET_NAME]##</value>
+</data>
+<data name="TK_SOUND_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SOUND_NAME]##</value>
+</data>
+<data name="TK_SPEED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SPEED_NAME]##</value>
+</data>
+<data name="TK_SQUADMATCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADMATCH_NAME]##</value>
+</data>
+<data name="TK_SQUARD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUARD_NAME]##</value>
+</data>
+<data name="TK_STAMINA_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STAMINA_NAME]##</value>
+</data>
+<data name="TK_STATISTIC_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STATISTIC_NAME]##</value>
+</data>
+<data name="TK_STEYR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STEYR_NAME]##</value>
+</data>
+<data name="TK_SVD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SVD_NAME]##</value>
+</data>
+<data name="TK_TERRITORY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TERRITORY_NAME]##</value>
+</data>
+<data name="TK_THEWORLDCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_THEWORLDCUP_NAME]##</value>
+</data>
+<data name="TK_TITLEQUEST_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TITLEQUEST_NAME]##</value>
+</data>
+<data name="TK_TYPESQUARD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TYPESQUARD_NAME]##</value>
+</data>
+<data name="TK_VICTORIES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_VICTORIES_NAME]##</value>
+</data>
+<data name="TK_VINTOREZ_NAME" xml:space="preserve">
+<value>##EMPTY[TK_VINTOREZ_NAME]##</value>
+</data>
+<data name="TK_WCAM_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_1_NAME]##</value>
+</data>
+<data name="TK_WCAM_10_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_10_NAME]##</value>
+</data>
+<data name="TK_WCAM_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_2_NAME]##</value>
+</data>
+<data name="TK_WCAM_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_3_NAME]##</value>
+</data>
+<data name="TK_WCAM_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_4_NAME]##</value>
+</data>
+<data name="TK_WCAM_5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_5_NAME]##</value>
+</data>
+<data name="TK_WCAM_6_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_6_NAME]##</value>
+</data>
+<data name="TK_WCAM_7_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_7_NAME]##</value>
+</data>
+<data name="TK_WCAM_8_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_8_NAME]##</value>
+</data>
+<data name="TK_WCAM_9_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WCAM_9_NAME]##</value>
+</data>
+<data name="TK_WIN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WIN_NAME]##</value>
+</data>
+<data name="TK_ZOOM_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ZOOM_NAME]##</value>
+</data>
+<data name="TK_OUR_TEAM" xml:space="preserve">
+<value>##EMPTY[TK_OUR_TEAM]##</value>
+</data>
+<data name="TK_PACK_MONEY_1A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_1A_NAME]##</value>
+</data>
+<data name="TK_PACK_MONEY_2A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_2A_NAME]##</value>
+</data>
+<data name="TK_PACK_MONEY_3A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_3A_NAME]##</value>
+</data>
+<data name="TK_PACK_MONEY_4A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_4A_NAME]##</value>
+</data>
+<data name="TK_PACK_MONEY_5A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_5A_NAME]##</value>
+</data>
+<data name="TK_PACK_MONEY_6A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_MONEY_6A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_1A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_1A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_2A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_2A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_3A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_3A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_4A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_4A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_5A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_5A_NAME]##</value>
+</data>
+<data name="TK_PACK_REAL_6A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_REAL_6A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_1A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_1A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_2A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_2A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_3A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_3A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_4A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_4A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_5A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_5A_NAME]##</value>
+</data>
+<data name="TK_PACK_TICKETS_6A_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PACK_TICKETS_6A_NAME]##</value>
+</data>
+<data name="TK_JOINMATCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_JOINMATCH_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AK_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AK_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_M16_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_M16_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_FAMAS_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_FAMAS_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_AUG_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_AUG_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L85_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L85_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_SVD_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_SVD_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_STEYR_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_STEYR_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_VINTOREZ_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_VINTOREZ_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_L115_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_L115_RLD5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_NA1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_NA1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_NA2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_NA2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_NA3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_NA3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_NA4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_NA4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_NA5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_NA5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_DMG1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_DMG1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_DMG2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_DMG2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_DMG3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_DMG3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_DMG4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_DMG4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_DMG5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_DMG5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_REC1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_REC1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_REC2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_REC2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_REC3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_REC3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_REC4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_REC4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_REC5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_REC5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_ZOOM1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_ZOOM1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_ZOOM2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_ZOOM2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_ZOOM3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_ZOOM3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_ZOOM4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_ZOOM4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_ZOOM5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_ZOOM5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_RLD1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_RLD1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_RLD2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_RLD2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_RLD3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_RLD3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_RLD4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_RLD4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_ORSIS_RLD5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_ORSIS_RLD5_NAME]##</value>
+</data>
+<data name="TK_WBATLERESULT_RESOURCE_ENERGY" xml:space="preserve">
+<value>##EMPTY[TK_WBATLERESULT_RESOURCE_ENERGY]##</value>
+</data>
+<data name="TK_WBATLERESULT_RESOURCE_POINTS" xml:space="preserve">
+<value>##EMPTY[TK_WBATLERESULT_RESOURCE_POINTS]##</value>
+</data>
+<data name="TK_WBATLERESULT_RESOURCE_REAL" xml:space="preserve">
+<value>##EMPTY[TK_WBATLERESULT_RESOURCE_REAL]##</value>
+</data>
+<data name="TK_WBATLERESULT_RESOURCE_MONEY" xml:space="preserve">
+<value>##EMPTY[TK_WBATLERESULT_RESOURCE_MONEY]##</value>
+</data>
+<data name="TK_ARMORY_HALO_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_HALO_1_NAME]##</value>
+</data>
+<data name="TK_ARMORY_HALO_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_HALO_2_NAME]##</value>
+</data>
+<data name="TK_ARMORY_HALO_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_HALO_3_NAME]##</value>
+</data>
+<data name="TK_ARMORY_HALO_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_HALO_4_NAME]##</value>
+</data>
+<data name="TK_ALLCHAT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ALLCHAT_NAME]##</value>
+</data>
+<data name="TK_PROFILEINFO_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PROFILEINFO_NAME]##</value>
+</data>
+<data name="TK_FULLENERGY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FULLENERGY_NAME]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_AVATARSAY" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_AVATARSAY]##</value>
+</data>
+<data name="TK_BATTLE_DIALOG_USE_KEY" xml:space="preserve">
+<value>##EMPTY[TK_BATTLE_DIALOG_USE_KEY]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_1" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_1]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_2" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_2]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_3" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_3]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_4" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_4]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_5" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_5]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_6" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_6]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_7" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_7]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_8" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_8]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_9" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_9]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_10" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_10]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_11" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_11]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_12" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_12]##</value>
+</data>
+<data name="TK_TUTORIAL_BATTLE_DIALOG_MOVECAM" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_BATTLE_DIALOG_MOVECAM]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_1" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_1]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_2" xml:space="preserve">
+<value> you can buy machines and offers svaypnut top"</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_3" xml:space="preserve">
+<value> do not worry; you have earned enough last battle."</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_4" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_4]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_5" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_5]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_6" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_6]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_7" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_7]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_8" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_8]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_9" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_9]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_10" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_10]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_START" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_START]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_13" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_13]##</value>
+</data>
+<data name="TK_TUTORIAL_LOBBY_DIALOG_14" xml:space="preserve">
+<value>##EMPTY[TK_TUTORIAL_LOBBY_DIALOG_14]##</value>
+</data>
+<data name="TK_ARMORY_MILITARY_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_MILITARY_1_NAME]##</value>
+</data>
+<data name="TK_ARMORY_MILITARY_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_MILITARY_2_NAME]##</value>
+</data>
+<data name="TK_ARMORY_MILITARY_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_MILITARY_3_NAME]##</value>
+</data>
+<data name="TK_ARMORY_MILITARY_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORY_MILITARY_4_NAME]##</value>
+</data>
+<data name="TK_CUPS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CUPS_NAME]##</value>
+</data>
+<data name="TK_BATTLESPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLESPLAYER_NAME]##</value>
+</data>
+<data name="TK_WINSPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WINSPLAYER_NAME]##</value>
+</data>
+<data name="TK_ACCURRIFLEPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURRIFLEPLAYER_NAME]##</value>
+</data>
+<data name="TK_ACCURSNIPERPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURSNIPERPLAYER_NAME]##</value>
+</data>
+<data name="TK_KILLSPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_KILLSPLAYER_NAME]##</value>
+</data>
+<data name="TK_HEADSHOTSPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_HEADSHOTSPLAYER_NAME]##</value>
+</data>
+<data name="TK_GETACHIEVESPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_GETACHIEVESPLAYER_NAME]##</value>
+</data>
+<data name="TK_ACCURRACITY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURRACITY_NAME]##</value>
+</data>
+<data name="TK_COUNTUPGRADE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COUNTUPGRADE_NAME]##</value>
+</data>
+<data name="TK_ALLMONTHCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ALLMONTHCUP_NAME]##</value>
+</data>
+<data name="TK_ALLWEEKCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ALLWEEKCUP_NAME]##</value>
+</data>
+<data name="TK_SQUADMONTHCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADMONTHCUP_NAME]##</value>
+</data>
+<data name="TK_SQUADWEEKCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADWEEKCUP_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №452##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ARMORPROPERTY_HEALTH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORPROPERTY_HEALTH_NAME]##</value>
+</data>
+<data name="TK_ARMORPROPERTY_DEFENSE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ARMORPROPERTY_DEFENSE_NAME]##</value>
+</data>
+<data name="TK_ARMORPROPERTY_ANTIHEAD_NAME" xml:space="preserve">
+<value>8</value>
+</data>
+<data name="TK_ARMORPROPERTY_INVIZ_NAME" xml:space="preserve">
+<value>10</value>
+</data>
+<data name="##EMPTY_KEY №457##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT1_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT1_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT2_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT2_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT3_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT3_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_COLLECTORT4_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_COLLECTORT4_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT1_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT1_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT2_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT2_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT3_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT3_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_MILITARYT4_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_MILITARYT4_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT1_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT1_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT2_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT2_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT3_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT3_INV5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HP5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HP5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_DEF5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_DEF5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_HS5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_HS5_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV1_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV2_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV3_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV4_NAME]##</value>
+</data>
+<data name="TK_WUPRGADE_HALOT4_INV5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WUPRGADE_HALOT4_INV5_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №823##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ERROR_LOADBUNDLE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_LOADBUNDLE_TITLE]##</value>
+</data>
+<data name="TK_ERROR_LOADBUNDLE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_LOADBUNDLE_DESC]##</value>
+</data>
+<data name="TK_ERROR_SERVER_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SERVER_TITLE]##</value>
+</data>
+<data name="TK_ERROR_SERVERAVAILABLE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SERVERAVAILABLE_DESC]##</value>
+</data>
+<data name="TK_ERROR_CONNECTIONLOST_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_CONNECTIONLOST_DESC]##</value>
+</data>
+<data name="TK_ERROR_LOGIN_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_LOGIN_TITLE]##</value>
+</data>
+<data name="TK_ERROR_LOGIN_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_LOGIN_DESC]##</value>
+</data>
+<data name="TK_ERROR_JOINROOM_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_JOINROOM_TITLE]##</value>
+</data>
+<data name="TK_ERROR_JOINBATTLEROOM_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_JOINBATTLEROOM_DESC]##</value>
+</data>
+<data name="TK_ERROR_NOTINSQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTINSQUAD_TITLE]##</value>
+</data>
+<data name="TK_ERROR_NOTINSQUAD_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTINSQUAD_DESC]##</value>
+</data>
+<data name="TK_ERROR_ARMOR_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_ARMOR_TITLE]##</value>
+</data>
+<data name="TK_ERROR_SETARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SETARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_NOTFOUNDARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTFOUNDARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_BUYARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_BUYARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_BUYCAMOUFLAGE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_BUYCAMOUFLAGE_TITLE]##</value>
+</data>
+<data name="TK_ERROR_NOTFOUNDARMORCAM_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTFOUNDARMORCAM_DESC]##</value>
+</data>
+<data name="TK_ERROR_BUYCAMOUFLAGE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_BUYCAMOUFLAGE_DESC]##</value>
+</data>
+<data name="TK_ERROR_SETMYNAME_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SETMYNAME_TITLE]##</value>
+</data>
+<data name="TK_ERROR_SETMYNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SETMYNAME_DESC]##</value>
+</data>
+<data name="TK_ERROR_CHANGEMYNAME_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_CHANGEMYNAME_TITLE]##</value>
+</data>
+<data name="TK_ERROR_CHANGEMYNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_CHANGEMYNAME_DESC]##</value>
+</data>
+<data name="TK_ERROR_WEAPON_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_WEAPON_TITLE]##</value>
+</data>
+<data name="TK_ERROR_SETWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SETWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_NOTFOUNDWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTFOUNDWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_BUYWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_BUYWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_NOTFOUNDWEAPONCAM_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_NOTFOUNDWEAPONCAM_DESC]##</value>
+</data>
+<data name="TK_ERROR_UPGRADEWEAPON_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_UPGRADEWEAPON_TITLE]##</value>
+</data>
+<data name="TK_ERROR_STARTUPGRADEWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_STARTUPGRADEWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_FORCEUPGRADEWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_FORCEUPGRADEWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_FINISHUPGRADEWEAPON_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_FINISHUPGRADEWEAPON_DESC]##</value>
+</data>
+<data name="TK_ERROR_UPGRADEARMOR_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_UPGRADEARMOR_TITLE]##</value>
+</data>
+<data name="TK_ERROR_STARTUPGRADEARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_STARTUPGRADEARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_FORCEUPGRADEARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_FORCEUPGRADEARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_FINISHUPGRADEARMOR_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_FINISHUPGRADEARMOR_DESC]##</value>
+</data>
+<data name="TK_ERROR_RESTOREENERGY_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_RESTOREENERGY_TITLE]##</value>
+</data>
+<data name="TK_ERROR_RESTOREENERGY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_RESTOREENERGY_DESC]##</value>
+</data>
+<data name="TK_ERROR_SQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SQUAD_TITLE]##</value>
+</data>
+<data name="TK_ERROR_JOINSQUAD_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_JOINSQUAD_DESC]##</value>
+</data>
+<data name="TK_ERROR_EXCLUDESQUADMEMBER_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_EXCLUDESQUADMEMBER_DESC]##</value>
+</data>
+<data name="TK_ERROR_WRONGSQUADNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_WRONGSQUADNAME_DESC]##</value>
+</data>
+<data name="TK_ERROR_WRONGSQUADSLOGAN_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_WRONGSQUADSLOGAN_DESC]##</value>
+</data>
+<data name="TK_ERROR_CREATESQUAD_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_CREATESQUAD_DESC]##</value>
+</data>
+<data name="TK_ERROR_UPDATESQUADNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_UPDATESQUADNAME_DESC]##</value>
+</data>
+<data name="TK_ERROR_UPDATESQUADSLOGAN_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_UPDATESQUADSLOGAN_DESC]##</value>
+</data>
+<data name="TK_ERROR_SQUADEXPAND_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_SQUADEXPAND_DESC]##</value>
+</data>
+<data name="TK_ERROR_EXISTSQUADNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_EXISTSQUADNAME_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №871##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="##EMPTY_KEY №872##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="##EMPTY_KEY №873##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_REVIVE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REVIVE_NAME]##</value>
+</data>
+<data name="TK_REVIVELOCK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REVIVELOCK_NAME]##</value>
+</data>
+<data name="TK_REPEATGAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REPEATGAME_NAME]##</value>
+</data>
+<data name="TK_WAITREPEATGAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WAITREPEATGAME_NAME]##</value>
+</data>
+<data name="TK_LEAVEBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEAVEBATTLE_NAME]##</value>
+</data>
+<data name="TK_ENDBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ENDBATTLE_NAME]##</value>
+</data>
+<data name="TK_TABLE_RANK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TABLE_RANK_NAME]##</value>
+</data>
+<data name="TK_TABLE_NAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TABLE_NAME_NAME]##</value>
+</data>
+<data name="TK_TABLE_WEAPON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TABLE_WEAPON_NAME]##</value>
+</data>
+<data name="TK_TABLE_RANKPOINTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TABLE_RANKPOINTS_NAME]##</value>
+</data>
+<data name="TK_ROUNDCOMPLETED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ROUNDCOMPLETED_NAME]##</value>
+</data>
+<data name="TK_MENU_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MENU_NAME]##</value>
+</data>
+<data name="TK_BATTLE_KILL_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLE_KILL_NAME]##</value>
+</data>
+<data name="TK_BATTLE_INHEAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLE_INHEAD_NAME]##</value>
+</data>
+<data name="TK_BATTLE_KILLEDINHEAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLE_KILLEDINHEAD_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №889##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_BUY_TICKETSPACK_DESC" xml:space="preserve">
+<value>##EMPTY[TK_BUY_TICKETSPACK_DESC]##</value>
+</data>
+<data name="TK_BUY_EVENT_DESC" xml:space="preserve">
+<value>##EMPTY[TK_BUY_EVENT_DESC]##</value>
+</data>
+<data name="TK_BUY_CAMOUFLAGE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_BUY_CAMOUFLAGE_TITLE]##</value>
+</data>
+<data name="TK_BUY_EQUIPMENTCAM_DESC" xml:space="preserve">
+<value>##EMPTY[TK_BUY_EQUIPMENTCAM_DESC]##</value>
+</data>
+<data name="TK_BUY_WEAPONCAM_DESC" xml:space="preserve">
+<value>##EMPTY[TK_BUY_WEAPONCAM_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №895##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_TEAMBOTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TEAMBOTS_NAME]##</value>
+</data>
+<data name="TK_SETMYNAME_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_SETMYNAME_TITLE]##</value>
+</data>
+<data name="TK_SETMYNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SETMYNAME_DESC]##</value>
+</data>
+<data name="TK_BUY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BUY_NAME]##</value>
+</data>
+<data name="TK_FOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FOR_NAME]##</value>
+</data>
+<data name="TK_YES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_YES_NAME]##</value>
+</data>
+<data name="TK_NO_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NO_NAME]##</value>
+</data>
+<data name="TK_BUYFOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BUYFOR_NAME]##</value>
+</data>
+<data name="TK_ACTIVATED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACTIVATED_NAME]##</value>
+</data>
+<data name="TK_COST_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COST_NAME]##</value>
+</data>
+<data name="TK_ACTIVATEON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACTIVATEON_NAME]##</value>
+</data>
+<data name="TK_DEATH_MATCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_DEATH_MATCH_NAME]##</value>
+</data>
+<data name="TK_SQUAD_MATCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_MATCH_NAME]##</value>
+</data>
+<data name="TK_JOIN_MATCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_JOIN_MATCH_NAME]##</value>
+</data>
+<data name="TK_SQUADTEAM_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTEAM_NAME]##</value>
+</data>
+<data name="TK_SQUADCHAT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADCHAT_NAME]##</value>
+</data>
+<data name="TK_SQUADSETTINGS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADSETTINGS_NAME]##</value>
+</data>
+<data name="TK_NOSQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NOSQUAD_NAME]##</value>
+</data>
+<data name="TK_NEEDRANK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NEEDRANK_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №915##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_NOTFINISHEDUPGRADE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTFINISHEDUPGRADE_TITLE]##</value>
+</data>
+<data name="TK_NOTFINISHEDUPGRADE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_NOTFINISHEDUPGRADE_DESC]##</value>
+</data>
+<data name="TK_ACHIEVEMAXUPGRADE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ACHIEVEMAXUPGRADE_TITLE]##</value>
+</data>
+<data name="TK_ACHIEVEMAXUPGRADE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ACHIEVEMAXUPGRADE_DESC]##</value>
+</data>
+<data name="TK_MAXUPGRADE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MAXUPGRADE_NAME]##</value>
+</data>
+<data name="TK_FORCEUPGRADE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FORCEUPGRADE_NAME]##</value>
+</data>
+<data name="TK_FINISHUPGRADE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FINISHUPGRADE_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №923##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SQUAD_BATTLE_START" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_BATTLE_START]##</value>
+</data>
+<data name="TK_SQUAD_PLAYER_JOINED" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_PLAYER_JOINED]##</value>
+</data>
+<data name="TK_SQUAD_PLAYER_LEFT" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_PLAYER_LEFT]##</value>
+</data>
+<data name="TK_SQUAD_RENAMED" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_RENAMED]##</value>
+</data>
+<data name="TK_SQUAD_EXPELED_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_EXPELED_TITLE]##</value>
+</data>
+<data name="TK_SQUAD_EXPELED_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_EXPELED_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №930##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_GOTNEWRANK_DESC" xml:space="preserve">
+<value>##EMPTY[TK_GOTNEWRANK_DESC]##</value>
+</data>
+<data name="TK_NOTENOUGHENERGY_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTENOUGHENERGY_TITLE]##</value>
+</data>
+<data name="TK_NOTENOUGHENERGY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_NOTENOUGHENERGY_DESC]##</value>
+</data>
+<data name="TK_FULLENERGY_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_FULLENERGY_TITLE]##</value>
+</data>
+<data name="TK_FULLENERGY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_FULLENERGY_DESC]##</value>
+</data>
+<data name="TK_RESTOREFOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RESTOREFOR_NAME]##</value>
+</data>
+<data name="TK_WAIT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WAIT_NAME]##</value>
+</data>
+<data name="TK_TAKERANKAWARD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TAKERANKAWARD_NAME]##</value>
+</data>
+<data name="TK_GOTNEWRANK_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_GOTNEWRANK_TITLE]##</value>
+</data>
+<data name="TK_GOTNEWRANK_UNLOCKED_DESC" xml:space="preserve">
+<value>##EMPTY[TK_GOTNEWRANK_UNLOCKED_DESC]##</value>
+</data>
+<data name="TK_MAP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MAP_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №942##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_AWARDACCURACY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AWARDACCURACY_NAME]##</value>
+</data>
+<data name="TK_AWARDDEATHS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AWARDDEATHS_NAME]##</value>
+</data>
+<data name="TK_AWARDHEADSHOTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AWARDHEADSHOTS_NAME]##</value>
+</data>
+<data name="TK_AWARDKILLS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AWARDKILLS_NAME]##</value>
+</data>
+<data name="TK_AWARDSHOTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_AWARDSHOTS_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №948##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_CURRENTWEAPON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CURRENTWEAPON_NAME]##</value>
+</data>
+<data name="TK_NOTICE_FINISHUPGRADEWEAPON_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_FINISHUPGRADEWEAPON_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_FINISHUPGRADEARMOR_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_FINISHUPGRADEARMOR_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_GOTACHIEVEMENT_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_GOTACHIEVEMENT_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_NEWITEM_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_NEWITEM_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_JOINCOMMANDBATTLE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_JOINCOMMANDBATTLE_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_EXPIREDWEAPONCAM_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_EXPIREDWEAPONCAM_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_EXPIREDARMORCAM_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_EXPIREDARMORCAM_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_DAILYQUEST_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_DAILYQUEST_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_FINISHALLDAILYQUEST_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_FINISHALLDAILYQUEST_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_NEWMESSAGE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_NEWMESSAGE_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_KICKFROMSQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_KICKFROMSQUAD_TITLE]##</value>
+</data>
+<data name="##EMPTY_KEY №961##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_SQUAD_TITLE]##</value>
+</data>
+<data name="TK_FINDSQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_FINDSQUAD_TITLE]##</value>
+</data>
+<data name="TK_EXISTINGSQUAD_DESC" xml:space="preserve">
+<value>##EMPTY[TK_EXISTINGSQUAD_DESC]##</value>
+</data>
+<data name="TK_NOTFOUNDSQOUAD_DESC" xml:space="preserve">
+<value>##EMPTY[TK_NOTFOUNDSQOUAD_DESC]##</value>
+</data>
+<data name="TK_NOSQUADNAME_DESC" xml:space="preserve">
+<value>##EMPTY[TK_NOSQUADNAME_DESC]##</value>
+</data>
+<data name="TK_SQUADMAXMEMBERS_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SQUADMAXMEMBERS_DESC]##</value>
+</data>
+<data name="TK_SQUADEXPANDNOTENOUGHMONEY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SQUADEXPANDNOTENOUGHMONEY_DESC]##</value>
+</data>
+<data name="TK_SQUADWASEXPANDED_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SQUADWASEXPANDED_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №970##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SQUADRANK_COMMANDER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADRANK_COMMANDER_NAME]##</value>
+</data>
+<data name="TK_SQUADRANK_SOLDIER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADRANK_SOLDIER_NAME]##</value>
+</data>
+<data name="TK_SQUADRANK_PRIVATE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADRANK_PRIVATE_NAME]##</value>
+</data>
+<data name="TK_SQUADINITSLOGAN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADINITSLOGAN_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №975##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SQUADTABLE_INDEX_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_INDEX_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_NAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_NAME_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_ALIAS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_ALIAS_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_RANKOFWEEK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_RANKOFWEEK_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_RANKTOTAL_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_RANKTOTAL_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_RANK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_RANK_NAME]##</value>
+</data>
+<data name="TK_SQUADTABLE_EXPEL_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTABLE_EXPEL_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №983##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_INBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INBATTLE_NAME]##</value>
+</data>
+<data name="TK_INCOMMANDBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INCOMMANDBATTLE_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №986##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_MONEYSHOP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MONEYSHOP_NAME]##</value>
+</data>
+<data name="TK_REALSHOP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_REALSHOP_NAME]##</value>
+</data>
+<data name="TK_TICKETSHOP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TICKETSHOP_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №990##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_LOADERTEXT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERTEXT_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_0_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_0_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_1_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_1_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_2_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_2_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_3_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_3_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_4_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_4_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_5_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_5_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_6_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_6_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_7_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_7_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_8_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_8_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_9_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_9_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_10_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_10_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_11_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_11_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_12_NAME" xml:space="preserve">
+<value> sniper rifle will be useful; than the machine. >> And vice versa."</value>
+</data>
+<data name="TK_LOADERADVICE_13_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_13_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_14_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_14_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_15_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_15_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_16_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_16_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_17_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_17_NAME]##</value>
+</data>
+<data name="TK_LOADERADVICE_18_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LOADERADVICE_18_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1011##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SQUADTYPE_OPENED_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADTYPE_OPENED_NAME]##</value>
+</data>
+<data name="TK_INWORLDRATING_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INWORLDRATING_NAME]##</value>
+</data>
+<data name="TK_WEEKLYRATING_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WEEKLYRATING_NAME]##</value>
+</data>
+<data name="TK_TOTALRATING_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TOTALRATING_NAME]##</value>
+</data>
+<data name="TK_SEND_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SEND_NAME]##</value>
+</data>
+<data name="TK_ENTERMESSAGETEXT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ENTERMESSAGETEXT_NAME]##</value>
+</data>
+<data name="TK_INVITEPLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INVITEPLAYER_NAME]##</value>
+</data>
+<data name="TK_SQUADNAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADNAME_NAME]##</value>
+</data>
+<data name="TK_APPLYFOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_APPLYFOR_NAME]##</value>
+</data>
+<data name="TK_LEAVESQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_LEAVESQUAD_NAME]##</value>
+</data>
+<data name="TK_SQUADSLOGAN_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADSLOGAN_NAME]##</value>
+</data>
+<data name="TK_CHANGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CHANGE_NAME]##</value>
+</data>
+<data name="TK_SQUADEMBLEM_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADEMBLEM_NAME]##</value>
+</data>
+<data name="TK_CREATESQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CREATESQUAD_NAME]##</value>
+</data>
+<data name="TK_ENTERNAMEOFSQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ENTERNAMEOFSQUAD_NAME]##</value>
+</data>
+<data name="TK_CREATEFOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CREATEFOR_NAME]##</value>
+</data>
+<data name="TK_JOINSQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_JOINSQUAD_NAME]##</value>
+</data>
+<data name="TK_CHEVRON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CHEVRON_NAME]##</value>
+</data>
+<data name="TK_PLACES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLACES_NAME]##</value>
+</data>
+<data name="TK_ENTERNAMEFORSEARCH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ENTERNAMEFORSEARCH_NAME]##</value>
+</data>
+<data name="TK_SQUADSIZE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SQUADSIZE_NAME]##</value>
+</data>
+<data name="TK_INCREASEBY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INCREASEBY_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1034##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SNIPERRIFLES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SNIPERRIFLES_NAME]##</value>
+</data>
+<data name="TK_ASSAULTRIFLES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ASSAULTRIFLES_NAME]##</value>
+</data>
+<data name="TK_CONSIDER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CONSIDER_NAME]##</value>
+</data>
+<data name="TK_BUYCAMOUFLAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BUYCAMOUFLAGE_NAME]##</value>
+</data>
+<data name="TK_NOCAMOUFLAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NOCAMOUFLAGE_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1040##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ACTIVEBATTLES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACTIVEBATTLES_NAME]##</value>
+</data>
+<data name="TK_INVITETOSQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_INVITETOSQUAD_NAME]##</value>
+</data>
+<data name="TK_WORLDTABLERECORD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WORLDTABLERECORD_NAME]##</value>
+</data>
+<data name="TK_PLAYERAVATAR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYERAVATAR_NAME]##</value>
+</data>
+<data name="TK_PLAYERNAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYERNAME_NAME]##</value>
+</data>
+<data name="TK_PLAYERFLAG_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYERFLAG_NAME]##</value>
+</data>
+<data name="TK_WIPEWARNING_DESC" xml:space="preserve">
+<value>##EMPTY[TK_WIPEWARNING_DESC]##</value>
+</data>
+<data name="TK_WEEKTABLERECORD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_WEEKTABLERECORD_NAME]##</value>
+</data>
+<data name="TK_MONTHTABLERECORD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MONTHTABLERECORD_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1050##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SOUNDSETTINGS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SOUNDSETTINGS_NAME]##</value>
+</data>
+<data name="TK_SOUNDEFFECTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SOUNDEFFECTS_NAME]##</value>
+</data>
+<data name="TK_PLAYMUSIC_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYMUSIC_NAME]##</value>
+</data>
+<data name="TK_OTHER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_OTHER_NAME]##</value>
+</data>
+<data name="TK_VISITOUTSITE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_VISITOUTSITE_NAME]##</value>
+</data>
+<data name="TK_GAMELANGUAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_GAMELANGUAGE_NAME]##</value>
+</data>
+<data name="TK_SOCIALWEBS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SOCIALWEBS_NAME]##</value>
+</data>
+<data name="TK_DEVELOPERS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_DEVELOPERS_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1059##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SUPPEROFFER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SUPPEROFFER_NAME]##</value>
+</data>
+<data name="TK_SPECIALOFFER_VINTOREZ_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SPECIALOFFER_VINTOREZ_NAME]##</value>
+</data>
+<data name="TK_RAITING_TOP5_PLAYERS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RAITING_TOP5_PLAYERS_NAME]##</value>
+</data>
+<data name="TK_RAITING_TOP5_SQUADS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RAITING_TOP5_SQUADS_NAME]##</value>
+</data>
+<data name="TK_STAYA_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STAYA_NAME]##</value>
+</data>
+<data name="TK_MISSIONS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_MISSIONS_NAME]##</value>
+</data>
+<data name="TK_PLAYERS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYERS_NAME]##</value>
+</data>
+<data name="TK_NOAVAILABLEBATTLES_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NOAVAILABLEBATTLES_NAME]##</value>
+</data>
+<data name="TK_PLACE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLACE_NAME]##</value>
+</data>
+<data name="TK_PLAYER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_PLAYER_NAME]##</value>
+</data>
+<data name="TK_SCORE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SCORE_NAME]##</value>
+</data>
+<data name="TK_TABLESQUAD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_TABLESQUAD_NAME]##</value>
+</data>
+<data name="TK_BESTSNIPERSWORLD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BESTSNIPERSWORLD_NAME]##</value>
+</data>
+<data name="TK_BESTPLAYERSWORLD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BESTPLAYERSWORLD_NAME]##</value>
+</data>
+<data name="TK_FIRSTPLACE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_FIRSTPLACE_NAME]##</value>
+</data>
+<data name="TK_SECONDPLACE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SECONDPLACE_NAME]##</value>
+</data>
+<data name="TK_THIRDPLACE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_THIRDPLACE_NAME]##</value>
+</data>
+<data name="TK_NOCUP_NAME" xml:space="preserve">
+<value>##EMPTY[TK_NOCUP_NAME]##</value>
+</data>
+<data name="TK_YOURID_NAME" xml:space="preserve">
+<value>##EMPTY[TK_YOURID_NAME]##</value>
+</data>
+<data name="TK_GIFT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_GIFT_NAME]##</value>
+</data>
+<data name="TK_RANK_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RANK_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1081##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_QUESTION_NOTHAVERESOURCE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_NOTHAVERESOURCE_TITLE]##</value>
+</data>
+<data name="TK_QUESTION_NOTHAVEREAL_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_NOTHAVEREAL_DESC]##</value>
+</data>
+<data name="TK_QUESTION_NOTHAVEMONEY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_NOTHAVEMONEY_DESC]##</value>
+</data>
+<data name="TK_QUESTION_LEAVESQUAD_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_LEAVESQUAD_TITLE]##</value>
+</data>
+<data name="TK_QUESTION_LEAVESQUADMASTER_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_LEAVESQUADMASTER_DESC]##</value>
+</data>
+<data name="TK_QUESTION_LEAVESQUADUSER_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_LEAVESQUADUSER_DESC]##</value>
+</data>
+<data name="TK_QUESTION_WIPEPLAYER_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_WIPEPLAYER_TITLE]##</value>
+</data>
+<data name="TK_QUESTION_WIPEPLAYER_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_WIPEPLAYER_DESC]##</value>
+</data>
+<data name="TK_QUESTION_EXPEL_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_EXPEL_TITLE]##</value>
+</data>
+<data name="TK_QUESTION_EXPEL_DESC" xml:space="preserve">
+<value>##EMPTY[TK_QUESTION_EXPEL_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №1092##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_STAYAGAME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_STAYAGAME_NAME]##</value>
+</data>
+<data name="TK_PUSH_ARMORUPEND_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PUSH_ARMORUPEND_DESC]##</value>
+</data>
+<data name="TK_PUSH_WEAPONUPEND_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PUSH_WEAPONUPEND_DESC]##</value>
+</data>
+<data name="TK_PUSH_WEEKLEAVE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PUSH_WEEKLEAVE_DESC]##</value>
+</data>
+<data name="TK_PUSH_DAYLEAVE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PUSH_DAYLEAVE_DESC]##</value>
+</data>
+<data name="TK_PUSH_ENERGYFULL_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PUSH_ENERGYFULL_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №1099##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_FEWENOUGHENERGY_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_FEWENOUGHENERGY_TITLE]##</value>
+</data>
+<data name="TK_FEWENOUGHENERGY_DESC" xml:space="preserve">
+<value>##EMPTY[TK_FEWENOUGHENERGY_DESC]##</value>
+</data>
+<data name="TK_NOTICE_NEWLEVELARMOR_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_NEWLEVELARMOR_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_NEWLEVELWEAPON_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_NEWLEVELWEAPON_TITLE]##</value>
+</data>
+<data name="TK_NOTICE_NEWLEVELMAP_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_NOTICE_NEWLEVELMAP_TITLE]##</value>
+</data>
+<data name="##EMPTY_KEY №1105##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SPEED_SNIPER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SPEED_SNIPER_NAME]##</value>
+</data>
+<data name="TK_SPEED_RIFLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SPEED_RIFLE_NAME]##</value>
+</data>
+<data name="TK_RECOIL_SNIPER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RECOIL_SNIPER_NAME]##</value>
+</data>
+<data name="TK_RECOIL_RIFLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RECOIL_RIFLE_NAME]##</value>
+</data>
+<data name="TK_ACCURACY_SNIPER_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURACY_SNIPER_NAME]##</value>
+</data>
+<data name="TK_ACCURACY_RIFLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACCURACY_RIFLE_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1112##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_CAMFACTOR_POINTS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMFACTOR_POINTS_NAME]##</value>
+</data>
+<data name="TK_CAMFACTOR_MONEY_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMFACTOR_MONEY_NAME]##</value>
+</data>
+<data name="TK_CAMFACTOR_DAMAGE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMFACTOR_DAMAGE_NAME]##</value>
+</data>
+<data name="TK_CAMFACTOR_HEALTH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMFACTOR_HEALTH_NAME]##</value>
+</data>
+<data name="TK_CAMFACTOR_LOCATORTIME_NAME" xml:space="preserve">
+<value>##EMPTY[TK_CAMFACTOR_LOCATORTIME_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1118##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_BOT_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BOT_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1120##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_D_NAME" xml:space="preserve">
+<value>##EMPTY[TK_D_NAME]##</value>
+</data>
+<data name="TK_H_NAME" xml:space="preserve">
+<value>##EMPTY[TK_H_NAME]##</value>
+</data>
+<data name="TK_M_NAME" xml:space="preserve">
+<value>##EMPTY[TK_M_NAME]##</value>
+</data>
+<data name="TK_S_NAME" xml:space="preserve">
+<value>##EMPTY[TK_S_NAME]##</value>
+</data>
+<data name="TK_SEC_NAME" xml:space="preserve">
+<value>##EMPTY[TK_SEC_NAME]##</value>
+</data>
+<data name="TK_1ST_NAME" xml:space="preserve">
+<value>##EMPTY[TK_1ST_NAME]##</value>
+</data>
+<data name="TK_2ND_NAME" xml:space="preserve">
+<value>##EMPTY[TK_2ND_NAME]##</value>
+</data>
+<data name="TK_3RD_NAME" xml:space="preserve">
+<value>##EMPTY[TK_3RD_NAME]##</value>
+</data>
+<data name="TK_4TH_NAME" xml:space="preserve">
+<value>##EMPTY[TK_4TH_NAME]##</value>
+</data>
+<data name="TK_BATTLERESULT_1BATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLERESULT_1BATTLE_NAME]##</value>
+</data>
+<data name="TK_BATTLERESULT_4BATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLERESULT_4BATTLE_NAME]##</value>
+</data>
+<data name="TK_BATTLERESULT_5BATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLERESULT_5BATTLE_NAME]##</value>
+</data>
+<data name="TK_BONUSFOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BONUSFOR_NAME]##</value>
+</data>
+<data name="TK_BATTLERAITING_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_BATTLERAITING_TITLE]##</value>
+</data>
+<data name="##EMPTY_KEY №1135##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_WARN_LEAVEBATTLE_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_WARN_LEAVEBATTLE_TITLE]##</value>
+</data>
+<data name="TK_WARN_LEAVEBATTLE_DESC" xml:space="preserve">
+<value>##EMPTY[TK_WARN_LEAVEBATTLE_DESC]##</value>
+</data>
+<data name="TK_PLAYERNOTFOUND_DESC" xml:space="preserve">
+<value>##EMPTY[TK_PLAYERNOTFOUND_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №1139##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_RESULTSCUPS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_RESULTSCUPS_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1141##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_COUNTHITS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_COUNTHITS_NAME]##</value>
+</data>
+<data name="TK_ACTIVEARMOR_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACTIVEARMOR_NAME]##</value>
+</data>
+<data name="TK_ACTIVEWEAPON_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ACTIVEWEAPON_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1145##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ENEMYTUTORIAL_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ENEMYTUTORIAL_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1147##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_SFSXERROR_BANNED_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SFSXERROR_BANNED_DESC]##</value>
+</data>
+<data name="TK_SFSXERROR_FULLSERVER_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SFSXERROR_FULLSERVER_DESC]##</value>
+</data>
+<data name="TK_SFSXERROR_ROOMNOTEXIST_DESC" xml:space="preserve">
+<value>##EMPTY[TK_SFSXERROR_ROOMNOTEXIST_DESC]##</value>
+</data>
+<data name="##EMPTY_KEY №1151##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP1_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP1_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP2_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP2_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP3_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP3_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP1_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP1_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP2_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP2_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP3_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP3_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP1_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP1_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP2_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP2_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP3_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP3_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP1_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP1_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP2_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP2_NAME]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP3_NAME" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP3_NAME]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP1_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP1_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP2_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP2_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_WEEK_PLAYERS_TOP3_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_PLAYERS_TOP3_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP1_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP1_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP2_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP2_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_PLAYERS_TOP3_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_PLAYERS_TOP3_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP1_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP1_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP2_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP2_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_WEEK_SQUADS_TOP3_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_WEEK_SQUADS_TOP3_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP1_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP1_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP2_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP2_DESCRIPTION]##</value>
+</data>
+<data name="AWARD_MONTH_SQUADS_TOP3_DESCRIPTION" xml:space="preserve">
+<value>##EMPTY[AWARD_MONTH_SQUADS_TOP3_DESCRIPTION]##</value>
+</data>
+<data name="##EMPTY_KEY №1176##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ERROR_VALIDATIONSNAME_TITLE" xml:space="preserve">
+<value>##EMPTY[TK_ERROR_VALIDATIONSNAME_TITLE]##</value>
+</data>
+<data name="##EMPTY_KEY №1178##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_ERRORJOINBATTLE_NAME" xml:space="preserve">
+<value>##EMPTY[TK_ERRORJOINBATTLE_NAME]##</value>
+</data>
+<data name="TK_ERRORJOINBATTLEEND_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERRORJOINBATTLEEND_DESC]##</value>
+</data>
+<data name="TK_ERRORJOINBATTLEFULL_DESC" xml:space="preserve">
+<value>##EMPTY[TK_ERRORJOINBATTLEFULL_DESC]##</value>
+</data>
+<data name="TK_BATTLEJOINENDS_NAME" xml:space="preserve">
+<value>##EMPTY[TK_BATTLEJOINENDS_NAME]##</value>
+</data>
+<data name="##EMPTY_KEY №1183##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_BOTNAME_1_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_1_0]##</value>
+</data>
+<data name="TK_BOTNAME_1_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_1_1]##</value>
+</data>
+<data name="TK_BOTNAME_1_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_1_2]##</value>
+</data>
+<data name="TK_BOTNAME_2_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_2_0]##</value>
+</data>
+<data name="TK_BOTNAME_2_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_2_1]##</value>
+</data>
+<data name="TK_BOTNAME_2_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_2_2]##</value>
+</data>
+<data name="TK_BOTNAME_3_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_3_0]##</value>
+</data>
+<data name="TK_BOTNAME_3_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_3_1]##</value>
+</data>
+<data name="TK_BOTNAME_3_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_3_2]##</value>
+</data>
+<data name="TK_BOTNAME_4_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_4_0]##</value>
+</data>
+<data name="TK_BOTNAME_4_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_4_1]##</value>
+</data>
+<data name="TK_BOTNAME_4_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_4_2]##</value>
+</data>
+<data name="TK_BOTNAME_5_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_5_0]##</value>
+</data>
+<data name="TK_BOTNAME_5_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_5_1]##</value>
+</data>
+<data name="TK_BOTNAME_5_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_5_2]##</value>
+</data>
+<data name="TK_BOTNAME_6_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_6_0]##</value>
+</data>
+<data name="TK_BOTNAME_6_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_6_1]##</value>
+</data>
+<data name="TK_BOTNAME_6_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_6_2]##</value>
+</data>
+<data name="TK_BOTNAME_7_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_7_0]##</value>
+</data>
+<data name="TK_BOTNAME_7_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_7_1]##</value>
+</data>
+<data name="TK_BOTNAME_7_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_7_2]##</value>
+</data>
+<data name="TK_BOTNAME_8_0" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_8_0]##</value>
+</data>
+<data name="TK_BOTNAME_8_1" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_8_1]##</value>
+</data>
+<data name="TK_BOTNAME_8_2" xml:space="preserve">
+<value>##EMPTY[TK_BOTNAME_8_2]##</value>
+</data>
+</root>
