@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CameraModel : Model
 {
-	public float	playZoomSize	{ get { return _playZoomSize; } }
+	public float	moveSpeed	{ get { return _moveSpeed; } }
 
 	[SerializeField]
-	private float	_playZoomSize;
+	private float	_moveSpeed;
 
 }

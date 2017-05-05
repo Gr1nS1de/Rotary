@@ -8,7 +8,7 @@ public class InputController : Controller
 
 	void OnFingerMove( FingerMotionEvent e ) 
 	{
-		if ((!_isStationaryStarted && !_isMovedStarted) && e.Phase == FingerMotionPhase.Started && e.Selection != null && e.Raycast.Hit2D.rigidbody != null)
+		if ((!_isStationaryStarted && !_isMovedStarted) && e.Phase == FingerMotionPhase.Started && e.Selection != null)// && e.Raycast.Hit2D.rigidbody != null)
 		{
 			_isMovedStarted = true;
 
@@ -27,7 +27,7 @@ public class InputController : Controller
 	void OnFingerStationary( FingerMotionEvent e ) 
 	{
 
-		if ((!_isStationaryStarted && !_isMovedStarted) && e.Phase == FingerMotionPhase.Started && e.Selection != null && e.Raycast.Hit2D.rigidbody != null)
+		if ((!_isStationaryStarted && !_isMovedStarted) && e.Phase == FingerMotionPhase.Started && e.Selection != null)// && e.Raycast.Hit2D.rigidbody != null)
 		{
 			_isStationaryStarted = true;
 

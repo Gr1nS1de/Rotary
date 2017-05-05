@@ -14,8 +14,9 @@ public class GameModel : Model
 {
 
 	#region Game model
-	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; } }
+	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }
+
 	[SerializeField]
 	private GameState					_gameState 				= GameState.MAIN_MENU;
 	[SerializeField]
@@ -28,7 +29,9 @@ public class GameModel : Model
 	public GameSoundModel				soundModel				{ get { return _soundModel 					= SearchLocal<GameSoundModel>(				_soundModel,				typeof(GameSoundModel).Name ); } }
 	public RCModel						RCModel					{ get { return _RCModel 					= SearchLocal<RCModel>(						_RCModel,					typeof(RCModel).Name ); } }
 	public ObjectsPoolModel				objectsPoolModel		{ get { return _objectsPoolModel			= SearchLocal<ObjectsPoolModel>(			_objectsPoolModel,			typeof(ObjectsPoolModel).Name );}}
+	public PlayerModel 					playerModel				{ get { return _playerModel					= SearchLocal<PlayerModel>(					_playerModel,				typeof(PlayerModel).Name );}}
 
+	private PlayerModel					_playerModel;
 	private CameraModel					_cameraModel;
 	private DestructibleModel   		_destructibleModel;
 	private GameSoundModel				_soundModel;

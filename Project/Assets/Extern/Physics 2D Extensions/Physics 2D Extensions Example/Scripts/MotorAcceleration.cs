@@ -23,8 +23,8 @@ namespace Thinksquirre.Phys2DExamples
         {
             var motor = m_WheelJoint.motor;
 
-            motor.motorSpeed += Time.deltaTime * m_AccelerationRate;
-            motor.motorSpeed = Mathf.Min(motor.motorSpeed, m_MotorSpeed);
+            //motor.motorSpeed += Time.deltaTime * m_AccelerationRate;
+			motor.motorSpeed = m_MotorSpeed; //Mathf.Min(motor.motorSpeed, m_MotorSpeed);
 
             m_WheelJoint.motor = motor;
         }

@@ -12,12 +12,11 @@ public class N : MonoBehaviour
 	#endregion
 
 	#region Game notifications
-	public const string GameOnStart					= "game.on.start";
-	public const string GamePlayLevel_				= "game.play.level";
+	public const string OnStart						= "on.start";
+	public const string GamePlay					= "game.play";
 	public const string GamePause					= "game.pause";
 	public const string GameOver					= "game.over";
 
-	public const string StartGame					= "start.game";
 	/*
 	public const string GamePlayerGetScoreItem		= "game.player.get.score_item";
 	public const string GamePlayerPlacedOnRoad		= "game.player.placed_on_road";

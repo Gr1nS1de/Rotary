@@ -22,11 +22,11 @@ public class UIModel : Model
 	#endregion
 
 	#region Declare models reference
-	public UIGameModel		UIGameModel				{ get { return _UIGameModel 		= SearchLocal<UIGameModel>(			_UIGameModel,		typeof(UIGameModel).Name);	} }
-	public UIMenuModel		UIMenuModel				{ get { return _UIMenuModel			= SearchLocal<UIMenuModel>(			_UIMenuModel,		typeof(UIMenuModel).Name);	} }
+	public UIGameModel			UIGameModel				{ get { return _UIGameModel 		= SearchLocal<UIGameModel>(			_UIGameModel,		typeof(UIGameModel).Name);	} }
+	public UIMainMenuModel		UIMainMenuModel			{ get { return _UIMainMenuModel		= SearchLocal<UIMainMenuModel>(		_UIMainMenuModel,	typeof(UIMainMenuModel).Name);	} }
 
-	private UIGameModel		_UIGameModel;
-	private UIMenuModel		_UIMenuModel;
+	private UIGameModel			_UIGameModel;
+	private UIMainMenuModel		_UIMainMenuModel;
 	#endregion
 }
 

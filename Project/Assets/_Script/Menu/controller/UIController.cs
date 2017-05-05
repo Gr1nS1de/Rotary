@@ -7,25 +7,42 @@ public class UIController : Controller
 {
 	#region Declare controllers reference
 	public UIGameController		UIGameController				{ get { return _UIGameController 		= SearchLocal<UIGameController>(			_UIGameController,		typeof(UIGameController).Name);	} }
-	public UIMenuController		UIMenuController				{ get { return _UIMenuController		= SearchLocal<UIMenuController>(			_UIMenuController,		typeof(UIMenuController).Name);	} }
+	public UIMainMenuController		UIMenuController				{ get { return _UIMenuController		= SearchLocal<UIMainMenuController>(			_UIMenuController,		typeof(UIMainMenuController).Name);	} }
 
 	private UIGameController	_UIGameController;
-	private UIMenuController	_UIMenuController;
+	private UIMainMenuController	_UIMenuController;
 	#endregion
 
-	private UIMenuModel	UIMenuModel	{ get { return ui.model.UIMenuModel; } }
+	private UIMainMenuModel	UIMenuModel	{ get { return ui.model.UIMainMenuModel; } }
 	private UIGameModel UIGameModel	{ get { return ui.model.UIGameModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
 		{
-			case N.GameOnStart:
+			case N.OnStart:
 				{
 					OnStart ();
 					break;
 				}
-					
+
+			case N.GamePlay:
+				{
+					ui.model.uiState = UIState.PLAYING;
+					break;
+				}
+
+			case N.GamePause:
+				{
+					ui.model.uiState = UIState.PAUSE;
+					break;
+				}
+
+			case N.GameOver:
+				{
+					ui.model.uiState = UIState.GAME_OVER;
+					break;
+				}
 		}
 	}
 
@@ -69,7 +86,7 @@ public class UIController : Controller
 	{
 		UpdateText();
 
-		UIMenuModel.canvasGroupStart.gameObject.SetActive(true);
+		UIMenuModel.canvasGroup.gameObject.SetActive(true);
 		/*
 		UIGameModel.canvasGroupInGame.DOFade(0,0.2f).SetEase(Ease.Linear);
 

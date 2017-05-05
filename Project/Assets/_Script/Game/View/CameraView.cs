@@ -1,22 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using DG.Tweening;
+using DG.Tweening;
 
 public class CameraView : View<GameActivity>
 {
-	public CameraModel 		cameraModel		{ get { return game.model.cameraModel; } }
-	public Camera 			cam				{ get { return GetComponent<Camera> (); } }
-	//public Transform		player			{ get { return game.view.gearLightView.transform; } }
-	public float			playZoomSize	{ get { return cameraModel.playZoomSize; } }
+	private CameraModel 	_cameraModel	{ get { return game.model.cameraModel; } }
+	private Camera 			_camera			{ get { return GetComponent<Camera> (); } }
+	private PlayerView		_playerView		{ get { return game.view.playerView; } }
+	private float			_moveSpeed		{ get { return _cameraModel.moveSpeed; } }
 
-	public void OnStart()
+	public void OnInit()
 	{
 	}
 
-	void Update()
+	void LateUpdate()
 	{
+		if (game.model.gameState != GameState.PLAYING)
+			return;
+		
+		//_camera.transform.DOMoveX (transform.position.x + _moveSpeed, 1f).SetUpdate (UpdateType.Late);
+		_camera.transform.position += new Vector3(_moveSpeed * Time.smoothDeltaTime, 0f, 0f);
+		//_camera.transform.position += new Vector3(_moveSpeed, 0f, 0f);
+	}
+
+	//void Update()
+	//{
 		//cam.backgroundColor = GM.instance.currentBackgroundColor;
-	}
+	//}
 
 	public void DOStart(System.Action callback)
 	{/*

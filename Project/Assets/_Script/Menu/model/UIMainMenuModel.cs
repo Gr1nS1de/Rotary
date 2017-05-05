@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UIMenuModel : Model
+public class UIMainMenuModel : Model
 {
-	public CanvasGroup 	canvasGroupStart		{ get { return _canvasGroupStart; } }
+	public CanvasGroup 	canvasGroup				{ get { return _canvasGroupStart; } }
 	public Text 		bestScoreText			{ get { return _bestScoreText; } }
 	public Text 		lastScoreText			{ get { return _lastScoreText; } }
 

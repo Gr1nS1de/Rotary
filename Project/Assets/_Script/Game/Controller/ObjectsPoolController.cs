@@ -15,7 +15,7 @@ public class ObjectsPoolController : Controller
 	{
 		switch (alias)
 		{
-			case N.GamePlayLevel_:
+			case N.GamePlay:
 				{
 					OnGamePlay ();
 

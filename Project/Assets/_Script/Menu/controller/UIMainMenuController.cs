@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIMenuController : Controller
+public class UIMainMenuController : Controller
 {
+	private UIMainMenuModel 		_uiMainMenuModel			{ get { return ui.model.UIMainMenuModel; } }
+
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
 		{
-			case N.GameOnStart:
+			case N.OnStart:
 				{
 					OnStart ();
 
@@ -22,9 +24,9 @@ public class UIMenuController : Controller
 	}
 
 	#region Public methods
-	public void ButtonGenerateLevel()
+	public void ButtonGamePlay()
 	{
-		Notify (N.StartGame);
+		Notify (N.GamePlay);
 	}
 	#endregion
 

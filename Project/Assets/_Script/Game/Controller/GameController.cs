@@ -11,9 +11,10 @@ public class GameController : Controller
 	public GameSoundController				gameSoundController				{ get { return _gameSoundController			= SearchLocal<GameSoundController>(			_gameSoundController,			typeof(GameSoundController).Name ); } }
 	public ResourcesController				resourcesController				{ get { return _resourcesController 		= SearchLocal<ResourcesController>(			_resourcesController,			typeof(ResourcesController).Name ); } }
 	public ObjectsPoolController			objectsPoolController			{ get { return _objectsPoolController 		= SearchLocal<ObjectsPoolController> (		_objectsPoolController, 		typeof(ObjectsPoolController).Name);}}
+	public PlayerController 				playerController				{ get { return _playerController			= SearchLocal<PlayerController>(			_playerController,				typeof(PlayerController).Name );}}
 
+	private PlayerController				_playerController;
 	private CameraController				_cameraController;
-
 	private GameSoundController				_gameSoundController;
 	private ResourcesController				_resourcesController;
 	private ObjectsPoolController 			_objectsPoolController;
@@ -25,7 +26,7 @@ public class GameController : Controller
 	{
 		switch ( alias )
 		{
-			case N.GameOnStart:
+			case N.OnStart:
 				{
 					//PlayerPrefs.DeleteAll ();
 					game.model.gameState = GameState.MAIN_MENU;
@@ -33,7 +34,7 @@ public class GameController : Controller
 					break;
 				}
 
-			case N.GamePlayLevel_:
+			case N.GamePlay:
 				{
 					game.model.gameState = GameState.PLAYING;
 					break;
@@ -47,6 +48,12 @@ public class GameController : Controller
 
 					game.model.gameState = GameState.GAME_OVER;
 
+					break;
+				}
+
+			case N.GamePause:
+				{
+					game.model.gameState = GameState.PAUSE;
 					break;
 				}
 		}

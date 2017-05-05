@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class PlayerController : Controller
 {
+	private PlayerModel _playerModel	{ get { return game.model.playerModel; } }
+	private PlayerView 	_playerView		{ get { return game.view.playerView; } }
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
 		switch ( alias )
 		{
-			case N.GameOnStart:
+			case N.OnStart:
 				{
 					OnStart ();
 
 					break;
 				}
 
+			case N.GamePlay:
+				{
+					InitPlayer ();
+					break;
+				}
+					
 
 		}
 	}
@@ -24,4 +32,10 @@ public class PlayerController : Controller
 	{
 		//game.view.cameraView.OnStart ();
 	}
+
+	private void InitPlayer()
+	{
+		_playerView.OnInit ();
+	}
+		
 }
