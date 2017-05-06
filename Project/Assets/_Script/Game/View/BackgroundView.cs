@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RCModel : MonoBehaviour 
+public class BackgroundView : View
 {
 }
+

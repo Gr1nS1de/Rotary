@@ -109,7 +109,10 @@ public abstract class Element : MonoBehaviour
 
 	public T SearchLocal<T>( T obj, string storeKey = "", bool update = false ) where T : Object
 	{
-		if (m_Storage.ContainsKey (storeKey) && storeKey != "" && !update)
+		//If object with such key exist at sorage & we dont need update
+		if (m_Storage.ContainsKey (storeKey) && !string.IsNullOrEmpty(storeKey) && !update)
+		{
+			//If object exist
 			if ((T)m_Storage [storeKey] != null)
 			{
 				return (T)m_Storage [storeKey];
@@ -118,6 +121,7 @@ public abstract class Element : MonoBehaviour
 			{
 				m_Storage.Remove (storeKey);
 			}
+		}
 
 		var searchFor = transform.GetComponent<T>() ? transform.GetComponent<T>() : transform.GetComponentInChildren<T>();
 

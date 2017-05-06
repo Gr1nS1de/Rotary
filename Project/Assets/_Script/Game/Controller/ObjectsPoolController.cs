@@ -5,29 +5,66 @@ using System.Collections.Generic;
 
 public class ObjectsPoolController : Controller
 {
-	public ObjectsPoolModel objectsPoolModel	{ get { return game.model.objectsPoolModel; } } 
-	public ObjectsPoolView	objectsPoolView		{ get { return game.view.objectsPoolView;}}
+	private ObjectsPoolModel 		_objectsPoolModel		{ get { return game.model.objectsPoolModel; } }
+	private PlatformsFactoryModel 	_platformsFactoryModel	{ get { return game.model.platformsFactoryModel; } }
+	private ObjectsPoolView			_objectsPoolView		{ get { return game.view.objectsPoolView;}}
+	private Queue<PlatformView>		_platformsQueue			{ get { return game.model.objectsPoolModel.poolingPlatformsQueue;}}
 
-	private Vector3			_lastObstaclePoolerViewPosition;
-	private float 			_desirableGapLength = 1.884f;
+	private Vector3					_lastObstaclePoolerViewPosition;
+	private float 					_desirableGapLength = 1.884f;
+	private Vector2 				_screenSize;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
 		{
+			case N.OnStart:
+				{
+					OnStart ();
+					break;
+				}
+
 			case N.GamePlay:
 				{
 					OnGamePlay ();
 
 					break;
 				}
+
+			case N.AddObjectToPoolQueue__:
+				{
+					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
+					Object poolingObject = (Object)data [1];
+
+					AddObjectToPool (poolingObjectType, poolingObject);
+
+					break;
+				}
+
+			case N.PoolObject___:
+				{
+					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
+					int objectCount = (int)data [1];
+					Vector3? objectPosition = (Vector3?)data [2];
+
+					PoolObject (poolingObjectType, objectCount, objectPosition);
+					break;
+				}
 		}
 	}
 
-	private void OnGamePlay()
+	private void OnStart()
 	{
+		float screenHeight = Camera.main.orthographicSize * 2.0f;
+		float screenWidth = screenHeight * Camera.main.aspect;
+		_screenSize = new Vector2 (screenWidth, screenHeight);
+		Vector3 poolerPosition = _objectsPoolView.transform.position;
+
+		poolerPosition.x = screenWidth;
+
+		_objectsPoolView.transform.position = poolerPosition;
 	}
-	/*
+
 	private void OnGamePlay()
 	{
 		//Start moving pooler object
@@ -38,18 +75,17 @@ public class ObjectsPoolController : Controller
 
 	public IEnumerator MovePoolerViewRoutine()
 	{
-		
 		//objectsPoolModel.gapPercentage = _desirableGapLength / game.model.currentRoadModel.roadTweenPath.GetTween ().PathLength ();
 
-		while (true)
+		while (game.model.gameState == GameState.PLAYING)
 		{
-			Vector3 poolerPosition = objectsPoolView.transform.position;
+			Vector3 poolerPosition = _objectsPoolView.transform.position;
 
-			objectsPoolModel.poolerPositionDelta = poolerPosition - _lastObstaclePoolerViewPosition;
+			_objectsPoolModel.poolerPositionDelta = poolerPosition - _lastObstaclePoolerViewPosition;
 
 			_lastObstaclePoolerViewPosition = poolerPosition;
 
-			objectsPoolView.UpdateMovePooler ();
+			_objectsPoolView.UpdateMovePooler ();
 
 			yield return null;
 		}
@@ -57,13 +93,13 @@ public class ObjectsPoolController : Controller
 
 	private IEnumerator ObjectsPoolingRoutine()
 	{
-		Queue<PoolingObject> poolingQueue = objectsPoolModel.poolingQueue;
+		Queue<PoolingObject> poolingQueue = _objectsPoolModel.poolingItemsQueue;
 
 		//wait before move`1asqzx
 		yield return null;
 		yield return null;
 
-		while ( true )
+		while ( game.model.gameState == GameState.PLAYING )
 		{
 			if (poolingQueue.Count <= 0)
 			{
@@ -75,12 +111,12 @@ public class ObjectsPoolController : Controller
 
 			switch (poolingObject.poolingType)
 			{
-				case PoolingObjectType.OBSTACLE:
+				case PoolingObjectType.COIN:
 					{
-						ObstacleView obstacleView = (ObstacleView)poolingObject.poolingObject;
+						//ObstacleView obstacleView = (ObstacleView)poolingObject.poolingObject;
 
 
-						PoolObstacle (obstacleView);
+						//PoolObstacle (obstacleView);
 
 						yield return new WaitForSeconds( Random.Range( 0.20f, 0.5f ) );
 
@@ -91,9 +127,52 @@ public class ObjectsPoolController : Controller
 		}
 	}
 
+	private void AddObjectToPool(PoolingObjectType poolingObjectType, Object poolingObject)
+	{
+		switch (poolingObjectType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					break;
+				}
+
+			case PoolingObjectType.COIN:
+				{
+					
+					break;
+				}
+		}
+	}
+
+	private void PoolObject(PoolingObjectType poolingObjectType, int count, Vector3? objectPosition)
+	{
+		switch (poolingObjectType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					for (int i = 0; i < count; i++)
+						PoolingPlatform (objectPosition);
+					break;
+				}
+		}
+	}
+
+	private void PoolingPlatform(Vector3? platformPosition)
+	{
+		PlatformView platformView = null;
+
+		if (_platformsQueue.Count > 0)
+			platformView = _platformsQueue.Dequeue ();
+		else
+		{
+			//Instantiate ();
+		}
+
+	}
+	/*
 	private void PoolObstacle(ObstacleView obstacleView)
 	{
-		var directionPoint = objectsPoolModel.poolerPositionDelta;
+		var directionPoint = _objectsPoolModel.poolerPositionDelta;
 		var angle = Mathf.Atan2(directionPoint.y, directionPoint.x) * Mathf.Rad2Deg;
 		bool isDownDirection = false;
 
@@ -105,7 +184,7 @@ public class ObjectsPoolController : Controller
 
 		Quaternion obstacleRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-		obstacleView.OnInit (objectsPoolView.transform.position, obstacleRotation, isDownDirection );
+		obstacleView.OnInit (_objectsPoolView.transform.position, obstacleRotation, isDownDirection );
 
 	}*/
 }

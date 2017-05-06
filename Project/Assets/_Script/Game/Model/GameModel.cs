@@ -30,7 +30,9 @@ public class GameModel : Model
 	public RCModel						RCModel					{ get { return _RCModel 					= SearchLocal<RCModel>(						_RCModel,					typeof(RCModel).Name ); } }
 	public ObjectsPoolModel				objectsPoolModel		{ get { return _objectsPoolModel			= SearchLocal<ObjectsPoolModel>(			_objectsPoolModel,			typeof(ObjectsPoolModel).Name );}}
 	public PlayerModel 					playerModel				{ get { return _playerModel					= SearchLocal<PlayerModel>(					_playerModel,				typeof(PlayerModel).Name );}}
+	public PlatformsFactoryModel		platformsFactoryModel	{ get { return _platformsFactoryModel		= SearchLocal<PlatformsFactoryModel>(		_platformsFactoryModel,		typeof(PlatformsFactoryModel).Name );}}
 
+	private PlatformsFactoryModel		_platformsFactoryModel;
 	private PlayerModel					_playerModel;
 	private CameraModel					_cameraModel;
 	private DestructibleModel   		_destructibleModel;

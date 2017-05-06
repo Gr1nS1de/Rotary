@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 //using DG.Tweening;
@@ -10,12 +9,27 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 #endif
 
+public enum GameThemeType
+{
+	DarkBlueGarage
+}
+
+[System.Serializable]
+public struct GameTheme
+{
+	public GameThemeType GameThemeType;
+	public PlatformView PlatformView;
+	public BackgroundView BackgroundView;
+}
+
 /// <summary>
 /// Class in charge of the logic of the game. This class will restart the level at game over, handle and save the point, and call the Ads if you import the VERY SIMPLE ADS asset available here: http://u3d.as/oWD
 /// </summary>
 public class GM : Controller
 {
 	public static GM Instance;
+
+	public GameTheme GameTheme = new GameTheme();
 
 	void Awake()
 	{
@@ -35,6 +49,22 @@ public class GM : Controller
 	void Start()
 	{
 
+	}
+
+	public void SetGameTheme(GameTheme gameTheme)
+	{
+		GameTheme.GameThemeType = gameTheme.GameThemeType;
+		GameTheme.PlatformView = gameTheme.PlatformView;
+		GameTheme.BackgroundView = gameTheme.BackgroundView;
+	}
+
+	public override void OnNotification (string alias, Object target, params object[] data)
+	{/*
+		switch (alias)
+		{
+			
+		}
+*/
 	}
 	/*
 	public Gradient		backgroundMenuGradient 	{ get { return _backgroundMenuGradient; }		set { _backgroundMenuGradient = value; } } 

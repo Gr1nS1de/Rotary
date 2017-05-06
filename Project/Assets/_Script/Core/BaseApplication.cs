@@ -23,7 +23,7 @@ public abstract class BaseApplication : Element
 	private void Awake()
 	{
 		InitTweening ();
-		Notify( N.RCStartLoad );
+		Notify( N.RCAwakeLoad );
 	}
 
 	private void Start()
