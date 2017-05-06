@@ -4,6 +4,7 @@ using System.Collections;
 
 public enum NotifyType
 {
+	CORE,
 	GAME,
 	UI,
 	ALL

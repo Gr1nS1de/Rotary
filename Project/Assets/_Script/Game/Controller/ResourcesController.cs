@@ -28,12 +28,18 @@ public class ResourcesController : Controller
 
 	private void LoadGameTheme(GameThemeType gameThemeType)
 	{
+		Resources.UnloadUnusedAssets ();
+
+		BackgroundView backgroundView = Resources.LoadAll<BackgroundView> (string.Format ("Theme/_{0}", gameThemeType))[0];
+		PlatformView platformView = Resources.LoadAll<PlatformView> (string.Format ("Theme/_{0}", gameThemeType))[0];
+		Debug.LogErrorFormat("backgroundView = {0}. platformView = {1}. load resources path = {2}",backgroundView != null, platformView != null, string.Format ("Theme/_{0}", gameThemeType) );
 		GameTheme gameTheme = new GameTheme 
 		{
-			GameThemeType = gameThemeType
-			//BackgroundView = 
-
+			GameThemeType = gameThemeType,
+			BackgroundView = backgroundView,
+			PlatformView = platformView
 		};
+
 		GM.Instance.SetGameTheme (gameTheme);
 	}
 

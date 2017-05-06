@@ -29,7 +29,10 @@ public class GM : Controller
 {
 	public static GM Instance;
 
-	public GameTheme GameTheme = new GameTheme();
+	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
+	public GameTheme CurrentGameTheme;
+	public Vector2 ScreenSize;
+	public Vector3 PlatformRendererSize;
 
 	void Awake()
 	{
@@ -44,6 +47,15 @@ public class GM : Controller
 		}
 
 		Localization.InitLanguage ();
+
+		float screenHeight = Camera.main.orthographicSize * 2.0f;
+		float screenWidth = screenHeight * Camera.main.aspect;
+
+		ScreenSize = new Vector2 (screenWidth, screenHeight);
+
+		Notify (N.RCLoadGameTheme_, NotifyType.CORE, DefaultGameTheme);
+
+		PlatformRendererSize = CurrentGameTheme.PlatformView.PlatformRenderer.bounds.size;
 	}
 
 	void Start()
@@ -53,9 +65,14 @@ public class GM : Controller
 
 	public void SetGameTheme(GameTheme gameTheme)
 	{
-		GameTheme.GameThemeType = gameTheme.GameThemeType;
-		GameTheme.PlatformView = gameTheme.PlatformView;
-		GameTheme.BackgroundView = gameTheme.BackgroundView;
+		CurrentGameTheme.GameThemeType = gameTheme.GameThemeType;
+		CurrentGameTheme.PlatformView = gameTheme.PlatformView;
+		CurrentGameTheme.BackgroundView = gameTheme.BackgroundView;
+
+		if (game.view.backgroundView != null)
+			Destroy (game.view.backgroundView.gameObject);
+
+		BackgroundView backgroundView = (BackgroundView)Instantiate (CurrentGameTheme.BackgroundView, game.view.transform);
 	}
 
 	public override void OnNotification (string alias, Object target, params object[] data)

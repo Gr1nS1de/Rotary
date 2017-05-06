@@ -11,8 +11,6 @@ public class ObjectsPoolController : Controller
 	private Queue<PlatformView>		_platformsQueue			{ get { return game.model.objectsPoolModel.poolingPlatformsQueue;}}
 
 	private Vector3					_lastObstaclePoolerViewPosition;
-	private float 					_desirableGapLength = 1.884f;
-	private Vector2 				_screenSize;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -36,7 +34,7 @@ public class ObjectsPoolController : Controller
 					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
 					Object poolingObject = (Object)data [1];
 
-					AddObjectToPool (poolingObjectType, poolingObject);
+					AddObjectToPoolQueue (poolingObjectType, poolingObject);
 
 					break;
 				}
@@ -55,12 +53,9 @@ public class ObjectsPoolController : Controller
 
 	private void OnStart()
 	{
-		float screenHeight = Camera.main.orthographicSize * 2.0f;
-		float screenWidth = screenHeight * Camera.main.aspect;
-		_screenSize = new Vector2 (screenWidth, screenHeight);
 		Vector3 poolerPosition = _objectsPoolView.transform.position;
 
-		poolerPosition.x = screenWidth;
+		poolerPosition.x = GM.Instance.ScreenSize.x;
 
 		_objectsPoolView.transform.position = poolerPosition;
 	}
@@ -127,12 +122,13 @@ public class ObjectsPoolController : Controller
 		}
 	}
 
-	private void AddObjectToPool(PoolingObjectType poolingObjectType, Object poolingObject)
+	private void AddObjectToPoolQueue(PoolingObjectType poolingObjectType, Object poolingObject)
 	{
 		switch (poolingObjectType)
 		{
 			case PoolingObjectType.PLATFORM:
 				{
+					_platformsQueue.Enqueue ((PlatformView)poolingObject);
 					break;
 				}
 
@@ -146,12 +142,24 @@ public class ObjectsPoolController : Controller
 
 	private void PoolObject(PoolingObjectType poolingObjectType, int count, Vector3? objectPosition)
 	{
+		Debug.LogFormat("PoolObject {0}. count = {1}. position = {2}", poolingObjectType, count, objectPosition);
+
 		switch (poolingObjectType)
 		{
 			case PoolingObjectType.PLATFORM:
 				{
 					for (int i = 0; i < count; i++)
+					{
 						PoolingPlatform (objectPosition);
+
+						if (objectPosition != null)
+						{
+							Vector3 platformSize = GM.Instance.PlatformRendererSize;
+							Vector3 screenSize = GM.Instance.ScreenSize;
+
+							objectPosition = new Vector3(objectPosition.GetValueOrDefault().x + (platformSize.x + _objectsPoolModel.platformsGap) , objectPosition.GetValueOrDefault().y, 0f ); 
+						}
+					}
 					break;
 				}
 		}
@@ -165,9 +173,29 @@ public class ObjectsPoolController : Controller
 			platformView = _platformsQueue.Dequeue ();
 		else
 		{
-			//Instantiate ();
+			platformView = (PlatformView)Instantiate (GM.Instance.CurrentGameTheme.PlatformView, game.view.transform.Find("_Platforms"));
 		}
 
+		if (platformPosition != null)
+		{
+			platformView.transform.position = platformPosition.GetValueOrDefault ();
+
+			_objectsPoolModel.lastPlatformPosition = platformView.transform.position;
+		}
+		else
+		{
+			Vector3 platformSize = GM.Instance.PlatformRendererSize;
+			Vector2 screenSize = GM.Instance.ScreenSize;
+
+			float randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);
+			Vector3 platformRandomPosition = new Vector3(_objectsPoolModel.lastPlatformPosition.x + platformSize.x + _objectsPoolModel.platformsGap, randomY, 0f);
+
+			platformView.transform.position = platformRandomPosition;
+
+			_objectsPoolModel.lastPlatformPosition = platformRandomPosition;
+		}
+
+		platformView.OnInit ();
 	}
 	/*
 	private void PoolObstacle(ObstacleView obstacleView)

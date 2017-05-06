@@ -13,14 +13,16 @@ public class CameraView : View<GameActivity>
 	{
 	}
 
-	void LateUpdate()
+	void Update()
 	{
 		if (game.model.gameState != GameState.PLAYING)
 			return;
-		
-		//_camera.transform.DOMoveX (transform.position.x + _moveSpeed, 1f).SetUpdate (UpdateType.Late);
-		_camera.transform.position += new Vector3(_moveSpeed * Time.smoothDeltaTime, 0f, 0f);
-		//_camera.transform.position += new Vector3(_moveSpeed, 0f, 0f);
+
+		Vector3 cameraPosition = _camera.transform.position;
+
+		cameraPosition.x += _moveSpeed;
+
+		_camera.transform.position = Vector3.Lerp(_camera.transform.position, cameraPosition, Time.deltaTime);
 	}
 
 	//void Update()

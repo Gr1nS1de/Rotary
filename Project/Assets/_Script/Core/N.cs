@@ -16,7 +16,7 @@ public class N : MonoBehaviour
 	public const string AddObjectToPoolQueue__		= "add.to.object.pool_queue";
 	public const string PoolObject___ 				= "pool.object";
 
-	public const string OnPlatformHidden_			= "on.platform.hidden";
+	public const string OnPlatformInvisible_		= "on.platform.invisible";
 
 	#endregion
 

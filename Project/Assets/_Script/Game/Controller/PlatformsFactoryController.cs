@@ -21,11 +21,11 @@ public class PlatformsFactoryController : Controller
 					break;
 				}
 
-			case N.OnPlatformHidden_:
+			case N.OnPlatformInvisible_:
 				{
 					PlatformView platformView = (PlatformView)data [0];
 
-					HidePlatform (platformView);
+					RestorePlatform (platformView);
 					break;
 				}
 		}
@@ -38,17 +38,23 @@ public class PlatformsFactoryController : Controller
 
 	private void OnGamePlay()
 	{
-		InitFirstPlatforms ();
+		InitPlatforms (game.model.objectsPoolModel.platformsMaxCount);
 	}
 
-	private void InitFirstPlatforms()
+	private void InitPlatforms(int count)
 	{
+		Vector3 platformSize = GM.Instance.PlatformRendererSize;
+		Vector3 screenSize = GM.Instance.ScreenSize;
 
+		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + platformSize.y * 1.25f, 0f );
+
+		Notify(N.PoolObject___, NotifyType.GAME, PoolingObjectType.PLATFORM, count, platformPosition);
 	}
 
-	private void HidePlatform(PlatformView platformView)
+	private void RestorePlatform(PlatformView platformView)
 	{
 		Notify (N.AddObjectToPoolQueue__, NotifyType.GAME, PoolingObjectType.PLATFORM, platformView);
+		Notify (N.PoolObject___, NotifyType.GAME, PoolingObjectType.PLATFORM, 1, null);
 	}
 }
 

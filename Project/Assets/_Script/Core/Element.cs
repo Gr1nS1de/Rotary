@@ -26,6 +26,11 @@ public abstract class Element : MonoBehaviour
 	{ 
 		switch(notifyType)
 		{
+			case NotifyType.CORE:
+				{
+					m_Core.Notify (alias, this, data);
+					break;
+				}
 			case NotifyType.ALL:
 				{
 					m_UI.Notify ( alias, this, data ); 
