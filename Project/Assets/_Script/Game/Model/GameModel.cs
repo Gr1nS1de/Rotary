@@ -34,8 +34,11 @@ public class GameModel : Model
 	#region Game model
 	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }
-	public GameTheme 					gameTheme				{ get { return _gameTheme; } set { _gameTheme = value;}}
+	public GameTheme 					gameTheme				{ get { return _gameTheme; } 		set { _gameTheme = value;}}
+	public float	 					gameMoveSpeed			{ get { return _gameMoveSpeed; } 	set { _gameMoveSpeed = value;}}
 
+	[SerializeField]
+	private float						_gameMoveSpeed			= 1f;
 	[SerializeField]
 	private GameTheme					_gameTheme;
 	[SerializeField]

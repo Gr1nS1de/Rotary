@@ -17,6 +17,7 @@ public class GM : Controller
 	public static GM Instance;
 
 	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
+	[HideInInspector]
 	public Vector2 ScreenSize;
 
 	void Awake()
