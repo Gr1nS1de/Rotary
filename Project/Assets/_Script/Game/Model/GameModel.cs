@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 //using DG.Tweening;
 
 public enum GameState
@@ -10,9 +11,26 @@ public enum GameState
 	GAME_OVER
 }
 
+public enum GameThemeType
+{
+	DarkBlueGarage
+}
+
+[System.Serializable]
+public struct GameTheme
+{
+	public GameThemeType GameThemeType;
+	public List<PlatformView> PlatformsViewList;
+	public BackgroundView BackgroundView;
+
+	public Vector3 GetPlatformRendererSize(PlatformTypes platformType)
+	{
+		return PlatformsViewList.Find (platform => platform.PlatformType == platformType).GetMainPlatformRenderer().bounds.size;
+	}
+}
+
 public class GameModel : Model
 {
-
 	#region Game model
 	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }

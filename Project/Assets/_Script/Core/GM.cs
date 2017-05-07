@@ -9,24 +9,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 #endif
 
-public enum GameThemeType
-{
-	DarkBlueGarage
-}
-
-[System.Serializable]
-public struct GameTheme
-{
-	public GameThemeType GameThemeType;
-	public List<PlatformView> PlatformsViewList;
-	public BackgroundView BackgroundView;
-
-	public Vector3 GetPlatformRendererSize(PlatformTypes platformType)
-	{
-		return PlatformsViewList.Find (platform => platform.PlatformType == platformType).GetMainPlatformRenderer().bounds.size;
-	}
-}
-
 /// <summary>
 /// Class in charge of the logic of the game. This class will restart the level at game over, handle and save the point, and call the Ads if you import the VERY SIMPLE ADS asset available here: http://u3d.as/oWD
 /// </summary>

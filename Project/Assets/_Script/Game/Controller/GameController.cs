@@ -34,22 +34,28 @@ public class GameController : Controller
 
 			case N.OnStart:
 				{
-					//PlayerPrefs.DeleteAll ();
-					game.model.gameState = GameState.MAIN_MENU;
 					OnStart();
+
+					game.model.gameState = GameState.MAIN_MENU;
 					break;
 				}
 
 			case N.GamePlay:
 				{
+					SetNewGame ();
+
 					game.model.gameState = GameState.PLAYING;
+					break;
+				}
+
+			case N.GameAddScore:
+				{
+					OnAddScore ();
 					break;
 				}
 
 			case N.GameOver:
 				{
-					//var collisionPoint = (Vector2)data [0];
-
 					GameOver ();
 
 					game.model.gameState = GameState.GAME_OVER;
@@ -90,7 +96,7 @@ public class GameController : Controller
 
 	}
 
-	private void Add1Score()
+	private void OnAddScore()
 	{
 		game.model.currentScore++;
 

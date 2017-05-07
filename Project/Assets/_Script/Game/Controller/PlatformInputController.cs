@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public class PlatformInputController : Controller
 {
-	private Transform _currentSelectedPlatform = null;
-	private Vector3 _selectedPointDelta;
+	private Dictionary<Transform, Vector3> _selectedPlatformsDictionary = new Dictionary<Transform, Vector3>();
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -24,22 +24,8 @@ public class PlatformInputController : Controller
 					Vector3 inputPoint = (Vector3)data [1];
 					FingerMotionPhase gesturePhase = (FingerMotionPhase)data [2];
 
-					//Debug.LogError ("Input "+dragItem);
-					//If just start drag with new gear
-					if (dragItem != null)
-					{
 
-						//Get item gear view
-						if (dragItem)
-							OnDragGear (dragItem.transform, inputPoint, gesturePhase);
-						else
-							Debug.LogError ("Input gear element == null. ");
-					}
-					else if (_currentSelectedPlatform)
-					{
-						OnDragGear (_currentSelectedPlatform, inputPoint, gesturePhase);
-					}
-
+					OnDragPlatform (dragItem.transform, inputPoint, gesturePhase);
 					break;
 				}
 		}
@@ -50,7 +36,7 @@ public class PlatformInputController : Controller
 
 	}
 
-	private void OnDragGear (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
+	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
 	{
 		//Debug.Log ("Drag gear = " + selectedGear.gameObject.name + " point " + inputPoint);
 
@@ -61,44 +47,33 @@ public class PlatformInputController : Controller
 		{
 			case FingerMotionPhase.Started:
 				{
-					if (_currentSelectedPlatform != null)
-						return;
-
-					_currentSelectedPlatform = selectedPlatform;
-
 					//Get delta between touch point and gear center position - for proper gear drag
-					_selectedPointDelta = new Vector3(selectedPlatform.position.x, selectedPlatform.position.y, selectedPoint.z) - selectedPoint;
-					
+					Vector3 selectedPointDelta = new Vector3(selectedPlatform.position.x, selectedPlatform.position.y, selectedPoint.z) - selectedPoint;
+
+					_selectedPlatformsDictionary.Add (selectedPlatform, selectedPointDelta);
 
 					break;
 				}
 
 			case FingerMotionPhase.Updated:
 				{
-					if (_currentSelectedPlatform != null)
-					{
-						MoveSelectedPlatform (inputPoint.y);
-					}
+					MovePlatform (selectedPlatform ,inputPoint.y);
 					break;
 				}
 
 			case FingerMotionPhase.Ended:
 				{
-					_currentSelectedPlatform = null;
+					if (_selectedPlatformsDictionary.ContainsKey (selectedPlatform))
+						_selectedPlatformsDictionary.Remove (selectedPlatform);
 					break;
 				}
 		}
 
 	}
 
-	private void MoveSelectedPlatform(float inputY)
+	private void MovePlatform(Transform selectedPlatform, float inputY)
 	{
-		_currentSelectedPlatform.transform.DOMoveY (inputY + _selectedPointDelta.y, 0.1f);
-	}
-
-	void OnDestroy()
-	{
-		_currentSelectedPlatform = null;
+		selectedPlatform.transform.DOMoveY (inputY + _selectedPlatformsDictionary[selectedPlatform].y, 0.1f);
 	}
 
 }

@@ -23,7 +23,7 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (initPosition.x - game.view.cameraView.transform.position.x);
 
-		initPosition.x /= 1.5f;
+		//initPosition.x /= 1.5f;
 
 		transform.position = initPosition;
 	}
@@ -38,7 +38,6 @@ public class PlayerView : View
 		_lastInvisibleTimestamp = null;
 	}
 		
-
 	void FixedUpdate()
 	{
 		if (game.model.gameState != GameState.PLAYING)
@@ -63,12 +62,27 @@ public class PlayerView : View
 			Notify (N.GameOver);
 
 		//Debug.LogErrorFormat ("Current distance to camera = {0}. Last frame distance = {1}. Offset = {2}", Vector2.Distance(game.view.cameraView.transform.position, transform.position), _lastCameraDistance, Vector2.Distance(game.view.cameraView.transform.position, transform.position) - _lastCameraDistance );
-		//Debug.LogError("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 0.15f ? " > " + (Mathf.Abs (currentOffset) - 0.15f) : "") );
+		Debug.Log("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 0.15f ? " > " + (Mathf.Abs (currentOffset) - 0.15f) : "") );
 		//_lastCameraDistance = Vector2.Distance(game.view.cameraView.transform.position, transform.position);
 		//_playerRB.DOMoveX (transform.position.x + _playerModel.moveSpeed, 1f).SetUpdate(UpdateType.Fixed);
 		//transform.position += new Vector3( _playerModel.moveSpeed * Time.fixedDeltaTime, 0f, 0f);
 	}
 
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.transform.parent == null)
+			return;
 
+		PlatformView platformView = collision.transform.parent.GetComponent<PlatformView> ();
+		
+		if(platformView != null)
+		{
+			if (!_playerModel.scorePlatformsList.Contains (platformView))
+			{
+				Notify (N.GameAddScore, NotifyType.ALL);
 
+				_playerModel.scorePlatformsList.Add (platformView);
+			}
+		}
+	}
 }

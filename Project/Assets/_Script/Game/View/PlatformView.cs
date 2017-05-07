@@ -1,38 +1,84 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Custom editor: PlatformViewEditor
 public class PlatformView : View, IPlatform, IPoolObject
 {
 	public PlatformTypes PlatformType;
-	[SerializeField]
-	private SpriteRenderer PlatformRenderer;
 
-	private bool _isWasVisibleOnce = false;
+	#region horizontal platform vars
+	[SerializeField]
+	private SpriteRenderer HorizontalPlatformRenderer;
+	#endregion
+
+	#region vertical platform vars
+	[SerializeField]
+	private SpriteRenderer[] VerticalPlatformRenderers;
+	[SerializeField]
+	private float _platformsGap = 0f;
+	#endregion
+
+	private bool _isWasVisible = false;
+	private bool _isInPool = true;
 
 	public void OnInit()
 	{
-		_isWasVisibleOnce = false;
+		_isWasVisible = false;
+		_isInPool = false;
 
-		PlatformRenderer.transform.localPosition = Vector3.zero;
+		switch (PlatformType)
+		{
+			case PlatformTypes.HORIZONTAL:
+				{
+					HorizontalPlatformRenderer.transform.localPosition = Vector3.zero;
+					break;
+				}
+
+			case PlatformTypes.VERTICAL:
+				{
+					
+					break;
+				}
+		}
 	}
 
 	public SpriteRenderer GetMainPlatformRenderer()
 	{
-		return PlatformRenderer;
+		SpriteRenderer platformRenderer = null;
+
+		switch (PlatformType)
+		{
+			case PlatformTypes.HORIZONTAL:
+				{
+					platformRenderer = HorizontalPlatformRenderer;
+					break;
+				}
+
+			case PlatformTypes.VERTICAL:
+				{
+					platformRenderer = VerticalPlatformRenderers [0];
+					break;
+				}
+		}
+
+		return platformRenderer;
 	}
 		
 	void Update()
 	{
-		if (!_isWasVisibleOnce)
+		if (_isInPool)
+			return;
+		
+		if (!_isWasVisible)
 		{
-			if (PlatformRenderer.isVisible)
+			if (GetMainPlatformRenderer().isVisible)
 			{
 				OnVisible ();
 			}
 		}else
-		if (_isWasVisibleOnce)
+		if (_isWasVisible)
 		{
-			if (!PlatformRenderer.isVisible)
+			if (!GetMainPlatformRenderer().isVisible)
 			{
 				OnInvisible ();
 			}
@@ -41,7 +87,7 @@ public class PlatformView : View, IPlatform, IPoolObject
 
 	public virtual void OnVisible()
 	{
-		_isWasVisibleOnce = true;
+		_isWasVisible = true;
 	}
 
 	public virtual void OnInvisible()
@@ -51,7 +97,7 @@ public class PlatformView : View, IPlatform, IPoolObject
 
 	public virtual void OnAddToPool()
 	{
-
+		_isInPool = true;
 	}
 }
 

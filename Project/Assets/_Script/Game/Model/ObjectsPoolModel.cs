@@ -23,6 +23,7 @@ public class ObjectsPoolModel : Model
 	public float					platformsGap			{ get { return _platformsGap;} set { _platformsGap = value; }}
 	public Vector3					poolerPositionDelta		{ get { return _poolerPositionDelta;} set { _poolerPositionDelta = value;}}
 	public Vector3					lastPlatformPosition	{ get { return _lastPlatformPosition;} set { _lastPlatformPosition = value;}}
+	public float					lastPlatformWidth		{ get { return _lastPlatformWidth;} set { _lastPlatformWidth = value;}}
 	public List<PlatformView>		instantiatedPlatforms	{ get { return _instantiatedPlatforms;}}
 
 
@@ -34,6 +35,7 @@ public class ObjectsPoolModel : Model
 	[SerializeField]
 	private float					_platformsGap;
 	private Vector3					_lastPlatformPosition;
+	private float					_lastPlatformWidth;
 	private Vector3					_poolerPositionDelta;
 }
 

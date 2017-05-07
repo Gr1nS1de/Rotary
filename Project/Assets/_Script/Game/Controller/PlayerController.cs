@@ -24,6 +24,16 @@ public class PlayerController : Controller
 					InitPlayer ();
 					break;
 				}
+
+			case N.OnPlatformInvisible_:
+				{
+					PlatformView platformView = (PlatformView)data [0];
+
+					if (_playerModel.scorePlatformsList.Contains (platformView))
+						_playerModel.scorePlatformsList.Remove (platformView);
+					
+					break;
+				}
 					
 			case N.GameOver:
 				{
@@ -50,6 +60,7 @@ public class PlayerController : Controller
 	private void ResetPlayer()
 	{
 		_playerView.transform.DOMove (Vector3.zero, 1f);
+		_playerModel.scorePlatformsList.Clear ();
 	}
 		
 }
