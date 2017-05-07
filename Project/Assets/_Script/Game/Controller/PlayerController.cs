@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : Controller
 {
@@ -24,6 +25,11 @@ public class PlayerController : Controller
 					break;
 				}
 					
+			case N.GameOver:
+				{
+					ResetPlayer ();
+					break;
+				}
 
 		}
 	}
@@ -35,7 +41,15 @@ public class PlayerController : Controller
 
 	private void InitPlayer()
 	{
-		_playerView.OnInit ();
+		Vector2 screenSize = GM.Instance.ScreenSize;
+		Vector3 playerInitPosition = new Vector3((-screenSize.x / 2f) + screenSize.x * _playerModel.initScreenPosX, screenSize.y / 2f * 0.5f, 0f);
+
+		_playerView.OnInit (playerInitPosition);
+	}
+
+	private void ResetPlayer()
+	{
+		_playerView.transform.DOMove (Vector3.zero, 1f);
 	}
 		
 }

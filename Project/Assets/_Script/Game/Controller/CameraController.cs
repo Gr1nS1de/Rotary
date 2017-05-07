@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using DG.Tweening;
+using DG.Tweening;
 
 public class CameraController : Controller
 {
@@ -24,6 +24,12 @@ public class CameraController : Controller
 					break;
 				}
 
+			case N.GameOver:
+				{
+					ResetCamera ();
+					break;
+				}
+
 		}
 	 }
 
@@ -35,6 +41,11 @@ public class CameraController : Controller
 	private void InitCamera()
 	{
 		_cameraView.OnInit ();
+	}
+
+	private void ResetCamera()
+	{
+		_cameraView.transform.DOMoveX (0f, 1f);
 	}
 
 	/*

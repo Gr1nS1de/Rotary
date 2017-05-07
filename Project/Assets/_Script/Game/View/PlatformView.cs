@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlatformView : View
+public class PlatformView : View, IPlatform, IPoolObject
 {
-	public SpriteRenderer PlatformRenderer;
+	public PlatformTypes PlatformType;
+	[SerializeField]
+	private SpriteRenderer PlatformRenderer;
 
-	private bool _isWaitForInvisible = false;
 	private bool _isWasVisibleOnce = false;
 
 	public void OnInit()
 	{
-		_isWaitForInvisible = true;
+		_isWasVisibleOnce = false;
+
 		PlatformRenderer.transform.localPosition = Vector3.zero;
+	}
+
+	public SpriteRenderer GetMainPlatformRenderer()
+	{
+		return PlatformRenderer;
 	}
 		
 	void Update()
@@ -19,19 +26,32 @@ public class PlatformView : View
 		if (!_isWasVisibleOnce)
 		{
 			if (PlatformRenderer.isVisible)
-				_isWasVisibleOnce = true;
+			{
+				OnVisible ();
+			}
 		}else
-		if (_isWaitForInvisible && _isWasVisibleOnce)
+		if (_isWasVisibleOnce)
 		{
 			if (!PlatformRenderer.isVisible)
 			{
-				_isWaitForInvisible = false;
-
-				Notify (N.OnPlatformInvisible_, NotifyType.GAME, this);
-
-				_isWasVisibleOnce = false;
+				OnInvisible ();
 			}
 		}
+	}
+
+	public virtual void OnVisible()
+	{
+		_isWasVisibleOnce = true;
+	}
+
+	public virtual void OnInvisible()
+	{
+		Notify (N.OnPlatformInvisible_, NotifyType.GAME, this);
+	}
+
+	public virtual void OnAddToPool()
+	{
+
 	}
 }
 

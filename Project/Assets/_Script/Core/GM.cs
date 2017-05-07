@@ -18,8 +18,13 @@ public enum GameThemeType
 public struct GameTheme
 {
 	public GameThemeType GameThemeType;
-	public PlatformView PlatformView;
+	public List<PlatformView> PlatformsViewList;
 	public BackgroundView BackgroundView;
+
+	public Vector3 GetPlatformRendererSize(PlatformTypes platformType)
+	{
+		return PlatformsViewList.Find (platform => platform.PlatformType == platformType).GetMainPlatformRenderer().bounds.size;
+	}
 }
 
 /// <summary>
@@ -30,58 +35,44 @@ public class GM : Controller
 	public static GM Instance;
 
 	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
-	public GameTheme CurrentGameTheme;
 	public Vector2 ScreenSize;
-	public Vector3 PlatformRendererSize;
 
 	void Awake()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
+
+			Localization.InitLanguage ();
+
+			float screenHeight = Camera.main.orthographicSize * 2.0f;
+			float screenWidth = screenHeight * Camera.main.aspect;
+
+			ScreenSize = new Vector2 (screenWidth, screenHeight);
+
 		}
 		else
 		{
 			if (Instance != this)
 				Destroy (this.gameObject);
 		}
-
-		Localization.InitLanguage ();
-
-		float screenHeight = Camera.main.orthographicSize * 2.0f;
-		float screenWidth = screenHeight * Camera.main.aspect;
-
-		ScreenSize = new Vector2 (screenWidth, screenHeight);
-
-		Notify (N.RCLoadGameTheme_, NotifyType.CORE, DefaultGameTheme);
-
-		PlatformRendererSize = CurrentGameTheme.PlatformView.PlatformRenderer.bounds.size;
 	}
 
 	void Start()
 	{
 
 	}
-
-	public void SetGameTheme(GameTheme gameTheme)
-	{
-		CurrentGameTheme.GameThemeType = gameTheme.GameThemeType;
-		CurrentGameTheme.PlatformView = gameTheme.PlatformView;
-		CurrentGameTheme.BackgroundView = gameTheme.BackgroundView;
-
-		if (game.view.backgroundView != null)
-			Destroy (game.view.backgroundView.gameObject);
-
-		BackgroundView backgroundView = (BackgroundView)Instantiate (CurrentGameTheme.BackgroundView, game.view.transform);
-	}
-
+		
 	public override void OnNotification (string alias, Object target, params object[] data)
-	{/*
+	{
 		switch (alias)
 		{
-			
+			case N.GameOver:
+				{
+					break;
+				}
 		}
-*/
+
 	}
 	/*
 	public Gradient		backgroundMenuGradient 	{ get { return _backgroundMenuGradient; }		set { _backgroundMenuGradient = value; } } 

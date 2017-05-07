@@ -24,6 +24,7 @@ public class PlatformInputController : Controller
 					Vector3 inputPoint = (Vector3)data [1];
 					FingerMotionPhase gesturePhase = (FingerMotionPhase)data [2];
 
+					//Debug.LogError ("Input "+dragItem);
 					//If just start drag with new gear
 					if (dragItem != null)
 					{
@@ -93,6 +94,11 @@ public class PlatformInputController : Controller
 	private void MoveSelectedPlatform(float inputY)
 	{
 		_currentSelectedPlatform.transform.DOMoveY (inputY + _selectedPointDelta.y, 0.1f);
+	}
+
+	void OnDestroy()
+	{
+		_currentSelectedPlatform = null;
 	}
 
 }

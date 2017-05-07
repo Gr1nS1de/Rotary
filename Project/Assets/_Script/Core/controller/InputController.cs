@@ -8,6 +8,8 @@ public class InputController : Controller
 
 	void OnFingerMove( FingerMotionEvent e ) 
 	{
+
+		//Debug.LogError ("Moved "+e.Selection);
 		if ((!_isStationaryStarted && !_isMovedStarted) && e.Phase == FingerMotionPhase.Started && e.Selection != null)// && e.Raycast.Hit2D.rigidbody != null)
 		{
 			_isMovedStarted = true;

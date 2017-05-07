@@ -28,6 +28,7 @@ public class PlatformsFactoryController : Controller
 					RestorePlatform (platformView);
 					break;
 				}
+
 		}
 	}
 
@@ -43,18 +44,20 @@ public class PlatformsFactoryController : Controller
 
 	private void InitPlatforms(int count)
 	{
-		Vector3 platformSize = GM.Instance.PlatformRendererSize;
+		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformTypes.HORIZONTAL);
 		Vector3 screenSize = GM.Instance.ScreenSize;
 
 		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + platformSize.y * 1.25f, 0f );
 
-		Notify(N.PoolObject___, NotifyType.GAME, PoolingObjectType.PLATFORM, count, platformPosition);
+		Notify(N.PoolObject____, NotifyType.GAME, PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.HORIZONTAL);
 	}
 
 	private void RestorePlatform(PlatformView platformView)
 	{
-		Notify (N.AddObjectToPoolQueue__, NotifyType.GAME, PoolingObjectType.PLATFORM, platformView);
-		Notify (N.PoolObject___, NotifyType.GAME, PoolingObjectType.PLATFORM, 1, null);
+		Notify (N.AddObjectToPool__, NotifyType.GAME, PoolingObjectType.PLATFORM, platformView);
+
+		if(platformView.PlatformType == PlatformTypes.HORIZONTAL)
+			Notify (N.PoolObject____, NotifyType.GAME, PoolingObjectType.PLATFORM, 1, null, platformView.PlatformType);
 	}
 }
 

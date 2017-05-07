@@ -14,13 +14,11 @@ public abstract class Element : MonoBehaviour
 	public UIApplication				m_UI			{ get { return _ui 		= !_ui ? 	SearchGlobal<UIApplication> (	_ui, 		typeof(UIApplication).ToString()) : 	_ui;}}
 	public Core							m_Core			{ get { return _core 	= !_core ? 	SearchGlobal<Core> (	_core, 		typeof(Core).ToString()) : 	_core;}}
 	public Dictionary<string, object>	m_Storage		{ get { return _storage == null ? _storage = new Dictionary<string, object>() : _storage; } }
-	public GameObject					dynamic_objects	{ get { return _dynamic_objects = _dynamic_objects ? _dynamic_objects : GameObject.FindGameObjectWithTag ("dynamic_objects"); }}
 
 	private GameApplication				_game;
 	private UIApplication 				_ui;
 	private Core 						_core;
 	private Dictionary<string, object> 	_storage;
-	private GameObject 					_dynamic_objects;
 
 	public void Notify( string alias, NotifyType notifyType = NotifyType.ALL, params object[] data ) 
 	{ 

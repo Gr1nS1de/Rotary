@@ -84,9 +84,9 @@ public class UIController : Controller
 
 	public void OnGameOver(System.Action complete)
 	{
-		UpdateText();
+		//UpdateText();
 
-		UIMenuModel.canvasGroup.gameObject.SetActive(true);
+		//UIMenuModel.canvasGroup.gameObject.SetActive(true);
 		/*
 		UIGameModel.canvasGroupInGame.DOFade(0,0.2f).SetEase(Ease.Linear);
 

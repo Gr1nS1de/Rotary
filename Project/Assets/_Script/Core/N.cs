@@ -13,8 +13,8 @@ public class N : MonoBehaviour
 	public const string GamePause					= "game.pause";
 	public const string GameOver					= "game.over";
 
-	public const string AddObjectToPoolQueue__		= "add.to.object.pool_queue";
-	public const string PoolObject___ 				= "pool.object";
+	public const string AddObjectToPool__			= "add.to.object.pool";
+	public const string PoolObject____ 				= "pool.object";
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 public class ObjectsPoolController : Controller
 {
-	private ObjectsPoolModel 		_objectsPoolModel		{ get { return game.model.objectsPoolModel; } }
-	private PlatformsFactoryModel 	_platformsFactoryModel	{ get { return game.model.platformsFactoryModel; } }
-	private ObjectsPoolView			_objectsPoolView		{ get { return game.view.objectsPoolView;}}
-	private Queue<PlatformView>		_platformsQueue			{ get { return game.model.objectsPoolModel.poolingPlatformsQueue;}}
+	private ObjectsPoolModel 		_objectsPoolModel			{ get { return game.model.objectsPoolModel; } }
+	private PlatformsFactoryModel 	_platformsFactoryModel		{ get { return game.model.platformsFactoryModel; } }
+	private ObjectsPoolView			_objectsPoolView			{ get { return game.view.objectsPoolView;}}
+	private List<PlatformView>		_poolPlatformsList			{ get { return game.model.objectsPoolModel.poolPlatformsList;}}
+	private List<PlatformView>		_instantiatedPlatformsList	{ get { return game.model.objectsPoolModel.instantiatedPlatforms;}}
 
 	private Vector3					_lastObstaclePoolerViewPosition;
 
@@ -29,23 +30,56 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
-			case N.AddObjectToPoolQueue__:
+			case N.AddObjectToPool__:
 				{
 					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
 					Object poolingObject = (Object)data [1];
 
-					AddObjectToPoolQueue (poolingObjectType, poolingObject);
+					AddObjectToPoolList (poolingObjectType, poolingObject);
 
 					break;
 				}
 
-			case N.PoolObject___:
+			case N.PoolObject____:
 				{
 					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
 					int objectCount = (int)data [1];
 					Vector3? objectPosition = (Vector3?)data [2];
 
-					PoolObject (poolingObjectType, objectCount, objectPosition);
+					if (game.model.gameState == GameState.PLAYING)
+					{
+						switch(poolingObjectType)
+						{
+							case PoolingObjectType.PLATFORM:
+								{
+									PlatformTypes platformType = (PlatformTypes)data [3];
+
+									PoolPlatform (platformType, objectCount, objectPosition);
+									break;
+								}
+
+							case PoolingObjectType.ITEM:
+								{
+									ItemTypes itemType = (ItemTypes)data [3];
+
+									PoolItem (itemType, objectCount, objectPosition);
+									break;
+								}
+						}
+					}
+					
+					break;
+				}
+
+			case N.GameOver:
+				{
+					_instantiatedPlatformsList.ForEach ((platform ) =>
+					{
+						if(!_poolPlatformsList.Contains(platform))
+							_poolPlatformsList.Add(platform);
+
+						_instantiatedPlatformsList.Remove(platform);
+					});
 					break;
 				}
 		}
@@ -106,7 +140,7 @@ public class ObjectsPoolController : Controller
 
 			switch (poolingObject.poolingType)
 			{
-				case PoolingObjectType.COIN:
+				case PoolingObjectType.ITEM:
 					{
 						//ObstacleView obstacleView = (ObstacleView)poolingObject.poolingObject;
 
@@ -122,17 +156,27 @@ public class ObjectsPoolController : Controller
 		}
 	}
 
-	private void AddObjectToPoolQueue(PoolingObjectType poolingObjectType, Object poolingObject)
+	private void AddObjectToPoolList(PoolingObjectType poolingObjectType, Object poolingObject)
 	{
 		switch (poolingObjectType)
 		{
 			case PoolingObjectType.PLATFORM:
 				{
-					_platformsQueue.Enqueue ((PlatformView)poolingObject);
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					if (platformView != null && !_poolPlatformsList.Contains (platformView))
+					{
+						_poolPlatformsList.Add (platformView);
+
+						if (_instantiatedPlatformsList.Contains (platformView))
+							_instantiatedPlatformsList.Remove (platformView);
+
+						platformView.gameObject.SetActive (false);
+					}
 					break;
 				}
 
-			case PoolingObjectType.COIN:
+			case PoolingObjectType.ITEM:
 				{
 					
 					break;
@@ -140,40 +184,60 @@ public class ObjectsPoolController : Controller
 		}
 	}
 
-	private void PoolObject(PoolingObjectType poolingObjectType, int count, Vector3? objectPosition)
+	private void PoolItem(ItemTypes itemType, int count, Vector3? objectPosition)
 	{
-		Debug.LogFormat("PoolObject {0}. count = {1}. position = {2}", poolingObjectType, count, objectPosition);
+		Debug.LogFormat("Pool item {0}. count = {1}. position = {2}", itemType, count, objectPosition);
 
-		switch (poolingObjectType)
+		switch (itemType)
 		{
-			case PoolingObjectType.PLATFORM:
+			case ItemTypes.COIN:
 				{
-					for (int i = 0; i < count; i++)
-					{
-						PoolingPlatform (objectPosition);
-
-						if (objectPosition != null)
-						{
-							Vector3 platformSize = GM.Instance.PlatformRendererSize;
-							Vector3 screenSize = GM.Instance.ScreenSize;
-
-							objectPosition = new Vector3(objectPosition.GetValueOrDefault().x + (platformSize.x + _objectsPoolModel.platformsGap) , objectPosition.GetValueOrDefault().y, 0f ); 
-						}
-					}
 					break;
 				}
 		}
 	}
 
-	private void PoolingPlatform(Vector3? platformPosition)
+	private void PoolPlatform(PlatformTypes platformType, int count, Vector3? platformPosition)
+	{
+		for (int i = 0; i < count; i++)
+		{
+			StartPoolPlatform (platformType, platformPosition);
+
+			if (platformPosition != null)
+			{
+				Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
+				Vector3 screenSize = GM.Instance.ScreenSize;
+
+				platformPosition = new Vector3(platformPosition.GetValueOrDefault().x + (platformSize.x + _objectsPoolModel.platformsGap) , platformPosition.GetValueOrDefault().y, 0f ); 
+			}
+		}
+	}
+
+	private void StartPoolPlatform(PlatformTypes platformType, Vector3? platformPosition)
 	{
 		PlatformView platformView = null;
+		bool isInPoolPlatformList = false;
 
-		if (_platformsQueue.Count > 0)
-			platformView = _platformsQueue.Dequeue ();
-		else
+		if (_poolPlatformsList.Count > 0)
 		{
-			platformView = (PlatformView)Instantiate (GM.Instance.CurrentGameTheme.PlatformView, game.view.transform.Find("_Platforms"));
+			platformView = _poolPlatformsList.Find((platform)=>platform.PlatformType == platformType);
+
+			if (platformView != null)
+			{
+				platformView.gameObject.SetActive (true);
+
+				_objectsPoolModel.instantiatedPlatforms.Add (platformView);
+				_poolPlatformsList.Remove (platformView);
+
+				isInPoolPlatformList = true;
+			}
+		}
+
+		if(!isInPoolPlatformList)
+		{
+			platformView = (PlatformView)Instantiate (game.model.gameTheme.PlatformsViewList.Find(platform=>platform.PlatformType == platformType), game.view.transform.Find("_Platforms"));
+
+			_objectsPoolModel.instantiatedPlatforms.Add (platformView);
 		}
 
 		if (platformPosition != null)
@@ -184,7 +248,7 @@ public class ObjectsPoolController : Controller
 		}
 		else
 		{
-			Vector3 platformSize = GM.Instance.PlatformRendererSize;
+			Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
 			Vector2 screenSize = GM.Instance.ScreenSize;
 
 			float randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);

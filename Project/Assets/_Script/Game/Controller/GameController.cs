@@ -26,6 +26,12 @@ public class GameController : Controller
 	{
 		switch ( alias )
 		{
+			case N.RCAwakeLoad:
+				{
+					Notify (N.RCLoadGameTheme_, NotifyType.CORE, GM.Instance.DefaultGameTheme);
+					break;
+				}
+
 			case N.OnStart:
 				{
 					//PlayerPrefs.DeleteAll ();
@@ -42,9 +48,9 @@ public class GameController : Controller
 
 			case N.GameOver:
 				{
-					var collisionPoint = (Vector2)data [0];
+					//var collisionPoint = (Vector2)data [0];
 
-					GameOver (collisionPoint);
+					GameOver ();
 
 					game.model.gameState = GameState.GAME_OVER;
 
@@ -59,12 +65,24 @@ public class GameController : Controller
 		}
 	}
 
+	#region public methods
+	public void SetGameTheme(GameTheme gameTheme)
+	{
+		game.model.gameTheme = gameTheme;
+
+		if (game.view.backgroundView != null)
+			Destroy (game.view.backgroundView.gameObject);
+
+		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);
+	}
+	#endregion
+
 	private void OnStart()
 	{
 		SetNewGame ();
 	}
 
-	void SetNewGame()
+	private void SetNewGame()
 	{
 		game.model.currentScore = 0;
 
@@ -72,7 +90,7 @@ public class GameController : Controller
 
 	}
 
-	public void Add1Score()
+	private void Add1Score()
 	{
 		game.model.currentScore++;
 
@@ -123,7 +141,7 @@ public class GameController : Controller
 		}
 	}
 */
-	private void GameOver( Vector2 collisionPoint )
+	private void GameOver()
 	{
 		if (game.model.gameState == GameState.GAME_OVER)
 			return;
@@ -133,7 +151,7 @@ public class GameController : Controller
 		//_player.DesactivateTouchControl();
 
 		//DOTween.KillAll();
-		StopAllCoroutines();
+		//StopAllCoroutines();
 
 		//Utils.SetLastScore(game.model.currentScore);
 
@@ -143,10 +161,10 @@ public class GameController : Controller
 
 		//_soundManager.PlayFail();
 
-		ui.controller.OnGameOver(() =>
-		{
-			ReloadScene();
-		});
+		//ui.controller.OnGameOver(() =>
+		//{
+			//ReloadScene();
+		//});
 	}
 
 	private void ReloadScene()
