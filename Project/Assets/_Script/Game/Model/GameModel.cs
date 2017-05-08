@@ -16,6 +16,15 @@ public enum GameThemeType
 	DarkBlueGarage
 }
 
+public enum GameSpeedType
+{
+	SPEED_1,
+	SPEED_2,
+	SPEED_3,
+	SPEED_4,
+	SPEED_5
+}
+
 [System.Serializable]
 public struct GameTheme
 {
@@ -35,10 +44,10 @@ public class GameModel : Model
 	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }
 	public GameTheme 					gameTheme				{ get { return _gameTheme; } 		set { _gameTheme = value;}}
-	public float	 					gameMoveSpeed			{ get { return _gameMoveSpeed; } 	set { _gameMoveSpeed = value;}}
+	public GameSpeedType	 			gameSpeed				{ get { return _gameSpeed; } 	set { _gameSpeed = value;}}
 
 	[SerializeField]
-	private float						_gameMoveSpeed			= 1f;
+	private GameSpeedType				_gameSpeed;
 	[SerializeField]
 	private GameTheme					_gameTheme;
 	[SerializeField]

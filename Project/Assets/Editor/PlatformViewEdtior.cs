@@ -34,6 +34,7 @@ public class PlatformViewEditor : Editor
 	{
 		serializedObject.Update();
 
+		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
 		data.PlatformType = (PlatformTypes)EditorGUILayout.EnumPopup("Platform Type", data.PlatformType);  
 
 		switch (data.PlatformType)

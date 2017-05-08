@@ -12,6 +12,7 @@ namespace Destructible2D
 		protected override void OnInspector()
 		{
 			DrawDefault("Requires");
+			DrawDefault("Intercept");
 			BeginError(Any(t => t.IndicatorPrefab == null));
 				DrawDefault("IndicatorPrefab");
 			EndError();
@@ -34,6 +35,9 @@ namespace Destructible2D
 		[Tooltip("The key you must hold down to do slicing")]
 		public KeyCode Requires = KeyCode.Mouse0;
 		
+		[Tooltip("The z position the indicator should spawn at")]
+		public float Intercept;
+
 		[Tooltip("The prefab used to show what the slice will look like")]
 		public GameObject IndicatorPrefab;
 		
@@ -82,8 +86,8 @@ namespace Destructible2D
 					if (mainCamera != null)
 					{
 						// Find start and end world points
-						var startPos = mainCamera.ScreenToWorldPoint( startMousePosition);
-						var endPos   = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+						var startPos = D2dHelper.ScreenToWorldPosition( startMousePosition, Intercept);
+						var endPos   = D2dHelper.ScreenToWorldPosition(Input.mousePosition, Intercept);
 					
 						// Extend end pos to raycast hit
 						CalculateEndPos(startPos, ref endPos);
@@ -102,13 +106,13 @@ namespace Destructible2D
 					indicatorInstance = Instantiate(IndicatorPrefab);
 				}
 				
-				var startPos = mainCamera.ScreenToWorldPoint( startMousePosition);
-				var endPos   = mainCamera.ScreenToWorldPoint(Input.mousePosition); CalculateEndPos(startPos, ref endPos);
+				var startPos = D2dHelper.ScreenToWorldPosition( startMousePosition, Intercept);
+				var endPos   = D2dHelper.ScreenToWorldPosition(Input.mousePosition, Intercept); CalculateEndPos(startPos, ref endPos);
 				var scale    = Vector3.Distance(endPos, startPos);
 				var angle    = D2dHelper.Atan2(endPos - startPos) * Mathf.Rad2Deg;
 				
 				// Transform the indicator so it lines up with the slice
-				indicatorInstance.transform.position   = new Vector3(startPos.x, startPos.y, indicatorInstance.transform.position.z);
+				indicatorInstance.transform.position   = startPos;
 				indicatorInstance.transform.rotation   = Quaternion.Euler(0.0f, 0.0f, -angle);
 				indicatorInstance.transform.localScale = new Vector3(Thickness, scale, scale);
 			}

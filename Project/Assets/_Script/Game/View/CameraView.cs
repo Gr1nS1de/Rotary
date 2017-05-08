@@ -20,7 +20,7 @@ public class CameraView : View<GameActivity>
 
 		Vector3 cameraPosition = _camera.transform.position;
 
-		cameraPosition.x += _moveSpeed * game.model.gameMoveSpeed;
+		cameraPosition.x += _moveSpeed;
 
 		_camera.transform.position = Vector3.Lerp(_camera.transform.position, cameraPosition, Time.deltaTime);
 	}

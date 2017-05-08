@@ -2,7 +2,7 @@
 using System.Collections;
 
 //Custom editor: PlatformViewEditor
-public class PlatformView : View, IPlatform, IPoolObject
+public class PlatformView : PoolingObjectView, IPlatform, IPoolObject
 {
 	public PlatformTypes PlatformType;
 

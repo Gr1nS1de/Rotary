@@ -18,7 +18,7 @@ public class N : MonoBehaviour
 	public const string PoolObject____ 				= "pool.object";
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
-
+	public const string OnPlayerInvisible			= "on.player.invisible";
 	#endregion
 
 	#region Destructible notifications

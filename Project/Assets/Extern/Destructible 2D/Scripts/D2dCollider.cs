@@ -27,15 +27,13 @@ namespace Destructible2D
 	public abstract class D2dCollider : MonoBehaviour
 	{
 		[Tooltip("Should these colliders be marked as triggers?")]
-		public bool IsTrigger = false;
+		public bool IsTrigger;
 
 		[Tooltip("The physics material applied to these colliders")]
 		public PhysicsMaterial2D Material;
-
-        [SerializeField]
-        protected GameObject child;
-
-		public GameObject m_SpriteChildCollider = null;
+		
+		[SerializeField]
+		protected GameObject child;
 
 		[SerializeField]
 		protected bool awoken;
@@ -114,6 +112,20 @@ namespace Destructible2D
 			}
 		}
 
+		protected virtual void Awake()
+		{
+			// Auto destroy all default collider2Ds
+			if (GetComponent<Collider2D>() != null)
+			{
+				var collider2Ds = GetComponents<Collider2D>();
+				
+				for (var i = collider2Ds.Length - 1; i >= 0; i--)
+				{
+					D2dHelper.Destroy(collider2Ds[i]);
+				}
+			}
+		}
+
 		protected virtual void Start()
 		{
 			if (awoken == false)
@@ -157,7 +169,6 @@ namespace Destructible2D
 			if (child != null)
 			{
 				child.transform.SetParent(null, false);
-               
 
 				tempChild = child;
 				child     = null;
@@ -182,9 +193,6 @@ namespace Destructible2D
 					child = new GameObject("Collider");
 
 					child.layer = transform.gameObject.layer;
-                    child.tag = transform.tag;
-
-                    m_SpriteChildCollider = child;
 
 					child.transform.SetParent(transform, false);
 				}
@@ -209,7 +217,6 @@ namespace Destructible2D
 				child = tempChild;
 
 				child.transform.SetParent(transform, false);
-               
 
 				tempChild = null;
 			}

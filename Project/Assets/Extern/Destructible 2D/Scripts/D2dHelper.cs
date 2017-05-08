@@ -81,6 +81,20 @@ namespace Destructible2D
 			
 			return matrix;
 		}
+
+		public static Vector3 ScreenToWorldPosition(Vector2 screenPosition, float intercept, Camera camera = null)
+		{
+			if (camera == null) camera = Camera.main;
+			if (camera == null) return screenPosition;
+
+			// Get ray of screen position
+			var ray = camera.ScreenPointToRay(screenPosition);
+
+			// Find point along this ray that intersects with Z = 0
+			var distance = D2dHelper.Divide(ray.origin.z - intercept, ray.direction.z);
+
+			return ray.origin - ray.direction * distance;
+		}
 		
 		public static bool IsValidUV(Vector2 uv)
 		{

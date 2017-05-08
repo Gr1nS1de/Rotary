@@ -54,12 +54,13 @@ public class GameController : Controller
 					break;
 				}
 
-			case N.GameOver:
+			case N.OnPlayerInvisible:
 				{
 					GameOver ();
 
 					game.model.gameState = GameState.GAME_OVER;
 
+					Notify (N.GameOver);
 					break;
 				}
 
@@ -80,6 +81,17 @@ public class GameController : Controller
 			Destroy (game.view.backgroundView.gameObject);
 
 		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);
+	}
+
+	public void SetGameSpeed(GameSpeedType gameSpeed)
+	{
+		switch (gameSpeed)
+		{
+			case GameSpeedType.SPEED_1:
+				{
+					break;
+				}
+		}
 	}
 	#endregion
 

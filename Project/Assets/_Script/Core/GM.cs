@@ -19,6 +19,7 @@ public class GM : Controller
 	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
 	[HideInInspector]
 	public Vector2 ScreenSize;
+	private const string LeaderBoardPrivate = "http://dreamlo.com/lb/HmyLFso9EUmOvvnmRzgKsw1og-BQzKSU-1t0Vk36HwIg";
 
 	void Awake()
 	{

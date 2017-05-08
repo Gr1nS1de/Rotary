@@ -12,12 +12,19 @@ namespace Destructible2D
 		protected override void OnInspector()
 		{
 			DrawDefault("Requires");
+			DrawDefault("Intercept");
 			BeginError(Any(t => t.IndicatorPrefab == null));
 				DrawDefault("IndicatorPrefab");
 			EndError();
-			DrawDefault("StampTex");
-			DrawDefault("Hardness");
-			DrawDefault("Thickness");
+			BeginError(Any(t => t.StampTex == null));
+				DrawDefault("StampTex");
+			EndError();
+			BeginError(Any(t => t.Hardness == 0.0f));
+				DrawDefault("Hardness");
+			EndError();
+			BeginError(Any(t => t.Thickness == 0.0f));
+				DrawDefault("Thickness");
+			EndError();
 		}
 	}
 }
@@ -32,6 +39,9 @@ namespace Destructible2D
 		[Tooltip("The key you must hold down to do slicing")]
 		public KeyCode Requires = KeyCode.Mouse0;
 		
+		[Tooltip("The z position the indicator should spawn at")]
+		public float Intercept;
+
 		[Tooltip("The prefab used to show what the slice will look like")]
 		public GameObject IndicatorPrefab;
 		
@@ -92,13 +102,13 @@ namespace Destructible2D
 					indicatorInstance = Instantiate(IndicatorPrefab);
 				}
 				
-				var startPos   = mainCamera.ScreenToWorldPoint( startMousePosition);
-				var currentPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+				var startPos   = D2dHelper.ScreenToWorldPosition( startMousePosition, Intercept, mainCamera);
+				var currentPos = D2dHelper.ScreenToWorldPosition(Input.mousePosition, Intercept, mainCamera);
 				var scale      = Vector3.Distance(currentPos, startPos);
 				var angle      = D2dHelper.Atan2(currentPos - startPos) * Mathf.Rad2Deg;
 				
 				// Transform the indicator so it lines up with the slice
-				indicatorInstance.transform.position   = new Vector3(startPos.x, startPos.y, indicatorInstance.transform.position.z);
+				indicatorInstance.transform.position   = startPos;
 				indicatorInstance.transform.rotation   = Quaternion.Euler(0.0f, 0.0f, -angle);
 				indicatorInstance.transform.localScale = new Vector3(Thickness, scale, scale);
 			}

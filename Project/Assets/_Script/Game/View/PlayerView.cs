@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Destructible2D;
 
 public class PlayerView : View
 {
+	[HideInInspector]
+	public List<PlatformView>	ScorePlatformsList	= new List<PlatformView>();
+
 	private PlayerModel _playerModel	{ get { return game.model.playerModel; } }
 	private Rigidbody2D _playerRB;
+	private ConstantForce2D _playerConstantForce;
 	private Vector3 _playerInitPosition;
 	private float _initCameraDistanceX = 0f;
 	//private float _lastCameraDistance = 0f;
@@ -16,6 +21,7 @@ public class PlayerView : View
 	void Awake()
 	{
 		_playerRB = GetComponent<Rigidbody2D> ();
+		_playerConstantForce = GetComponent<ConstantForce2D> ();
 	}
 
 	public void OnInit(Vector3 initPosition)
@@ -50,51 +56,107 @@ public class PlayerView : View
 		float currentCameraDistanceX = Mathf.Abs (game.view.cameraView.transform.position.x - transform.position.x);
 		float currentOffset = _initCameraDistanceX - currentCameraDistanceX;
 
-		if (_playerModel.angularSpeed != 0)
+		if (_playerModel.angularSpeed != 0f)
 		{
 			if (Mathf.Abs (currentOffset) > 1f)
 			{
 				_offsetBackspeedRate += 0.1f;
 
 				if (currentOffset < 0f)
-					_playerRB.angularVelocity = _playerModel.angularSpeed * game.model.gameMoveSpeed - Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
+					_playerRB.angularVelocity = _playerModel.angularSpeed - Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
 				else
-					_playerRB.angularVelocity = _playerModel.angularSpeed * game.model.gameMoveSpeed + Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
+					_playerRB.angularVelocity = _playerModel.angularSpeed + Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
 			}
 			else
 			{
 				_offsetBackspeedRate = 0f;
-				_playerRB.angularVelocity = _playerModel.angularSpeed * game.model.gameMoveSpeed;
+				_playerRB.angularVelocity = _playerModel.angularSpeed;
 			}
 		}
 
 		if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
-			Notify (N.GameOver);
+			Notify (N.OnPlayerInvisible);
 
 		//Debug.LogErrorFormat ("Current distance to camera = {0}. Last frame distance = {1}. Offset = {2}", Vector2.Distance(game.view.cameraView.transform.position, transform.position), _lastCameraDistance, Vector2.Distance(game.view.cameraView.transform.position, transform.position) - _lastCameraDistance );
-		//Debug.Log("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 1f ? " > " + (Mathf.Abs (currentOffset) - 1f) : "") );
+		Debug.Log("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 1f ? " > " + (Mathf.Abs (currentOffset) - 1f) : "") );
 		//_lastCameraDistance = Vector2.Distance(game.view.cameraView.transform.position, transform.position);
 		//_playerRB.DOMoveX (transform.position.x + _playerModel.moveSpeed, 1f).SetUpdate(UpdateType.Fixed);
 
-		if(_playerModel.linearSpeed != 0)
-			transform.position += new Vector3( _playerModel.linearSpeed * game.model.gameMoveSpeed * Time.fixedDeltaTime, 0f, 0f);
+		if (_playerModel.linearForce != 0)
+		{
+			//transform.position += new Vector3 (_playerModel.linearSpeed * game.model.gameMoveSpeed * Time.fixedDeltaTime, 0f, 0f);
+			_playerConstantForce.force = ( new Vector2 (_playerModel.linearForce, 0f));
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.transform.parent == null)
 			return;
-
-		PlatformView platformView = collision.transform.parent.GetComponent<PlatformView> ();
 		
-		if(platformView != null)
-		{
-			if (!_playerModel.scorePlatformsList.Contains (platformView))
-			{
-				Notify (N.GameAddScore, NotifyType.ALL);
+		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
 
-				_playerModel.scorePlatformsList.Add (platformView);
-			}
+		if (poolingObject == null)
+			return;
+		
+		switch(poolingObject.PoolingType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					break;
+				}
+
+			case PoolingObjectType.ITEM:
+				{
+					ItemView itemView = (ItemView)poolingObject;
+					D2dDestructible destructibleItem = itemView.GetComponentInChildren<D2dDestructible>();
+
+					Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
+
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.transform.parent == null)
+			return;
+
+		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
+
+		if (poolingObject == null)
+			return;
+
+		switch (poolingObject.PoolingType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					if (transform.position.x > platformView.transform.position.x)
+					{
+						if (!ScorePlatformsList.Contains (platformView))
+						{
+							Notify (N.GameAddScore, NotifyType.ALL);
+
+							ScorePlatformsList.Add (platformView);
+						}
+					}
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,8 +12,9 @@ namespace Destructible2D
 	{
 		protected override void OnInspector()
 		{
-			DrawDefault("ShakeScale");
+			DrawDefault("Shake");
 			DrawDefault("ShakeDampening");
+			DrawDefault("ShakeScale");
 			DrawDefault("ShakeSpeed");
 		}
 	}
@@ -27,20 +29,25 @@ namespace Destructible2D
 	[AddComponentMenu(D2dHelper.ComponentMenuPrefix + "Camera Shake")]
 	public class D2dCameraShake : MonoBehaviour
 	{
-		// Global shake amount that gets reduced every frame
-		public static float Shake;
+		public static List<D2dCameraShake> AllCameraShakes = new List<D2dCameraShake>();
+
+		[Tooltip("The current shake strength. This gets reduced automatically")]
+		public float Shake;
 		
-		// The amount this camera shakes relative to the Shake value
-		public float ShakeScale = 1.0f;
-		
-		// The speed at which the Shake value gets reduced
+		[Tooltip("The speed at which the Shake value gets reduced")]
 		public float ShakeDampening = 10.0f;
 		
-		// The freqncy of the camera shake
+		[Tooltip("The amount this camera shakes relative to the Shake value")]
+		public float ShakeScale = 1.0f;
+		
+		[Tooltip("The freqncy of the camera shake")]
 		public float ShakeSpeed = 10.0f;
 		
+		// Used to seed/offset the perlin lookup
+		[SerializeField]
 		private float offsetX;
-		
+
+		[SerializeField]
 		private float offsetY;
 		
 		protected virtual void Awake()
@@ -48,19 +55,29 @@ namespace Destructible2D
 			offsetX = Random.Range(-1000.0f, 1000.0f);
 			offsetY = Random.Range(-1000.0f, 1000.0f);
 		}
+
+		protected virtual void OnEnable()
+		{
+			AllCameraShakes.Add(this);
+		}
+
+		protected virtual void OnDisable()
+		{
+			AllCameraShakes.Remove(this);
+		}
 		
 		protected virtual void LateUpdate()
 		{
-			Shake = D2dHelper.Dampen(Shake, 0.0f, ShakeDampening, Time.deltaTime);
+			Shake = D2dHelper.Dampen(Shake, 0.0f, ShakeDampening, Time.deltaTime, 0.1f);
 			
 			var shakeStrength = Shake * ShakeScale;
 			var shakeTime     = Time.time * ShakeSpeed;
-			var offset        = Vector2.zero;
-			
-			offset.x = Mathf.PerlinNoise(offsetX, shakeTime) * shakeStrength;
-			offset.y = Mathf.PerlinNoise(offsetY, shakeTime) * shakeStrength;
-			
-			transform.localPosition = offset;
+			var localPosition = transform.localPosition;
+
+			localPosition.x = Mathf.PerlinNoise(offsetX, shakeTime) * shakeStrength;
+			localPosition.y = Mathf.PerlinNoise(offsetY, shakeTime) * shakeStrength;
+
+			transform.localPosition = localPosition;
 		}
 	}
 }

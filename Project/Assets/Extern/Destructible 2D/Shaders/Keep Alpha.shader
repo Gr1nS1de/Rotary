@@ -81,11 +81,6 @@ Shader "Destructible 2D/Keep Alpha"
 					float4 mainTex  = tex2D(_MainTex, i.texcoord0);
 					float4 alphaTex = tex2D(_AlphaTex, i.texcoord1);
 					
-					// Clip the alpha if it's outside the range
-					float2 clipUV = abs(i.texcoord1 - 0.5f);
-					
-					alphaTex.a *= max(clipUV.x, clipUV.y) <= 0.5f ? 1.0f : 0.0f;
-					
 					// Multiply the color
 					o.rgba = mainTex * i.color;
 					

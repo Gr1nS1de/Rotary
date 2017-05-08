@@ -11,7 +11,7 @@ namespace Destructible2D
 	{
 		protected override void OnInspector()
 		{
-			BeginError(Any(t => t.Life <= 0.0f));
+			BeginError(Any(t => t.Life < 0.0f));
 				DrawDefault("Life");
 			EndError();
 

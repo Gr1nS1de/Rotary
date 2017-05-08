@@ -12,11 +12,19 @@ namespace Destructible2D
 		protected override void OnInspector()
 		{
 			DrawDefault("Requires");
-			DrawDefault("Layers");
-			DrawDefault("StampTex");
-			DrawDefault("Size");
+			BeginError(Any(t => t.Layers == 0));
+				DrawDefault("Layers");
+			EndError();
+			BeginError(Any(t => t.StampTex == null));
+				DrawDefault("StampTex");
+			EndError();
+			BeginError(Any(t => t.Size.x == 0.0f || t.Size.y == 0.0f));
+				DrawDefault("Size");
+			EndError();
 			DrawDefault("Angle");
-			DrawDefault("Hardness");
+			BeginError(Any(t => t.Hardness == 0.0f));
+				DrawDefault("Hardness");
+			EndError();
 		}
 	}
 }
@@ -55,15 +63,11 @@ namespace Destructible2D
 
 				if (mainCamera != null)
 				{
-					// Get screen ray of mouse position
-					var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-					// Project ray onto Z=0 plane and find the point it intersects
-					var distance = D2dHelper.Divide(ray.origin.z, ray.direction.z);
-					var point    = ray.origin - ray.direction * distance;
+					// World position of the mouse
+					var position = D2dHelper.ScreenToWorldPosition(Input.mousePosition, 0.0f, mainCamera);
 					
 					// Stamp at that point
-					D2dDestructible.StampAll(point, Size, Angle, StampTex, Hardness, Layers);
+					D2dDestructible.StampAll(position, Size, Angle, StampTex, Hardness, Layers);
 				}
 			}
 		}

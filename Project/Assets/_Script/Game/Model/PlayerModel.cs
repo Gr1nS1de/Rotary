@@ -9,12 +9,10 @@ public class PlayerModel : Model
 	public float					invisibleBeforeDie	{ get { return _invisibleBeforeDie;}set { _invisibleBeforeDie 	= value; } }
 	public float					offsetBackSpeed		{ get { return _offsetBackSpeed; } 	set { _offsetBackSpeed	= value; } }
 	public float					initScreenPosX		{ get { return _initScreenPosX; } 	set { _initScreenPosX 	= value; } }
-	public List<PlatformView>		scorePlatformsList	{ get { return _scorePlatformsList; } }
-	public float	 				linearSpeed			{ get { return _linearSpeed; } 	set { _linearSpeed = value;}}
+	public float	 				linearForce			{ get { return _linearForce; } 	set { _linearForce = value;}}
 
 	[SerializeField]
-	private float					_linearSpeed			= 1f;
-	private List<PlatformView> 		_scorePlatformsList = new List<PlatformView>();
+	private float					_linearForce		= 1f;
 	[SerializeField]
 	private float					_angularSpeed; // -85.5 = 1 camera speed. -257.5 = 3 camera speed...
 	[SerializeField]

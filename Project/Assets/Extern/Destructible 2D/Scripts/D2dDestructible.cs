@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,6 +16,8 @@ namespace Destructible2D
 		
 		protected override void OnInspector()
 		{
+			var updateMesh = false;
+
 			DrawDefault("Indestructible");
 			DrawDefault("RecordAlphaCount");
 			DrawDefault("AutoSharpen");
@@ -44,7 +45,7 @@ namespace Destructible2D
 			DrawDefault("DensityTex");
 			DrawDefault("HealTex");
 			DrawDefault("Sharpness");
-			DrawDefault("color");
+			DrawDefault("color", ref updateMesh);
 			
 			DrawDamage();
 			
@@ -55,7 +56,6 @@ namespace Destructible2D
 				BeginMixed(Any(t => t.AlphaTex != Target.AlphaTex));
 					EditorGUI.ObjectField(D2dHelper.Reserve(), "Alpha Tex", Target.AlphaTex, typeof(Texture2D), false);
 				EndMixed();
-				
 				BeginMixed(Any(t => t.AlphaCount != Target.AlphaCount));
 					EditorGUI.IntField(D2dHelper.Reserve(), "Alpha Count", Target.AlphaCount);
 				EndMixed();
@@ -92,6 +92,8 @@ namespace Destructible2D
 				DrawDefault("OnAlphaDataModified");
 				DrawDefault("OnAlphaDataSubset");
 			}
+
+			if (updateMesh == true) DirtyEach(t => t.UpdateMesh());
 		}
 		
 		private void DrawDamage()
@@ -1649,40 +1651,23 @@ namespace Destructible2D
 						clone = Instantiate(this);
 
 						// Retain name and tag
-						clone.name = name+"_piece";
-						clone.tag  = transform.tag;
-						/*
+						clone.name = name;
+						clone.tag  = tag;
+
 						// Retain layer
-						clone.gameObject.layer = LayerMask.NameToLayer(GM.instance.destructibleObstaclePieceLayerName);
+						clone.gameObject.layer = gameObject.layer;
 
-                        clone.GetComponent<Rigidbody2D>().isKinematic = false;
+						for(int c = 0; c < clone.transform.childCount; c++)
+						{
+							clone.transform.GetChild(c).gameObject.layer = gameObject.layer;
+						}
 
-						if (clone.GetComponent<RobotView> ())
-							Destroy (clone.GetComponent<RobotView> ());
-
-						if (clone.GetComponent<GearColliderView> ())
-							Destroy (clone.GetComponent<GearColliderView>());
-
-						if (clone.GetComponent<D2dDestroyer> ())
-							clone.GetComponent<D2dDestroyer> ().enabled = true;
-						*/
-						// Retain clones in container
+						// Retain transform
 						clone.transform.SetParent(transform.parent, false);
 
 						clone.transform.localPosition = transform.localPosition;
 						clone.transform.localRotation = transform.localRotation;
 						clone.transform.localScale    = transform.localScale;
-
-                        // Disable childrens
-						//Utils.ActivateTransformChildrens(clone.transform, false);
-						
-                        //Reset all unity colliders on clones
-						if (clone.GetComponent<Collider2D> ())
-							foreach (Collider2D collider in clone.GetComponents<Collider2D>())
-							{
-								StartCoroutine (ResetCollider(clone.transform, collider));
-							}
-						
 					}
 
 					group.GenerateData();
@@ -1714,15 +1699,41 @@ namespace Destructible2D
 			IsSplitting = false; clones.Clear();
 		}
 
-		private IEnumerator ResetCollider(Transform clone, Collider2D collider)
+		[ContextMenu("Update Mesh")]
+		public void UpdateMesh()
 		{
-			System.Type colliderType = collider.GetType ();
+			if (meshFilter == null) meshFilter = gameObject.GetComponent<MeshFilter>();
+			if (meshFilter == null) meshFilter = gameObject.AddComponent<MeshFilter>();
 
-			Destroy (collider);
+			if (MainTex != null)
+			{
+				var paddedTextureRect = textureRect;
 
-			yield return null;
+				FastPadRect(ref paddedTextureRect);
 
-			clone.gameObject.AddComponent(colliderType);
+				if (mesh == null)
+				{
+					mesh = new Mesh();
+
+					UpdateMeshData(paddedTextureRect);
+
+					mesh.hideFlags = HideFlags.DontSave;
+					mesh.name      = "Destructible Mesh";
+					mesh.triangles = indices;
+				}
+				else
+				{
+					UpdateMeshData(paddedTextureRect);
+				}
+
+				UpdateProperties(paddedTextureRect);
+
+				meshFilter.sharedMesh = mesh;
+			}
+			else
+			{
+				meshFilter.sharedMesh = null;
+			}
 		}
 
 		public void SubsetAlphaWith(byte[] subData, D2dRect subRect, int newAlphaCount = -1)
@@ -1840,13 +1851,6 @@ namespace Destructible2D
 			Gizmos.DrawWireCube(originalRect.center, originalRect.size);
 		}
 #endif
-#if UNITY_EDITOR
-		protected virtual void OnValidate()
-		{
-			// If the user changes the 'color' field in the inspector, update the mesh
-			UpdateMesh();
-        }
-#endif
 		private void UpdateRenderer(Material oldMaterial)
 		{
 			if (meshRenderer == null) meshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -1868,47 +1872,7 @@ namespace Destructible2D
 				meshRenderer.sharedMaterial = Resources.Load<Material>("Destructible 2D/Default");
 			}
 		}
-
-		private void UpdateMesh()
-		{
-			if (meshFilter == null) meshFilter = gameObject.GetComponent<MeshFilter>();
-
-            if (meshFilter == null && gameObject.GetComponent<SpriteRenderer>())
-                DestroyImmediate(gameObject.GetComponent<SpriteRenderer>());
-
-			if (meshFilter == null) meshFilter = gameObject.AddComponent<MeshFilter>();
-
-			if (MainTex != null)
-			{
-				var paddedTextureRect = textureRect;
-
-				FastPadRect(ref paddedTextureRect);
-
-				if (mesh == null)
-				{
-					mesh = new Mesh();
-
-					UpdateMeshData(paddedTextureRect);
-
-					mesh.hideFlags = HideFlags.DontSave;
-					mesh.name      = "Destructible Mesh";
-					mesh.triangles = indices;
-				}
-				else
-				{
-					UpdateMeshData(paddedTextureRect);
-				}
-
-				UpdateProperties(paddedTextureRect);
-
-				meshFilter.sharedMesh = mesh;
-			}
-			else
-			{
-				meshFilter.sharedMesh = null;
-			}
-		}
-
+		
 		// This will automatically scale a textureRect to account for automatic NPOT upscaling
 		private void FastPadRect(ref Rect rect)
 		{

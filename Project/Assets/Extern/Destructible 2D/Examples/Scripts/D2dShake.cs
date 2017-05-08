@@ -28,7 +28,10 @@ namespace Destructible2D
 		
 		protected virtual void Awake()
 		{
-			D2dCameraShake.Shake += Shake;
+			for (var i = D2dCameraShake.AllCameraShakes.Count - 1; i >= 0; i--)
+			{
+				D2dCameraShake.AllCameraShakes[i].Shake += Shake;
+			}
 		}
 	}
 }

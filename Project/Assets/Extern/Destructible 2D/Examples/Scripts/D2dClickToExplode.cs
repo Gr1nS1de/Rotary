@@ -13,6 +13,7 @@ namespace Destructible2D
 		protected override void OnInspector()
 		{
 			DrawDefault("Requires");
+			DrawDefault("Intercept");
 			DrawDefault("ExplosionPrefab");
 			DrawDefault("FractureCount");
 			DrawDefault("Force");
@@ -29,6 +30,9 @@ namespace Destructible2D
 	{
 		[Tooltip("The key you must hold down to spawn")]
 		public KeyCode Requires = KeyCode.Mouse0;
+
+		[Tooltip("The z position the prefab should spawn at")]
+		public float Intercept;
 		
 		[Tooltip("The prefab that gets spawned under the mouse when clicking")]
 		public GameObject ExplosionPrefab;
@@ -40,10 +44,12 @@ namespace Destructible2D
 		public float Force;
 		
 		// Stores the point of the last explosion in world space so it can be used in OnEndSplit
-		private Vector2 point;
+		private Vector2 explosionPosition;
 		
 		protected virtual void Update()
 		{
+			if (FractureCount <= 0) return;
+
 			// Required key is down?
 			if (Input.GetKeyDown(Requires) == true)
 			{
@@ -52,9 +58,10 @@ namespace Destructible2D
 
 				if (mainCamera != null)
 				{
-					var screenPoint = Input.mousePosition;
-					var worldPoint  = Camera.main.ScreenToWorldPoint(screenPoint);
-					var collider    = Physics2D.OverlapPoint(worldPoint);
+					// Get screen ray of mouse position
+					explosionPosition = D2dHelper.ScreenToWorldPosition(Input.mousePosition, Intercept, mainCamera);
+					
+					var collider = Physics2D.OverlapPoint(explosionPosition);
 					
 					if (collider != null)
 					{
@@ -62,9 +69,6 @@ namespace Destructible2D
 						
 						if (destructible != null)
 						{
-							// Store explosion point (used in OnEndSplit)
-							point = worldPoint;
-
 							// Register split event
 							destructible.OnEndSplit.AddListener(OnEndSplit);
 
@@ -79,7 +83,7 @@ namespace Destructible2D
 							{
 								var worldRotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)); // Random rotation around Z axis
 								
-								//Instantiate(ExplosionPrefab, worldPoint, worldRotation);
+								Instantiate(ExplosionPrefab, explosionPosition, worldRotation);
 							}
 						}
 					}
@@ -99,7 +103,7 @@ namespace Destructible2D
 				if (rigidbody != null)
 				{
 					// Get the local point of the explosion that called this split event
-					var localPoint = (Vector2)clone.transform.InverseTransformPoint(point);
+					var localPoint = (Vector2)clone.transform.InverseTransformPoint(explosionPosition);
 
 					// Get the vector between this point and the center of the destructible's current rect
 					var vector = clone.AlphaRect.center - localPoint;

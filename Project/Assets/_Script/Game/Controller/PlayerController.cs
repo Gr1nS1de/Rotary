@@ -29,8 +29,8 @@ public class PlayerController : Controller
 				{
 					PlatformView platformView = (PlatformView)data [0];
 
-					if (_playerModel.scorePlatformsList.Contains (platformView))
-						_playerModel.scorePlatformsList.Remove (platformView);
+					if (_playerView.ScorePlatformsList.Contains (platformView))
+						_playerView.ScorePlatformsList.Remove (platformView);
 					
 					break;
 				}
@@ -60,7 +60,8 @@ public class PlayerController : Controller
 	private void ResetPlayer()
 	{
 		_playerView.transform.DOMove (Vector3.zero, 1f);
-		_playerModel.scorePlatformsList.Clear ();
+		_playerView.ScorePlatformsList.Clear ();
+		_playerView.GetComponent<ConstantForce2D> ().force = Vector2.zero;
 	}
 		
 }

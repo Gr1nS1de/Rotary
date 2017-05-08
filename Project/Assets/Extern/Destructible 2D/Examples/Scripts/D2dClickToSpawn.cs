@@ -12,6 +12,7 @@ namespace Destructible2D
 		protected override void OnInspector()
 		{
 			DrawDefault("Requires");
+			DrawDefault("Intercept");
 			BeginError(Any(t => t.Prefab == null));
 				DrawDefault("Prefab");
 			EndError();
@@ -28,6 +29,9 @@ namespace Destructible2D
 	{
 		[Tooltip("The key you must hold down to spawn")]
 		public KeyCode Requires = KeyCode.Mouse0;
+
+		[Tooltip("The z position the prefab should spawn at")]
+		public float Intercept;
 		
 		[Tooltip("The prefab that gets spawned under the mouse when clicking")]
 		public GameObject Prefab;
@@ -45,14 +49,14 @@ namespace Destructible2D
 
 					if (mainCamera != null)
 					{
-						// Get the world point of the mouse position
-						var worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+						// World position of the mouse
+						var position = D2dHelper.ScreenToWorldPosition(Input.mousePosition, Intercept, mainCamera);
 
 						// Get a random rotation around the Z axis
-						var worldRotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+						var rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
 						
 						// Spawn prefab here
-						Instantiate(Prefab, worldPoint, worldRotation);
+						Instantiate(Prefab, position, rotation);
 					}
 				}
 			}

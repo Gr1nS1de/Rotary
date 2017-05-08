@@ -1,4 +1,4 @@
-﻿/*using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using Destructible2D;
@@ -11,7 +11,7 @@ public class DestructibleController : Controller
 	{
 		switch (alias)
 		{
-			case N.GameStart:
+			case N.OnStart:
 				{
 					OnStart ();
 
@@ -43,6 +43,8 @@ public class DestructibleController : Controller
 		else
 			_destructibleModel.entityBreakPoint = collisionPoint;
 
+		destructible.gameObject.layer = LayerMask.NameToLayer ("DestroyedItem");
+
 		// Register split event
 		destructible.OnEndSplit.AddListener((piecesList)=>
 		{
@@ -50,7 +52,7 @@ public class DestructibleController : Controller
 		});
 
 		// Split via fracture
-		D2dQuadFracturer.Fracture(destructible, fractureCount, 0.1f);
+		D2dQuadFracturer.Fracture(destructible, fractureCount, 0.3f);
 	}
 
 	private void OnEndSplit(D2dDestructible destructible, List<D2dDestructible> piecesList)
@@ -64,6 +66,9 @@ public class DestructibleController : Controller
 			var clone = piecesList[i];
 			var rigidbody = clone.GetComponent<Rigidbody2D>();
 
+			rigidbody.bodyType = RigidbodyType2D.Dynamic;
+			clone.GetComponent<D2dDestroyer> ().enabled = true;
+
 			// Does this clone have a Rigidbody2D?
 			if (rigidbody != null)
 			{
@@ -73,13 +78,12 @@ public class DestructibleController : Controller
 				// Get the vector between this point and the center of the destructible's current rect
 				var vector = clone.AlphaRect.center - localPoint;
 
-				var force = ( game.model.gameState == GameState.GAMEOVER ? game.model.playerModel.breakForce : game.model.destructibleModel.breakForce );
+				//var force = ( game.model.gameState == GameState.GAMEOVER ? game.model.playerModel.breakForce : game.model.destructibleModel.breakForce );
 
 				// Apply relative force
-				rigidbody.AddRelativeForce(vector * force, ForceMode2D.Impulse);
+				rigidbody.AddRelativeForce(vector * _destructibleModel.breakForce, ForceMode2D.Impulse);
 			}
 		}
 	}
 
 }
-*/
