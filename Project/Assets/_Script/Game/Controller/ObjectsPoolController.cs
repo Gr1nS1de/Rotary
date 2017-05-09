@@ -30,6 +30,14 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
+			case N.PlayerImpactItem__:
+				{
+					ItemView itemView = (ItemView)data [0];
+
+
+					break;
+				}
+
 			case N.GameOver:
 				{
 					List<PoolingObjectView> copyInstantiatedObjectsList = new List<PoolingObjectView> (_instantiatedObjectsList);
@@ -82,8 +90,27 @@ public class ObjectsPoolController : Controller
 				{
 					ItemView itemView = (ItemView)poolingObject;
 
+					OnAddingItemToPool (itemView);
 
+					break;
+				}
+		}
+	}
 
+	private void OnAddingItemToPool(ItemView ItemView)
+	{
+		ItemTypes itemType = ItemView.ItemType;
+
+		switch (itemType)
+		{
+			case ItemTypes.COIN:
+				{
+					
+					break;
+				}
+
+			case ItemTypes.DIMOND:
+				{
 					break;
 				}
 		}
@@ -91,32 +118,28 @@ public class ObjectsPoolController : Controller
 
 	public void PoolObject(PoolingObjectType poolingObjectType, int objectCount, Vector3? objectPosition, System.Enum objectType)
 	{
-
-		if (game.model.gameState == GameState.PLAYING)
+		switch(poolingObjectType)
 		{
-			switch(poolingObjectType)
-			{
-				case PoolingObjectType.PLATFORM:
-					{
-						PlatformTypes platformType = (PlatformTypes)objectType;
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformTypes platformType = (PlatformTypes)objectType;
 
-						PoolPlatform (platformType, objectCount, objectPosition);
-						break;
-					}
+					PoolPlatform (platformType, objectCount, objectPosition);
+					break;
+				}
 
-				case PoolingObjectType.ITEM:
-					{
-						ItemTypes itemType = (ItemTypes)objectType;
+			case PoolingObjectType.ITEM:
+				{
+					ItemTypes itemType = (ItemTypes)objectType;
 
-						PoolItem (itemType, objectCount, objectPosition);
-						break;
-					}
+					PoolItem (itemType, objectCount, objectPosition);
+					break;
+				}
 
-				case PoolingObjectType.BONUS:
-					{
-						break;
-					}
-			}
+			case PoolingObjectType.BONUS:
+				{
+					break;
+				}
 		}
 
 	}
@@ -125,6 +148,12 @@ public class ObjectsPoolController : Controller
 	private void PoolItem(ItemTypes itemType, int count, Vector3? objectPosition)
 	{
 		//Debug.LogFormat("Pool item {0}. count = {1}. position = {2}", itemType, count, objectPosition);
+		ItemView itemView = GetPooledItem(itemType);
+
+		if (itemView == null)
+		{
+			itemView = Instantiate (game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType));
+		}
 
 		switch (itemType)
 		{
@@ -136,10 +165,48 @@ public class ObjectsPoolController : Controller
 
 			case ItemTypes.DIMOND:
 				{
-					
 					break;
 				}
 		}
+
+		if (objectPosition == null)
+		{
+			itemView.transform.position = GetItemRandomPosition (itemType);
+		}
+		else
+		{
+			itemView.transform.position = objectPosition.GetValueOrDefault ();
+		}
+
+		_instantiatedObjectsList.Add (itemView);
+	}
+
+	private Vector3 GetItemRandomPosition(ItemTypes itemType)
+	{
+		Vector3 randomPosition = Vector3.zero;
+		Vector3 lastPlatformPosition = _objectsPoolModel.lastPooledPlatform.platformPosition;
+		float lastPlatformWidth = _objectsPoolModel.lastPooledPlatform.platformWidth;
+		float screenHeight = GM.Instance.ScreenSize.y;
+		Vector3 itemRendererSize = game.model.itemsFactoryModel.GetItemRendererSize (itemType);
+
+		switch (_objectsPoolModel.lastPooledPlatform.platformType)
+		{
+			case PlatformTypes.HORIZONTAL:
+				{
+					randomPosition.x = Random.Range (lastPlatformPosition.x - lastPlatformWidth / 2f + itemRendererSize.x, lastPlatformPosition.x + lastPlatformWidth / 2f - itemRendererSize.x);
+					randomPosition.y = Random.Range (-screenHeight / 2f + itemRendererSize.y, screenHeight / 2f - itemRendererSize.y);
+					break;
+				}
+
+			case PlatformTypes.VERTICAL:
+				{
+					randomPosition.x = lastPlatformPosition.x;
+					randomPosition.y = lastPlatformPosition.y;
+					break;
+				}
+		}
+
+		return randomPosition;
 	}
 
 	private void PoolPlatform(PlatformTypes platformType, int count, Vector3? platformPosition)
@@ -167,33 +234,10 @@ public class ObjectsPoolController : Controller
 		Vector3 platformRendererSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
 
 		//If platform already in pooling list and waiting for being pooled
-		if (_poolObjectsList.Count > 0)
-		{
-			_poolObjectsList.ForEach((platformObj)=>
-			{
-				if(platformView== null)
-				{
-					PlatformView platform = (PlatformView)platformObj;
 
-					if(platform.PlatformType == platformType)
-					{
-						platformView = platform;
-					}
-				}
-			});
-				//.Find(platform=>((PlatformView)platform).PlatformType == platformType);
+		platformView = GetPooledPlatform (platformType);
 
-			if (platformView != null)
-			{
-				platformView.gameObject.SetActive (true);
-
-				_poolObjectsList.Remove (platformView);
-
-				isInPoolList = true;
-			}
-		}
-
-		if(!isInPoolList)
+		if(platformView == null)
 		{
 			platformView = (PlatformView)
 					Instantiate (
@@ -202,9 +246,9 @@ public class ObjectsPoolController : Controller
 					);
 
 			platformView.name = string.Format ("{0}Platform_{1}", platformType.ToString().ToLower(), Random.Range(0,100));
-		}
 
-		platformView.gameObject.SetActive (true);
+			platformView.gameObject.SetActive (true);
+		}
 
 		//If we got position where platform should be placed
 		if (platformPosition != null)
@@ -234,7 +278,7 @@ public class ObjectsPoolController : Controller
 					}
 			}
 
-			platformRandomPosition.x = _objectsPoolModel.lastPlatformPosition.x + _objectsPoolModel.lastPlatformWidth / 2f + platformRendererSize.x / 2f + _objectsPoolModel.platformsGap;
+			platformRandomPosition.x = _objectsPoolModel.lastPooledPlatform.platformPosition.x + _objectsPoolModel.lastPooledPlatform.platformWidth / 2f + platformRendererSize.x / 2f + _objectsPoolModel.platformsGap;
 			platformRandomPosition.y = randomY;
 			platformRandomPosition.z = 0f;
 
@@ -243,12 +287,63 @@ public class ObjectsPoolController : Controller
 
 		_instantiatedObjectsList.Add (platformView);
 
-		_objectsPoolModel.lastPlatformPosition = platformView.transform.position;
-		_objectsPoolModel.lastPlatformWidth = platformRendererSize.x;
+		_objectsPoolModel.lastPooledPlatform.platformPosition = platformView.transform.position;
+		_objectsPoolModel.lastPooledPlatform.platformWidth = platformRendererSize.x;
+		_objectsPoolModel.lastPooledPlatform.platformType = platformType;
 
 		//Debug.LogFormat ("Pooling platform: {0}. Already instantiated: {1}",platformView.name, _instantiatedPlatformsList.Count);
 
 		platformView.OnInit ();
+	}
+
+	private PlatformView GetPooledPlatform(PlatformTypes platformType)
+	{
+		PlatformView pooledPlatform = null;
+
+		foreach(var platformObj in _poolObjectsList)
+		{
+			if(platformObj is PlatformView)
+			{
+				PlatformView platform = (PlatformView)platformObj;
+
+				if(platform.PlatformType == platformType)
+				{
+					pooledPlatform = platform;
+
+					pooledPlatform.gameObject.SetActive (true);
+
+					_poolObjectsList.Remove (pooledPlatform);
+					break;
+				}
+			}
+		}
+
+		return pooledPlatform;
+	}
+
+	private ItemView GetPooledItem(ItemTypes itemType)
+	{
+		ItemView pooledItem = null;
+
+		foreach(var itemObj in _poolObjectsList)
+		{
+			if (itemObj is ItemView)
+			{
+				ItemView item = (ItemView)itemObj;
+
+				if (item.ItemType == itemType)
+				{
+					pooledItem = item;
+
+					pooledItem.gameObject.SetActive (true);
+
+					_poolObjectsList.Remove (pooledItem);
+					break;
+				}
+			}
+		}
+
+		return pooledItem;
 	}
 
 	/*

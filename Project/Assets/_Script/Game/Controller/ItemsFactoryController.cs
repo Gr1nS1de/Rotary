@@ -4,6 +4,8 @@ using System.Collections;
 public class ItemsFactoryController : Controller
 {
 
+	public ItemsFactoryModel _itemsFactoryModel	{ get { return game.model.itemsFactoryModel; } } 
+
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
@@ -24,7 +26,16 @@ public class ItemsFactoryController : Controller
 				{
 					PlatformView platformView = (PlatformView)data [0];
 
+					CheckItemSpawn (platformView);
+					break;
+				}
 
+			case N.OnItemInvisible_:
+				{
+					ItemView itemView = (ItemView)data [0];
+
+					if(game.model.gameState == GameState.PLAYING)
+						RestoreItem (itemView);
 					break;
 				}
 
@@ -40,6 +51,30 @@ public class ItemsFactoryController : Controller
 	{
 	}
 
+	private void CheckItemSpawn(PlatformView platformView)
+	{
+		int scoreCount = game.model.currentScore;
+		float randomNum = Random.value;
 
+		if (scoreCount > 5)
+		{
+			if (randomNum > 0.8f)
+			{
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+			}
+		}
+		else if (scoreCount > 15)
+		{
+			if (randomNum > 0.7f)
+			{
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+			}
+		}
+	}
+
+	private void RestoreItem(ItemView itemView)
+	{
+		game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.ITEM, itemView);
+	}
 }
 

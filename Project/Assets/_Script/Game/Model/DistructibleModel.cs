@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestructibleModel : Model
+public class DistructibleModel : Model
 {
 	public float			breakForce							{ get { return _breakForce;}}
 	public Vector3 			entityBreakPoint					{ get { return _entityBreakPoint;} set { _entityBreakPoint = value; }}
 	public int				playerFtactureCount					{ get { return _playerFractureCount;}}
-	public int				destructibleObstacleFractureCount	{ get { return _destructibleObstacleFractureCount;}}
+	public int				distructibleObstacleFractureCount	{ get { return _distructibleObstacleFractureCount;}}
 
 	[SerializeField]
 	private float 			_breakForce;
@@ -14,5 +14,5 @@ public class DestructibleModel : Model
 	[SerializeField]
 	private int				_playerFractureCount;
 	[SerializeField]
-	private	int 			_destructibleObstacleFractureCount;
+	private	int 			_distructibleObstacleFractureCount;
 }

@@ -14,15 +14,14 @@ public class N : MonoBehaviour
 	public const string GameOver					= "game.over";
 	public const string GameAddScore				= "game.add.score";
 
-	//public const string AddObjectToPool__			= "add.to.object.pool";
-	//public const string PoolObject____ 				= "pool.object";
-
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
+	public const string OnItemInvisible_			= "on.item.invisible";
 	public const string OnPlayerInvisible			= "on.player.invisible";
 	#endregion
 
-	#region Destructible notifications
-	public const string DestructibleBreakEntity___ 	= "destructible.break.entity";
+	#region player notifications
+	//public const string DestructibleBreakEntity___ 	= "destructible.break.entity";
+	public const string PlayerImpactItem__ 			= "player.impact.item";
 	#endregion
 
 	#region ResourcesController notifications

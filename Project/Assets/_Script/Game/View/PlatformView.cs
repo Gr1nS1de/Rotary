@@ -2,7 +2,7 @@
 using System.Collections;
 
 //Custom editor: PlatformViewEditor
-public class PlatformView : PoolingObjectView, IPlatform, IPoolObject
+public class PlatformView : PoolingObjectView, IPoolObject
 {
 	public PlatformTypes PlatformType;
 
@@ -42,26 +42,48 @@ public class PlatformView : PoolingObjectView, IPlatform, IPoolObject
 		}
 	}
 
-	public SpriteRenderer GetMainPlatformRenderer()
+	public bool IsObjectVisible()
 	{
-		SpriteRenderer platformRenderer = null;
+		bool isVisible = false;
 
 		switch (PlatformType)
 		{
 			case PlatformTypes.HORIZONTAL:
 				{
-					platformRenderer = HorizontalPlatformRenderer;
+					isVisible = HorizontalPlatformRenderer.isVisible;
 					break;
 				}
 
 			case PlatformTypes.VERTICAL:
 				{
-					platformRenderer = VerticalPlatformRenderers [0];
+					isVisible = VerticalPlatformRenderers [0].isVisible;
 					break;
 				}
 		}
 
-		return platformRenderer;
+		return isVisible;
+	}
+
+	public Vector3 GetMainRendererSize()
+	{
+		Vector3 rendererSize = Vector3.zero;
+
+		switch (PlatformType)
+		{
+			case PlatformTypes.HORIZONTAL:
+				{
+					rendererSize = HorizontalPlatformRenderer.bounds.size;
+					break;
+				}
+
+			case PlatformTypes.VERTICAL:
+				{
+					rendererSize = VerticalPlatformRenderers [0].bounds.size;
+					break;
+				}
+		}
+
+		return rendererSize;
 	}
 		
 	void Update()
@@ -71,14 +93,14 @@ public class PlatformView : PoolingObjectView, IPlatform, IPoolObject
 		
 		if (!_isWasVisible)
 		{
-			if (GetMainPlatformRenderer().isVisible)
+			if (IsObjectVisible())
 			{
 				OnVisible ();
 			}
 		}else
 		if (_isWasVisible)
 		{
-			if (!GetMainPlatformRenderer().isVisible)
+				if (!IsObjectVisible())
 			{
 				OnInvisible ();
 			}

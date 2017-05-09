@@ -14,7 +14,7 @@ public class GameSoundController : Controller
 					break;
 				}
 
-			case N.DestructibleBreakEntity___:
+			case N.PlayerImpactItem__:
 				{
 					//var obstacleDestructible = (D2dDestructible)data [0];
 					//var fractureCount = (int)data [1];

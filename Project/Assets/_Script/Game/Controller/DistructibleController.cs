@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using Destructible2D;
 
-public class DestructibleController : Controller
+public class DistructibleController : Controller
 {
-	private DestructibleModel _destructibleModel	{ get { return game.model.destructibleModel; } }
+	private DistructibleModel _distructibleModel	{ get { return game.model.distructibleModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -17,7 +17,7 @@ public class DestructibleController : Controller
 
 					break;
 				}
-
+				/*
 			case N.DestructibleBreakEntity___:
 				{
 					var obstacleDestructible = (D2dDestructible)data [0];
@@ -27,7 +27,7 @@ public class DestructibleController : Controller
 					BreakEntity( obstacleDestructible, fractureCount, collisionPoint);
 
 					break;
-				}
+				}*/
 
 		}
 	}
@@ -35,13 +35,13 @@ public class DestructibleController : Controller
 	private void OnStart()
 	{}
 
-	private void BreakEntity( D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
+	public void BreakEntity( D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
 	{
 		// Store explosion point (used in OnEndSplit)
 		if (collisionPoint == Vector2.zero)
-			_destructibleModel.entityBreakPoint = destructible.transform.position;
+			_distructibleModel.entityBreakPoint = destructible.transform.position;
 		else
-			_destructibleModel.entityBreakPoint = collisionPoint;
+			_distructibleModel.entityBreakPoint = collisionPoint;
 
 		destructible.gameObject.layer = LayerMask.NameToLayer ("DestroyedItem");
 
@@ -73,7 +73,7 @@ public class DestructibleController : Controller
 			if (rigidbody != null)
 			{
 				// Get the local point of the explosion that called this split event
-				var localPoint = (Vector2)clone.transform.InverseTransformPoint(_destructibleModel.entityBreakPoint);
+				var localPoint = (Vector2)clone.transform.InverseTransformPoint(_distructibleModel.entityBreakPoint);
 
 				// Get the vector between this point and the center of the destructible's current rect
 				var vector = clone.AlphaRect.center - localPoint;
@@ -81,7 +81,7 @@ public class DestructibleController : Controller
 				//var force = ( game.model.gameState == GameState.GAMEOVER ? game.model.playerModel.breakForce : game.model.destructibleModel.breakForce );
 
 				// Apply relative force
-				rigidbody.AddRelativeForce(vector * _destructibleModel.breakForce, ForceMode2D.Impulse);
+				rigidbody.AddRelativeForce(vector * _distructibleModel.breakForce, ForceMode2D.Impulse);
 			}
 		}
 	}

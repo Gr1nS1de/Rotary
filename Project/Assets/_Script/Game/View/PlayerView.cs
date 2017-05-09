@@ -115,8 +115,7 @@ public class PlayerView : View
 					ItemView itemView = (ItemView)poolingObject;
 					D2dDestructible destructibleItem = itemView.GetComponentInChildren<D2dDestructible>();
 
-					Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
-
+					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, collision.contacts [0].point);
 					break;
 				}
 

@@ -4,7 +4,8 @@ using System.Collections;
 public enum ItemTypes
 {
 	COIN,
-	DIMOND
+	DIMOND,
+	MAGNET
 }
 
 public class ItemModel : Model

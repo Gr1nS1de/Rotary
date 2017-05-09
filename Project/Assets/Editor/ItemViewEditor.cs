@@ -3,27 +3,27 @@ using System.Collections;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(PlatformView))]
-public class PlatformViewEditor : Editor
+[CustomEditor(typeof(ItemView))]
+public class ItemViewEditor : Editor
 {
 	SerializedProperty _mainRenderer;
-	PlatformView data;
+	ItemView data;
 
 	void OnEnable()
 	{
-		data = (PlatformView)target;
+		data = (ItemView)target;
 
-		switch (data.PlatformType)
+		switch (data.ItemType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case ItemTypes.COIN:
 				{
-					_mainRenderer = serializedObject.FindProperty ("HorizontalPlatformRenderer");
+					_mainRenderer = serializedObject.FindProperty ("CoinRenderer");
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case ItemTypes.DIMOND:
 				{
-					_mainRenderer = serializedObject.FindProperty ("VerticalPlatformRenderers");
+					_mainRenderer = serializedObject.FindProperty ("DimondRenderer");
 					break;
 				}
 		}
@@ -34,24 +34,25 @@ public class PlatformViewEditor : Editor
 		serializedObject.Update();
 
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
-		data.PlatformType = (PlatformTypes)EditorGUILayout.EnumPopup("Platform Type", data.PlatformType);  
+		data.ItemType = (ItemTypes)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
 
-		switch (data.PlatformType)
+		switch (data.ItemType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case ItemTypes.COIN:
 				{
 					//EditorGUILayout.ObjectField("Main Platform Renderer", _mainRenderer.objectReferenceValue, typeof(SpriteRenderer), true);
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case ItemTypes.DIMOND:
 				{
 					EditorGUILayout.PropertyField(_mainRenderer, true);
+					EditorGUILayout.FloatField ("Distruct Fracture Count", data.DistructFractureCount);
 					break;
 				}
 		}
-				
+
 		serializedObject.ApplyModifiedProperties();
 	}
 

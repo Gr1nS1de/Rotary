@@ -27,8 +27,11 @@ public class PlatformsFactoryController : Controller
 
 					Debug.LogFormat ("Platform is invisible: {0}", platformView.name);
 
-					if(game.model.gameState == GameState.PLAYING)
+					if (game.model.gameState == GameState.PLAYING)
+					{
 						RestorePlatform (platformView);
+						CheckPlatformSpawn (platformView);
+					}
 					break;
 				}
 
@@ -52,20 +55,20 @@ public class PlatformsFactoryController : Controller
 
 		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + platformSize.y * 1.25f, 0f );
 
-		//Notify(N.PoolObject____, NotifyType.GAME, PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.HORIZONTAL);
 		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.HORIZONTAL);
 	}
 
 	private void RestorePlatform(PlatformView platformView)
 	{
-		//Notify (N.AddObjectToPool__, NotifyType.GAME, PoolingObjectType.PLATFORM, platformView);
 		game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.PLATFORM, platformView);
+	}
 
+	private void CheckPlatformSpawn(PlatformView platformView)
+	{
 		switch (platformView.PlatformType)
 		{
 			case PlatformTypes.HORIZONTAL:
 				{
-					//Notify (N.PoolObject____, NotifyType.GAME, PoolingObjectType.PLATFORM, 1, null, platformView.PlatformType);
 					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.HORIZONTAL);
 
 					if (Random.Range (0, 10) > 8)
