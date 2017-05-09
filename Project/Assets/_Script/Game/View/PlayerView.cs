@@ -8,6 +8,7 @@ public class PlayerView : View
 {
 	[HideInInspector]
 	public List<PlatformView>	ScorePlatformsList	= new List<PlatformView>();
+	public bool IsShowDebugCameraDistance = false;
 
 	private PlayerModel _playerModel	{ get { return game.model.playerModel; } }
 	private Rigidbody2D _playerRB;
@@ -63,14 +64,14 @@ public class PlayerView : View
 				_offsetBackspeedRate += 0.1f;
 
 				if (currentOffset < 0f)
-					_playerRB.angularVelocity = _playerModel.angularSpeed - Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
+					_playerRB.angularVelocity = _playerModel.angularSpeed * game.model.gameSpeed - Mathf.Lerp(0f, _playerModel.offsetBackForce, _offsetBackspeedRate * Time.fixedDeltaTime);
 				else
-					_playerRB.angularVelocity = _playerModel.angularSpeed + Mathf.Lerp(0f, _playerModel.offsetBackSpeed, _offsetBackspeedRate * Time.fixedDeltaTime);
+					_playerRB.angularVelocity = _playerModel.angularSpeed * game.model.gameSpeed + Mathf.Lerp(0f, _playerModel.offsetBackForce, _offsetBackspeedRate * Time.fixedDeltaTime);
 			}
 			else
 			{
 				_offsetBackspeedRate = 0f;
-				_playerRB.angularVelocity = _playerModel.angularSpeed;
+				_playerRB.angularVelocity = _playerModel.angularSpeed *  game.model.gameSpeed;
 			}
 		}
 
@@ -78,14 +79,15 @@ public class PlayerView : View
 			Notify (N.OnPlayerInvisible);
 
 		//Debug.LogErrorFormat ("Current distance to camera = {0}. Last frame distance = {1}. Offset = {2}", Vector2.Distance(game.view.cameraView.transform.position, transform.position), _lastCameraDistance, Vector2.Distance(game.view.cameraView.transform.position, transform.position) - _lastCameraDistance );
-		Debug.Log("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 1f ? " > " + (Mathf.Abs (currentOffset) - 1f) : "") );
+		if(IsShowDebugCameraDistance)
+			Debug.Log("Current camera offset = "+currentOffset +  (Mathf.Abs (currentOffset) > 1f ? " > " + (Mathf.Abs (currentOffset) - 1f) : "") );
 		//_lastCameraDistance = Vector2.Distance(game.view.cameraView.transform.position, transform.position);
 		//_playerRB.DOMoveX (transform.position.x + _playerModel.moveSpeed, 1f).SetUpdate(UpdateType.Fixed);
 
 		if (_playerModel.linearForce != 0)
 		{
 			//transform.position += new Vector3 (_playerModel.linearSpeed * game.model.gameMoveSpeed * Time.fixedDeltaTime, 0f, 0f);
-			_playerConstantForce.force = ( new Vector2 (_playerModel.linearForce, 0f));
+			_playerConstantForce.force = ( new Vector2 (_playerModel.linearForce * game.model.gameSpeed, 0f));
 		}
 	}
 

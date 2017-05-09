@@ -12,7 +12,7 @@ public class ResourcesController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
-
+					LoadItems ();
 					break;
 				}
 
@@ -24,6 +24,11 @@ public class ResourcesController : Controller
 					break;
 				}
 		}
+	}
+
+	private void LoadItems()
+	{
+		game.model.itemsFactoryModel.itemsPrefabsList.AddRange( Resources.LoadAll<ItemView> ("Items") );
 	}
 
 	private void LoadGameTheme(GameThemeType gameThemeType)
@@ -42,6 +47,9 @@ public class ResourcesController : Controller
 		};
 
 		game.controller.SetGameTheme (gameTheme);
+
+		backgroundView = null;
+		platformsViewList = null;
 	}
 
 }

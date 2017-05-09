@@ -14,8 +14,8 @@ public class N : MonoBehaviour
 	public const string GameOver					= "game.over";
 	public const string GameAddScore				= "game.add.score";
 
-	public const string AddObjectToPool__			= "add.to.object.pool";
-	public const string PoolObject____ 				= "pool.object";
+	//public const string AddObjectToPool__			= "add.to.object.pool";
+	//public const string PoolObject____ 				= "pool.object";
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnPlayerInvisible			= "on.player.invisible";

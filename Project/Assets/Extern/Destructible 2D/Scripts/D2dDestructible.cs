@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Collections;
 using System.Collections.Generic;
 
 #if UNITY_EDITOR
@@ -1668,6 +1669,13 @@ namespace Destructible2D
 						clone.transform.localPosition = transform.localPosition;
 						clone.transform.localRotation = transform.localRotation;
 						clone.transform.localScale    = transform.localScale;
+
+						//Reset all unity colliders on clones
+						if (clone.GetComponent<Collider2D> ())
+							foreach (Collider2D collider in clone.GetComponents<Collider2D>())
+							{
+								StartCoroutine (ResetCollider(clone.transform, collider));
+							}
 					}
 
 					group.GenerateData();
@@ -1697,6 +1705,17 @@ namespace Destructible2D
 				if (OnEndSplit != null) OnEndSplit.Invoke(clones);
 			}
 			IsSplitting = false; clones.Clear();
+		}
+
+		private System.Collections.IEnumerator ResetCollider(Transform clone, Collider2D collider)
+		{
+			System.Type colliderType = collider.GetType ();
+
+			Destroy (collider);
+
+			yield return null;
+
+			clone.gameObject.AddComponent(colliderType);
 		}
 
 		[ContextMenu("Update Mesh")]

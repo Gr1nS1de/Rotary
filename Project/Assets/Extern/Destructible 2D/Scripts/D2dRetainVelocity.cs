@@ -72,7 +72,7 @@ namespace Destructible2D
 				{
 					var cloneRigidbody2D = clone.GetComponent<Rigidbody2D>();
 
-					if (cloneRigidbody2D != null)
+					if (cloneRigidbody2D != null && cloneRigidbody2D.bodyType != RigidbodyType2D.Static)
 					{
 						cloneRigidbody2D.velocity        = velocity;
 						cloneRigidbody2D.angularVelocity = angularVelocity;

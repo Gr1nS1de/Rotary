@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class ObjectsPoolController : Controller
 {
-	private ObjectsPoolModel 		_objectsPoolModel			{ get { return game.model.objectsPoolModel; } }
-	private PlatformsFactoryModel 	_platformsFactoryModel		{ get { return game.model.platformsFactoryModel; } }
-	private ObjectsPoolView			_objectsPoolView			{ get { return game.view.objectsPoolView;}}
-	private List<PlatformView>		_poolPlatformsList			{ get { return game.model.objectsPoolModel.poolPlatformsList;}}
-	private List<PlatformView>		_instantiatedPlatformsList	{ get { return game.model.objectsPoolModel.instantiatedPlatforms;}}
+	private ObjectsPoolModel 			_objectsPoolModel			{ get { return game.model.objectsPoolModel; } }
+	private PlatformsFactoryModel 		_platformsFactoryModel		{ get { return game.model.platformsFactoryModel; } }
+	private ObjectsPoolView				_objectsPoolView			{ get { return game.view.objectsPoolView;}}
+	private List<PoolingObjectView>		_poolObjectsList			{ get { return game.model.objectsPoolModel.poolObjectsList;}}
+	private List<PoolingObjectView>		_instantiatedObjectsList	{ get { return game.model.objectsPoolModel.instantiatedObjectsList;}}
 
 	private Vector3					_lastObstaclePoolerViewPosition;
 
@@ -30,62 +30,16 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
-			case N.AddObjectToPool__:
-				{
-					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
-					Object poolingObject = (Object)data [1];
-
-					AddObjectToPoolList (poolingObjectType, poolingObject);
-
-					break;
-				}
-
-			case N.PoolObject____:
-				{
-					PoolingObjectType poolingObjectType = (PoolingObjectType)data [0];
-					int objectCount = (int)data [1];
-					Vector3? objectPosition = (Vector3?)data [2];
-
-					if (game.model.gameState == GameState.PLAYING)
-					{
-						switch(poolingObjectType)
-						{
-							case PoolingObjectType.PLATFORM:
-								{
-									PlatformTypes platformType = (PlatformTypes)data [3];
-
-									PoolPlatform (platformType, objectCount, objectPosition);
-									break;
-								}
-
-							case PoolingObjectType.ITEM:
-								{
-									ItemTypes itemType = (ItemTypes)data [3];
-
-									PoolItem (itemType, objectCount, objectPosition);
-									break;
-								}
-
-							case PoolingObjectType.BONUS:
-								{
-									break;
-								}
-						}
-					}
-					
-					break;
-				}
-
 			case N.GameOver:
 				{
-					List<PlatformView> copyInstantiatedPlatformsList = new List<PlatformView> (_instantiatedPlatformsList);
+					List<PoolingObjectView> copyInstantiatedObjectsList = new List<PoolingObjectView> (_instantiatedObjectsList);
 
-					copyInstantiatedPlatformsList.ForEach(platform=>
+					copyInstantiatedObjectsList.ForEach(obj=>
 					{
-						AddObjectToPoolList(PoolingObjectType.PLATFORM, platform);
+						AddObjectToPool(obj.PoolingType, obj);
 					});
 
-					copyInstantiatedPlatformsList = null;
+					copyInstantiatedObjectsList = null;
 					break;
 				}
 		}
@@ -99,7 +53,8 @@ public class ObjectsPoolController : Controller
 	{
 	}
 
-	private void AddObjectToPoolList(PoolingObjectType poolingObjectType, Object poolingObject)
+	#region public methods
+	public void AddObjectToPool(PoolingObjectType poolingObjectType, PoolingObjectView poolingObject)
 	{
 		switch (poolingObjectType)
 		{
@@ -109,12 +64,12 @@ public class ObjectsPoolController : Controller
 
 					//Debug.LogFormat ("Add platform to pool. {0}", platformView.name);
 
-					if (platformView != null && !_poolPlatformsList.Contains (platformView))
+					if (platformView != null && !_poolObjectsList.Contains (platformView))
 					{
-						_poolPlatformsList.Add (platformView);
+						_poolObjectsList.Add (platformView);
 
-						if (_instantiatedPlatformsList.Contains (platformView))
-							_instantiatedPlatformsList.Remove (platformView);
+						if (_instantiatedObjectsList.Contains (platformView))
+							_instantiatedObjectsList.Remove (platformView);
 
 						platformView.OnAddToPool ();
 
@@ -125,11 +80,47 @@ public class ObjectsPoolController : Controller
 
 			case PoolingObjectType.ITEM:
 				{
-					
+					ItemView itemView = (ItemView)poolingObject;
+
+
+
 					break;
 				}
 		}
 	}
+
+	public void PoolObject(PoolingObjectType poolingObjectType, int objectCount, Vector3? objectPosition, System.Enum objectType)
+	{
+
+		if (game.model.gameState == GameState.PLAYING)
+		{
+			switch(poolingObjectType)
+			{
+				case PoolingObjectType.PLATFORM:
+					{
+						PlatformTypes platformType = (PlatformTypes)objectType;
+
+						PoolPlatform (platformType, objectCount, objectPosition);
+						break;
+					}
+
+				case PoolingObjectType.ITEM:
+					{
+						ItemTypes itemType = (ItemTypes)objectType;
+
+						PoolItem (itemType, objectCount, objectPosition);
+						break;
+					}
+
+				case PoolingObjectType.BONUS:
+					{
+						break;
+					}
+			}
+		}
+
+	}
+	#endregion
 
 	private void PoolItem(ItemTypes itemType, int count, Vector3? objectPosition)
 	{
@@ -139,6 +130,13 @@ public class ObjectsPoolController : Controller
 		{
 			case ItemTypes.COIN:
 				{
+
+					break;
+				}
+
+			case ItemTypes.DIMOND:
+				{
+					
 					break;
 				}
 		}
@@ -169,15 +167,27 @@ public class ObjectsPoolController : Controller
 		Vector3 platformRendererSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
 
 		//If platform already in pooling list and waiting for being pooled
-		if (_poolPlatformsList.Count > 0)
+		if (_poolObjectsList.Count > 0)
 		{
-			platformView = _poolPlatformsList.Find((platform)=>platform.PlatformType == platformType);
+			_poolObjectsList.ForEach((platformObj)=>
+			{
+				if(platformView== null)
+				{
+					PlatformView platform = (PlatformView)platformObj;
+
+					if(platform.PlatformType == platformType)
+					{
+						platformView = platform;
+					}
+				}
+			});
+				//.Find(platform=>((PlatformView)platform).PlatformType == platformType);
 
 			if (platformView != null)
 			{
 				platformView.gameObject.SetActive (true);
 
-				_poolPlatformsList.Remove (platformView);
+				_poolObjectsList.Remove (platformView);
 
 				isInPoolList = true;
 			}
@@ -231,7 +241,7 @@ public class ObjectsPoolController : Controller
 			platformView.transform.position = platformRandomPosition;
 		}
 
-		_instantiatedPlatformsList.Add (platformView);
+		_instantiatedObjectsList.Add (platformView);
 
 		_objectsPoolModel.lastPlatformPosition = platformView.transform.position;
 		_objectsPoolModel.lastPlatformWidth = platformRendererSize.x;

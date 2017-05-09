@@ -16,7 +16,7 @@ public enum GameThemeType
 	DarkBlueGarage
 }
 
-public enum GameSpeedType
+public enum GameSpeedState
 {
 	SPEED_1,
 	SPEED_2,
@@ -44,10 +44,13 @@ public class GameModel : Model
 	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }
 	public GameTheme 					gameTheme				{ get { return _gameTheme; } 		set { _gameTheme = value;}}
-	public GameSpeedType	 			gameSpeed				{ get { return _gameSpeed; } 	set { _gameSpeed = value;}}
+	public float			 			gameSpeed				{ get { return _gameSpeed; } 		set { _gameSpeed = value;}}
+	public GameSpeedState	 			gameSpeedState			{ get { return _gameSpeedState; } 	set { _gameSpeedState = value;}}
 
 	[SerializeField]
-	private GameSpeedType				_gameSpeed;
+	private GameSpeedState				_gameSpeedState;
+	[SerializeField]
+	private float						_gameSpeed				= 1f;
 	[SerializeField]
 	private GameTheme					_gameTheme;
 	[SerializeField]
@@ -64,7 +67,11 @@ public class GameModel : Model
 	public ObjectsPoolModel				objectsPoolModel		{ get { return _objectsPoolModel			= SearchLocal<ObjectsPoolModel>(			_objectsPoolModel,			typeof(ObjectsPoolModel).Name );}}
 	public PlayerModel 					playerModel				{ get { return _playerModel					= SearchLocal<PlayerModel>(					_playerModel,				typeof(PlayerModel).Name );}}
 	public PlatformsFactoryModel		platformsFactoryModel	{ get { return _platformsFactoryModel		= SearchLocal<PlatformsFactoryModel>(		_platformsFactoryModel,		typeof(PlatformsFactoryModel).Name );}}
+	public ItemsFactoryModel			itemsFactoryModel		{ get { return _itemsFactoryModel			= SearchLocal<ItemsFactoryModel>(			_itemsFactoryModel,			typeof(ItemsFactoryModel).Name );}}
+	public BonusesFactoryModel			bonusesFactoryModel		{ get { return _bonusesFactoryModel			= SearchLocal<BonusesFactoryModel>(			_bonusesFactoryModel,		typeof(BonusesFactoryModel).Name );}}
 
+	private BonusesFactoryModel			_bonusesFactoryModel;
+	private ItemsFactoryModel			_itemsFactoryModel;
 	private PlatformsFactoryModel		_platformsFactoryModel;
 	private PlayerModel					_playerModel;
 	private CameraModel					_cameraModel;

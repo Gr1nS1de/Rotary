@@ -12,7 +12,13 @@ public class GameController : Controller
 	public ResourcesController				resourcesController				{ get { return _resourcesController 		= SearchLocal<ResourcesController>(			_resourcesController,			typeof(ResourcesController).Name ); } }
 	public ObjectsPoolController			objectsPoolController			{ get { return _objectsPoolController 		= SearchLocal<ObjectsPoolController> (		_objectsPoolController, 		typeof(ObjectsPoolController).Name);}}
 	public PlayerController 				playerController				{ get { return _playerController			= SearchLocal<PlayerController>(			_playerController,				typeof(PlayerController).Name );}}
+	public ItemsFactoryController			itemsFactoryController			{ get { return _itemsFactoryController		= SearchLocal<ItemsFactoryController>(		_itemsFactoryController,		typeof(ItemsFactoryController).Name );}}
+	public BonusesFactoryController			bonusesFactoryController		{ get { return _bonusesFactoryController	= SearchLocal<BonusesFactoryController>(	_bonusesFactoryController,		typeof(BonusesFactoryController).Name );}}
+	public PlatformsFactoryController		platformsFactoryController		{ get { return _platformsFactoryController	= SearchLocal<PlatformsFactoryController>(	_platformsFactoryController,	typeof(PlatformsFactoryController).Name );}}
 
+	private PlatformsFactoryController		_platformsFactoryController;
+	private BonusesFactoryController		_bonusesFactoryController;
+	private ItemsFactoryController			_itemsFactoryController;
 	private PlayerController				_playerController;
 	private CameraController				_cameraController;
 	private GameSoundController				_gameSoundController;
@@ -21,6 +27,8 @@ public class GameController : Controller
 	#endregion
 
 	//private GearModel 					playerModel	{ get { return game.model.playerModel;}}
+
+	private GameSpeedState _currentGameSpeedState;
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -51,6 +59,7 @@ public class GameController : Controller
 			case N.GameAddScore:
 				{
 					OnAddScore ();
+					CheckGameSpeedState ();
 					break;
 				}
 
@@ -83,21 +92,66 @@ public class GameController : Controller
 		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);
 	}
 
-	public void SetGameSpeed(GameSpeedType gameSpeed)
+	//https://ussrgames.atlassian.net/wiki/pages/viewpage.action?pageId=40027034
+	public void SetGameSpeed(GameSpeedState speedState)
 	{
-		switch (gameSpeed)
+		switch (speedState)
 		{
-			case GameSpeedType.SPEED_1:
+			case GameSpeedState.SPEED_1:
+				{
+					game.model.gameSpeed = 3f;
+					game.model.playerModel.forceOnInit = 3f;
+					game.model.playerModel.angularSpeed = -89.3f;
+					game.model.playerModel.offsetBackForce = 400f;
+					break;
+				}
+
+			case GameSpeedState.SPEED_2:
+				{
+					game.model.gameSpeed = 4f;
+					game.model.playerModel.angularSpeed = -92.4f;
+					game.model.playerModel.offsetBackForce = 500f;
+					break;
+				}
+
+			case GameSpeedState.SPEED_3:
+				{
+					game.model.gameSpeed = 5f;
+					game.model.playerModel.angularSpeed = -87.4f;
+					game.model.playerModel.offsetBackForce = 600f;
+					break;
+				}
+
+			case GameSpeedState.SPEED_4:
+				{
+					game.model.gameSpeed = 6f;
+					game.model.playerModel.angularSpeed = -86.65f;
+					game.model.playerModel.offsetBackForce = 700f;
+					break;
+				}
+
+			case GameSpeedState.SPEED_5:
 				{
 					break;
 				}
 		}
+
+		_currentGameSpeedState = speedState;
+		game.model.gameSpeedState = speedState;
 	}
 	#endregion
 
 	private void OnStart()
 	{
 		SetNewGame ();
+
+		SetGameSpeed( game.model.gameSpeedState);
+	}
+
+	void Update()
+	{
+		if (_currentGameSpeedState != game.model.gameSpeedState)
+			SetGameSpeed (game.model.gameSpeedState);
 	}
 
 	private void SetNewGame()
@@ -119,6 +173,38 @@ public class GameController : Controller
 		//_soundManager.PlayTouch();
 
 		//FindObjectOfType<Circle>().DOParticle();
+	}
+
+	private void CheckGameSpeedState()
+	{
+		int currentScore = game.model.currentScore;
+		GameSpeedState correctGameSpeedState = GameSpeedState.SPEED_1;
+
+		if (currentScore < 5)
+		{
+			//
+		}
+		else if (currentScore >= 5 && currentScore < 30)
+		{
+			correctGameSpeedState = GameSpeedState.SPEED_2;
+		}
+		else if (currentScore >= 30 && currentScore < 50)
+		{
+			correctGameSpeedState = GameSpeedState.SPEED_3;
+		}
+		else if (currentScore >= 50 && currentScore < 70)
+		{
+			correctGameSpeedState = GameSpeedState.SPEED_4;
+		}
+		else
+		{
+			correctGameSpeedState = GameSpeedState.SPEED_5;
+		}
+
+		if (game.model.gameSpeedState != correctGameSpeedState)
+		{
+			SetGameSpeed (correctGameSpeedState);
+		}
 	}
 	/*
 	public void OnImpactObstacleByPlayer(RobotView obstacleView, Vector2 collisionPoint)

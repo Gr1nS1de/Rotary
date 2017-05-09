@@ -105,7 +105,7 @@ public class DragRecognizer : ContinuousGestureRecognizer<DragGesture>
         // if we are currently moving, or we were still moving last frame (allows listeners to detect when the finger is stationary when MoveDelta = 0)...
         if( gesture.DeltaMove.sqrMagnitude > 0 || gesture.LastDelta.sqrMagnitude > 0 )
             gesture.LastPos = gesture.Position;
-
+		
         RaiseEvent( gesture );
         return GestureRecognitionState.InProgress;
     }

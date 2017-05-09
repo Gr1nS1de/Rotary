@@ -3,7 +3,8 @@ using System.Collections;
 
 public enum ItemTypes
 {
-	COIN
+	COIN,
+	DIMOND
 }
 
 public class ItemModel : Model
