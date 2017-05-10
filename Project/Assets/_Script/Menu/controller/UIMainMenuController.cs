@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UIMainMenuController : Controller
 {
@@ -15,6 +16,12 @@ public class UIMainMenuController : Controller
 
 					break;
 				}
+
+			case N.GameOver:
+				{
+					OnGameOver ();
+					break;
+				}
 		}
 	}
 
@@ -27,7 +34,20 @@ public class UIMainMenuController : Controller
 	public void ButtonGamePlay()
 	{
 		Notify (N.GamePlay);
+
+		SetActivePlayButton (false);
 	}
 	#endregion
 
+	private void OnGameOver()
+	{
+		SetActivePlayButton (true);
+	}
+
+	private void SetActivePlayButton(bool isActive)
+	{
+		Button playButton = ui.model.UIMainMenuModel.buttonPlay;
+
+		playButton.gameObject.SetActive (isActive);
+	}
 }

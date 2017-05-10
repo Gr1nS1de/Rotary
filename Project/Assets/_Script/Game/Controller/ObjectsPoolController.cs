@@ -8,10 +8,9 @@ public class ObjectsPoolController : Controller
 	private ObjectsPoolModel 			_objectsPoolModel			{ get { return game.model.objectsPoolModel; } }
 	private PlatformsFactoryModel 		_platformsFactoryModel		{ get { return game.model.platformsFactoryModel; } }
 	private ObjectsPoolView				_objectsPoolView			{ get { return game.view.objectsPoolView;}}
+
 	private List<PoolingObjectView>		_poolObjectsList			{ get { return game.model.objectsPoolModel.poolObjectsList;}}
 	private List<PoolingObjectView>		_instantiatedObjectsList	{ get { return game.model.objectsPoolModel.instantiatedObjectsList;}}
-
-	private Vector3						_lastObstaclePoolerViewPosition;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -129,6 +128,10 @@ public class ObjectsPoolController : Controller
 
 		if (_poolObjectsList.Contains (poolingObjectView) || _instantiatedObjectsList.Contains (poolingObjectView))
 			isValid = true;
+		else
+		{
+			Debug.LogErrorFormat ("Got invalid pooling object! {0}", poolingObjectView.name);
+		}
 
 		return isValid;
 	}
@@ -181,7 +184,8 @@ public class ObjectsPoolController : Controller
 
 		if (itemView == null)
 		{
-			itemView = Instantiate (game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType));
+			itemView = Instantiate (game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType),
+									game.view.transform.Find("_Items"));
 
 			if (!gameObject.activeInHierarchy)
 				gameObject.SetActive (true);
@@ -257,7 +261,7 @@ public class ObjectsPoolController : Controller
 
 		//If platform already in pooling list and waiting for being pooled
 
-		platformView = GetPooledPlatform (platformType);
+		platformView = GetPoolListPlatform (platformType);
 
 		if(platformView == null)
 		{
@@ -277,34 +281,10 @@ public class ObjectsPoolController : Controller
 		{
 			platformView.transform.position = platformPosition.GetValueOrDefault ();
 		}
-		else //Get random position for platform
+		else
 		{
-			Vector2 screenSize = GM.Instance.ScreenSize;
-			float randomY = 0f;	//Screen center Y coord
-			Vector3 platformRandomPosition = default(Vector3);
-
-			switch (platformType)
-			{
-				case PlatformTypes.HORIZONTAL:
-					{
-						randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);
-						break;
-					}
-
-				case PlatformTypes.VERTICAL:
-					{
-						float platformsGap = game.view.playerView.GetComponent<SpriteRenderer> ().bounds.size.y * 1.1f;	//Add 10% of player height to gap
-
-						randomY = Random.Range (-screenSize.y / 2f + platformsGap / 2f, screenSize.y / 2f - platformsGap / 2f);
-						break;
-					}
-			}
-
-			platformRandomPosition.x = _objectsPoolModel.lastPooledPlatform.platformPosition.x + _objectsPoolModel.lastPooledPlatform.platformWidth / 2f + platformRendererSize.x / 2f + _objectsPoolModel.platformsGap;
-			platformRandomPosition.y = randomY;
-			platformRandomPosition.z = 0f;
-
-			platformView.transform.position = platformRandomPosition;
+			//Get random position for platform
+			platformView.transform.position = GetPlatfromRandomPosition(platformType);
 		}
 
 		_instantiatedObjectsList.Add (platformView);
@@ -318,7 +298,38 @@ public class ObjectsPoolController : Controller
 		platformView.OnInit ();
 	}
 
-	private PlatformView GetPooledPlatform(PlatformTypes platformType)
+	private Vector3 GetPlatfromRandomPosition(PlatformTypes platformType)
+	{
+		Vector2 screenSize = GM.Instance.ScreenSize;
+		Vector3 platformRendererSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
+		float randomY = 0f;	//Screen center Y coord
+		Vector3 platformRandomPosition = default(Vector3);
+
+		switch (platformType)
+		{
+			case PlatformTypes.HORIZONTAL:
+				{
+					randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);
+					break;
+				}
+
+			case PlatformTypes.VERTICAL:
+				{
+					float platformsGap = game.view.playerView.GetComponent<SpriteRenderer> ().bounds.size.y * 1.1f;	//Add 10% of player height to gap
+
+					randomY = Random.Range (-screenSize.y / 2f + platformsGap / 2f, screenSize.y / 2f - platformsGap / 2f);
+					break;
+				}
+		}
+
+		platformRandomPosition.x = _objectsPoolModel.lastPooledPlatform.platformPosition.x + _objectsPoolModel.lastPooledPlatform.platformWidth / 2f + platformRendererSize.x / 2f + _objectsPoolModel.platformsGap;
+		platformRandomPosition.y = randomY;
+		platformRandomPosition.z = 0f;
+
+		return platformRandomPosition;
+	}
+
+	private PlatformView GetPoolListPlatform(PlatformTypes platformType)
 	{
 		PlatformView pooledPlatform = null;
 

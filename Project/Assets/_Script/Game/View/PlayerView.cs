@@ -31,8 +31,6 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (initPosition.x - game.view.cameraView.transform.position.x);
 
-		//initPosition.x /= 1.5f;
-
 		transform.position = initPosition;
 
 		if(_playerModel.forceOnInit != 0f)
