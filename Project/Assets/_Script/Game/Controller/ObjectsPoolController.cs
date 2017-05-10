@@ -177,11 +177,14 @@ public class ObjectsPoolController : Controller
 	private void PoolItem(ItemTypes itemType, int count, Vector3? objectPosition)
 	{
 		//Debug.LogFormat("Pool item {0}. count = {1}. position = {2}", itemType, count, objectPosition);
-		ItemView itemView = GetPooledItem(itemType);
+		ItemView itemView = GetPoolListItem(itemType);
 
 		if (itemView == null)
 		{
 			itemView = Instantiate (game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType));
+
+			if (!gameObject.activeInHierarchy)
+				gameObject.SetActive (true);
 		}
 
 		if (objectPosition == null)
@@ -340,7 +343,7 @@ public class ObjectsPoolController : Controller
 		return pooledPlatform;
 	}
 
-	private ItemView GetPooledItem(ItemTypes itemType)
+	private ItemView GetPoolListItem(ItemTypes itemType)
 	{
 		ItemView pooledItem = null;
 

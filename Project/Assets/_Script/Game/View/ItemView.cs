@@ -16,50 +16,46 @@ public class ItemView : PoolingObjectView
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
 	private bool _isPlayerImpact = false;
+	private Tweener _itemTween = null;
 
 	public void OnInit()
 	{
+		//Debug.LogFormat ("Init item {0}", transform.name);
 		_isWasVisible = false;
 		_isInPool = false;
 		_isPlayerImpact = false;
 
-		switch (ItemType)
-		{
-			case ItemTypes.COIN:
-				{
-					break;
-				}
-
-			case ItemTypes.DIMOND:
-				{
-					DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.Fast).SetLoops(-1).SetId(this);
-					break;
-				}
-		}
+		if (_itemTween == null)
+			SetupItemTweening ();
+		else
+			_itemTween.Restart ();
 	}
 
-	public bool IsObjectVisible()
+	private void SetupItemTweening()
 	{
-		bool isVisible = false;
-
 		switch (ItemType)
 		{
 			case ItemTypes.COIN:
 				{
-					isVisible = CoinRenderer.isVisible;
+					_itemTween = CoinRenderer.transform.DOPunchScale (new Vector3(0.1f, 0.1f, 0f), 0.5f, 1, 1f)
+						.SetEase(Ease.InBounce)
+						.SetLoops(-1)
+						.SetAutoKill(false);
 					break;
 				}
 
 			case ItemTypes.DIMOND:
 				{
-					isVisible = DimondRenderer.GetComponent<MeshRenderer> ().isVisible;
+					_itemTween = DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360)
+						.SetEase(Ease.Linear)
+						.SetLoops(-1)
+						.SetAutoKill(false);
 					break;
 				}
 		}
-
-		return isVisible;
 	}
-
+		
+	#region public methods
 	public Vector3 GetMainRendererSize()
 	{
 		Vector3 rendererSize = Vector3.zero;
@@ -80,6 +76,29 @@ public class ItemView : PoolingObjectView
 		}
 
 		return rendererSize;
+	}
+	#endregion
+
+	private bool IsObjectVisible()
+	{
+		bool isVisible = false;
+
+		switch (ItemType)
+		{
+			case ItemTypes.COIN:
+				{
+					isVisible = CoinRenderer.isVisible;
+					break;
+				}
+
+			case ItemTypes.DIMOND:
+				{
+					isVisible = DimondRenderer.GetComponent<MeshRenderer> ().isVisible;
+					break;
+				}
+		}
+
+		return isVisible;
 	}
 
 	void Update()
@@ -116,18 +135,27 @@ public class ItemView : PoolingObjectView
 
 	public void OnPlayerImpact()
 	{
-		DOTween.Kill(this);
+		if(_itemTween != null)
+			_itemTween.Rewind ();
+		
 		_isPlayerImpact = true;
 	}
 
 	public void OnAddToPool()
 	{
-		DOTween.Kill(this);
+		if(_itemTween != null)
+			_itemTween.Rewind ();
+		
 		_isInPool = true;
 	}
 
-	void OnDisable()
+	void OnDestroy()
 	{
+		if (_itemTween != null)
+		{
+			_itemTween.Kill ();
+			_itemTween = null;
+		}
 	}
 }
 

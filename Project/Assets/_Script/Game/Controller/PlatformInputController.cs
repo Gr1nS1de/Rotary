@@ -7,6 +7,9 @@ public class PlatformInputController : Controller
 {
 	private Dictionary<Transform, Vector3> _selectedPlatformsDictionary = new Dictionary<Transform, Vector3>();
 
+	private Vector2 _screenSize;
+	private Vector3 _horizontalPlatformSize;
+
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
 		switch (alias)
@@ -33,7 +36,8 @@ public class PlatformInputController : Controller
 
 	private void OnStart()
 	{
-
+		_screenSize = GM.Instance.ScreenSize;
+		_horizontalPlatformSize = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.HORIZONTAL);
 	}
 
 	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
@@ -73,7 +77,8 @@ public class PlatformInputController : Controller
 
 	private void MovePlatform(Transform selectedPlatform, float inputY)
 	{
-		selectedPlatform.transform.DOMoveY (inputY + _selectedPlatformsDictionary[selectedPlatform].y, 0.1f);
+		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
+		selectedPlatform.transform.DOMoveY (positionY, 0.1f);
 	}
 
 }

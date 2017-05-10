@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using DG.Tweening;
+using DG.Tweening;
 
 public enum NotifyType
 {
@@ -77,6 +77,6 @@ public abstract class BaseApplication : Element
 		//DOTween.KillAll();	
 
 		//if (Time.realtimeSinceStartup < 1)
-			//DOTween.Init ();
+		DOTween.Init ();
 	}
 }
