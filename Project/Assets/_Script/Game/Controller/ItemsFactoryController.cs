@@ -74,7 +74,12 @@ public class ItemsFactoryController : Controller
 
 	private void RestoreItem(ItemView itemView)
 	{
-		game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.ITEM, itemView);
+		if (game.controller.objectsPoolController.IsValidPoolingObject (itemView))
+			game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.ITEM, itemView);
+		else
+		{
+			Destroy (itemView.gameObject);
+		}
 	}
 }
 

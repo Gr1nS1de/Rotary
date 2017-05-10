@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlatformsFactoryController : Controller
 {
@@ -45,22 +46,28 @@ public class PlatformsFactoryController : Controller
 
 	private void OnGamePlay()
 	{
-		InitPlatforms (game.model.objectsPoolModel.platformsMaxCount);
+		InitHorizontalPlatforms (game.model.objectsPoolModel.platformsMaxCount);
 	}
 
-	private void InitPlatforms(int count)
+	private void InitHorizontalPlatforms(int count)
 	{
 		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformTypes.HORIZONTAL);
 		Vector3 screenSize = GM.Instance.ScreenSize;
 
-		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + platformSize.y * 1.25f, 0f );
+		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.4f), 0f );
 
 		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.HORIZONTAL);
 	}
 
 	private void RestorePlatform(PlatformView platformView)
 	{
-		game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.PLATFORM, platformView);
+		if (game.controller.objectsPoolController.IsValidPoolingObject (platformView))
+			game.controller.objectsPoolController.AddObjectToPool (PoolingObjectType.PLATFORM, platformView);
+		else
+		{
+			Destroy (platformView.gameObject);
+			Debug.LogErrorFormat ("Trying to restore platform which not is pool valid. Strange behaviour!");
+		}
 	}
 
 	private void CheckPlatformSpawn(PlatformView platformView)

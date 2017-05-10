@@ -3,6 +3,7 @@ using System.Collections.Generic;
 //using DG.Tweening;
 using UnityEngine.SceneManagement;
 //using Destructible2D;
+using DG.Tweening;
 
 public class GameController : Controller
 {
@@ -101,22 +102,20 @@ public class GameController : Controller
 		{
 			case GameSpeedState.SPEED_1:
 				{
-					game.model.gameSpeed = 3f;
 					game.model.playerModel.forceOnInit = 3f;
+					/*
+					game.model.gameSpeed = 3f;
 					game.model.playerModel.angularSpeed = -89.3f;
 					game.model.playerModel.offsetBackForce = 400f;
-					break;
-				}
+					*/
 
-			case GameSpeedState.SPEED_2:
-				{
 					game.model.gameSpeed = 4f;
 					game.model.playerModel.angularSpeed = -92.4f;
 					game.model.playerModel.offsetBackForce = 500f;
 					break;
 				}
 
-			case GameSpeedState.SPEED_3:
+			case GameSpeedState.SPEED_2:
 				{
 					game.model.gameSpeed = 5f;
 					game.model.playerModel.angularSpeed = -87.4f;
@@ -124,11 +123,16 @@ public class GameController : Controller
 					break;
 				}
 
-			case GameSpeedState.SPEED_4:
+			case GameSpeedState.SPEED_3:
 				{
 					game.model.gameSpeed = 6f;
 					game.model.playerModel.angularSpeed = -86.65f;
 					game.model.playerModel.offsetBackForce = 700f;
+					break;
+				}
+
+			case GameSpeedState.SPEED_4:
+				{
 					break;
 				}
 
@@ -139,7 +143,7 @@ public class GameController : Controller
 		}
 
 		_currentGameSpeedState = speedState;
-		game.model.gameSpeedState = speedState;
+		game.model.gameSpeedState = _currentGameSpeedState;
 	}
 	#endregion
 

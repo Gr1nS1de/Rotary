@@ -38,10 +38,10 @@ public class PlatformInputController : Controller
 
 	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
 	{
-		//Debug.Log ("Drag gear = " + selectedGear.gameObject.name + " point " + inputPoint);
+		//Debug.Log ("Drag platform = " + selectedPlatform.gameObject.name + " point " + inputPoint);
 
-		Vector3 selectedPoint = new Vector3 (inputPoint.x, inputPoint.y, -2f);// Z = -2 bcs move object forward to camera
-		//Vector3 gearPosition = selectedPlatform.transform.position;
+		Vector3 selectedPoint = new Vector3 (inputPoint.x, inputPoint.y, 0f);
+		selectedPlatform = selectedPlatform.GetComponentInParent<PlatformView>().transform;
 
 		switch (gesturePhase)
 		{

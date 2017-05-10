@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Destructible2D;
+using DG.Tweening;
 
 public class ItemView : PoolingObjectView
 {
@@ -14,11 +15,13 @@ public class ItemView : PoolingObjectView
 
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
+	private bool _isPlayerImpact = false;
 
 	public void OnInit()
 	{
 		_isWasVisible = false;
 		_isInPool = false;
+		_isPlayerImpact = false;
 
 		switch (ItemType)
 		{
@@ -29,7 +32,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.DIMOND:
 				{
-
+					DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.Fast).SetLoops(-1).SetId(this);
 					break;
 				}
 		}
@@ -81,7 +84,7 @@ public class ItemView : PoolingObjectView
 
 	void Update()
 	{
-		if (_isInPool)
+		if (_isInPool || _isPlayerImpact)
 			return;
 
 		if (!_isWasVisible)
@@ -98,21 +101,33 @@ public class ItemView : PoolingObjectView
 					OnInvisible ();
 				}
 			}
+				
 	}
 
-	public virtual void OnVisible()
+	public void OnVisible()
 	{
 		_isWasVisible = true;
 	}
 
-	public virtual void OnInvisible()
+	public void OnInvisible()
 	{
 		Notify (N.OnItemInvisible_, NotifyType.GAME, this);
 	}
 
-	public virtual void OnAddToPool()
+	public void OnPlayerImpact()
 	{
+		DOTween.Kill(this);
+		_isPlayerImpact = true;
+	}
+
+	public void OnAddToPool()
+	{
+		DOTween.Kill(this);
 		_isInPool = true;
+	}
+
+	void OnDisable()
+	{
 	}
 }
 

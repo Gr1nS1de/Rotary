@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
 
 public class ItemsController : Controller
 {
@@ -28,7 +30,7 @@ public class ItemsController : Controller
 			case N.PlayerImpactItem__:
 				{
 					ItemView itemView = (ItemView)data [0];
-					Vector3 contactPoint = (Vector3)data [1];
+					Vector2 contactPoint = (Vector2)data [1];
 
 					OnImpactItem (itemView, contactPoint);
 					break;
@@ -42,7 +44,7 @@ public class ItemsController : Controller
 
 	}
 
-	private void OnImpactItem(ItemView itemView, Vector3 contactPoint)
+	private void OnImpactItem(ItemView itemView, Vector2 contactPoint)
 	{
 		ItemTypes itemType = itemView.ItemType;
 
@@ -57,6 +59,7 @@ public class ItemsController : Controller
 			case ItemTypes.DIMOND:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
+					itemView.OnPlayerImpact ();
 					game.controller.distructibleController.BreakEntity(itemView.DimondRenderer, itemView.DistructFractureCount, contactPoint);
 					break;
 				}

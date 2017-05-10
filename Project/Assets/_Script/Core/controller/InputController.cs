@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InputController : Controller
 {
+	//List<Touch> TouchesList = new List<Touch> ();
+	//Touch[] _inputTouches = Input.touches;
 	/*
 	void OnFingerMove( FingerMotionEvent e ) 
 	{
@@ -23,7 +26,7 @@ public class InputController : Controller
 		//Notify (N.OnGameInput___, NotifyType.GAME, null, Camera.main.ScreenToWorldPoint(e.Position), FingerMotionPhase.Ended);
 	}*/
 
-	void OnDrag(DragGesture e)
+	public void OnDrag(DragGesture e)
 	{
 		if(e.StartSelection != null)
 			Notify (N.OnGameInput___, NotifyType.GAME, e.StartSelection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
