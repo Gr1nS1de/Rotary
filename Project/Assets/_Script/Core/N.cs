@@ -22,6 +22,7 @@ public class N : MonoBehaviour
 	#region player notifications
 	//public const string DestructibleBreakEntity___ 	= "destructible.break.entity";
 	public const string PlayerImpactItem__ 			= "player.impact.item";
+	public const string PlayerLeftPlatform_			= "player.left.platform";
 	#endregion
 
 	#region ResourcesController notifications

@@ -59,8 +59,10 @@ public class GameController : Controller
 					break;
 				}
 
-			case N.GameAddScore:
+			case N.PlayerLeftPlatform_:
 				{
+					PlatformView platformView = (PlatformView)data [0];
+
 					OnAddScore ();
 					CheckGameSpeedState ();
 					break;
@@ -92,7 +94,7 @@ public class GameController : Controller
 		if (game.view.backgroundView != null)
 			Destroy (game.view.backgroundView.gameObject);
 
-		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);
+		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
 	}
 
 	//https://ussrgames.atlassian.net/wiki/pages/viewpage.action?pageId=40027034
@@ -102,42 +104,36 @@ public class GameController : Controller
 		{
 			case GameSpeedState.SPEED_1:
 				{
-					game.model.playerModel.forceOnInit = 3f;
-					/*
 					game.model.gameSpeed = 3f;
-					game.model.playerModel.angularSpeed = -89.3f;
-					game.model.playerModel.offsetBackForce = 400f;
-					*/
-
-					game.model.gameSpeed = 4f;
-					game.model.playerModel.angularSpeed = -92.4f;
-					game.model.playerModel.offsetBackForce = 500f;
+					game.model.playerModel.angularSpeed = -70f;
 					break;
 				}
 
 			case GameSpeedState.SPEED_2:
 				{
-					game.model.gameSpeed = 5f;
-					game.model.playerModel.angularSpeed = -87.4f;
-					game.model.playerModel.offsetBackForce = 600f;
+					game.model.gameSpeed = 4f;
+					game.model.playerModel.angularSpeed = -65f;
 					break;
 				}
 
 			case GameSpeedState.SPEED_3:
 				{
 					game.model.gameSpeed = 6f;
-					game.model.playerModel.angularSpeed = -86.65f;
-					game.model.playerModel.offsetBackForce = 700f;
+					game.model.playerModel.angularSpeed = -60f;
 					break;
 				}
 
 			case GameSpeedState.SPEED_4:
 				{
+					game.model.gameSpeed = 7f;
+					game.model.playerModel.angularSpeed = -60f;
 					break;
 				}
 
 			case GameSpeedState.SPEED_5:
 				{
+					game.model.gameSpeed = 8f;
+					game.model.playerModel.angularSpeed = -50f;
 					break;
 				}
 		}
@@ -156,8 +152,8 @@ public class GameController : Controller
 
 	void Update()
 	{
-		if (_currentGameSpeedState != game.model.gameSpeedState)
-			SetGameSpeed (game.model.gameSpeedState);
+		//if (_currentGameSpeedState != game.model.gameSpeedState)
+		//	SetGameSpeed (game.model.gameSpeedState);
 	}
 
 	private void SetNewGame()
@@ -171,6 +167,8 @@ public class GameController : Controller
 	private void OnAddScore()
 	{
 		game.model.currentScore++;
+
+		Notify (N.GameAddScore);
 
 		//Notify (N.GameAddScore, 1);
 

@@ -54,7 +54,7 @@ public class PlatformsFactoryController : Controller
 		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformTypes.HORIZONTAL);
 		Vector3 screenSize = GM.Instance.ScreenSize;
 
-		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.4f), 0f );
+		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.5f), 0f );
 
 		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.HORIZONTAL);
 	}
@@ -62,8 +62,12 @@ public class PlatformsFactoryController : Controller
 	private void RestorePlatform(PlatformView platformView)
 	{
 		if (game.controller.objectsPoolController.IsValidPoolingObject (platformView))
-			game.controller.objectsPoolController.AddObjectToPool (PoolingObjectType.PLATFORM, platformView);
-		else
+		{
+			DG.Tweening.DOVirtual.DelayedCall (game.model.playerModel.invisibleBeforeDie, () =>
+			{
+				game.controller.objectsPoolController.StoreObjectToPool (PoolingObjectType.PLATFORM, platformView);
+			});
+		}else
 		{
 			Destroy (platformView.gameObject);
 			Debug.LogErrorFormat ("Trying to restore platform which not is pool valid. Strange behaviour!");

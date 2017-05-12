@@ -70,12 +70,19 @@ public class ItemsFactoryController : Controller
 				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
 			}
 		}
+		else if (scoreCount > 25)
+		{
+			if (randomNum > 0.6f)
+			{
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+			}
+		}
 	}
 
 	private void RestoreItem(ItemView itemView)
 	{
 		if (game.controller.objectsPoolController.IsValidPoolingObject (itemView))
-			game.controller.objectsPoolController.AddObjectToPool(PoolingObjectType.ITEM, itemView);
+			game.controller.objectsPoolController.StoreObjectToPool(PoolingObjectType.ITEM, itemView);
 		else
 		{
 			Destroy (itemView.gameObject);

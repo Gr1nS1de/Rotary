@@ -23,6 +23,14 @@ public class LastPooledPlatform
 
 }
 
+public enum PoolingObjectState
+{
+	WAIT_FOR_VISIBLE,
+	VISIBLE,
+	WAS_VISIBLE,
+
+}
+
 public class ObjectsPoolModel : Model
 {
 	public int						platformsMaxCount			{ get { return _platformsMaxCount; } 		set { _platformsMaxCount = value; }}

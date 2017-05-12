@@ -51,7 +51,7 @@ public class ObjectsPoolController : Controller
 
 					copyInstantiatedObjectsList.ForEach(obj=>
 					{
-						AddObjectToPool(obj.PoolingType, obj);
+						StoreObjectToPool(obj.PoolingType, obj);
 					});
 
 					copyInstantiatedObjectsList = null;
@@ -69,7 +69,7 @@ public class ObjectsPoolController : Controller
 	}
 
 	#region public methods
-	public void AddObjectToPool(PoolingObjectType poolingObjectType, PoolingObjectView poolingObject)
+	public void StoreObjectToPool(PoolingObjectType poolingObjectType, PoolingObjectView poolingObject)
 	{
 		switch (poolingObjectType)
 		{
@@ -79,7 +79,7 @@ public class ObjectsPoolController : Controller
 
 					//Debug.LogFormat ("Add platform to pool. {0}", platformView.name);
 
-					OnAddingPlatformToPool (platformView);
+					OnStoringPlatformToPool (platformView);
 					break;
 				}
 
@@ -87,7 +87,7 @@ public class ObjectsPoolController : Controller
 				{
 					ItemView itemView = (ItemView)poolingObject;
 
-					OnAddingItemToPool (itemView);
+					OnStoringItemToPool (itemView);
 
 					break;
 				}
@@ -137,7 +137,7 @@ public class ObjectsPoolController : Controller
 	}
 	#endregion
 
-	private void OnAddingPlatformToPool(PlatformView platformView)
+	private void OnStoringPlatformToPool(PlatformView platformView)
 	{
 		if (!_poolObjectsList.Contains (platformView))
 		{
@@ -150,13 +150,9 @@ public class ObjectsPoolController : Controller
 
 			platformView.gameObject.SetActive (false);
 		}
-		else
-		{
-			Debug.LogErrorFormat ("Trying to add platform that already in pool! {0}", platformView.name);
-		}
 	}
 
-	private void OnAddingItemToPool(ItemView itemView)
+	private void OnStoringItemToPool(ItemView itemView)
 	{
 		ItemTypes itemType = itemView.ItemType;
 
@@ -315,7 +311,7 @@ public class ObjectsPoolController : Controller
 
 			case PlatformTypes.VERTICAL:
 				{
-					float platformsGap = game.view.playerView.GetComponent<SpriteRenderer> ().bounds.size.y * 1.1f;	//Add 10% of player height to gap
+					float platformsGap = game.model.playerModel.playerRendererSize.y / 2f + game.model.platformsFactoryModel.verticalPlatformsGap;	//Add 10% of player height to gap
 
 					randomY = Random.Range (-screenSize.y / 2f + platformsGap / 2f, screenSize.y / 2f - platformsGap / 2f);
 					break;

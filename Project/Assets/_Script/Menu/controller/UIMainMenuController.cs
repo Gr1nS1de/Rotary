@@ -17,6 +17,12 @@ public class UIMainMenuController : Controller
 					break;
 				}
 
+			case N.GameAddScore:
+				{
+					_uiMainMenuModel.bestScoreText.text = game.model.currentScore.ToString();
+					break;
+				}
+
 			case N.GameOver:
 				{
 					OnGameOver ();

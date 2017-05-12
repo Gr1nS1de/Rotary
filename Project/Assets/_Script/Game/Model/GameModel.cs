@@ -22,7 +22,9 @@ public enum GameSpeedState
 	SPEED_2,
 	SPEED_3,
 	SPEED_4,
-	SPEED_5
+	SPEED_5,
+	SPEED_6,
+	SPEED_7
 }
 
 [System.Serializable]
