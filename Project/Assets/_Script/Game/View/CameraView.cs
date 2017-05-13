@@ -15,7 +15,7 @@ public class CameraView : View<GameActivity>
 
 	void Update()
 	{
-		if (game.model.gameState != GameState.PLAYING)
+		if (game.model.gameState != GameState.Playing)
 			return;
 
 		Vector3 cameraPosition = _camera.transform.position;

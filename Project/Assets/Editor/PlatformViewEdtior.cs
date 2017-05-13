@@ -15,13 +15,13 @@ public class PlatformViewEditor : Editor
 
 		switch (data.PlatformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					_mainRenderer = serializedObject.FindProperty ("HorizontalPlatformRenderer");
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
 					_mainRenderer = serializedObject.FindProperty ("VerticalPlatformRenderers");
 					break;
@@ -38,14 +38,14 @@ public class PlatformViewEditor : Editor
 
 		switch (data.PlatformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					//EditorGUILayout.ObjectField("Main Platform Renderer", _mainRenderer.objectReferenceValue, typeof(SpriteRenderer), true);
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;

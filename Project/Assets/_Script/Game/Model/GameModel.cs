@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public enum GameState
 {
-	MAIN_MENU,
-	PLAYING,
-	PAUSE,
-	GAME_OVER
+	MainMenu,
+	Playing,
+	Pause,
+	GameOver
 }
 
 public enum GameThemeType
@@ -18,13 +18,19 @@ public enum GameThemeType
 
 public enum GameSpeedState
 {
-	SPEED_1,
-	SPEED_2,
-	SPEED_3,
-	SPEED_4,
-	SPEED_5,
-	SPEED_6,
-	SPEED_7
+	NotDefined,
+	Speed_1,
+	Speed_2,
+	Speed_3,
+	Speed_4,
+	Speed_5,
+	Speed_6,
+	Speed_7
+}
+
+public enum GameType
+{
+	Classic
 }
 
 [System.Serializable]
@@ -40,6 +46,25 @@ public struct GameTheme
 	}
 }
 
+public class GameOverData
+{
+	public GameOverData(){}
+	public GameOverData(GameOverData gameOverData)
+	{
+		GameType = gameOverData.GameType;
+		CoinsCount = gameOverData.CoinsCount;
+		CrystalsCount = gameOverData.CrystalsCount;
+		MagnetsCount = gameOverData.MagnetsCount;
+		ScoreCount = gameOverData.ScoreCount;
+	}
+
+	public GameType GameType;
+	public int CoinsCount;
+	public int CrystalsCount;
+	public int MagnetsCount;
+	public int ScoreCount;
+}
+
 public class GameModel : Model
 {
 	#region Game model
@@ -48,15 +73,23 @@ public class GameModel : Model
 	public GameTheme 					gameTheme				{ get { return _gameTheme; } 		set { _gameTheme = value;}}
 	public float			 			gameSpeed				{ get { return _gameSpeed; } 		set { _gameSpeed = value;}}
 	public GameSpeedState	 			gameSpeedState			{ get { return _gameSpeedState; } 	set { _gameSpeedState = value;}}
+	public int	 						playedGamesCount		{ get { return _playedGamesCount; } set { _playedGamesCount = value;}}
+	public GameType						gameType				{ get { return _gameType; } 		set { _gameType = value;}}
+	public GameOverData					gameOverData			{ get { return _gameOverData; } 		set { _gameOverData = value;}}
 
+	private GameOverData				_gameOverData			 = new GameOverData ();
 	[SerializeField]
+	private GameType					_gameType;
+	[SerializeField]
+	private int							_playedGamesCount;
+	[SerializeField]			
 	private GameSpeedState				_gameSpeedState;
 	[SerializeField]
 	private float						_gameSpeed				= 1f;
 	[SerializeField]
 	private GameTheme					_gameTheme;
 	[SerializeField]
-	private GameState					_gameState 				= GameState.MAIN_MENU;
+	private GameState					_gameState 				= GameState.MainMenu;
 	[SerializeField]
 	private int 						_currentScore;
 	#endregion
@@ -71,7 +104,9 @@ public class GameModel : Model
 	public PlatformsFactoryModel		platformsFactoryModel	{ get { return _platformsFactoryModel		= SearchLocal<PlatformsFactoryModel>(		_platformsFactoryModel,		typeof(PlatformsFactoryModel).Name );}}
 	public ItemsFactoryModel			itemsFactoryModel		{ get { return _itemsFactoryModel			= SearchLocal<ItemsFactoryModel>(			_itemsFactoryModel,			typeof(ItemsFactoryModel).Name );}}
 	public BonusesFactoryModel			bonusesFactoryModel		{ get { return _bonusesFactoryModel			= SearchLocal<BonusesFactoryModel>(			_bonusesFactoryModel,		typeof(BonusesFactoryModel).Name );}}
+	public ItemModel					itemModel				{ get { return _itemModel					= SearchLocal<ItemModel>(					_itemModel,					typeof(ItemModel).Name );}}
 
+	private ItemModel					_itemModel;
 	private BonusesFactoryModel			_bonusesFactoryModel;
 	private ItemsFactoryModel			_itemsFactoryModel;
 	private PlatformsFactoryModel		_platformsFactoryModel;

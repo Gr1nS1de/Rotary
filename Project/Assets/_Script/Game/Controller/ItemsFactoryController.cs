@@ -34,7 +34,7 @@ public class ItemsFactoryController : Controller
 				{
 					ItemView itemView = (ItemView)data [0];
 
-					if(game.model.gameState == GameState.PLAYING)
+					if(game.model.gameState == GameState.Playing)
 						RestoreItem (itemView);
 					break;
 				}
@@ -60,21 +60,21 @@ public class ItemsFactoryController : Controller
 		{
 			if (randomNum > 0.8f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.Crystal);
 			}
 		}
 		else if (scoreCount > 15)
 		{
 			if (randomNum > 0.7f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.Crystal);
 			}
 		}
 		else if (scoreCount > 25)
 		{
 			if (randomNum > 0.6f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.DIMOND);
+				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, ItemTypes.Crystal);
 			}
 		}
 	}

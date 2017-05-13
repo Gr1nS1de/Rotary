@@ -31,7 +31,7 @@ public class GameController : Controller
 	private ObjectsPoolController 			_objectsPoolController;
 	#endregion
 
-	//private GearModel 					playerModel	{ get { return game.model.playerModel;}}
+	//private GameModel 				playerModel	{ get { return game.model.playerModel;}}
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -47,15 +47,24 @@ public class GameController : Controller
 				{
 					OnStart();
 
-					game.model.gameState = GameState.MAIN_MENU;
+					game.model.gameState = GameState.MainMenu;
 					break;
 				}
 
 			case N.GameStartPlay:
 				{
-					SetNewGame ();
+					OnGameStartPlay ();
 
-					game.model.gameState = GameState.PLAYING;
+					game.model.gameState = GameState.Playing;
+					break;
+				}
+
+			case N.PlayerImpactItem__:
+				{
+					ItemView itemView = (ItemView)data [0];
+					Vector2 contactPoint = (Vector2)data [1];
+
+					OnPlayerImpactItem (itemView);
 					break;
 				}
 
@@ -71,15 +80,21 @@ public class GameController : Controller
 				{
 					GameOver ();
 
-					game.model.gameState = GameState.GAME_OVER;
+					game.model.gameState = GameState.GameOver;
 
-					Notify (N.GameOver);
+					Notify (N.GameOver_, NotifyType.ALL, new GameOverData (game.model.gameOverData));
 					break;
 				}
 
 			case N.GamePause:
 				{
-					game.model.gameState = GameState.PAUSE;
+					game.model.gameState = GameState.Pause;
+					break;
+				}
+
+			case N.GameContinue:
+				{
+					game.model.gameState = GameState.Playing;
 					break;
 				}
 		}
@@ -99,7 +114,7 @@ public class GameController : Controller
 
 	private void OnStart()
 	{
-		SetNewGame ();
+		game.model.playedGamesCount = PlayerPrefs.GetInt (Prefs.PlayerData.GamesPlayedCount);
 	}
 
 	void Update()
@@ -108,12 +123,43 @@ public class GameController : Controller
 		//	SetGameSpeed (game.model.gameSpeedState);
 	}
 
-	private void SetNewGame()
+	private void OnGameStartPlay()
 	{
 		game.model.currentScore = 0;
 
+		game.model.gameOverData.CoinsCount = 0;
+		game.model.gameOverData.CrystalsCount = 0;
+		game.model.gameOverData.ScoreCount = 0;
+		game.model.gameOverData.GameType = game.model.gameType;
+
 		//m_PointText.text = _pointScore.ToString();
 
+	}
+
+	private void OnPlayerImpactItem(ItemView itemView)
+	{
+		ItemTypes itemType = itemView.ItemType;
+
+		switch (itemType)
+		{
+			case ItemTypes.Coin:
+				{
+					game.model.gameOverData.CoinsCount++;
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					game.model.gameOverData.CrystalsCount += itemView.DistructFractureCount;
+					break;
+				}
+
+			case ItemTypes.Magnet:
+				{
+					game.model.gameOverData.MagnetsCount++;
+					break;
+				}
+		}
 	}
 
 	private void OnAddScore()
@@ -133,7 +179,8 @@ public class GameController : Controller
 
 	private void GameOver()
 	{
-		
+		IncreasePlayedGamesCount ();
+
 		//ReportScoreToLeaderboard(point);
 
 		//_player.DesactivateTouchControl();
@@ -153,6 +200,24 @@ public class GameController : Controller
 		//{
 			//ReloadScene();
 		//});
+	}
+
+	private void IncreasePlayedGamesCount()
+	{
+		int currentPlayedGamesCount = 1;
+
+		if (!PlayerPrefs.HasKey (Prefs.PlayerData.GamesPlayedCount))
+		{
+			PlayerPrefs.SetInt (Prefs.PlayerData.GamesPlayedCount, currentPlayedGamesCount);
+		}
+		else
+		{
+			currentPlayedGamesCount = PlayerPrefs.GetInt (Prefs.PlayerData.GamesPlayedCount);
+
+			PlayerPrefs.SetInt (Prefs.PlayerData.GamesPlayedCount, ++currentPlayedGamesCount);
+		}
+
+		game.model.playedGamesCount = currentPlayedGamesCount;
 	}
 
 	private void ReloadScene()

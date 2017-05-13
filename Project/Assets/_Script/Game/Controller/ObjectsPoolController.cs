@@ -32,10 +32,11 @@ public class ObjectsPoolController : Controller
 			case N.PlayerImpactItem__:
 				{
 					ItemView itemView = (ItemView)data [0];
+					Vector2 contactPoint = (Vector2)data [1];
 
 					switch (itemView.ItemType)
 					{
-						case ItemTypes.DIMOND:
+						case ItemTypes.Crystal:
 							{
 								if (_instantiatedObjectsList.Contains (itemView))
 									_instantiatedObjectsList.Remove (itemView);
@@ -45,8 +46,9 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
-			case N.GameOver:
+			case N.GameOver_:
 				{
+					//GameOverData gameOverData = (GameOverData)data[0];
 					List<PoolingObjectView> copyInstantiatedObjectsList = new List<PoolingObjectView> (_instantiatedObjectsList);
 
 					copyInstantiatedObjectsList.ForEach(obj=>
@@ -207,21 +209,25 @@ public class ObjectsPoolController : Controller
 		Vector3 lastPlatformPosition = _objectsPoolModel.lastPooledPlatform.platformPosition;
 		float lastPlatformWidth = _objectsPoolModel.lastPooledPlatform.platformWidth;
 		float screenHeight = GM.Instance.ScreenSize.y;
-		Vector3 itemRendererSize = game.model.itemsFactoryModel.GetItemRendererSize (itemType);
+		Vector3 itemRendererSize = game.model.itemModel.GetItemRendererSize (itemType);
 
 		switch (_objectsPoolModel.lastPooledPlatform.platformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
-					float horizontalPlatformHeight = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.HORIZONTAL).y;
+					float horizontalPlatformHeight = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.Horizontal).y;
 
 					randomPosition.x = Random.Range (lastPlatformPosition.x - lastPlatformWidth / 2f + itemRendererSize.x, lastPlatformPosition.x + lastPlatformWidth / 2f - itemRendererSize.x);
 					randomPosition.y = Random.Range (-screenHeight / 2f + itemRendererSize.y + horizontalPlatformHeight / 2f, screenHeight / 2f - itemRendererSize.y - horizontalPlatformHeight / 2f);
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
+					float platformsGap = game.model.playerModel.playerRendererSize.y + _platformsFactoryModel.verticalPlatformsGap;
+					float randomY = Random.Range (lastPlatformPosition.y - platformsGap / 2f + itemRendererSize.y, lastPlatformPosition.y + platformsGap / 2f - itemRendererSize.y);
+
+
 					randomPosition.x = lastPlatformPosition.x;
 					randomPosition.y = lastPlatformPosition.y;
 					break;
@@ -303,15 +309,15 @@ public class ObjectsPoolController : Controller
 
 		switch (platformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
-					float platformsGap = game.model.playerModel.playerRendererSize.y / 2f + game.model.platformsFactoryModel.verticalPlatformsGap;	//Add 10% of player height to gap
+					float platformsGap = game.model.playerModel.playerRendererSize.y / 2f + game.model.platformsFactoryModel.verticalPlatformsGap * 1.5f;	//Add 10% of player height to gap
 
 					randomY = Random.Range (-screenSize.y / 2f + platformsGap / 2f, screenSize.y / 2f - platformsGap / 2f);
 					break;

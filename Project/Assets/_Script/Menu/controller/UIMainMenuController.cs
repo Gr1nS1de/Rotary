@@ -23,8 +23,10 @@ public class UIMainMenuController : Controller
 					break;
 				}
 
-			case N.GameOver:
+			case N.GameOver_:
 				{
+					//GameOverData gameOverData = (GameOverData)data[0];
+
 					OnGameOver ();
 					break;
 				}

@@ -8,10 +8,5 @@ public class ItemsFactoryModel : Model
 
 	[SerializeField]
 	private List<ItemView>		_itemsPrefabsList	= new List<ItemView>();
-
-	public Vector3 GetItemRendererSize(ItemTypes itemType)
-	{
-		return itemsPrefabsList.Find (item => item.ItemType == itemType).GetMainRendererSize();
-	}
 }
 

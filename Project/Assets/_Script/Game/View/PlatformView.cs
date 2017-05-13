@@ -27,24 +27,24 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					//Obsolete. Now set position directly for platform view.
 					//HorizontalPlatformRenderer.transform.localPosition = Vector3.zero;
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
 					Vector3 verticalPlatformSize = VerticalPlatformRenderers [0].bounds.size;
-					Vector3 topPlatformPosition = VerticalPlatformRenderers [0].transform.position;
-					Vector3 bottomPlatformPosition = VerticalPlatformRenderers [1].transform.position;
+					Vector3 topPlatformPosition = VerticalPlatformRenderers [0].transform.localPosition;
+					Vector3 bottomPlatformPosition = VerticalPlatformRenderers [1].transform.localPosition;
 
-					topPlatformPosition.y = verticalPlatformSize.y / 2f + game.model.playerModel.playerRendererSize.y + platformsFactoryModel.verticalPlatformsGap;
-					bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - game.model.playerModel.playerRendererSize.y - platformsFactoryModel.verticalPlatformsGap;
+					topPlatformPosition.y = verticalPlatformSize.y / 2f + game.model.playerModel.playerRendererSize.y / 2f + platformsFactoryModel.verticalPlatformsGap / 2f;
+					bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - game.model.playerModel.playerRendererSize.y / 2f - platformsFactoryModel.verticalPlatformsGap / 2f;
 
-					VerticalPlatformRenderers [0].transform.position = topPlatformPosition;
-					VerticalPlatformRenderers [1].transform.position = bottomPlatformPosition;
+					VerticalPlatformRenderers [0].transform.localPosition = topPlatformPosition;
+					VerticalPlatformRenderers [1].transform.localPosition = bottomPlatformPosition;
 					break;
 				}
 		}
@@ -56,13 +56,13 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					isVisible = HorizontalPlatformRenderer.isVisible;
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
 					isVisible = VerticalPlatformRenderers [0].isVisible;
 					break;
@@ -78,13 +78,13 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.HORIZONTAL:
+			case PlatformTypes.Horizontal:
 				{
 					rendererSize = HorizontalPlatformRenderer.bounds.size;
 					break;
 				}
 
-			case PlatformTypes.VERTICAL:
+			case PlatformTypes.Vertical:
 				{
 					rendererSize = VerticalPlatformRenderers [0].bounds.size;
 					break;

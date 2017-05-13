@@ -37,7 +37,7 @@ public class PlatformInputController : Controller
 	private void OnStart()
 	{
 		_screenSize = GM.Instance.ScreenSize;
-		_horizontalPlatformSize = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.HORIZONTAL);
+		_horizontalPlatformSize = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.Horizontal);
 	}
 
 	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
@@ -82,7 +82,8 @@ public class PlatformInputController : Controller
 	private void MovePlatform(Transform selectedPlatform, float inputY)
 	{
 		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
-		selectedPlatform.transform.DOMoveY (positionY, 0.1f);
+
+		selectedPlatform.transform.DOMoveY (positionY, 0.05f).SetEase(Ease.InOutElastic);
 	}
 
 }

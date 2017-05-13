@@ -50,13 +50,13 @@ public class ItemsController : Controller
 
 		switch (itemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
 					itemView.OnPlayerImpact ();
@@ -64,7 +64,7 @@ public class ItemsController : Controller
 					break;
 				}
 
-			case ItemTypes.MAGNET:
+			case ItemTypes.Magnet:
 				{
 					break;
 				}

@@ -3,8 +3,8 @@ using System.Collections;
 
 public enum PlatformTypes
 {
-	HORIZONTAL,
-	VERTICAL
+	Horizontal,
+	Vertical
 }
 
 public class PlatformModel : Model

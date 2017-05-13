@@ -24,8 +24,10 @@ public class CameraController : Controller
 					break;
 				}
 
-			case N.GameOver:
+			case N.GameOver_:
 				{
+					//GameOverData gameOverData = (GameOverData)data[0];
+
 					ResetCamera ();
 					break;
 				}

@@ -35,7 +35,7 @@ public class ItemView : PoolingObjectView
 	{
 		switch (ItemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					_itemTween = CoinRenderer.transform.DOPunchScale (new Vector3(0.1f, 0.1f, 0f), 0.5f, 1, 1f)
 						.SetEase(Ease.InBounce)
@@ -44,7 +44,7 @@ public class ItemView : PoolingObjectView
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					_itemTween = DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360)
 						.SetEase(Ease.Linear)
@@ -62,13 +62,13 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					rendererSize = CoinRenderer.bounds.size;
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					rendererSize = DimondRenderer.GetComponent<MeshRenderer> ().bounds.size;
 					break;
@@ -85,13 +85,13 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					isVisible = CoinRenderer.isVisible;
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					isVisible = DimondRenderer.GetComponent<MeshRenderer> ().isVisible;
 					break;

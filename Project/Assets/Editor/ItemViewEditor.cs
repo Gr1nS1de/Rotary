@@ -15,13 +15,13 @@ public class ItemViewEditor : Editor
 
 		switch (data.ItemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					_mainRenderer = serializedObject.FindProperty ("CoinRenderer");
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					_mainRenderer = serializedObject.FindProperty ("DimondRenderer");
 					break;
@@ -38,14 +38,14 @@ public class ItemViewEditor : Editor
 
 		switch (data.ItemType)
 		{
-			case ItemTypes.COIN:
+			case ItemTypes.Coin:
 				{
 					//EditorGUILayout.ObjectField("Main Platform Renderer", _mainRenderer.objectReferenceValue, typeof(SpriteRenderer), true);
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;
 				}
 
-			case ItemTypes.DIMOND:
+			case ItemTypes.Crystal:
 				{
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					EditorGUILayout.FloatField ("Distruct Fracture Count", data.DistructFractureCount);

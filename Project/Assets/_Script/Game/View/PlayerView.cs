@@ -50,7 +50,7 @@ public class PlayerView : View
 
 	void Update()
 	{
-		if (game.model.gameState != GameState.PLAYING)
+		if (game.model.gameState != GameState.Playing)
 			return;
 		
 		Vector3 playerPosition = transform.transform.position;

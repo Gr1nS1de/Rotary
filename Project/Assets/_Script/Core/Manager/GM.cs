@@ -48,8 +48,9 @@ public class GM : Controller
 	{
 		switch (alias)
 		{
-			case N.GameOver:
+			case N.GameOver_:
 				{
+					GameOverData gameOverData = (GameOverData)data[0];
 					break;
 				}
 		}
