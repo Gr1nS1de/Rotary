@@ -10,7 +10,7 @@ public class PlayerModel : Model
 	public float					offsetBackForceMax	{ get { return _offsetBackForceMax; } 	set { _offsetBackForceMax	= value; } }
 	public float					initScreenPosX		{ get { return _initScreenPosX; } 		set { _initScreenPosX 	= value; } }
 	public float	 				linearForce			{ get { return _linearForce; } 			set { _linearForce = value;}}
-	public Vector3					playerRendererSize	{ get { return game.view.playerView.GetComponent<Renderer> ().bounds.size;}}
+	public Vector3					playerRendererSize	{ get { return game.view.playerView.PlayerRenderer.bounds.size;}}
 
 	[SerializeField]
 	private float					_linearForce		= 1f;

@@ -61,10 +61,9 @@ public class PlayerController : Controller
 
 	private void ResetPlayer()
 	{
-		_playerView.transform.DOMove (Vector3.zero, 0.5f);
+		_playerView.PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f);
 		_playerView.ScorePlatformsList.Clear ();
-		_playerView.GetComponent<ConstantForce2D> ().force = Vector2.zero;
-		_playerView.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		_playerView.PlayerRenderer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 	}
 		
 }

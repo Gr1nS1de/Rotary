@@ -8,22 +8,21 @@ public class PlayerView : View
 {
 	[HideInInspector]
 	public List<PlatformView>	ScorePlatformsList	= new List<PlatformView>();
-	public bool IsShowDebugCameraDistance = false;
+	public SpriteRenderer		PlayerRenderer;
+	public Transform 			PlayerTriggerDetector;
 
-	private PlayerModel _playerModel	{ get { return game.model.playerModel; } }
-	private Rigidbody2D _playerRB;
-	private ConstantForce2D _playerConstantForce;
-	private Vector3 _playerInitPosition;
-	private float _initCameraDistanceX = 0f;
+	private PlayerModel 		_playerModel	{ get { return game.model.playerModel; } }
+	//private Rigidbody2D 		_playerRB;
+	private Vector3 			_playerInitPosition;
+	private float 				_initCameraDistanceX = 0f;
 	//private float _lastCameraDistance = 0f;
-	private float? _lastInvisibleTimestamp = 0f;
-	private float _offsetBackspeedRate = 0f;
-	private float _backOffsetSpeed = 0f;
+	private float? 				_lastInvisibleTimestamp = 0f;
+	private float 				_offsetBackspeedRate = 0f;
+	private float 				_backOffsetSpeed = 0f;
 
 	void Awake()
 	{
-		_playerRB = GetComponent<Rigidbody2D> ();
-		_playerConstantForce = GetComponent<ConstantForce2D> ();
+		//_playerRB = GetComponent<Rigidbody2D> ();
 	}
 
 	public void OnInit(Vector3 initPosition)
@@ -32,18 +31,18 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (- GM.Instance.ScreenSize.x / 2f + (GM.Instance.ScreenSize.x * _playerModel.initScreenPosX)  - game.view.cameraView.transform.position.x);
 
-		transform.position = initPosition;
+		PlayerRenderer.transform.position = initPosition;
 
 		if(_playerModel.forceOnInit != 0f)
-			transform.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * _playerModel.forceOnInit, ForceMode2D.Impulse);
+			PlayerRenderer.transform.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * _playerModel.forceOnInit, ForceMode2D.Impulse);
 	}
 
-	void OnBecameInvisible()
+	public override void OnInvisible()
 	{
 		_lastInvisibleTimestamp = Time.time + _playerModel.invisibleBeforeDie;
 	}
 
-	void OnBecameVisible()
+	public override void OnVisible()
 	{
 		_lastInvisibleTimestamp = null;
 	}
@@ -52,14 +51,17 @@ public class PlayerView : View
 	{
 		if (game.model.gameState != GameState.Playing)
 			return;
-		
-		Vector3 playerPosition = transform.transform.position;
 
-		playerPosition.x += _playerModel.linearForce * game.model.gameSpeed + _backOffsetSpeed;
+		Vector3 currentPosition = PlayerRenderer.transform.position;
+		Vector3 playerNextPosition = currentPosition;
 
-		transform.position = Vector3.Lerp(transform.position, playerPosition, Time.deltaTime);
+		playerNextPosition.x += _playerModel.linearForce * game.model.gameSpeed + _backOffsetSpeed;
 
-		float currentCameraDistanceX = Mathf.Abs (game.view.cameraView.transform.position.x - transform.position.x);
+		PlayerRenderer.transform.position = PlayerTriggerDetector.position = Vector3.Lerp(currentPosition, playerNextPosition, Time.deltaTime);
+
+		currentPosition = PlayerRenderer.transform.position;
+
+		float currentCameraDistanceX = Mathf.Abs (game.view.cameraView.transform.position.x - currentPosition.x);
 		float currentOffset = _initCameraDistanceX - currentCameraDistanceX;
 		float currentOffsetAbs = Mathf.Abs (currentOffset);
 
@@ -84,18 +86,87 @@ public class PlayerView : View
 
 		if (_playerModel.angularSpeed != 0f)
 		{
-			transform.Rotate (0f, 0f, _playerModel.angularSpeed * game.model.gameSpeed * Time.fixedDeltaTime);
+			PlayerRenderer.transform.Rotate (0f, 0f, _playerModel.angularSpeed * game.model.gameSpeed * Time.fixedDeltaTime);
 		}
 
 		if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
 			Notify (N.OnPlayerInvisible);
 
-		if(IsShowDebugCameraDistance)
-			Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
+		//Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
 		
 	}
 
-		/*
+	public override void OnRendererCollisionEnter(Collision2D collision)
+	{
+		if (collision.transform.parent == null)
+			return;
+		
+		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
+
+		if (poolingObject == null)
+			return;
+		
+		switch(poolingObject.PoolingType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					break;
+				}
+
+			case PoolingObjectType.ITEM:
+				{
+					ItemView itemView = (ItemView)poolingObject;
+					D2dDestructible destructibleItem = itemView.GetComponentInChildren<D2dDestructible>();
+
+					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, collision.contacts [0].point);
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
+		}
+	}
+
+	public override void OnRendererTriggerExit (Collider2D otherCollider)
+	{
+		if (game.model.gameState != GameState.Playing)
+			return;
+		
+		PoolingObjectView poolingObject = otherCollider.transform.parent.GetComponent<PoolingObjectView> ();
+
+		if (poolingObject == null)
+			return;
+
+		switch (poolingObject.PoolingType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					if (PlayerTriggerDetector.position.x > platformView.transform.position.x)
+					{
+						if (!ScorePlatformsList.Contains (platformView))
+						{
+							Notify (N.PlayerLeftPlatform_, NotifyType.GAME, platformView);
+
+							ScorePlatformsList.Add (platformView);
+						}
+					}
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
+		}
+	}
+
+	/*
 	void FixedUpdate()
 	{
 		if (game.model.gameState != GameState.PLAYING)
@@ -135,73 +206,4 @@ public class PlayerView : View
 		//_playerRB.DOMoveX (transform.position.x + _playerModel.moveSpeed, 1f).SetUpdate(UpdateType.Fixed);
 	}
 */
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.transform.parent == null)
-			return;
-		
-		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
-
-		if (poolingObject == null)
-			return;
-		
-		switch(poolingObject.PoolingType)
-		{
-			case PoolingObjectType.PLATFORM:
-				{
-					PlatformView platformView = (PlatformView)poolingObject;
-
-					break;
-				}
-
-			case PoolingObjectType.ITEM:
-				{
-					ItemView itemView = (ItemView)poolingObject;
-					D2dDestructible destructibleItem = itemView.GetComponentInChildren<D2dDestructible>();
-
-					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, collision.contacts [0].point);
-					break;
-				}
-
-			default:
-				{
-					break;
-				}
-		}
-	}
-
-	void OnCollisionExit2D(Collision2D collision)
-	{
-		if (collision.transform.parent == null)
-			return;
-
-		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
-
-		if (poolingObject == null)
-			return;
-
-		switch (poolingObject.PoolingType)
-		{
-			case PoolingObjectType.PLATFORM:
-				{
-					PlatformView platformView = (PlatformView)poolingObject;
-
-					if (transform.position.x > platformView.transform.position.x)
-					{
-						if (!ScorePlatformsList.Contains (platformView))
-						{
-							Notify (N.PlayerLeftPlatform_, NotifyType.GAME, platformView);
-
-							ScorePlatformsList.Add (platformView);
-						}
-					}
-					break;
-				}
-
-			default:
-				{
-					break;
-				}
-		}
-	}
 }
