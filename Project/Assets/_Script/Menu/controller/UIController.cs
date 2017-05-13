@@ -26,7 +26,7 @@ public class UIController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					ui.model.uiState = UIState.PLAYING;
 					break;

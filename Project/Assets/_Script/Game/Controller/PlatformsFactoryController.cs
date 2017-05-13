@@ -16,7 +16,7 @@ public class PlatformsFactoryController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					OnGamePlay ();
 					break;

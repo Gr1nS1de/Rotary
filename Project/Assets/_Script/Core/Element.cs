@@ -45,6 +45,7 @@ public abstract class Element : MonoBehaviour
 			case NotifyType.UI:
 				{
 					m_UI.Notify ( alias, this, data );
+					m_Core.Notify (alias, this, data);
 					break;
 				}
 		}

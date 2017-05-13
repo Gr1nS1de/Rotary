@@ -9,9 +9,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 #endif
 
-/// <summary>
-/// Class in charge of the logic of the game. This class will restart the level at game over, handle and save the point, and call the Ads if you import the VERY SIMPLE ADS asset available here: http://u3d.as/oWD
-/// </summary>
 public class GM : Controller
 {
 	public static GM Instance;
@@ -19,7 +16,10 @@ public class GM : Controller
 	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
 	[HideInInspector]
 	public Vector2 ScreenSize;
+
 	private const string LeaderBoardPrivate = "http://dreamlo.com/lb/HmyLFso9EUmOvvnmRzgKsw1og-BQzKSU-1t0Vk36HwIg";
+
+	private AnalyticsManager _analyticsManager = null;
 
 	void Awake()
 	{
@@ -34,17 +34,14 @@ public class GM : Controller
 
 			ScreenSize = new Vector2 (screenWidth, screenHeight);
 
+			if(_analyticsManager == null)
+				_analyticsManager = new AnalyticsManager ();
 		}
 		else
 		{
 			if (Instance != this)
 				Destroy (this.gameObject);
 		}
-	}
-
-	void Start()
-	{
-
 	}
 		
 	public override void OnNotification (string alias, Object target, params object[] data)

@@ -39,7 +39,7 @@ public class UIMainMenuController : Controller
 	#region Public methods
 	public void ButtonGamePlay()
 	{
-		Notify (N.GamePlay);
+		Notify (N.GameStartPlay);
 
 		SetActivePlayButton (false);
 	}

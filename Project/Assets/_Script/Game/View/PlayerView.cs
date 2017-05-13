@@ -63,10 +63,8 @@ public class PlayerView : View
 		float currentOffset = _initCameraDistanceX - currentCameraDistanceX;
 		float currentOffsetAbs = Mathf.Abs (currentOffset);
 
-
 		if (currentOffsetAbs > 0.1f)
 		{
-			
 			//_offsetBackspeedRate += 0.1f;
 			if (currentOffset > 0f)
 			{

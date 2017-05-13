@@ -18,7 +18,7 @@ public class CameraController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					InitCamera ();
 					break;

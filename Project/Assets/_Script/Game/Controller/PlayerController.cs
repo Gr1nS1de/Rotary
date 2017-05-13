@@ -19,7 +19,7 @@ public class PlayerController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					InitPlayer ();
 					break;

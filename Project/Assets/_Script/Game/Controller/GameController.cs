@@ -17,7 +17,9 @@ public class GameController : Controller
 	public BonusesFactoryController			bonusesFactoryController		{ get { return _bonusesFactoryController	= SearchLocal<BonusesFactoryController>(	_bonusesFactoryController,		typeof(BonusesFactoryController).Name );}}
 	public PlatformsFactoryController		platformsFactoryController		{ get { return _platformsFactoryController	= SearchLocal<PlatformsFactoryController>(	_platformsFactoryController,	typeof(PlatformsFactoryController).Name );}}
 	public DistructibleController			distructibleController			{ get { return _distructibleController		= SearchLocal<DistructibleController>(		_distructibleController,		typeof(DistructibleController).Name );}}
+	public GameSpeedController				gameSpeedController				{ get { return _gameSpeedController			= SearchLocal<GameSpeedController>(			_gameSpeedController,			typeof(GameSpeedController).Name );}}
 
+	private GameSpeedController				_gameSpeedController;
 	private DistructibleController			_distructibleController;
 	private PlatformsFactoryController		_platformsFactoryController;
 	private BonusesFactoryController		_bonusesFactoryController;
@@ -30,8 +32,6 @@ public class GameController : Controller
 	#endregion
 
 	//private GearModel 					playerModel	{ get { return game.model.playerModel;}}
-
-	private GameSpeedState _currentGameSpeedState;
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -51,7 +51,7 @@ public class GameController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					SetNewGame ();
 
@@ -64,7 +64,6 @@ public class GameController : Controller
 					PlatformView platformView = (PlatformView)data [0];
 
 					OnAddScore ();
-					CheckGameSpeedState ();
 					break;
 				}
 
@@ -96,58 +95,11 @@ public class GameController : Controller
 
 		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
 	}
-
-	//https://ussrgames.atlassian.net/wiki/pages/viewpage.action?pageId=40027034
-	public void SetGameSpeed(GameSpeedState speedState)
-	{
-		switch (speedState)
-		{
-			case GameSpeedState.SPEED_1:
-				{
-					game.model.gameSpeed = 3f;
-					game.model.playerModel.angularSpeed = -70f;
-					break;
-				}
-
-			case GameSpeedState.SPEED_2:
-				{
-					game.model.gameSpeed = 4f;
-					game.model.playerModel.angularSpeed = -65f;
-					break;
-				}
-
-			case GameSpeedState.SPEED_3:
-				{
-					game.model.gameSpeed = 6f;
-					game.model.playerModel.angularSpeed = -60f;
-					break;
-				}
-
-			case GameSpeedState.SPEED_4:
-				{
-					game.model.gameSpeed = 7f;
-					game.model.playerModel.angularSpeed = -60f;
-					break;
-				}
-
-			case GameSpeedState.SPEED_5:
-				{
-					game.model.gameSpeed = 8f;
-					game.model.playerModel.angularSpeed = -50f;
-					break;
-				}
-		}
-
-		_currentGameSpeedState = speedState;
-		game.model.gameSpeedState = _currentGameSpeedState;
-	}
 	#endregion
 
 	private void OnStart()
 	{
 		SetNewGame ();
-
-		SetGameSpeed( game.model.gameSpeedState);
 	}
 
 	void Update()
@@ -179,81 +131,9 @@ public class GameController : Controller
 		//FindObjectOfType<Circle>().DOParticle();
 	}
 
-	private void CheckGameSpeedState()
-	{
-		int currentScore = game.model.currentScore;
-		GameSpeedState correctGameSpeedState = GameSpeedState.SPEED_1;
-
-		if (currentScore < 5)
-		{
-			//
-		}
-		else if (currentScore >= 5 && currentScore < 30)
-		{
-			correctGameSpeedState = GameSpeedState.SPEED_2;
-		}
-		else if (currentScore >= 30 && currentScore < 50)
-		{
-			correctGameSpeedState = GameSpeedState.SPEED_3;
-		}
-		else if (currentScore >= 50 && currentScore < 70)
-		{
-			correctGameSpeedState = GameSpeedState.SPEED_4;
-		}
-		else
-		{
-			correctGameSpeedState = GameSpeedState.SPEED_5;
-		}
-
-		if (game.model.gameSpeedState != correctGameSpeedState)
-		{
-			SetGameSpeed (correctGameSpeedState);
-		}
-	}
-	/*
-	public void OnImpactObstacleByPlayer(RobotView obstacleView, Vector2 collisionPoint)
-	{
-		var obstacleModel = game.model.robotsFactoryModel.currentModelsDictionary[obstacleView];
-
-		if (!obstacleModel)
-		{
-			Debug.LogError ("Cant find model");
-			return;
-		}
-			
-		switch (obstacleModel.bodyType)
-		{
-			case RobotBodyType.HEAD:
-				{
-					//obstacleRenderObject.GetComponent<Rigidbody2D> ().isKinematic = true;
-					Notify(N.GameOver, collisionPoint);
-
-					break;
-				}
-
-			case RobotBodyType.BODY:
-				{
-					/*
-					var obstacleDestructible = obstacleView.GetComponent<D2dDestructible> ();
-
-					Add1Score ();
-
-					obstacleView.gameObject.layer = LayerMask.NameToLayer (GM.instance.destructibleObstaclePieceLayerName);
-
-					Notify (N.DestructibleBreakEntity___, obstacleDestructible, game.model.destructibleModel.destructibleObstacleFractureCount, collisionPoint);
-
-					break;
-				}
-			default:
-				break;
-		}
-	}
-*/
 	private void GameOver()
 	{
-		if (game.model.gameState == GameState.GAME_OVER)
-			return;
-
+		
 		//ReportScoreToLeaderboard(point);
 
 		//_player.DesactivateTouchControl();
@@ -284,7 +164,4 @@ public class GameController : Controller
 		Application.LoadLevel(Application.loadedLevel);
 		#endif
 	}
-
-
-
 }

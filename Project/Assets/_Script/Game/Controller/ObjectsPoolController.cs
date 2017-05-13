@@ -22,7 +22,7 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					OnGamePlay ();
 

@@ -16,7 +16,7 @@ public class ItemsFactoryController : Controller
 					break;
 				}
 
-			case N.GamePlay:
+			case N.GameStartPlay:
 				{
 					OnGamePlay ();
 					break;
