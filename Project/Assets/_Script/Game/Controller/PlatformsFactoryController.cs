@@ -26,7 +26,7 @@ public class PlatformsFactoryController : Controller
 				{
 					PlatformView platformView = (PlatformView)data [0];
 
-					Debug.LogFormat ("Platform is invisible: {0}", platformView.name);
+					//Debug.LogFormat ("Platform is invisible: {0}", platformView.name);
 
 					if (game.model.gameState == GameState.Playing)
 					{

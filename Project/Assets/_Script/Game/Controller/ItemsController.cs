@@ -48,6 +48,8 @@ public class ItemsController : Controller
 	{
 		ItemTypes itemType = itemView.ItemType;
 
+		itemView.OnPlayerImpact ();
+
 		switch (itemType)
 		{
 			case ItemTypes.Coin:
@@ -59,7 +61,6 @@ public class ItemsController : Controller
 			case ItemTypes.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
-					itemView.OnPlayerImpact ();
 					game.controller.distructibleController.BreakEntity(itemView.DimondRenderer, itemView.DistructFractureCount, contactPoint);
 					break;
 				}

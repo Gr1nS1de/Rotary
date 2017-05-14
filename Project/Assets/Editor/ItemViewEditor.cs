@@ -35,6 +35,8 @@ public class ItemViewEditor : Editor
 
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
 		data.ItemType = (ItemTypes)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
+		data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
+
 
 		switch (data.ItemType)
 		{
@@ -48,7 +50,7 @@ public class ItemViewEditor : Editor
 			case ItemTypes.Crystal:
 				{
 					EditorGUILayout.PropertyField(_mainRenderer, true);
-					EditorGUILayout.FloatField ("Distruct Fracture Count", data.DistructFractureCount);
+					data.DistructFractureCount = EditorGUILayout.IntField ("Distruct Fracture Count", data.DistructFractureCount);
 					break;
 				}
 		}

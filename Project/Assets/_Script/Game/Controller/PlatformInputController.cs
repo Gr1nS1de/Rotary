@@ -31,6 +31,14 @@ public class PlatformInputController : Controller
 					OnDragPlatform (dragItem.transform, inputPoint, gesturePhase);
 					break;
 				}
+
+			case N.GameOver_:
+				{
+					GameOverData gameOverData = (GameOverData)data [0];
+
+					OnGameOver ();
+					break;
+				}
 		}
 	}
 
@@ -83,8 +91,13 @@ public class PlatformInputController : Controller
 	{
 		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
 
-		selectedPlatform.transform.DOMoveY (positionY, 0.05f).SetEase(Ease.InOutElastic);
+		selectedPlatform.transform.DOMoveY (positionY, 0.05f).SetEase(Ease.Linear).SetUpdate(UpdateType.Fixed);
 	}
 
+	private void OnGameOver()
+	{
+		if(_selectedPlatformsDictionary != null)
+			_selectedPlatformsDictionary.Clear ();
+	}
 }
 

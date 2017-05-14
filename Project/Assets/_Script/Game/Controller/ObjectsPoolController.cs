@@ -226,10 +226,10 @@ public class ObjectsPoolController : Controller
 				{
 					float platformsGap = game.model.playerModel.playerRendererSize.y + _platformsFactoryModel.verticalPlatformsGap;
 					float randomY = Random.Range (lastPlatformPosition.y - platformsGap / 2f + itemRendererSize.y, lastPlatformPosition.y + platformsGap / 2f - itemRendererSize.y);
+					float randomX = Random.Range (lastPlatformPosition.x - lastPlatformWidth / 2f, lastPlatformPosition.x + lastPlatformWidth / 2f);
 
-
-					randomPosition.x = lastPlatformPosition.x;
-					randomPosition.y = lastPlatformPosition.y;
+					randomPosition.x = randomX;
+					randomPosition.y = randomY;
 					break;
 				}
 		}
@@ -319,7 +319,7 @@ public class ObjectsPoolController : Controller
 				{
 					float platformsGap = game.model.playerModel.playerRendererSize.y / 2f + game.model.platformsFactoryModel.verticalPlatformsGap * 1.5f;	//Add 10% of player height to gap
 
-					randomY = Random.Range (-screenSize.y / 2f + platformsGap / 2f, screenSize.y / 2f - platformsGap / 2f);
+					randomY = Random.Range (-screenSize.y / 2f + platformsGap, screenSize.y / 2f - platformsGap);
 					break;
 				}
 		}

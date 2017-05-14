@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class ViewTriggerDetect : MonoBehaviour
 {
+	public LayerMask ignoredMasks;
 	void OnTriggerEnter2D(Collider2D otherCollider)
-	{
+	{		
+		if(ignoredMasks == (ignoredMasks | (1 << otherCollider.gameObject.layer)))
+			return;
+
 		if (otherCollider.transform.parent == null)
 			return;
 
@@ -19,6 +23,9 @@ public class ViewTriggerDetect : MonoBehaviour
 
 	void OnTriggerExit2D(Collider2D otherCollider)
 	{
+		if(ignoredMasks == (ignoredMasks | (1 << otherCollider.gameObject.layer)))
+			return;
+		
 		if (otherCollider.transform.parent == null)
 			return;
 

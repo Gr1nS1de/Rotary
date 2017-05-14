@@ -15,7 +15,7 @@ public class PlayerView : View
 	//private Rigidbody2D 		_playerRB;
 	private Vector3 			_playerInitPosition;
 	private float 				_initCameraDistanceX = 0f;
-	//private float _lastCameraDistance = 0f;
+	//private float 			_lastCameraDistance = 0f;
 	private float? 				_lastInvisibleTimestamp = 0f;
 	private float 				_offsetBackspeedRate = 0f;
 	private float 				_backOffsetSpeed = 0f;
@@ -34,7 +34,7 @@ public class PlayerView : View
 		PlayerRenderer.transform.position = initPosition;
 
 		if(_playerModel.forceOnInit != 0f)
-			PlayerRenderer.transform.GetComponent<Rigidbody2D> ().AddForce (Vector2.right * _playerModel.forceOnInit, ForceMode2D.Impulse);
+			PlayerRenderer.transform.GetComponent<Rigidbody2D> ().AddForce (new Vector2(1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
 	}
 
 	public override void OnInvisible()
@@ -118,9 +118,42 @@ public class PlayerView : View
 			case PoolingObjectType.ITEM:
 				{
 					ItemView itemView = (ItemView)poolingObject;
-					D2dDestructible destructibleItem = itemView.GetComponentInChildren<D2dDestructible>();
 
 					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, collision.contacts [0].point);
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
+		}
+	}
+
+	public override void OnRendererTriggerEnter (Collider2D otherCollider)
+	{
+		if (game.model.gameState != GameState.Playing)
+			return;
+		
+		PoolingObjectView poolingObject = otherCollider.transform.parent.GetComponent<PoolingObjectView> ();
+
+		if (poolingObject == null)
+			return;
+
+		switch(poolingObject.PoolingType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					break;
+				}
+
+			case PoolingObjectType.ITEM:
+				{
+					ItemView itemView = (ItemView)poolingObject;
+
+					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, Vector2.zero);
 					break;
 				}
 
