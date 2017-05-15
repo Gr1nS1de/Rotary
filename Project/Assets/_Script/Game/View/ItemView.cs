@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Destructible2D;
 using DG.Tweening;
 using tk2dRuntime;
@@ -8,7 +9,8 @@ using tk2dRuntime;
 public class ItemView : PoolingObjectView
 {
 	public ItemTypes	ItemType;
-	public int 			DistructFractureCount = 5;
+	public int 			CrystalFractureCount = 5;
+	public float 		CrystalDestroyTime = 2f;
 
 	[SerializeField]
 	public D2dDestructible DimondRenderer;
@@ -21,11 +23,12 @@ public class ItemView : PoolingObjectView
 	private bool _isPlayerImpact = false;
 	private Tweener _itemInitTween = null;
 	private Sequence _itemImpactSequence = null;
+	private int _crystalFragmetsCollised = 0;
 
-	public void Start()
-	{
-		OnInit ();
-	}
+	//public void Start()
+	//{
+	//	OnInit ();
+	//}
 
 	public void OnInit() //OnInit
 	{
@@ -174,11 +177,11 @@ public class ItemView : PoolingObjectView
 
 						_itemImpactSequence
 							.Append (CoinRenderer.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0f), 0.3f, 1))
+							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.5f, 0, 0))
+							.Join(CoinRenderer.DOFade(0f, 0.5f))
 							.Append(CoinRenderer.transform.DOPunchScale(-Vector3.one * 1.5f, 0.2f, 0, 0f))
-							.Insert(0.1f, CountRenderer.DOFade(1f, 0.1f))
-							.Insert(0.1f, CountRenderer.transform.DOLocalMoveY(2f, 0.5f))
-							.Insert(0f ,CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.5f, 0, 0))
-							.Insert(0f, CoinRenderer.DOFade(0f, 0.5f))
+							.Insert(0.05f, CountRenderer.DOFade(1f, 0.1f))
+							.Insert(0.05f, CountRenderer.transform.DOLocalMoveY(2f, 0.5f))
 							.SetRecyclable(true)
 							.SetAutoKill(false);
 					}
@@ -189,11 +192,57 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
+					if (_itemImpactSequence == null)
+					{
+						_itemImpactSequence = DOTween.Sequence ();
+						List<D2dDestructible> crystalFragmentsList = new List<D2dDestructible> (transform.GetComponentsInChildren<D2dDestructible>());
+
+						_itemImpactSequence.AppendInterval (CrystalDestroyTime / 2f);
+
+						crystalFragmentsList.ForEach (crystalFragment =>
+						{
+							_itemImpactSequence.Insert(CrystalDestroyTime / 2f, DOVirtual.DelayedCall(CrystalDestroyTime / 2f, ()=>
+							{
+
+							}).OnUpdate(()=>
+							{
+								crystalFragment.transform.DOMove(game.view.playerView.transform.position, CrystalDestroyTime / 2f);
+							}));
+
+							crystalFragment.gameObject.layer = LayerMask.NameToLayer("DestroyedItemBack");
+						});
+
+						_itemImpactSequence
+							.SetRecyclable(true)
+							.SetAutoKill(false);
+					}
+
+					_itemImpactSequence.Play ();
+
 					break;
 				}
 
 			case ItemTypes.Magnet:
 				{
+					break;
+				}
+		}
+	}
+
+	public override void OnRendererTriggerEnter (ViewTriggerDetect triggerDetector, Collider2D otherCollider)
+	{
+		switch (ItemType)
+		{
+			case ItemTypes.Crystal:
+				{
+					if (++_crystalFragmetsCollised > CrystalFractureCount)
+					{
+						CountRenderer.DOFade (1f, 0.1f);
+						CountRenderer.text = string.Format ("+{0}", _crystalFragmetsCollised);
+						CountRenderer.transform.position = triggerDetector.transform.position;
+
+						Debug.LogFormat ("Impact crystal to player");
+					}
 					break;
 				}
 		}

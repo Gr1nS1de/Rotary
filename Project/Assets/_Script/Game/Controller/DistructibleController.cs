@@ -35,55 +35,97 @@ public class DistructibleController : Controller
 	private void OnStart()
 	{}
 
-	public void BreakEntity( D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
+	public void BreakItem(ItemTypes itemType, D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
 	{
 		// Store explosion point (used in OnEndSplit)
-		if (collisionPoint == Vector2.zero)
+		if (collisionPoint == Vector2.zero || collisionPoint ==  default(Vector2))
 			_distructibleModel.entityBreakPoint = destructible.transform.position;
 		else
 			_distructibleModel.entityBreakPoint = collisionPoint;
 
-		destructible.gameObject.layer = LayerMask.NameToLayer ("DestroyedItem");
-
-		// Register split event
-		destructible.OnEndSplit.AddListener((piecesList)=>
+		switch(itemType)
 		{
-			OnEndSplit(destructible, piecesList);
-		});
+			case ItemTypes.Crystal:
+				{
+					destructible.gameObject.layer = LayerMask.NameToLayer ("DestroyedItem");
 
-		// Split via fracture
-		D2dQuadFracturer.Fracture(destructible, fractureCount, 0.3f);
+					// Register split event
+					destructible.OnEndSplit.AddListener ((piecesList ) =>
+					{
+						OnEndSplit (destructible, piecesList);
+					});
+
+					// Split via fracture
+					D2dQuadFracturer.Fracture (destructible, fractureCount, 0.3f);
+					break;
+				}
+		}
 	}
 
 	private void OnEndSplit(D2dDestructible destructible, List<D2dDestructible> piecesList)
 	{
 		//destructible.GetComponent<D2dDestroyer> ().enabled = true;
 		//Utils.ActivateTransformChildrens (destructible.transform, false);
+
+		ItemView itemView = destructible.transform.parent.GetComponent<ItemView> ();
+		ItemTypes itemType = itemView.ItemType;
 		
 		// Go through all clones in the clones list
+
 		for (var i = piecesList.Count - 1; i >= 0; i--)
 		{
 			var clone = piecesList[i];
 			var rigidbody = clone.GetComponent<Rigidbody2D>();
+			var d2Destroyer = clone.GetComponent<D2dDestroyer> ();
 
-			rigidbody.bodyType = RigidbodyType2D.Dynamic;
-			clone.GetComponent<D2dDestroyer> ().enabled = true;
-
-			// Does this clone have a Rigidbody2D?
-			if (rigidbody != null)
+			switch(itemType)
 			{
-				// Get the local point of the explosion that called this split event
-				var localPoint = (Vector2)clone.transform.InverseTransformPoint(_distructibleModel.entityBreakPoint);
+				case ItemTypes.Crystal:
+					{
+						rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
-				// Get the vector between this point and the center of the destructible's current rect
-				var vector = clone.AlphaRect.center - localPoint;
+						d2Destroyer.Life = itemView.CrystalDestroyTime;
+						d2Destroyer.FadeDuration = itemView.CrystalDestroyTime / 2f;
+						d2Destroyer.enabled = true;
 
-				//var force = ( game.model.gameState == GameState.GAMEOVER ? game.model.playerModel.breakForce : game.model.destructibleModel.breakForce );
+						//Reset all unity colliders on clones
+						if (clone.GetComponent<Collider2D> ())
+							foreach (Collider2D collider in clone.GetComponents<Collider2D>())
+							{
+								StartCoroutine (ResetCollider(clone.transform, collider));
+							}
 
-				// Apply relative force
-				rigidbody.AddRelativeForce(vector * _distructibleModel.breakForce, ForceMode2D.Impulse);
+						// Does this clone have a Rigidbody2D?
+						if (rigidbody != null)
+						{
+							// Get the local point of the explosion that called this split event
+							var localPoint = (Vector2)clone.transform.InverseTransformPoint (_distructibleModel.entityBreakPoint);
+
+							// Get the vector between this point and the center of the destructible's current rect
+							var vector = clone.AlphaRect.center - localPoint;
+
+							//var force = ( game.model.gameState == GameState.GAMEOVER ? game.model.playerModel.breakForce : game.model.destructibleModel.breakForce );
+
+							// Apply relative force
+							rigidbody.AddRelativeForce (vector * _distructibleModel.breakForce, ForceMode2D.Impulse);
+						}
+						break;
+					}
 			}
 		}
+	}
+
+	private System.Collections.IEnumerator ResetCollider(Transform clone, Collider2D collider)
+	{
+		System.Type colliderType = collider.GetType ();
+
+		Destroy (collider);
+
+		yield return null;
+
+		Collider2D colliderComponent = (Collider2D)clone.gameObject.AddComponent(colliderType);
+
+		colliderComponent.isTrigger = true;
 	}
 
 }

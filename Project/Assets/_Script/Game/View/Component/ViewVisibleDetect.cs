@@ -5,12 +5,12 @@ public class ViewVisibleDetect : MonoBehaviour
 {
 	void OnBecameInvisible()
 	{
-		transform.parent.GetComponent<View> ().OnInvisible ();
+		transform.parent.GetComponent<View> ().OnInvisible (this);
 	}
 
 	void OnBecameVisible()
 	{
-		transform.parent.GetComponent<View> ().OnVisible ();
+		transform.parent.GetComponent<View> ().OnVisible (this);
 		
 	}
 }

@@ -61,7 +61,10 @@ public class ItemsController : Controller
 			case ItemTypes.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
-					game.controller.distructibleController.BreakEntity(itemView.DimondRenderer, itemView.DistructFractureCount, contactPoint);
+					SetCrystalFractureCount(itemView);
+					game.controller.distructibleController.BreakItem(itemType, itemView.DimondRenderer, itemView.CrystalFractureCount, contactPoint);
+
+					Destroy (itemView.gameObject, itemView.CrystalDestroyTime + 1f);
 					break;
 				}
 
@@ -72,6 +75,56 @@ public class ItemsController : Controller
 		}
 	}
 
+	private void SetCrystalFractureCount(ItemView itemCrystal)
+	{
+		int fractureCount = 0;
+
+		switch (game.model.gameSpeedState)
+		{
+			case GameSpeedState.Speed_1:
+				{
+					fractureCount = 1;
+					break;
+				}
+
+			case GameSpeedState.Speed_2:
+				{
+					fractureCount = 2;
+					break;
+				}
+
+			case GameSpeedState.Speed_3:
+				{
+					fractureCount = 3;
+					break;
+				}
+
+			case GameSpeedState.Speed_4:
+				{
+					fractureCount = 4;
+					break;
+				}
+
+			case GameSpeedState.Speed_5:
+				{
+					fractureCount = 5;
+					break;
+				}
+			case GameSpeedState.Speed_6:
+				{	
+					fractureCount = 6;
+					break;
+				}
+
+			case GameSpeedState.Speed_7:
+				{	
+					fractureCount = 7;
+					break;
+				}
+		}
+
+		itemCrystal.CrystalFractureCount = fractureCount;
+	}
 
 }
 

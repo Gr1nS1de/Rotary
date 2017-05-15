@@ -37,12 +37,12 @@ public class PlayerView : View
 			PlayerRenderer.transform.GetComponent<Rigidbody2D> ().AddForce (new Vector2(1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
 	}
 
-	public override void OnInvisible()
+	public override void OnInvisible(ViewVisibleDetect visibleDetector)
 	{
 		_lastInvisibleTimestamp = Time.time + _playerModel.invisibleBeforeDie;
 	}
 
-	public override void OnVisible()
+	public override void OnVisible(ViewVisibleDetect visibleDetector)
 	{
 		_lastInvisibleTimestamp = null;
 	}
@@ -96,7 +96,7 @@ public class PlayerView : View
 		
 	}
 
-	public override void OnRendererCollisionEnter(Collision2D collision)
+	public override void OnRendererCollisionEnter(ViewCollisionDetect collisionDetector, Collision2D collision)
 	{
 		if (collision.transform.parent == null)
 			return;
@@ -130,7 +130,7 @@ public class PlayerView : View
 		}
 	}
 
-	public override void OnRendererTriggerEnter (Collider2D otherCollider)
+	public override void OnRendererTriggerEnter (ViewTriggerDetect triggerDetector, Collider2D otherCollider)
 	{
 		if (game.model.gameState != GameState.Playing)
 			return;
@@ -164,7 +164,7 @@ public class PlayerView : View
 		}
 	}
 
-	public override void OnRendererTriggerExit (Collider2D otherCollider)
+	public override void OnRendererTriggerExit (ViewTriggerDetect triggerDetector, Collider2D otherCollider)
 	{
 		if (game.model.gameState != GameState.Playing)
 			return;

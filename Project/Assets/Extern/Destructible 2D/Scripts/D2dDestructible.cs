@@ -1658,24 +1658,12 @@ namespace Destructible2D
 						// Retain layer
 						clone.gameObject.layer = gameObject.layer;
 
-						for(int c = 0; c < clone.transform.childCount; c++)
-						{
-							clone.transform.GetChild(c).gameObject.layer = gameObject.layer;
-						}
-
 						// Retain transform
 						clone.transform.SetParent(transform.parent, false);
 
 						clone.transform.localPosition = transform.localPosition;
 						clone.transform.localRotation = transform.localRotation;
 						clone.transform.localScale    = transform.localScale;
-
-						//Reset all unity colliders on clones
-						if (clone.GetComponent<Collider2D> ())
-							foreach (Collider2D collider in clone.GetComponents<Collider2D>())
-							{
-								StartCoroutine (ResetCollider(clone.transform, collider));
-							}
 					}
 
 					group.GenerateData();
@@ -1705,17 +1693,6 @@ namespace Destructible2D
 				if (OnEndSplit != null) OnEndSplit.Invoke(clones);
 			}
 			IsSplitting = false; clones.Clear();
-		}
-
-		private System.Collections.IEnumerator ResetCollider(Transform clone, Collider2D collider)
-		{
-			System.Type colliderType = collider.GetType ();
-
-			Destroy (collider);
-
-			yield return null;
-
-			clone.gameObject.AddComponent(colliderType);
 		}
 
 		[ContextMenu("Update Mesh")]

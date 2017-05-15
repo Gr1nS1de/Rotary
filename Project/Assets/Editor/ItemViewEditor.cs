@@ -37,20 +37,20 @@ public class ItemViewEditor : Editor
 		data.ItemType = (ItemTypes)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
 		data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
 
+		EditorGUILayout.PropertyField(_mainRenderer, true);
 
 		switch (data.ItemType)
 		{
 			case ItemTypes.Coin:
 				{
 					//EditorGUILayout.ObjectField("Main Platform Renderer", _mainRenderer.objectReferenceValue, typeof(SpriteRenderer), true);
-					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;
 				}
 
 			case ItemTypes.Crystal:
 				{
-					EditorGUILayout.PropertyField(_mainRenderer, true);
-					data.DistructFractureCount = EditorGUILayout.IntField ("Distruct Fracture Count", data.DistructFractureCount);
+					data.CrystalFractureCount = EditorGUILayout.IntField ("Crystal Fracture Count", data.CrystalFractureCount);
+					data.CrystalDestroyTime = EditorGUILayout.FloatField ("Crystal Destroy Time", data.CrystalDestroyTime);
 					break;
 				}
 		}

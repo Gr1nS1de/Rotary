@@ -66,7 +66,8 @@ public class PlatformInputController : Controller
 					//Get delta between touch point and gear center position - for proper gear drag
 					Vector3 selectedPointDelta = new Vector3(selectedPlatform.position.x, selectedPlatform.position.y, selectedPoint.z) - selectedPoint;
 
-					_selectedPlatformsDictionary.Add (selectedPlatform, selectedPointDelta);
+					if(!_selectedPlatformsDictionary.ContainsKey(selectedPlatform))
+						_selectedPlatformsDictionary.Add (selectedPlatform, selectedPointDelta);
 
 					break;
 				}

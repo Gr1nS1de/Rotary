@@ -150,7 +150,7 @@ public class GameController : Controller
 
 			case ItemTypes.Crystal:
 				{
-					game.model.gameOverData.CrystalsCount += itemView.DistructFractureCount;
+					game.model.gameOverData.CrystalsCount += itemView.CrystalFractureCount;
 					break;
 				}
 

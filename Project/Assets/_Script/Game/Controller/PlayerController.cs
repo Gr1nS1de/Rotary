@@ -54,7 +54,7 @@ public class PlayerController : Controller
 	private void InitPlayer()
 	{
 		Vector2 screenSize = GM.Instance.ScreenSize;
-		Vector3 playerInitPosition = new Vector3((-screenSize.x / 2f) + screenSize.x * _playerModel.initScreenPosX, screenSize.y / 2f * 0.5f, 0f);
+		Vector3 playerInitPosition = new Vector3(-screenSize.x / 2f, screenSize.y / 2f * 0.5f, 0f);
 
 		_playerView.OnInit (playerInitPosition);
 	}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ViewTriggerDetect : MonoBehaviour
 {
 	public LayerMask ignoredMasks;
+
 	void OnTriggerEnter2D(Collider2D otherCollider)
 	{		
 		if(ignoredMasks == (ignoredMasks | (1 << otherCollider.gameObject.layer)))
@@ -18,7 +19,7 @@ public class ViewTriggerDetect : MonoBehaviour
 		if (viewObject == null)
 			return;
 
-		transform.parent.GetComponent<View>().OnRendererTriggerEnter (otherCollider);
+		transform.parent.GetComponent<View>().OnRendererTriggerEnter (this, otherCollider);
 	}
 
 	void OnTriggerExit2D(Collider2D otherCollider)
@@ -34,6 +35,6 @@ public class ViewTriggerDetect : MonoBehaviour
 		if (viewObject == null)
 			return;
 
-		transform.parent.GetComponent<View>().OnRendererTriggerExit (otherCollider);
+		transform.parent.GetComponent<View>().OnRendererTriggerExit (this, otherCollider);
 	}
 }
