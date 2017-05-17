@@ -16,6 +16,10 @@ PluginImporter:
     WP8:
       enabled: 1
       settings: {}
+    WindowsStoreApps:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 
