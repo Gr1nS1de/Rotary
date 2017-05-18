@@ -21,7 +21,7 @@ public class ItemView : PoolingObjectView
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
 	private bool _isPlayerImpact = false;
-	private Tweener _itemInitTween = null;
+	private Sequence _itemInitSequence = null;
 	private Sequence _itemImpactSequence = null;
 	private int _crystalFragmetsCollised = 0;
 
@@ -46,34 +46,41 @@ public class ItemView : PoolingObjectView
 		if(CoinRenderer != null)
 			CoinRenderer.color = new Color (CoinRenderer.color.r, CoinRenderer.color.g, CoinRenderer.color.b, 1f);
 
-		if (_itemInitTween == null)
+		if (_itemInitSequence == null)
 			SetupItemTweening ();
 		else
-			_itemInitTween.Restart ();
+			_itemInitSequence.Restart ();
 	}
 
 	private void SetupItemTweening()
 	{
+		_itemInitSequence = DOTween.Sequence ();
+
 		switch (ItemType)
 		{
 			case ItemTypes.Coin:
 				{
-					_itemInitTween = CoinRenderer.transform.DOPunchScale (new Vector3(0.15f, 0.15f, 0f), 0.6f, 1, 1f)
-						.SetEase(Ease.InBounce)
+					_itemInitSequence
+						.Append(CoinRenderer.transform.DOPunchScale (new Vector3(0.15f, 0.15f, 0f), 0.6f, 1, 1f).SetEase(Ease.InBounce))
 						.SetLoops(-1)
+						.SetRecyclable(true)
 						.SetAutoKill(false);
 					break;
 				}
 
 			case ItemTypes.Crystal:
 				{
-					_itemInitTween = DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360)
-						.SetEase(Ease.Linear)
+					_itemInitSequence
+						.Append(DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
 						.SetLoops(-1)
+						.SetRecyclable(true)
 						.SetAutoKill(false);
 					break;
 				}
+					
 		}
+
+		_itemInitSequence.Play ();
 	}
 		
 	#region public methods
@@ -159,8 +166,8 @@ public class ItemView : PoolingObjectView
 		if (_isPlayerImpact)
 			return;
 		
-		if(_itemInitTween != null)
-			_itemInitTween.Rewind ();
+		if(_itemInitSequence != null)
+			_itemInitSequence.Rewind ();
 
 		if (_itemImpactSequence != null)
 			_itemImpactSequence.Rewind ();
@@ -176,12 +183,12 @@ public class ItemView : PoolingObjectView
 						_itemImpactSequence = DOTween.Sequence ();
 
 						_itemImpactSequence
-							.Append (CoinRenderer.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0f), 0.3f, 1))
-							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.5f, 0, 0))
-							.Join(CoinRenderer.DOFade(0f, 0.5f))
+							.Append (CoinRenderer.transform.DOPunchScale(new Vector3(1f, 1f, 0f), 0.2f, 1))
+							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.3f, 0, 0))
+							.Insert(0.1f, CoinRenderer.DOFade(0f, 0.3f))
 							.Append(CoinRenderer.transform.DOPunchScale(-Vector3.one * 1.5f, 0.2f, 0, 0f))
-							.Insert(0.05f, CountRenderer.DOFade(1f, 0.1f))
 							.Insert(0.05f, CountRenderer.transform.DOLocalMoveY(2f, 0.5f))
+							.Insert(0.05f, CountRenderer.DOFade(1f, 0.1f))
 							.SetRecyclable(true)
 							.SetAutoKill(false);
 					}
@@ -192,6 +199,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
+					Debug.LogErrorFormat ("On player impact me. {0}",transform.name);
 					if (_itemImpactSequence == null)
 					{
 						_itemImpactSequence = DOTween.Sequence ();
@@ -201,12 +209,9 @@ public class ItemView : PoolingObjectView
 
 						crystalFragmentsList.ForEach (crystalFragment =>
 						{
-							_itemImpactSequence.Insert(CrystalDestroyTime / 2f, DOVirtual.DelayedCall(CrystalDestroyTime / 2f, ()=>
+							_itemImpactSequence.Join(DOVirtual.DelayedCall(CrystalDestroyTime / 2f, ()=>
 							{
 
-							}).OnUpdate(()=>
-							{
-								crystalFragment.transform.DOMove(game.view.playerView.transform.position, CrystalDestroyTime / 2f);
 							}));
 
 							crystalFragment.gameObject.layer = LayerMask.NameToLayer("DestroyedItemBack");
@@ -250,8 +255,8 @@ public class ItemView : PoolingObjectView
 
 	public void OnAddToPool()
 	{
-		if(_itemInitTween != null)
-			_itemInitTween.Rewind ();
+		if(_itemInitSequence != null)
+			_itemInitSequence.Rewind ();
 
 		if (_itemImpactSequence != null)
 			_itemImpactSequence.Rewind ();
@@ -261,12 +266,12 @@ public class ItemView : PoolingObjectView
 
 	void OnDestroy()
 	{
-		if (_itemInitTween != null)
+		if (_itemInitSequence != null)
 		{
-			if(_itemInitTween.IsActive())
-				_itemInitTween.Kill ();
+			if(_itemInitSequence.IsActive())
+				_itemInitSequence.Kill ();
 			
-			_itemInitTween = null;
+			_itemInitSequence = null;
 		}
 
 		if (_itemImpactSequence != null)

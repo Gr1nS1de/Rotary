@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 //Custom editor: PlatformViewEditor
 public class PlatformView : PoolingObjectView, IPoolObject
@@ -18,6 +19,9 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
+	private Sequence _platformInitSequence = null;
+	private float _verticalPlatformGapHeight;
+
 	private PlatformsFactoryModel platformsFactoryModel { get { return game.model.platformsFactoryModel;}} 
 
 	public void OnInit()
@@ -40,13 +44,49 @@ public class PlatformView : PoolingObjectView, IPoolObject
 					Vector3 topPlatformPosition = VerticalPlatformRenderers [0].transform.localPosition;
 					Vector3 bottomPlatformPosition = VerticalPlatformRenderers [1].transform.localPosition;
 
-					topPlatformPosition.y = verticalPlatformSize.y / 2f + game.model.playerModel.playerRendererSize.y / 2f + platformsFactoryModel.verticalPlatformsGap / 2f;
-					bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - game.model.playerModel.playerRendererSize.y / 2f - platformsFactoryModel.verticalPlatformsGap / 2f;
+					_verticalPlatformGapHeight = game.model.playerModel.playerRendererSize.y + platformsFactoryModel.verticalPlatformsGap;
+
+					topPlatformPosition.y = verticalPlatformSize.y / 2f + _verticalPlatformGapHeight / 2f;
+					bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - _verticalPlatformGapHeight / 2f;
 
 					VerticalPlatformRenderers [0].transform.localPosition = topPlatformPosition;
 					VerticalPlatformRenderers [1].transform.localPosition = bottomPlatformPosition;
 					break;
 				}
+		}
+
+		if (_platformInitSequence == null)
+			SetupPlatformTweening ();
+		else
+			_platformInitSequence.Restart ();
+	}
+
+	private void SetupPlatformTweening()
+	{
+		_platformInitSequence = DOTween.Sequence ();
+
+		switch (PlatformType)
+		{
+			case PlatformTypes.Horizontal:
+				{
+					break;
+				}
+
+			case PlatformTypes.Vertical:
+				{
+					float screenHeight = GM.Instance.ScreenSize.y;
+
+					_platformInitSequence
+						.Append(transform.DOMoveY (screenHeight / 2f - _verticalPlatformGapHeight * 0.6f, 1f))
+						.Append(transform.DOMoveY (-screenHeight / 2f + _verticalPlatformGapHeight * 0.6f, 1f))
+						.SetLoops(-1)
+						.SetRecyclable(true)
+						.SetAutoKill(false);
+
+					_platformInitSequence.Play ();
+					break;
+				}
+
 		}
 	}
 
@@ -129,6 +169,10 @@ public class PlatformView : PoolingObjectView, IPoolObject
 	public virtual void OnAddToPool()
 	{
 		_isInPool = true;
+
+
+		if(_platformInitSequence != null)
+			_platformInitSequence.Rewind ();
 	}
 }
 

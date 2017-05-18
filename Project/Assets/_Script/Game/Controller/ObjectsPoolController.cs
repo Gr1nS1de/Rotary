@@ -293,6 +293,7 @@ public class ObjectsPoolController : Controller
 
 		_objectsPoolModel.lastPooledPlatform.platformPosition = platformView.transform.position;
 		_objectsPoolModel.lastPooledPlatform.platformWidth = platformRendererSize.x;
+		_objectsPoolModel.lastPooledPlatform.prevPlatformType = _objectsPoolModel.lastPooledPlatform.platformType;
 		_objectsPoolModel.lastPooledPlatform.platformType = platformType;
 
 		//Debug.LogFormat ("Pooling platform: {0}. Already instantiated: {1}",platformView.name, _instantiatedPlatformsList.Count);

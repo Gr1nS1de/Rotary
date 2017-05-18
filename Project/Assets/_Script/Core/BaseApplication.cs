@@ -20,18 +20,6 @@ public abstract class BaseApplication<G, U> : BaseApplication
 
 public abstract class BaseApplication : Element
 {
-
-	private void Awake()
-	{
-		InitTweening ();
-		Notify( N.RCAwakeLoad );
-	}
-
-	private void Start()
-	{		
-		
-		Notify(N.OnStart);
-	}
 		
 	public void Notify( string alias, Object target, params object[] data )
 	{
@@ -72,11 +60,4 @@ public abstract class BaseApplication : Element
 		} );
 	}
 
-	private void InitTweening()
-	{
-		//DOTween.KillAll();	
-
-		//if (Time.realtimeSinceStartup < 1)
-		DOTween.Init ();
-	}
 }

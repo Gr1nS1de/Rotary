@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-//using DG.Tweening;
+using DG.Tweening;
 //using Destructible2D;
 
 #if UNITY_5_3_OR_NEWER
@@ -27,21 +27,43 @@ public class GM : Controller
 		{
 			Instance = this;
 
+			InitGameSettings ();
+			InitTweening ();
 			Localization.InitLanguage ();
-
-			float screenHeight = Camera.main.orthographicSize * 2.0f;
-			float screenWidth = screenHeight * Camera.main.aspect;
-
-			ScreenSize = new Vector2 (screenWidth, screenHeight);
-
-			if(_analyticsManager == null)
-				_analyticsManager = new AnalyticsManager ();
 		}
 		else
 		{
 			if (Instance != this)
 				Destroy (this.gameObject);
 		}
+	}
+
+	private void InitGameSettings()
+	{
+		float screenHeight = Camera.main.orthographicSize * 2.0f;
+		float screenWidth = screenHeight * Camera.main.aspect;
+
+		ScreenSize = new Vector2 (screenWidth, screenHeight);
+
+		if(_analyticsManager == null)
+			_analyticsManager = new AnalyticsManager ();
+
+		Notify( N.RCAwakeLoad );
+	}
+
+	private void InitTweening()
+	{
+		//DOTween.KillAll();	
+
+		//if (Time.realtimeSinceStartup < 1)
+		DOTween.Init ();
+		//DOTween.defaultAutoPlay = AutoPlay.None;
+	}
+
+	void Start()
+	{		
+
+		Notify(N.OnStart);
 	}
 		
 	public override void OnNotification (string alias, Object target, params object[] data)
