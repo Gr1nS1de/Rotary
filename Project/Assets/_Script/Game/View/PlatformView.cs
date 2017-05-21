@@ -38,6 +38,7 @@ public class PlatformView : PoolingObjectView, IPoolObject
 					break;
 				}
 
+			case PlatformTypes.Vertical_Moving:
 			case PlatformTypes.Vertical:
 				{
 					Vector3 verticalPlatformSize = VerticalPlatformRenderers [0].bounds.size;
@@ -74,6 +75,11 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 			case PlatformTypes.Vertical:
 				{
+					break;
+				}
+
+			case PlatformTypes.Vertical_Moving:
+				{
 					float screenHeight = GM.Instance.ScreenSize.y;
 
 					_platformInitSequence
@@ -107,6 +113,12 @@ public class PlatformView : PoolingObjectView, IPoolObject
 					isVisible = VerticalPlatformRenderers [0].isVisible;
 					break;
 				}
+
+			case PlatformTypes.Vertical_Moving:
+				{
+					isVisible = VerticalPlatformRenderers [0].isVisible;
+					break;
+				}
 		}
 
 		return isVisible;
@@ -125,6 +137,12 @@ public class PlatformView : PoolingObjectView, IPoolObject
 				}
 
 			case PlatformTypes.Vertical:
+				{
+					rendererSize = VerticalPlatformRenderers [0].bounds.size;
+					break;
+				}
+
+			case PlatformTypes.Vertical_Moving:
 				{
 					rendererSize = VerticalPlatformRenderers [0].bounds.size;
 					break;

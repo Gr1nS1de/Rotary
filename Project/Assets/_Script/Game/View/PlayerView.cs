@@ -20,10 +20,11 @@ public class PlayerView : View
 	private float 				_offsetBackspeedRate = 0f;
 	private float 				_backOffsetSpeed = 0f;
 
-	void Awake()
-	{
-		//_playerRB = GetComponent<Rigidbody2D> ();
-	}
+	//initialize values 
+	void Start() 
+	{ 
+		//_playerRB = PlayerRenderer.GetComponent<Rigidbody2D>();
+	} 
 
 	public void OnInit(Vector3 initPosition)
 	{

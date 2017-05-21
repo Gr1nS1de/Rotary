@@ -21,6 +21,7 @@ public class PlatformViewEditor : Editor
 					break;
 				}
 
+			case PlatformTypes.Vertical_Moving:
 			case PlatformTypes.Vertical:
 				{
 					_mainRenderer = serializedObject.FindProperty ("VerticalPlatformRenderers");
@@ -36,6 +37,9 @@ public class PlatformViewEditor : Editor
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
 		data.PlatformType = (PlatformTypes)EditorGUILayout.EnumPopup("Platform Type", data.PlatformType);  
 
+		EditorGUILayout.PropertyField(_mainRenderer, true);
+
+		/*
 		switch (data.PlatformType)
 		{
 			case PlatformTypes.Horizontal:
@@ -50,7 +54,7 @@ public class PlatformViewEditor : Editor
 					EditorGUILayout.PropertyField(_mainRenderer, true);
 					break;
 				}
-		}
+		}*/
 				
 		serializedObject.ApplyModifiedProperties();
 	}
