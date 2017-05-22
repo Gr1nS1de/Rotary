@@ -22,6 +22,7 @@ public enum AnalyticsResoucesCurrency
     notdefined,
 	Coin,
 	Crystal,
+	Magnet,
    	Life
 }
 

@@ -199,7 +199,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
-					Debug.LogErrorFormat ("On player impact me. {0}",transform.name);
+					//Debug.LogErrorFormat ("On player impact me. {0}",transform.name);
 					if (_itemImpactSequence == null)
 					{
 						_itemImpactSequence = DOTween.Sequence ();
