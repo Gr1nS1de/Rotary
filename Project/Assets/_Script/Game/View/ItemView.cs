@@ -183,9 +183,9 @@ public class ItemView : PoolingObjectView
 						_itemImpactSequence = DOTween.Sequence ();
 
 						_itemImpactSequence
-							.Append (CoinRenderer.transform.DOPunchScale(new Vector3(1f, 1f, 0f), 0.2f, 1))
-							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.3f, 0, 0))
-							.Insert(0.1f, CoinRenderer.DOFade(0f, 0.3f))
+							.Append (CoinRenderer.transform.DOPunchScale(new Vector3(1f, 1f, 0f), 0.3f, 1))
+							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.4f, 0, 0))
+							.Insert(0.2f, CoinRenderer.DOFade(0f, 0.3f))
 							.Append(CoinRenderer.transform.DOPunchScale(-Vector3.one * 1.5f, 0.2f, 0, 0f))
 							.Insert(0.05f, CountRenderer.transform.DOLocalMoveY(2f, 0.5f))
 							.Insert(0.05f, CountRenderer.DOFade(1f, 0.1f))

@@ -75,7 +75,7 @@ public class GameModel : Model
 	public GameSpeedState	 			gameSpeedState			{ get { return _gameSpeedState; } 	set { _gameSpeedState = value;}}
 	public int	 						playedGamesCount		{ get { return _playedGamesCount; } set { _playedGamesCount = value;}}
 	public GameType						gameType				{ get { return _gameType; } 		set { _gameType = value;}}
-	public GameOverData					gameOverData			{ get { return _gameOverData; } 		set { _gameOverData = value;}}
+	public GameOverData					gameOverData			{ get { return _gameOverData; } 	set { _gameOverData = value;}}
 
 	private GameOverData				_gameOverData			 = new GameOverData ();
 	[SerializeField]
@@ -105,7 +105,9 @@ public class GameModel : Model
 	public ItemsFactoryModel			itemsFactoryModel		{ get { return _itemsFactoryModel			= SearchLocal<ItemsFactoryModel>(			_itemsFactoryModel,			typeof(ItemsFactoryModel).Name );}}
 	public BonusesFactoryModel			bonusesFactoryModel		{ get { return _bonusesFactoryModel			= SearchLocal<BonusesFactoryModel>(			_bonusesFactoryModel,		typeof(BonusesFactoryModel).Name );}}
 	public ItemModel					itemModel				{ get { return _itemModel					= SearchLocal<ItemModel>(					_itemModel,					typeof(ItemModel).Name );}}
+	public PlatformModel				platformModel			{ get { return _platformModel				= SearchLocal<PlatformModel>(				_platformModel,				typeof(PlatformModel).Name );}}
 
+	private PlatformModel					_platformModel;
 	private ItemModel					_itemModel;
 	private BonusesFactoryModel			_bonusesFactoryModel;
 	private ItemsFactoryModel			_itemsFactoryModel;

@@ -10,6 +10,9 @@ public enum PlatformTypes
 
 public class PlatformModel : Model
 {
+	public float	horizontalPlatformInputSpeed	{ get { return _horizontalPlatformInputSpeed; }	set { _horizontalPlatformInputSpeed = value;} }
 
+	[SerializeField]
+	private float	_horizontalPlatformInputSpeed	 = 0.02f;
 }
 

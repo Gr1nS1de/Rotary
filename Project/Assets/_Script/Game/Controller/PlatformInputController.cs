@@ -9,6 +9,8 @@ public class PlatformInputController : Controller
 
 	private Vector2 _screenSize;
 	private Vector3 _horizontalPlatformSize;
+	private float 	_smoothStartAccumulative = 0;
+	private Tweener	_smoothStartTween;
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -69,11 +71,23 @@ public class PlatformInputController : Controller
 					if(!_selectedPlatformsDictionary.ContainsKey(selectedPlatform))
 						_selectedPlatformsDictionary.Add (selectedPlatform, selectedPointDelta);
 
+					if (_selectedPlatformsDictionary.Count == 1)
+						_smoothStartAccumulative = 0.5f;
+
+					if (_smoothStartTween != null && _smoothStartTween.IsActive ())
+						_smoothStartTween.Kill ();
+
+					_smoothStartTween = 
+						DOVirtual.Float (_smoothStartAccumulative, 0f, 0.1f, (val ) =>
+						{
+							_smoothStartAccumulative = val;
+						}).SetUpdate(UpdateType.Fixed);
 					break;
 				}
 
 			case FingerMotionPhase.Updated:
 				{
+					
 					MovePlatform (selectedPlatform ,inputPoint.y);
 					break;
 				}
@@ -82,6 +96,18 @@ public class PlatformInputController : Controller
 				{
 					if (_selectedPlatformsDictionary.ContainsKey (selectedPlatform))
 						_selectedPlatformsDictionary.Remove (selectedPlatform);
+
+					if (_selectedPlatformsDictionary.Count == 0)
+					{
+						if (_smoothStartTween.IsActive ())
+							_smoothStartTween.Kill ();
+						
+						_smoothStartTween = 
+							DOVirtual.Float (_smoothStartAccumulative, 0.1f, 0.05f, (val ) =>
+							{
+								_smoothStartAccumulative = val;
+							});
+					}
 					break;
 				}
 		}
@@ -92,7 +118,10 @@ public class PlatformInputController : Controller
 	{
 		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
 
-		selectedPlatform.DOMoveY (positionY, 0.05f).SetEase(Ease.Linear).SetUpdate(UpdateType.Fixed);
+		selectedPlatform
+			.DOMoveY (positionY, game.model.platformModel.horizontalPlatformInputSpeed * (1 + _smoothStartAccumulative))
+			.SetEase(Ease.Linear)
+			.SetUpdate(UpdateType.Fixed);
 	}
 
 	private void OnGameOver()
