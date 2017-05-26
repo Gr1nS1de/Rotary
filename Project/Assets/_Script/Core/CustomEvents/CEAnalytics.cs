@@ -9,9 +9,9 @@ public enum AnalyticsEventName
 {
     Undifined,
 	GameStates_v1,
-	BuySkin_v1,
-	BuyTheme_v1,
-	FirstBattles_v1
+	BuyPlayerSkin_v1,
+	BuyGameTheme_v1,
+	First100Games_v1
 }
 
 public class CEAnalytics : CustomEvent

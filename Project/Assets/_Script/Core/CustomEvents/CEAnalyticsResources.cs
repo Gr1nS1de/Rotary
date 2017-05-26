@@ -29,7 +29,7 @@ public enum AnalyticsResoucesCurrency
 public enum AnalyticsItemType
 {
     notdefined,
-    PurchaseShop,	
+    PurchaseInGame,	
 	GameResult
 }
 

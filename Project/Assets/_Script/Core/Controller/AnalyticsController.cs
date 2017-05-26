@@ -27,13 +27,13 @@ public class AnalyticsController : Controller
 						Parameters = new Dictionary<string, object>() { { string.Format("01_{0}GameStart", game.model.gameType.ToString()), null } }
 					});
 
-					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 10)
+					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 100)
 					{
 						CustomEventDelegate.OnEvent (new CEAnalytics
 						{
-							EventName = AnalyticsEventName.FirstBattles_v1,
+							EventName = AnalyticsEventName.First100Games_v1,
 							IsHasEventValue = false,
-							Parameters = new Dictionary<string, object>() { { string.Format("{0}_{1}GameStart", game.model.playedGamesCount, game.model.gameType.ToString()), null } }
+							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameStart", game.model.playedGamesCount, game.model.gameType.ToString()), null } }
 						});
 					}
 
@@ -85,21 +85,21 @@ public class AnalyticsController : Controller
 						Parameters = new Dictionary<string, object>() { { string.Format("04_{0}GameOver", gameOverData.GameType.ToString()), null } }
 					});
 
-					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 11)
+					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 101)
 					{
 						CustomEventDelegate.OnEvent (new CEAnalytics
 						{
-							EventName = AnalyticsEventName.FirstBattles_v1,
+							EventName = AnalyticsEventName.First100Games_v1,
 							IsHasEventValue = false,
-							Parameters = new Dictionary<string, object>() { { string.Format("{0}_{1}GameOver", game.model.playedGamesCount, gameOverData.GameType.ToString()), null } }
+							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameOver", game.model.playedGamesCount, gameOverData.GameType.ToString()), null } }
 						});
 					}
 
 					CustomEventDelegate.OnEvent(new CEAnalyticsProgression()
 					{
 						progressionStatus = GameAnalyticsSDK.GAProgressionStatus.Complete,
-						progression01 = string.Format("{0}_{1}GameCompleted",game.model.playedGamesCount, gameOverData.GameType.ToString()),
-						progression02 = null,
+						progression01 = string.Format("{0}Game", gameOverData.GameType.ToString()),
+						progression02 = string.Format("{0:00}_GameCompleted",game.model.playedGamesCount),
 						progression03 = null,
 						value = game.model.currentScore
 					});
@@ -123,7 +123,7 @@ public class AnalyticsController : Controller
 				flowType = GAResourceFlowType.Source,
 				amount = gameOverData.CoinsCount,
 				resourceCurrency = AnalyticsResoucesCurrency.Coin,
-				itemId = string.Format("{0}_{1}Game", game.model.playedGamesCount, gameOverData.GameType.ToString()),
+				itemId = string.Format("{0}Game", gameOverData.GameType.ToString()),
 				itemType = AnalyticsItemType.GameResult
 			});
 		}
@@ -135,7 +135,7 @@ public class AnalyticsController : Controller
 				flowType = GAResourceFlowType.Source,
 				amount = gameOverData.CrystalsCount,
 				resourceCurrency = AnalyticsResoucesCurrency.Crystal,
-				itemId = string.Format ("{0}_{1}Game", game.model.playedGamesCount, gameOverData.GameType.ToString()),
+				itemId = string.Format("{0}Game", gameOverData.GameType.ToString()),
 				itemType = AnalyticsItemType.GameResult
 			});
 		}
@@ -147,7 +147,7 @@ public class AnalyticsController : Controller
 				flowType = GAResourceFlowType.Source,
 				amount = gameOverData.MagnetsCount,
 				resourceCurrency = AnalyticsResoucesCurrency.Magnet,
-				itemId = string.Format("{0}_{1}Game", game.model.playedGamesCount, gameOverData.GameType.ToString()),
+				itemId = string.Format("{0}Game", gameOverData.GameType.ToString()),
 				itemType = AnalyticsItemType.GameResult
 			});
 		}
