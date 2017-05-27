@@ -21,7 +21,7 @@ public class ResourcesController : Controller
 					GameThemeType gameThemeType = (GameThemeType)data [0];
 
 					LoadGameTheme (gameThemeType);
-					LoadMenuTheme (gameThemeType);
+					//LoadMenuTheme (gameThemeType);
 					break;
 				}
 		}
@@ -34,8 +34,9 @@ public class ResourcesController : Controller
 
 	private void LoadGameTheme(GameThemeType gameThemeType)
 	{
-		BackgroundView backgroundView = Resources.LoadAll<BackgroundView> (string.Format ("Theme/({0:00)_{1}", (int)gameThemeType, gameThemeType))[0];
-		List<PlatformView> platformsViewList = new List<PlatformView>( Resources.LoadAll<PlatformView> (string.Format ("Theme/({0:00)_{1}", (int)gameThemeType, gameThemeType)));
+		BackgroundView backgroundView = Resources.LoadAll<BackgroundView> (string.Format ("Theme/{0:00}_{1}", (int)gameThemeType, gameThemeType))[0];
+		List<PlatformView> platformsViewList = new List<PlatformView>( Resources.LoadAll<PlatformView> (string.Format ("Theme/{0:00}_{1}", (int)gameThemeType, gameThemeType)));
+
 
 		//Debug.LogErrorFormat("backgroundView = {0}. platformView = {1}. load resources path = {2}",backgroundView != null, platformsViewList != null, string.Format ("Theme/_{0}", gameThemeType) );
 		GameTheme gameTheme = new GameTheme 
