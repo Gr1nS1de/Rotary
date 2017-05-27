@@ -13,7 +13,7 @@ public class UIController : Controller
 	private UIMainMenuController	_UIMenuController;
 	#endregion
 
-	private UIMainMenuModel	UIMenuModel	{ get { return ui.model.UIMainMenuModel; } }
+	private MainMenuModel	UIMenuModel	{ get { return ui.model.UIMainMenuModel; } }
 	private UIGameModel UIGameModel	{ get { return ui.model.UIGameModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
@@ -50,15 +50,18 @@ public class UIController : Controller
 
 	void OnStart()
 	{
-		//UpdateText();
-		//UIGameModel.canvasGroupInGame.alpha = 0;
-		//UIMenuModel.canvasGroupStart.alpha = 1f;
 	}
+
+	#region public methods
+	public void SetMenuTheme(MenuTheme menuTheme)
+	{
+		ui.model.menuTheme = menuTheme;
+
+	}
+	#endregion
 		
 	void UpdateText()
 	{
-		//UIMenuModel.bestScoreText.text = "BEST " + Utils.GetBestScore().ToString();
-		//UIMenuModel.lastScoreText.text = "LAST " + Utils.GetLastScore().ToString();
 	}
 
 	public void OnStartGame(System.Action complete)

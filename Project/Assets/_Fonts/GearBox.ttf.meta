@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2e42c092acb8a4e86b8556fdc2a807f6
+timeCreated: 1495839191
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: GearBox
+  fontNames:
+  - GearBox
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

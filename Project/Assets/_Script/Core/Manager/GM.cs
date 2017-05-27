@@ -36,10 +36,13 @@ public class GM : Controller
 			if (Instance != this)
 				Destroy (this.gameObject);
 		}
+			
 	}
 
 	private void InitGameSettings()
 	{
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
 		float screenHeight = Camera.main.orthographicSize * 2.0f;
 		float screenWidth = screenHeight * Camera.main.aspect;
 

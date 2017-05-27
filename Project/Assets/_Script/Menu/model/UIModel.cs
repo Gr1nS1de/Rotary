@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public enum UIState
@@ -11,22 +12,31 @@ public enum UIState
 	SHOP
 }
 
+[System.Serializable]
+public struct MenuTheme
+{
+	public GameThemeType GameThemeType;
+}
+
 public class UIModel : Model
 {
 
 	#region UI Model
 	public UIState					uiState				{ get { return _uiState; } 		set { _uiState 	= value; } }
+	public MenuTheme 				menuTheme			{ get { return _menuTheme; } 	set { _menuTheme = value;} }
 
 	[SerializeField]
 	private UIState					_uiState 			= UIState.MAIN_MENU;
+	[SerializeField]
+	private MenuTheme				_menuTheme;
 	#endregion
 
 	#region Declare models reference
 	public UIGameModel			UIGameModel				{ get { return _UIGameModel 		= SearchLocal<UIGameModel>(			_UIGameModel,		typeof(UIGameModel).Name);	} }
-	public UIMainMenuModel		UIMainMenuModel			{ get { return _UIMainMenuModel		= SearchLocal<UIMainMenuModel>(		_UIMainMenuModel,	typeof(UIMainMenuModel).Name);	} }
+	public MainMenuModel		UIMainMenuModel			{ get { return _UIMainMenuModel		= SearchLocal<MainMenuModel>(		_UIMainMenuModel,	typeof(MainMenuModel).Name);	} }
 
 	private UIGameModel			_UIGameModel;
-	private UIMainMenuModel		_UIMainMenuModel;
+	private MainMenuModel		_UIMainMenuModel;
 	#endregion
 }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UIMainMenuController : Controller
 {
-	private UIMainMenuModel 		_uiMainMenuModel			{ get { return ui.model.UIMainMenuModel; } }
+	private MainMenuModel 		_uiMainMenuModel			{ get { return ui.model.UIMainMenuModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -54,7 +54,7 @@ public class UIMainMenuController : Controller
 
 	private void SetActivePlayButton(bool isActive)
 	{
-		Button playButton = ui.model.UIMainMenuModel.buttonPlay;
+		Button playButton = ui.view.mainMenuView.ButtonPlay;
 
 		playButton.gameObject.SetActive (isActive);
 	}

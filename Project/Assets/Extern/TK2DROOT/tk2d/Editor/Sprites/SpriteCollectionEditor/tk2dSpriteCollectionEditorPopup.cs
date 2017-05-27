@@ -52,7 +52,7 @@ public class tk2dSpriteCollectionEditorPopup : EditorWindow, IEditorHost
 {
 	tk2dSpriteCollection _spriteCollection; // internal tmp var
 	SpriteView spriteView;
-	SettingsView settingsView;
+	tk2dEditor.SpriteCollectionEditor.SettingsView settingsView;
 	FontView fontView;
 	SpriteSheetView spriteSheetView;
 	
@@ -131,7 +131,7 @@ public class tk2dSpriteCollectionEditorPopup : EditorWindow, IEditorHost
 	void UpdateSelection()
 	{
 		// clear settings view if its selected
-		settingsView.show = false;
+		((tk2dEditor.SpriteCollectionEditor.SettingsView) settingsView).show = false;
 		
 		selectedEntries = (from entry in entries where entry.selected == true orderby entry.selectionKey select entry).ToList();
 	}
@@ -307,7 +307,7 @@ public class tk2dSpriteCollectionEditorPopup : EditorWindow, IEditorHost
 		}
 		
 		spriteView = new SpriteView(this);
-		settingsView = new SettingsView(this);
+		settingsView = new tk2dEditor.SpriteCollectionEditor.SettingsView(this);
 		fontView = new FontView(this);
 		spriteSheetView = new SpriteSheetView(this);
 	}
@@ -419,10 +419,10 @@ public class tk2dSpriteCollectionEditorPopup : EditorWindow, IEditorHost
 		else
 		{
 			bool newSettingsView = GUILayout.Toggle(settingsView.show, "Settings", EditorStyles.toolbarButton);
-			if (newSettingsView != settingsView.show)
+			if (newSettingsView != ((tk2dEditor.SpriteCollectionEditor.SettingsView) settingsView).show)
 			{
 				ClearSelection();
-				settingsView.show = newSettingsView;
+				((tk2dEditor.SpriteCollectionEditor.SettingsView) settingsView).show = newSettingsView;
 			}
 		}
 		
@@ -913,7 +913,7 @@ public class tk2dSpriteCollectionEditorPopup : EditorWindow, IEditorHost
 		else
 			DrawSpriteList();
 
-		if (settingsView.show || (spriteCollectionProxy != null && spriteCollectionProxy.Empty)) settingsView.Draw();
+		if (((tk2dEditor.SpriteCollectionEditor.SettingsView) settingsView).show || (spriteCollectionProxy != null && spriteCollectionProxy.Empty)) ((tk2dEditor.SpriteCollectionEditor.SettingsView) settingsView).Draw();
 		else if (fontView.Draw(selectedEntries)) { }
 		else if (spriteSheetView.Draw(selectedEntries)) { }
 		else spriteView.Draw(selectedEntries);
