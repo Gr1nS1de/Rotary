@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ThemeElementView : View
 {
 	public Button ButtonBackground;
-	public Graphic ImageIcon;
+	public Graphic[] GraphicIcons;
 
 }
 

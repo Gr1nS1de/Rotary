@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class UIGameModel : Model 
 {
-	public CanvasGroup 					canvasGroupInGame		{ get { return _canvasGroupInGame; } }
 	public Text							scoreText				{ get { return _scoreText; } }
 	public Slider						scoreSlider				{ get { return _scoreSlider; } }
 	public GameObject					itemSpotPrefab			{ get { return _itemSpotPrefab; } }
 	public GameObject					itemSpotsContainer		{ get { return _itemSpotsContainer; } }
 	public Dictionary<int, GameObject>	itemsDictionaryByScore	{ get { return _itemsDictionaryByScore; } }
 	public Color						itemDeactivatedColor	{ get { return _itemDeactivatedColor; } }
+	public CanvasGroup 					canvasGroupInGame		{ get { return _canvasGroupInGame; } }
 
 	[SerializeField]
 	private CanvasGroup					_canvasGroupInGame;

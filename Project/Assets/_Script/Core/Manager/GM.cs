@@ -52,6 +52,7 @@ public class GM : Controller
 			_analyticsManager = new AnalyticsManager ();
 
 		Notify( N.RCAwakeLoad );
+		SetGameTheme(DefaultGameTheme);
 	}
 
 	private void InitTweening()
@@ -80,6 +81,11 @@ public class GM : Controller
 				}
 		}
 
+	}
+
+	public void SetGameTheme(GameThemeType gameThemeType)
+	{
+		Notify (N.RCLoadGameTheme_, NotifyType.CORE, gameThemeType);
 	}
 	/*
 	public Gradient		backgroundMenuGradient 	{ get { return _backgroundMenuGradient; }		set { _backgroundMenuGradient = value; } } 

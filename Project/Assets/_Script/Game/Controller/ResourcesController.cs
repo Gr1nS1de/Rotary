@@ -58,14 +58,12 @@ public class ResourcesController : Controller
 		List<PlatformView> platformsViewList = new List<PlatformView>( Resources.LoadAll<PlatformView> (string.Format ("Theme/({0:00)_{1}", (int)gameThemeType, gameThemeType)));
 
 		//Debug.LogErrorFormat("backgroundView = {0}. platformView = {1}. load resources path = {2}",backgroundView != null, platformsViewList != null, string.Format ("Theme/_{0}", gameThemeType) );
-		GameTheme gameTheme = new GameTheme 
+		UITheme menuTheme = new UITheme 
 		{
-			GameThemeType = gameThemeType,
-			BackgroundView = backgroundView,
-			PlatformsViewList = platformsViewList,
+			GameThemeType = gameThemeType
 		};
 
-		game.controller.SetGameTheme (gameTheme);
+		ui.controller.SetMenuTheme (menuTheme);
 
 	}
 }

@@ -39,7 +39,6 @@ public class GameController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
-					Notify (N.RCLoadGameTheme_, NotifyType.CORE, GM.Instance.DefaultGameTheme);
 					break;
 				}
 
@@ -109,12 +108,15 @@ public class GameController : Controller
 			Destroy (game.view.backgroundView.gameObject);
 
 		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
+	
+		Notify (N.GameThemeChanged_, NotifyType.GAME, gameTheme);
 	}
 	#endregion
 
 	private void OnStart()
 	{
 		game.model.playedGamesCount = PlayerPrefs.GetInt (Prefs.PlayerData.GamesPlayedCount);
+
 	}
 
 	void Update()

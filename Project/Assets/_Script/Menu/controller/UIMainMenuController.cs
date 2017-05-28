@@ -19,7 +19,7 @@ public class UIMainMenuController : Controller
 
 			case N.GameAddScore:
 				{
-					_uiMainMenuModel.bestScoreText.text = game.model.currentScore.ToString();
+					//_uiMainMenuModel.bestScoreText.text = game.model.currentScore.ToString();
 					break;
 				}
 

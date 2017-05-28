@@ -17,6 +17,15 @@ public class N : MonoBehaviour
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnItemInvisible_			= "on.item.invisible";
 	public const string OnPlayerInvisible			= "on.player.invisible";
+
+	public const string GameThemeChanged_			= "game.theme.changed";
+	#endregion
+
+	#region Menu notifications
+	public const string UIThemeChanged_				= "ui.theme.changed";
+
+	public const string CenterButtonPressed_ 		= "center.button.pressed";
+	public const string RightButtonPressed_ 		= "right.button.pressed";
 	#endregion
 
 	#region player notifications
