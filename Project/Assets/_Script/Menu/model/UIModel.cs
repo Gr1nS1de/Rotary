@@ -16,6 +16,7 @@ public enum UIState
 public struct MenuTheme
 {
 	public GameThemeType GameThemeType;
+	public Color IconsColor;
 }
 
 public class UIModel : Model

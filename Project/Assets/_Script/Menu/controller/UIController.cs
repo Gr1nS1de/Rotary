@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class UIController : Controller
 {
 	#region Declare controllers reference
-	public UIGameController		UIGameController				{ get { return _UIGameController 		= SearchLocal<UIGameController>(			_UIGameController,		typeof(UIGameController).Name);	} }
+	public UIGameController			UIGameController				{ get { return _UIGameController 		= SearchLocal<UIGameController>(			_UIGameController,		typeof(UIGameController).Name);	} }
 	public UIMainMenuController		UIMenuController				{ get { return _UIMenuController		= SearchLocal<UIMainMenuController>(			_UIMenuController,		typeof(UIMainMenuController).Name);	} }
 
-	private UIGameController	_UIGameController;
+	private UIGameController		_UIGameController;
 	private UIMainMenuController	_UIMenuController;
 	#endregion
 
 	private MainMenuModel	UIMenuModel	{ get { return ui.model.UIMainMenuModel; } }
-	private UIGameModel UIGameModel	{ get { return ui.model.UIGameModel; } }
+	private UIGameModel 	UIGameModel	{ get { return ui.model.UIGameModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{

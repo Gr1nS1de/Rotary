@@ -116,6 +116,9 @@ public class PlatformInputController : Controller
 
 	private void MovePlatform(Transform selectedPlatform, float inputY)
 	{
+		if (selectedPlatform == null || !_selectedPlatformsDictionary.ContainsKey(selectedPlatform))
+			return;
+		
 		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
 
 		selectedPlatform
