@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RightButtonsController : Controller
 {
-	public System.Action<UITheme> ActionUIThemeChanged;
+	public System.Action<UITheme> ActionUIThemeChanged = delegate{};
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -28,6 +28,14 @@ public class RightButtonsController : Controller
 					UITheme uiTheme = (UITheme)data [0];
 
 					ActionUIThemeChanged (uiTheme);
+					break;
+				}
+
+			case N.UIStateChanged_:
+				{
+					UIState uiState = (UIState)data [0];
+
+
 					break;
 				}
 		}

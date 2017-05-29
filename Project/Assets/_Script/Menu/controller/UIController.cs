@@ -59,9 +59,11 @@ public class UIController : Controller
 	#region public methods
 	public void SetMenuTheme(UITheme menuTheme)
 	{
+		menuTheme.IconsColor = ui.model.menuTheme.IconsColor;
+
 		ui.model.menuTheme = menuTheme;
 
-		Notify (N.UIThemeChanged_, NotifyType.GAME, menuTheme);
+		Notify (N.UIThemeChanged_, NotifyType.UI, menuTheme);
 	}
 
 	public void GoToState(UIState uiState)
@@ -77,6 +79,8 @@ public class UIController : Controller
 		});
 
 		ui.model.uiState = uiState;
+
+		Notify (N.UIStateChanged_, NotifyType.UI, uiState);
 	}
 	#endregion
 

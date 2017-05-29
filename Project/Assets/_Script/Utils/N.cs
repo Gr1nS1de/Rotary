@@ -23,6 +23,7 @@ public class N : MonoBehaviour
 
 	#region Menu notifications
 	public const string UIThemeChanged_				= "ui.theme.changed";
+	public const string UIStateChanged_				= "ui.state.changed";
 
 	public const string CenterButtonPressed_ 		= "center.button.pressed";
 	public const string RightButtonPressed_ 		= "right.button.pressed";

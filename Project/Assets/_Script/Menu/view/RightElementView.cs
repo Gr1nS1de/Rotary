@@ -7,7 +7,7 @@ public class RightElementView : ThemeElementView
 {
 	public RightElementId ElementId;
 
-	void Start()
+	void Awake()
 	{
 		RegisterEvents ();
 	}

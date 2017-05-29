@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CenterButtonsController : Controller
 {
-	public System.Action<UITheme> ActionUIThemeChanged;
+	public System.Action<UITheme> ActionUIThemeChanged = delegate{};
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{

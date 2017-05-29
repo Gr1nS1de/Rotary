@@ -7,7 +7,7 @@ public class CenterElementView : ThemeElementView
 {
 	public CenterElementId ElementId;
 
-	void Start()
+	void Awake()
 	{
 		RegisterEvents ();
 	}
@@ -40,7 +40,7 @@ public class CenterElementView : ThemeElementView
 			ButtonBackground.onClick.AddListener( OnButtonClicked);
 		}
 
-		ui.controller.RightButtonsController.ActionUIThemeChanged += OnUIThemeChanged;
+		ui.controller.CenterButtonsController.ActionUIThemeChanged += OnUIThemeChanged;
 	}
 
 	private void UnregisterEvents()
@@ -50,8 +50,8 @@ public class CenterElementView : ThemeElementView
 			ButtonBackground.onClick.RemoveListener(OnButtonClicked);
 		}
 
-		if(ui.controller.RightButtonsController != null)
-			ui.controller.RightButtonsController.ActionUIThemeChanged -= OnUIThemeChanged;
+		if(ui.controller.CenterButtonsController != null)
+			ui.controller.CenterButtonsController.ActionUIThemeChanged -= OnUIThemeChanged;
 	}
 }
 

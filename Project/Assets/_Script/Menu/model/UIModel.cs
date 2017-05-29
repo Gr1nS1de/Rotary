@@ -22,6 +22,9 @@ public struct UITheme
 {
 	public GameThemeType GameThemeType;
 	public Color IconsColor;
+	public Sprite PlayButtonBGSprite;
+	public Sprite CenterButtonsBGSprite;
+	public Sprite RightButtonsBGSPrite;
 }
 
 public class UIModel : Model
