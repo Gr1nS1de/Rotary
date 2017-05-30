@@ -12,6 +12,11 @@ public class RightElementView : ThemeElementView
 		RegisterEvents ();
 	}
 
+	void OnEnable()
+	{
+		ChangeUITheme (ui.model.menuTheme, true);
+	}
+
 	void OnDestroy()
 	{
 		UnregisterEvents ();
@@ -19,12 +24,24 @@ public class RightElementView : ThemeElementView
 
 	private void OnUIThemeChanged(UITheme menuTheme)
 	{
+		ChangeUITheme (menuTheme);
+	}
+
+	private void ChangeUITheme(UITheme menuTheme, bool isImmediate = false)
+	{
 		if (GraphicIcons == null || GraphicIcons.Length <= 0)
 			return;
 
 		foreach (Graphic element in GraphicIcons)
 		{
-			element.DOColor(menuTheme.IconsColor, 0.3f);
+			if (isImmediate)
+			{
+				element.color = menuTheme.IconsColor;
+			}
+			else
+			{
+				element.DOColor (menuTheme.IconsColor, 0.3f);
+			}
 		}
 	}
 

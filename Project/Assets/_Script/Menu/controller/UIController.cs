@@ -59,8 +59,6 @@ public class UIController : Controller
 	#region public methods
 	public void SetMenuTheme(UITheme menuTheme)
 	{
-		menuTheme.IconsColor = ui.model.menuTheme.IconsColor;
-
 		ui.model.menuTheme = menuTheme;
 
 		Notify (N.UIThemeChanged_, NotifyType.UI, menuTheme);
@@ -163,8 +161,23 @@ public class UIController : Controller
 				}
 		}
 
-		if (windowCanvas != null && (windowCanvas.alpha != 1f && isActive || windowCanvas.alpha != 0f && !isActive))
-			windowCanvas.DOFade (enableValue, enableTime);
+		if (windowCanvas != null)
+		{
+			if (isActive)
+			{
+				windowCanvas.alpha = 0f;
+
+				if (!windowCanvas.gameObject.activeInHierarchy)
+					windowCanvas.gameObject.SetActive (isActive);
+				
+					windowCanvas.DOFade (enableValue, enableTime);
+			}
+			else
+			{
+				if (windowCanvas.gameObject.activeInHierarchy)
+					windowCanvas.gameObject.SetActive (isActive);
+			}
+		}
 	}
 		
 	void UpdateText()

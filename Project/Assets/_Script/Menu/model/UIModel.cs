@@ -25,6 +25,7 @@ public struct UITheme
 	public Sprite PlayButtonBGSprite;
 	public Sprite CenterButtonsBGSprite;
 	public Sprite RightButtonsBGSPrite;
+	public Sprite CenterButtonHalfBGSPrite;
 }
 
 public class UIModel : Model

@@ -54,12 +54,11 @@ public class ResourcesController : Controller
 
 	private void LoadMenuTheme(GameThemeType gameThemeType)
 	{
-		Debug.LogErrorFormat ("Loaded path: {0}. sprites: {1}",string.Format ("Theme/{0:00}_{1}/RightButtons", (int)gameThemeType, gameThemeType) , Resources.LoadAll<Sprite> (string.Format ("Theme/{0:00)_{1}/RightButtons", (int)gameThemeType, gameThemeType)).Length);
+		//Debug.LogErrorFormat ("Loaded path: {0}. sprites: {1}",string.Format ("Theme/{0:00}_{1}/RightButtons", (int)gameThemeType, gameThemeType) , Resources.LoadAll<Sprite> (string.Format ("Theme/{0:00)_{1}/RightButtons", (int)gameThemeType, gameThemeType)).Length);
 
 		Sprite rightButtonSprite = Resources.LoadAll<Sprite> (string.Format ("Theme/{0:00}_{1}/RightButtons", (int)gameThemeType, gameThemeType))[0];
 		List<Sprite> centerButtonsSprites = new List<Sprite>( Resources.LoadAll<Sprite> (string.Format ("Theme/{0:00}_{1}/CenterButtons", (int)gameThemeType, gameThemeType)));
-
-		//Debug.LogErrorFormat("backgroundView = {0}. platformView = {1}. load resources path = {2}",backgroundView != null, platformsViewList != null, string.Format ("Theme/_{0}", gameThemeType) );
+		UIThemeModel themeModel = Resources.LoadAll<UIThemeModel> (string.Format ("Theme/{0:00}_{1}", (int)gameThemeType, gameThemeType))[0];
 
 		UITheme menuTheme = new UITheme 
 		{
@@ -75,7 +74,11 @@ public class ResourcesController : Controller
 			else 
 				if (centerButton.name.Contains ("CenterButton"))
 					menuTheme.CenterButtonsBGSprite = centerButton;
+				else if(centerButton.name.Contains("CenterButtonHalf"))
+					menuTheme.CenterButtonHalfBGSPrite = centerButton;
 		}
+
+		menuTheme.IconsColor = themeModel.IconsColor;
 
 		ui.controller.SetMenuTheme (menuTheme);
 
