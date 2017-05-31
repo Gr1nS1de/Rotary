@@ -5,12 +5,18 @@ using DG.Tweening;
 public class CameraView : View<GameActivity>
 {
 	private CameraModel 	_cameraModel	{ get { return game.model.cameraModel; } }
-	private Camera 			_camera			{ get { return GetComponent<Camera> (); } }
+	private Camera 			_camera;
 	private PlayerView		_playerView		{ get { return game.view.playerView; } }
 	private float			_moveSpeed		{ get { return _cameraModel.moveSpeed; } }
 
+	void Start()
+	{
+		_camera = GetComponent<Camera> ();
+	}
+
 	public void OnInit()
 	{
+		
 	}
 
 	void Update()

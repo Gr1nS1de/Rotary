@@ -39,9 +39,9 @@ public class UIModel : Model
 {
 
 	#region UI Model
-	public UIPanelState			uiMainState			{ get { return _uiPanelState; } 	set { _uiPanelState = value;} }
-	public UITheme 				menuTheme			{ get { return _menuTheme; } 	set { _menuTheme = value;} }
-	public UIWindowState				uiState				{ get { return _uiWindowState; } 		set { _uiWindowState 	= value; } }
+	public UIPanelState			uiMainState			{ get { return _uiPanelState; } 	set { _uiPanelState 	= value;} }
+	public UITheme 				menuTheme			{ get { return _menuTheme; } 		set { _menuTheme 		= value;} }
+	public UIWindowState		uiWindowState		{ get { return _uiWindowState; } 	set { _uiWindowState 	= value; } }
 	public CanvasGroup 			mainMenuWindow		{ get { return _mainMenuWindow; } }
 	public CanvasGroup 			storeWindow			{ get { return _storeWindow; } }
 	public CanvasGroup 			settingsWindow		{ get { return _settingsWindow; } }
@@ -81,15 +81,15 @@ public class UIModel : Model
 	[SerializeField]
 	private UITheme				_menuTheme;
 	[SerializeField]
-	private UIPanelState		_uiPanelState;
+	private UIPanelState		_uiPanelState			= UIPanelState.MainMenu;
 	#endregion
 
 	#region Declare models reference
-	public UIGameModel			UIGameModel				{ get { return _UIGameModel 		= SearchLocal<UIGameModel>(			_UIGameModel,		typeof(UIGameModel).Name);	} }
-	public MainMenuModel		UIMainMenuModel			{ get { return _UIMainMenuModel		= SearchLocal<MainMenuModel>(		_UIMainMenuModel,	typeof(MainMenuModel).Name);	} }
+	public InGamePanelModel			InGamePanelModel			{ get { return _inGamePanelModel 		= SearchLocal<InGamePanelModel>(		_inGamePanelModel,		typeof(InGamePanelModel).Name);	} }
+	public MainMenuPanelModel		MainMenuPanelModel			{ get { return _mainMenuPanelModel		= SearchLocal<MainMenuPanelModel>(		_mainMenuPanelModel,	typeof(MainMenuPanelModel).Name);	} }
 
-	private MainMenuModel		_UIMainMenuModel;
-	private UIGameModel			_UIGameModel;
+	private MainMenuPanelModel		_mainMenuPanelModel;
+	private InGamePanelModel		_inGamePanelModel;
 	#endregion
 }
 

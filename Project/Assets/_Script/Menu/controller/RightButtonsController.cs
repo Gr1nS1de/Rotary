@@ -48,7 +48,7 @@ public class RightButtonsController : Controller
 
 	private void OnStart()
 	{
-		UpdateRightButtons (ui.model.uiState);
+		UpdateRightButtons (ui.model.uiWindowState);
 	}
 
 	private void OnButtonPressed(RightElementId rightElementId)

@@ -115,7 +115,7 @@ public class GameController : Controller
 
 	private void OnStart()
 	{
-		game.model.playedGamesCount = PlayerPrefs.GetInt (Prefs.PlayerData.GamesPlayedCount);
+		game.model.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 
 	}
 
@@ -214,9 +214,9 @@ public class GameController : Controller
 		}
 		else
 		{
-			currentPlayedGamesCount = PlayerPrefs.GetInt (Prefs.PlayerData.GamesPlayedCount);
+			currentPlayedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 
-			PlayerPrefs.SetInt (Prefs.PlayerData.GamesPlayedCount, ++currentPlayedGamesCount);
+			Prefs.PlayerData.IncreasePlayedGamesCount ();
 		}
 
 		game.model.playedGamesCount = currentPlayedGamesCount;

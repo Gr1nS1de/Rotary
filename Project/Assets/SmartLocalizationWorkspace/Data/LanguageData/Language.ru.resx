@@ -115,7 +115,25 @@
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader><data name="TK_HELLO_NAME" xml:space="preserve">
-<value>Привет</value>
+  </resheader><data name="TK_LIKE_NAME" xml:space="preserve">
+<value>спасибо за игру!</value>
+</data>
+<data name="TK_LANGUAGE_NAME" xml:space="preserve">
+<value>язык</value>
+</data>
+<data name="TK_SETTINGS_NAME" xml:space="preserve">
+<value>настройки</value>
+</data>
+<data name="TK_GIFT_NAME" xml:space="preserve">
+<value>подарок</value>
+</data>
+<data name="TK_RATE_NAME" xml:space="preserve">
+<value>оценить</value>
+</data>
+<data name="TK_ACHIEVEMENTS_NAME" xml:space="preserve">
+<value>достижения</value>
+</data>
+<data name="TK_STORE_NAME" xml:space="preserve">
+<value>магазин монет</value>
 </data>
 </root>

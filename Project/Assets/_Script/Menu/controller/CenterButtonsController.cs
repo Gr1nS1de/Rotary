@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SmartLocalization;
 
 public class CenterButtonsController : Controller
 {
@@ -69,6 +70,7 @@ public class CenterButtonsController : Controller
 
 			case CenterElementId.Settings_ButtonLanguage:
 				{
+					Localization.InitLanguage(LanguageManager.Instance.CurrentlyLoadedCulture.languageCode == "ru" ? "en" : "ru");	
 					break;
 				}
 

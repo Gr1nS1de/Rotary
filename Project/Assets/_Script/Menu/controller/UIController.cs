@@ -6,19 +6,19 @@ using DG.Tweening;
 public class UIController : Controller
 {
 	#region Declare controllers reference
-	public UIGameController			UIGameController				{ get { return _UIGameController 		= SearchLocal<UIGameController>(		_UIGameController,			typeof(UIGameController).Name);	} }
-	public UIMainMenuController		UIMenuController				{ get { return _UIMenuController		= SearchLocal<UIMainMenuController>(	_UIMenuController,			typeof(UIMainMenuController).Name);	} }
-	public CenterButtonsController	CenterButtonsController			{ get { return _centerButtonsController	= SearchLocal<CenterButtonsController>(	_centerButtonsController,	typeof(CenterButtonsController).Name);	} }
-	public RightButtonsController	RightButtonsController			{ get { return _rightButtonsController	= SearchLocal<RightButtonsController>(	_rightButtonsController,	typeof(RightButtonsController).Name);	} }
+	public InGamePanelController		InGamePanelController			{ get { return _inGamePanelController 		= SearchLocal<InGamePanelController>(		_inGamePanelController,		typeof(InGamePanelController).Name);	} }
+	public MainMenuPanelController		MainMenuPanelController			{ get { return _mainMenuPanelController		= SearchLocal<MainMenuPanelController>(		_mainMenuPanelController,	typeof(MainMenuPanelController).Name);	} }
+	public CenterButtonsController		CenterButtonsController			{ get { return _centerButtonsController		= SearchLocal<CenterButtonsController>(		_centerButtonsController,	typeof(CenterButtonsController).Name);	} }
+	public RightButtonsController		RightButtonsController			{ get { return _rightButtonsController		= SearchLocal<RightButtonsController>(		_rightButtonsController,	typeof(RightButtonsController).Name);	} }
 
-	private RightButtonsController	_rightButtonsController;
-	private CenterButtonsController	_centerButtonsController;
-	private UIGameController		_UIGameController;
-	private UIMainMenuController	_UIMenuController;
+	private RightButtonsController		_rightButtonsController;
+	private CenterButtonsController		_centerButtonsController;
+	private InGamePanelController		_inGamePanelController;
+	private MainMenuPanelController		_mainMenuPanelController;
 	#endregion
 
-	private MainMenuModel	UIMenuModel	{ get { return ui.model.UIMainMenuModel; } }
-	private UIGameModel 	UIGameModel	{ get { return ui.model.UIGameModel; } }
+	private MainMenuPanelModel	MainMenuPanelModel	{ get { return ui.model.MainMenuPanelModel; } }
+	private InGamePanelModel 	InGamePanelModel	{ get { return ui.model.InGamePanelModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -62,7 +62,7 @@ public class UIController : Controller
 	{
 		//Debug.LogFormat ("GoToState {0}", uiState);
 
-		if (ui.model.uiState == uiState)
+		if (ui.model.uiWindowState == uiState)
 			return;
 
 		DisableAllWindows ();
@@ -73,7 +73,7 @@ public class UIController : Controller
 			SetWindowActive(uiState, true);
 		});
 
-		ui.model.uiState = uiState;
+		ui.model.uiWindowState = uiState;
 
 		Notify (N.UIStateChanged_, NotifyType.UI, uiState);
 	}
