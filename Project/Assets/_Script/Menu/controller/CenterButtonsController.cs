@@ -44,21 +44,26 @@ public class CenterButtonsController : Controller
 		{
 			case CenterElementId.Main_ButtonPlay:
 				{
+					Notify (N.GameStart);
+
 					break;
 				}
 
 			case CenterElementId.Settings_ButtonCoinStore:
 				{
+					ui.controller.GoToWindowState (UIWindowState.Store);
+					break;
+				}
+
+			case CenterElementId.Like_ButtonDailyGift:
+				{
+					ui.controller.GoToWindowState (UIWindowState.DailyGift);
 					break;
 				}
 
 			case CenterElementId.Like_ButtonRate:
 				{
-					break;
-				}
-
-			case CenterElementId.Like_ButtonGift:
-				{
+					
 					break;
 				}
 
@@ -69,6 +74,7 @@ public class CenterButtonsController : Controller
 
 			case CenterElementId.Settings_ButtonMusic:
 				{
+					
 					break;
 				}
 

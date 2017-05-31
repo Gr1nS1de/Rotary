@@ -9,7 +9,7 @@ public class N : MonoBehaviour
 
 	#region Game notifications
 	public const string OnStart						= "on.start";
-	public const string GameStartPlay				= "game.start.play";
+	public const string GameStart					= "game.start";
 	public const string GamePause					= "game.pause";
 	public const string GameContinue				= "game.continue";
 	public const string GameOver_					= "game.over";

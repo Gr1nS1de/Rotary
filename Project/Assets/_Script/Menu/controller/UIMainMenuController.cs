@@ -38,15 +38,6 @@ public class UIMainMenuController : Controller
 
 	}
 
-	#region Public methods
-	public void ButtonGamePlay()
-	{
-		Notify (N.GameStartPlay);
-
-		SetActivePlayButton (false);
-	}
-	#endregion
-
 	private void OnGameOver()
 	{
 		SetActivePlayButton (true);
@@ -54,8 +45,6 @@ public class UIMainMenuController : Controller
 
 	private void SetActivePlayButton(bool isActive)
 	{
-		Button playButton = ui.view.mainMenuView.ButtonPlay;
 
-		playButton.gameObject.SetActive (isActive);
 	}
 }

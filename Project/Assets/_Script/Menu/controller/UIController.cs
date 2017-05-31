@@ -30,23 +30,17 @@ public class UIController : Controller
 					break;
 				}
 
-			case N.GameStartPlay:
+			case N.GameStart:
 				{
-					ui.model.uiState = UIState.InGame;
-					break;
-				}
-
-			case N.GamePause:
-				{
-					ui.model.uiState = UIState.Pause;
+					GoToMainState (UIPanelState.InGame);
 					break;
 				}
 
 			case N.GameOver_:
 				{
-					GameOverData gameOverData = (GameOverData)data[0];
+					//GameOverData gameOverData = (GameOverData)data[0];
 
-					ui.model.uiState = UIState.GameOver;
+					GoToMainState (UIPanelState.MainMenu);
 					break;
 				}
 		}
@@ -64,13 +58,16 @@ public class UIController : Controller
 		Notify (N.UIThemeChanged_, NotifyType.UI, menuTheme);
 	}
 
-	public void GoToState(UIState uiState)
+	public void GoToWindowState(UIWindowState uiState)
 	{
+		//Debug.LogFormat ("GoToState {0}", uiState);
+
 		if (ui.model.uiState == uiState)
 			return;
 
 		DisableAllWindows ();
 
+		//Wait for disable all windows	
 		DOVirtual.DelayedCall (0.15f, () =>
 		{
 			SetWindowActive(uiState, true);
@@ -82,17 +79,66 @@ public class UIController : Controller
 	}
 	#endregion
 
+	private void GoToMainState(UIPanelState uiMainState)
+	{
+		switch (uiMainState)
+		{
+			case UIPanelState.MainMenu:
+				{
+					SetActivePanel (true, ui.model.mainMenuPanel);
+					SetActivePanel (false, ui.model.inGamePanel);
+					break;
+				}
+
+			case UIPanelState.InGame:
+				{
+					SetActivePanel (false, ui.model.mainMenuPanel);
+					SetActivePanel (true, ui.model.inGamePanel);
+					break;
+				}
+		}
+	}
+
+	private void SetActivePanel(bool isActive, CanvasGroup panelCanvas)
+	{
+		float enableTime = 0.15f;
+		float enableValue = isActive ? 1f : 0f;
+
+		if (isActive)
+		{
+			panelCanvas.alpha = 0f;
+
+			if (!panelCanvas.gameObject.activeInHierarchy)
+				panelCanvas.gameObject.SetActive (isActive);
+
+			panelCanvas.DOFade (enableValue, enableTime);
+		}
+		else
+		{
+			if (panelCanvas.gameObject.activeInHierarchy)
+			{
+				panelCanvas.DOFade (enableValue, enableTime)
+					.OnComplete (() =>
+					{
+						panelCanvas.gameObject.SetActive (isActive);
+					});
+			}
+		}
+	}
+
+	//Скрываем все дочерние окна из набора UIState
 	private void DisableAllWindows()
 	{
-		foreach(string stateName in System.Enum.GetNames (typeof(UIState)))
+		foreach(string stateName in System.Enum.GetNames (typeof(UIWindowState)))
 		{
-			UIState uiState = (UIState)System.Enum.Parse(typeof(UIState), stateName);
+			UIWindowState uiState = (UIWindowState)System.Enum.Parse(typeof(UIWindowState), stateName);
 
 			SetWindowActive(uiState, false);
 		}
 	}
 
-	private void SetWindowActive(UIState uiState, bool isActive)
+	//Метод для скрытия/открытия окон UIState
+	private void SetWindowActive(UIWindowState uiState, bool isActive)
 	{
 		float enableTime = 0.15f;
 		float enableValue = isActive ? 1f : 0f;
@@ -100,63 +146,63 @@ public class UIController : Controller
 
 		switch (uiState)
 		{
-			case UIState.Store:
+			case UIWindowState.Store:
 				{
 					windowCanvas = ui.model.storeWindow;
 					break;
 				}
 
-			case UIState.Settings:
+			case UIWindowState.Settings:
 				{
 					windowCanvas = ui.model.settingsWindow;
 					break;
 				}
 
-			case UIState.PlayerSkin:
+			case UIWindowState.PlayerSkin:
 				{
 					windowCanvas = ui.model.playerSkinWindow;
 					break;
 				}
 
-			case UIState.MainMenu:
+			case UIWindowState.MainMenu:
 				{
 					windowCanvas = ui.model.mainMenuWindow;
 					break;
 				}
 
-			case UIState.Like:
+			case UIWindowState.Like:
 				{
 					windowCanvas = ui.model.likeWindow;
 					break;
 				}
 
-			case UIState.DailyGift:
+			case UIWindowState.DailyGift:
 				{
 					windowCanvas = ui.model.dailyGiftWindow;
 					break;
 				}
-
-			case UIState.InGame:
-				{
-					windowCanvas = ui.model.inGameWindow;
-					break;
-				}
-
-			case UIState.Pause:
+					
+			case UIWindowState.Pause:
 				{
 					windowCanvas = ui.model.pauseWindow;
 					break;
 				}
 
-			case UIState.GameOver:
+			case UIWindowState.GameOver:
 				{
 					windowCanvas = ui.model.gameOverWindow;
 					break;
 				}
 
-			case UIState.Achievements:
+			case UIWindowState.Achievements:
 				{
 					windowCanvas = ui.model.achievementsWindow;
+					break;
+				}
+
+			default:
+				{
+					//Debug.LogFormat ("There is no state for {0}", uiState);
 					break;
 				}
 		}
@@ -175,7 +221,13 @@ public class UIController : Controller
 			else
 			{
 				if (windowCanvas.gameObject.activeInHierarchy)
-					windowCanvas.gameObject.SetActive (isActive);
+				{
+					windowCanvas.DOFade (enableValue, enableTime)
+						.OnComplete (() =>
+						{
+							windowCanvas.gameObject.SetActive (isActive);
+						});
+				}
 			}
 		}
 	}

@@ -18,7 +18,7 @@ public class AnalyticsController : Controller
 					break;
 				}
 
-			case N.GameStartPlay:
+			case N.GameStart:
 				{
 					CustomEventDelegate.OnEvent (new CEAnalytics
 					{

@@ -13,7 +13,7 @@ public class UIGameController : Controller
 	{
 		switch (alias)
 		{
-			case N.GameStartPlay:
+			case N.GameStart:
 				{
 					//InitScoreBarItems ();
 					//InitScoreBarSlider ();

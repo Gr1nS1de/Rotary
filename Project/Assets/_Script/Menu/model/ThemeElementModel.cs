@@ -11,7 +11,7 @@ public enum CenterElementId
 	Store_ButtonCoinsPack_00	= 3,
 	Store_ButtonCoinsPack_01	= 4,
 
-	Like_ButtonGift				= 5,
+	Like_ButtonDailyGift				= 5,
 	Like_ButtonRate				= 6,
 
 	Settings_ButtonCoinStore	= 7,
@@ -29,7 +29,7 @@ public enum RightElementId
 	ButtonBack,
 	ButtonGameServices,
 	ButtonLeaderboard,
-	ButtonAchievements
+	ButtonGSAchievements
 }
 
 public class ThemeElementModel : Model
