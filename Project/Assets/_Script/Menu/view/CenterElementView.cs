@@ -57,7 +57,7 @@ public class CenterElementView : ThemeElementView
 			ButtonBackground.onClick.AddListener( OnButtonClicked);
 		}
 
-		ui.controller.CenterButtonsController.ActionUIThemeChanged += OnUIThemeChanged;
+		ui.controller.CenterElementsController.ActionUIThemeChanged += OnUIThemeChanged;
 	}
 
 	private void UnregisterEvents()
@@ -67,8 +67,8 @@ public class CenterElementView : ThemeElementView
 			ButtonBackground.onClick.RemoveListener(OnButtonClicked);
 		}
 
-		if(ui.controller.CenterButtonsController != null)
-			ui.controller.CenterButtonsController.ActionUIThemeChanged -= OnUIThemeChanged;
+		if(ui.controller.CenterElementsController != null)
+			ui.controller.CenterElementsController.ActionUIThemeChanged -= OnUIThemeChanged;
 	}
 }
 

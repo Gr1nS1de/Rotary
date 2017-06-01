@@ -7,6 +7,10 @@ public class N : MonoBehaviour
 	public const string OnGameInput___				= "on.game.input";
 	#endregion
 
+	#region Purchase notifications
+	public const string PurchaseDoubleCoin			= "purchase.double.coin";
+	#endregion
+
 	#region Game notifications
 	public const string OnStart						= "on.start";
 	public const string GameStart					= "game.start";
@@ -14,9 +18,12 @@ public class N : MonoBehaviour
 	public const string GameContinue				= "game.continue";
 	public const string GameOver_					= "game.over";
 	public const string GameAddScore				= "game.add.score";
+
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnItemInvisible_			= "on.item.invisible";
 	public const string OnPlayerInvisible			= "on.player.invisible";
+
+	public const string OnPlayerNewRecord_			= "on.player.new.record";
 
 	public const string GameThemeChanged_			= "game.theme.changed";
 	#endregion
@@ -35,9 +42,8 @@ public class N : MonoBehaviour
 	public const string PlayerLeftPlatform_			= "player.left.platform";
 	#endregion
 
-	#region ResourcesController notifications
-	public const string RCAwakeLoad			
-	= "rc.awake.load";
+	#region Resources notifications
+	public const string RCAwakeLoad					= "rc.awake.load";
 	public const string RCLoadGameTheme_			= "rc.load.game_theme";
 	#endregion
 }

@@ -76,7 +76,15 @@ public class GameModel : Model
 	public int	 						playedGamesCount		{ get { return _playedGamesCount; } set { _playedGamesCount = value;}}
 	public GameType						gameType				{ get { return _gameType; } 		set { _gameType = value;}}
 	public GameOverData					gameOverData			{ get { return _gameOverData; } 	set { _gameOverData = value;}}
+	public bool							isDoubleCoin			{ get { return _isDoubleCoin; } 	set { _isDoubleCoin = value;}}
+	public int							playerRecord			{ get { return _playerRecord; } 	set { _playerRecord = value;}}
+	public int							coinsCount				{ get { return _coinsCount; } 		set { _coinsCount = value;}}
+	public int							crystalsCount			{ get { return _crystalsCount; } 	set { _crystalsCount = value;}}
 
+	private int							_crystalsCount;
+	private int							_coinsCount;
+	private int							_playerRecord;
+	private bool						_isDoubleCoin;
 	private GameOverData				_gameOverData			 = new GameOverData ();
 	[SerializeField]
 	private GameType					_gameType;

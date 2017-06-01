@@ -8,17 +8,17 @@ public class UIController : Controller
 	#region Declare controllers reference
 	public InGamePanelController		InGamePanelController			{ get { return _inGamePanelController 		= SearchLocal<InGamePanelController>(		_inGamePanelController,		typeof(InGamePanelController).Name);	} }
 	public MainMenuPanelController		MainMenuPanelController			{ get { return _mainMenuPanelController		= SearchLocal<MainMenuPanelController>(		_mainMenuPanelController,	typeof(MainMenuPanelController).Name);	} }
-	public CenterButtonsController		CenterButtonsController			{ get { return _centerButtonsController		= SearchLocal<CenterButtonsController>(		_centerButtonsController,	typeof(CenterButtonsController).Name);	} }
-	public RightButtonsController		RightButtonsController			{ get { return _rightButtonsController		= SearchLocal<RightButtonsController>(		_rightButtonsController,	typeof(RightButtonsController).Name);	} }
+	public CenterElementsController		CenterElementsController		{ get { return _centerElementsController	= SearchLocal<CenterElementsController>(	_centerElementsController,	typeof(CenterElementsController).Name);	} }
+	public RightElementsController		RightElementsController			{ get { return _rightElementsController		= SearchLocal<RightElementsController>(		_rightElementsController,	typeof(RightElementsController).Name);	} }
 
-	private RightButtonsController		_rightButtonsController;
-	private CenterButtonsController		_centerButtonsController;
+	private RightElementsController		_rightElementsController;
+	private CenterElementsController	_centerElementsController;
 	private InGamePanelController		_inGamePanelController;
 	private MainMenuPanelController		_mainMenuPanelController;
 	#endregion
 
-	private MainMenuPanelModel	MainMenuPanelModel	{ get { return ui.model.MainMenuPanelModel; } }
-	private InGamePanelModel 	InGamePanelModel	{ get { return ui.model.InGamePanelModel; } }
+	private MainMenuPanelModel	mainMenuPanelModel	{ get { return ui.model.mainMenuPanelModel; } }
+	private InGamePanelModel 	inGamePanelModel	{ get { return ui.model.inGamePanelModel; } }
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{

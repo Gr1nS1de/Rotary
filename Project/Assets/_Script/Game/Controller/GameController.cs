@@ -31,7 +31,7 @@ public class GameController : Controller
 	private ObjectsPoolController 			_objectsPoolController;
 	#endregion
 
-	//private GameModel 				playerModel	{ get { return game.model.playerModel;}}
+	private GameModel 				_gameModel	{ get { return game.model;}}
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -39,6 +39,7 @@ public class GameController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
+					OnAwakeInit ();
 					break;
 				}
 
@@ -46,7 +47,7 @@ public class GameController : Controller
 				{
 					OnStart();
 
-					game.model.gameState = GameState.MainMenu;
+					_gameModel.gameState = GameState.MainMenu;
 					break;
 				}
 
@@ -54,7 +55,7 @@ public class GameController : Controller
 				{
 					OnGameStartPlay ();
 
-					game.model.gameState = GameState.Playing;
+					_gameModel.gameState = GameState.Playing;
 					break;
 				}
 
@@ -64,6 +65,13 @@ public class GameController : Controller
 					Vector2 contactPoint = (Vector2)data [1];
 
 					OnPlayerImpactItem (itemView);
+					break;
+				}
+
+			case N.PurchaseDoubleCoin:
+				{
+					Prefs.PlayerData.SetDoubleCoin ();
+					_gameModel.isDoubleCoin = true;
 					break;
 				}
 
@@ -79,21 +87,21 @@ public class GameController : Controller
 				{
 					GameOver ();
 
-					game.model.gameState = GameState.GameOver;
+					_gameModel.gameState = GameState.GameOver;
 
-					Notify (N.GameOver_, NotifyType.ALL, new GameOverData (game.model.gameOverData));
+					Notify (N.GameOver_, NotifyType.ALL, new GameOverData (_gameModel.gameOverData));
 					break;
 				}
 
 			case N.GamePause:
 				{
-					game.model.gameState = GameState.Pause;
+					_gameModel.gameState = GameState.Pause;
 					break;
 				}
 
 			case N.GameContinue:
 				{
-					game.model.gameState = GameState.Playing;
+					_gameModel.gameState = GameState.Playing;
 					break;
 				}
 		}
@@ -102,37 +110,39 @@ public class GameController : Controller
 	#region public methods
 	public void SetGameTheme(GameTheme gameTheme)
 	{
-		game.model.gameTheme = gameTheme;
+		_gameModel.gameTheme = gameTheme;
 
 		if (game.view.backgroundView != null)
 			Destroy (game.view.backgroundView.gameObject);
 
-		BackgroundView backgroundView = (BackgroundView)Instantiate (game.model.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
+		BackgroundView backgroundView = (BackgroundView)Instantiate (_gameModel.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
 	
 		Notify (N.GameThemeChanged_, NotifyType.GAME, gameTheme);
 	}
 	#endregion
 
-	private void OnStart()
+	private void OnAwakeInit()
 	{
-		game.model.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
-
+		_gameModel.playerRecord = Prefs.PlayerData.GetRecord ();
+		_gameModel.coinsCount = Prefs.PlayerData.GetCoinsCount ();
+		_gameModel.crystalsCount = Prefs.PlayerData.GetCrystalsCount ();
+		_gameModel.isDoubleCoin = Prefs.PlayerData.GetDoubleCoin () == 1;
+		_gameModel.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 	}
 
-	void Update()
+	private void OnStart()
 	{
-		//if (_currentGameSpeedState != game.model.gameSpeedState)
-		//	SetGameSpeed (game.model.gameSpeedState);
+
 	}
 
 	private void OnGameStartPlay()
 	{
-		game.model.currentScore = 0;
+		_gameModel.currentScore = 0;
 
-		game.model.gameOverData.CoinsCount = 0;
-		game.model.gameOverData.CrystalsCount = 0;
-		game.model.gameOverData.ScoreCount = 0;
-		game.model.gameOverData.GameType = game.model.gameType;
+		_gameModel.gameOverData.CoinsCount = 0;
+		_gameModel.gameOverData.CrystalsCount = 0;
+		_gameModel.gameOverData.ScoreCount = 0;
+		_gameModel.gameOverData.GameType = _gameModel.gameType;
 
 		//m_PointText.text = _pointScore.ToString();
 
@@ -146,19 +156,29 @@ public class GameController : Controller
 		{
 			case ItemTypes.Coin:
 				{
-					game.model.gameOverData.CoinsCount++;
+					int coinsCount = (_gameModel.isDoubleCoin ? 2 : 1);
+
+					_gameModel.coinsCount += coinsCount;
+					_gameModel.gameOverData.CoinsCount += coinsCount;
+
+					Prefs.PlayerData.CreditCoins (coinsCount);
 					break;
 				}
 
 			case ItemTypes.Crystal:
 				{
-					game.model.gameOverData.CrystalsCount += itemView.CrystalFractureCount;
+					int crystalsCount = itemView.CrystalFractureCount;
+
+					_gameModel.crystalsCount += crystalsCount;
+					_gameModel.gameOverData.CrystalsCount += crystalsCount;
+
+					Prefs.PlayerData.CreditCrystals (crystalsCount);
 					break;
 				}
 
 			case ItemTypes.Magnet:
 				{
-					game.model.gameOverData.MagnetsCount++;
+					_gameModel.gameOverData.MagnetsCount++;
 					break;
 				}
 		}
@@ -166,17 +186,21 @@ public class GameController : Controller
 
 	private void OnAddScore()
 	{
-		game.model.currentScore++;
+		_gameModel.currentScore++;
+
+		if (_gameModel.currentScore > _gameModel.playerRecord)
+		{
+			OnNewRecord (_gameModel.currentScore);
+		}
 
 		Notify (N.GameAddScore);
+	}
 
-		//Notify (N.GameAddScore, 1);
-
-		//m_PointText.text = _pointScore.ToString();
-
-		//_soundManager.PlayTouch();
-
-		//FindObjectOfType<Circle>().DOParticle();
+	private void OnNewRecord(int score)
+	{
+		Prefs.PlayerData.SetRecord (score);
+		_gameModel.playerRecord = score;
+		Notify (N.OnPlayerNewRecord_, NotifyType.ALL, score);
 	}
 
 	private void GameOver()
@@ -190,7 +214,7 @@ public class GameController : Controller
 		//DOTween.KillAll();
 		//StopAllCoroutines();
 
-		//Utils.SetLastScore(game.model.currentScore);
+		//Utils.SetLastScore(_gameModel.currentScore);
 
 		//playerModel.particleTrace.Stop ();
 
@@ -219,7 +243,7 @@ public class GameController : Controller
 			Prefs.PlayerData.IncreasePlayedGamesCount ();
 		}
 
-		game.model.playedGamesCount = currentPlayedGamesCount;
+		_gameModel.playedGamesCount = currentPlayedGamesCount;
 	}
 
 	private void ReloadScene()

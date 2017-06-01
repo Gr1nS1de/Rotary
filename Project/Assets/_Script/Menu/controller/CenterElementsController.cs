@@ -2,7 +2,7 @@
 using System.Collections;
 using SmartLocalization;
 
-public class CenterButtonsController : Controller
+public class CenterElementsController : Controller
 {
 	public System.Action<UITheme> ActionUIThemeChanged = delegate{};
 
@@ -36,9 +36,8 @@ public class CenterButtonsController : Controller
 
 	private void OnStart()
 	{
-
 	}
-
+		
 	private void OnButtonPressed(CenterElementId centerElementId)
 	{
 		switch (centerElementId)
@@ -97,6 +96,7 @@ public class CenterButtonsController : Controller
 
 			case CenterElementId.Store_ButtonDoubleCoin:
 				{
+					Notify (N.PurchaseDoubleCoin);
 					break;
 				}
 		}

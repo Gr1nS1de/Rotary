@@ -53,7 +53,10 @@ public class UIModel : Model
 	public CanvasGroup 			gameOverWindow		{ get { return _gameOverWindow; } }
 	public CanvasGroup 			inGamePanel			{ get { return _inGamePanel; } }
 	public CanvasGroup 			mainMenuPanel		{ get { return _mainMenuPanel; } }
+	public CanvasGroup 			rightElementsPanel	{ get { return _rightElementsPanel; } }
 
+	[SerializeField]
+	private CanvasGroup			_rightElementsPanel;
 	[SerializeField]
 	private CanvasGroup			_mainMenuPanel;
 	[SerializeField]
@@ -85,8 +88,8 @@ public class UIModel : Model
 	#endregion
 
 	#region Declare models reference
-	public InGamePanelModel			InGamePanelModel			{ get { return _inGamePanelModel 		= SearchLocal<InGamePanelModel>(		_inGamePanelModel,		typeof(InGamePanelModel).Name);	} }
-	public MainMenuPanelModel		MainMenuPanelModel			{ get { return _mainMenuPanelModel		= SearchLocal<MainMenuPanelModel>(		_mainMenuPanelModel,	typeof(MainMenuPanelModel).Name);	} }
+	public InGamePanelModel			inGamePanelModel			{ get { return _inGamePanelModel 		= SearchLocal<InGamePanelModel>(		_inGamePanelModel,		typeof(InGamePanelModel).Name);	} }
+	public MainMenuPanelModel		mainMenuPanelModel			{ get { return _mainMenuPanelModel		= SearchLocal<MainMenuPanelModel>(		_mainMenuPanelModel,	typeof(MainMenuPanelModel).Name);	} }
 
 	private MainMenuPanelModel		_mainMenuPanelModel;
 	private InGamePanelModel		_inGamePanelModel;

@@ -57,7 +57,7 @@ public class RightElementView : ThemeElementView
 			ButtonBackground.onClick.AddListener(OnButtonClicked);
 		}
 
-		ui.controller.RightButtonsController.ActionUIThemeChanged += OnUIThemeChanged;
+		ui.controller.RightElementsController.ActionUIThemeChanged += OnUIThemeChanged;
 	}
 
 	private void UnregisterEvents()
@@ -67,8 +67,8 @@ public class RightElementView : ThemeElementView
 			ButtonBackground.onClick.RemoveListener( OnButtonClicked);
 		}
 
-		if(ui.controller.RightButtonsController != null)
-			ui.controller.RightButtonsController.ActionUIThemeChanged -= OnUIThemeChanged;
+		if(ui.controller.RightElementsController != null)
+			ui.controller.RightElementsController.ActionUIThemeChanged -= OnUIThemeChanged;
 	}
 }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InGamePanelController : Controller
 {
-	private InGamePanelModel _inGamePanelModel		{ get { return ui.model.InGamePanelModel; } }
+	private InGamePanelModel _inGamePanelModel		{ get { return ui.model.inGamePanelModel; } }
 	//private RoadModel 	currentRoadModel		{ get { return game.model.currentGearView; } }
 
 	public override void OnNotification ( string alias, Object target, params object[] data )

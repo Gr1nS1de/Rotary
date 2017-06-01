@@ -15,13 +15,21 @@ public class PlayerController : Controller
 			case N.OnStart:
 				{
 					OnStart ();
-
 					break;
 				}
 
 			case N.GameStart:
 				{
 					InitPlayer ();
+					break;
+				}
+
+			case N.PlayerImpactItem__:
+				{
+					ItemView itemView = (ItemView)data [0];
+					//Vector2 contactPoint = (Vector2)data [1];
+
+					OnPlayerImpactItem (itemView);
 					break;
 				}
 
@@ -32,6 +40,12 @@ public class PlayerController : Controller
 					if (_playerView.ScorePlatformsList.Contains (platformView))
 						_playerView.ScorePlatformsList.Remove (platformView);
 					
+					break;
+				}
+
+			case N.OnPlayerNewRecord_:
+				{
+					int score = (int)data [0];
 					break;
 				}
 					
@@ -48,7 +62,32 @@ public class PlayerController : Controller
 
 	private void OnStart()
 	{
-		//game.view.cameraView.OnStart ();
+	}
+
+	private void OnPlayerImpactItem(ItemView itemView)
+	{
+		ItemTypes itemType = itemView.ItemType;
+
+		switch (itemType)
+		{
+			case ItemTypes.Coin:
+				{
+					
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					
+					break;
+				}
+
+			default:
+				{
+					
+					break;
+				}
+		}
 	}
 
 	private void InitPlayer()

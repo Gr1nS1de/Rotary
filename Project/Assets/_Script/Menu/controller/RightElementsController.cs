@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
-public class RightButtonsController : Controller
+public class RightElementsController : Controller
 {
-	public System.Action<UITheme> ActionUIThemeChanged = delegate{};
+	public System.Action<UITheme>	 ActionUIThemeChanged	= delegate{};
 
-	private Stack<UIWindowState> _backButtonStack = new Stack<UIWindowState> ();
+	private Stack<UIWindowState> 	_backButtonStack 		= new Stack<UIWindowState> ();
+	private Sequence				_rightPanelMoveSequence = null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -39,8 +41,8 @@ public class RightButtonsController : Controller
 				{
 					UIWindowState uiState = (UIWindowState)data [0];
 
-					UpdateBackStack (uiState);
 					UpdateRightButtons (uiState);
+					UpdateBackStack (uiState);
 					break;
 				}
 		}
@@ -51,9 +53,34 @@ public class RightButtonsController : Controller
 		UpdateRightButtons (ui.model.uiWindowState);
 	}
 
+	private void MoveRightPanel()
+	{
+		
+		if (_rightPanelMoveSequence == null)
+		{
+			RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
+
+			_rightPanelMoveSequence = DOTween.Sequence ();
+			_rightPanelMoveSequence.SetRecyclable (true).SetAutoKill (false);
+			_rightPanelMoveSequence.Append (rightPanelRect.DOPunchAnchorPos (new Vector2 (-rightPanelRect.rect.width, 0f), 0.5f, 0, 1f));
+		}
+		else
+		{
+			if (_rightPanelMoveSequence.IsActive ())
+				_rightPanelMoveSequence.Rewind ();
+		}
+			
+		_rightPanelMoveSequence.Play ();
+	}
+
 	private void OnButtonPressed(RightElementId rightElementId)
 	{
 		UIWindowState uiState = UIWindowState.MainMenu;
+
+		if (rightElementId != RightElementId.ButtonBack && _backButtonStack.Count == 0)
+		{
+			MoveRightPanel ();
+		}
 
 		switch (rightElementId)
 		{
@@ -97,7 +124,8 @@ public class RightButtonsController : Controller
 
 			case RightElementId.ButtonBack:
 				{
-					OnBack ();
+					OnBackPressed ();
+					MoveRightPanel ();
 
 					if(_backButtonStack.Count > 0)
 						uiState = _backButtonStack.Peek ();
@@ -148,8 +176,20 @@ public class RightButtonsController : Controller
 	{
 		foreach (RightElementView rightElementView in ui.view.rightElementsArray)
 		{
+
 			if (rightElementView.ElementId == button1 || rightElementView.ElementId == button2 || rightElementView.ElementId == button3 || rightElementView.ElementId == button4)
+			{
+				if (rightElementView.ElementId == button1)
+					rightElementView.transform.SetSiblingIndex (0);
+				else if(rightElementView.ElementId == button2)
+					rightElementView.transform.SetSiblingIndex (1);
+				else if(rightElementView.ElementId == button3)
+					rightElementView.transform.SetSiblingIndex (3);
+				else if(rightElementView.ElementId == button4)
+					rightElementView.transform.SetSiblingIndex (4);
+
 				SetButtonActive (rightElementView, true);
+			}
 			else
 				SetButtonActive (rightElementView, false);
 		}
@@ -169,7 +209,7 @@ public class RightButtonsController : Controller
 		}
 	}
 
-	private void OnBack()
+	private void OnBackPressed()
 	{
 		if (_backButtonStack.Count <= 1)
 		{
@@ -226,6 +266,8 @@ public class RightButtonsController : Controller
 					break;
 				}
 		}
+
+		Debug.LogError ("Update backstack count = "+_backButtonStack.Count);
 	}
 
 	private void PushToBackStack (UIWindowState uiState, bool isPopLast = false)
