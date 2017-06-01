@@ -6,6 +6,22 @@ public class UIView : View
 	public RightElementView[]	rightElementsArray		{ get { return _rightElementsArray == null ? _rightElementsArray	= SearchLocal<RightElementView>(	_rightElementsArray,	typeof(RightElementView).Name) : _rightElementsArray; 	} }
 
 	private RightElementView[]	_rightElementsArray = null;
+
+	public RightElementView GetRightElement(RightElementId rightElementId)
+	{
+		RightElementView rightElementView = null;
+
+		foreach (RightElementView rightElement in rightElementsArray)
+		{
+			if (rightElement.ElementId == rightElementId)
+			{
+				rightElementView = rightElement;
+				break;
+			}
+		}
+
+		return rightElementView;
+	}
 	/*
 	public MainMenuVIew				mainMenuView			{ get { return _mainMenuView		= SearchLocal<MainMenuVIew>(		_mainMenuView,			typeof(MainMenuVIew).Name );}}
 	public SettingsView				settingsView			{ get { return _settingsView		= SearchLocal<SettingsView>(		_settingsView,			typeof(SettingsView).Name );}}

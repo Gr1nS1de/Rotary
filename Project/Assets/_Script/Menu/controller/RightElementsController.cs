@@ -9,6 +9,8 @@ public class RightElementsController : Controller
 
 	private Stack<UIWindowState> 	_backButtonStack 		= new Stack<UIWindowState> ();
 	private Sequence				_rightPanelMoveSequence = null;
+	private Sequence				_gameServicesOpenSequence = null;
+	private Sequence				_gameServicesCloseSequence = null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -50,6 +52,7 @@ public class RightElementsController : Controller
 
 	private void OnStart()
 	{
+		ui.model.mainMenuPanelModel.isGameServicesOpened = false;
 		UpdateRightButtons (ui.model.uiWindowState);
 	}
 
@@ -76,8 +79,9 @@ public class RightElementsController : Controller
 	private void OnButtonPressed(RightElementId rightElementId)
 	{
 		UIWindowState uiState = UIWindowState.MainMenu;
+		bool isChangeWindowState = true;
 
-		if (rightElementId != RightElementId.ButtonBack && _backButtonStack.Count == 0)
+		if (_backButtonStack.Count == 0 && rightElementId != RightElementId.ButtonBack && rightElementId != RightElementId.ButtonGameServices)
 		{
 			MoveRightPanel ();
 		}
@@ -109,6 +113,20 @@ public class RightElementsController : Controller
 				}
 
 		#region Google Play Services
+			case RightElementId.ButtonGameServices:
+				{
+					isChangeWindowState = false;
+
+					if(ui.model.mainMenuPanelModel.isGameServicesOpened)
+					{
+						CloseGameServices();
+					}else
+					{
+						OpenGameServices();
+					}
+					break;
+				}
+
 			case RightElementId.ButtonGSAchievements:
 				{
 					uiState = UIWindowState.GS_Achievements;
@@ -133,7 +151,85 @@ public class RightElementsController : Controller
 				}
 		}
 
-		ui.controller.GoToWindowState (uiState);
+		if (isChangeWindowState)
+		{
+			ui.model.mainMenuPanelModel.isGameServicesOpened = false;
+			ui.controller.GoToWindowState (uiState);
+		}
+	}
+
+	private void OpenGameServices()
+	{
+		RightElementView leaderboardView = ui.view.GetRightElement (RightElementId.ButtonLeaderboard);
+		RightElementView achievementsView = ui.view.GetRightElement (RightElementId.ButtonGSAchievements);
+
+		if (!leaderboardView.gameObject.activeInHierarchy)
+			leaderboardView.gameObject.SetActive (true);
+
+		if (!achievementsView.gameObject.activeInHierarchy)
+			achievementsView.gameObject.SetActive (true);
+		
+		if(_gameServicesOpenSequence == null)
+		{
+			_gameServicesOpenSequence = DOTween.Sequence();
+
+			_gameServicesOpenSequence.SetRecyclable(true).SetAutoKill(false);
+			_gameServicesOpenSequence
+				.Append (leaderboardView.GetComponent<RectTransform> ().DOAnchorPosX (-160f, 0.3f))
+				.Join (achievementsView.GetComponent<RectTransform> ().DOAnchorPosX (-320f, 0.3f))
+				.Join (leaderboardView.GetComponent<CanvasGroup> ().DOFade (1f, 0.3f))
+				.Join (achievementsView.GetComponent<CanvasGroup> ().DOFade (1f, 0.3f));
+		}else{
+			if (_gameServicesOpenSequence.IsActive ())
+				_gameServicesOpenSequence.Rewind ();
+			
+			if (_gameServicesCloseSequence.IsActive ())
+				_gameServicesCloseSequence.Rewind ();
+		}
+
+		leaderboardView.GetComponent<CanvasGroup> ().alpha = 0f;
+		achievementsView.GetComponent<CanvasGroup> ().alpha = 0f;
+			
+
+		ui.model.mainMenuPanelModel.isGameServicesOpened = true;
+		_gameServicesOpenSequence.Play ();
+	}
+
+	private void CloseGameServices()
+	{
+		RightElementView leaderboardView = ui.view.GetRightElement (RightElementId.ButtonLeaderboard);
+		RightElementView achievementsView = ui.view.GetRightElement (RightElementId.ButtonGSAchievements);
+
+		if (!leaderboardView.gameObject.activeInHierarchy)
+			leaderboardView.gameObject.SetActive (true);
+
+		if (!achievementsView.gameObject.activeInHierarchy)
+			achievementsView.gameObject.SetActive (true);
+
+		if(_gameServicesCloseSequence == null)
+		{
+			_gameServicesCloseSequence = DOTween.Sequence();
+
+			_gameServicesCloseSequence.SetRecyclable(true).SetAutoKill(false);
+			_gameServicesCloseSequence
+				.Append (leaderboardView.GetComponent<RectTransform> ().DOAnchorPosX (0f, 0.3f))
+				.Join (achievementsView.GetComponent<RectTransform> ().DOAnchorPosX (0f, 0.3f))
+				.Join (leaderboardView.GetComponent<CanvasGroup> ().DOFade (0f, 0.3f))
+				.Join (achievementsView.GetComponent<CanvasGroup> ().DOFade (0f, 0.3f))
+				.OnComplete(()=>{
+					leaderboardView.gameObject.SetActive (false);
+					achievementsView.gameObject.SetActive (false);
+				});
+		}else{
+			if (_gameServicesOpenSequence.IsActive ())
+				_gameServicesOpenSequence.Rewind ();
+
+			if (_gameServicesCloseSequence.IsActive ())
+				_gameServicesCloseSequence.Rewind ();
+		}
+
+		ui.model.mainMenuPanelModel.isGameServicesOpened = false;
+		_gameServicesCloseSequence.Play ();
 	}
 
 	private void UpdateRightButtons(UIWindowState uiState)
@@ -266,8 +362,6 @@ public class RightElementsController : Controller
 					break;
 				}
 		}
-
-		Debug.LogError ("Update backstack count = "+_backButtonStack.Count);
 	}
 
 	private void PushToBackStack (UIWindowState uiState, bool isPopLast = false)
