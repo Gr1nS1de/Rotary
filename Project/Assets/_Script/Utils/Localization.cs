@@ -2,6 +2,14 @@
 using System.Collections;
 using SmartLocalization;
 
+public enum LocalizationTextState
+{
+	NONE		= 0,
+	TO_UPPER,
+	TO_UPPER_FIRST,
+	TO_LOWER
+}
+
 public static class Localization
 {
 	private const string 	PREFS_LANGUAGE_CODE 	= "LanguageCode";
@@ -81,6 +89,7 @@ public static class Localization
 	{
 		return PlayerPrefs.GetString (PREFS_LANGUAGE_CODE);
 	}
+
 	#endregion
 
 	#region private methods

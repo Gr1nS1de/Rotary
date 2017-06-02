@@ -136,4 +136,7 @@
 <data name="TK_STORE_NAME" xml:space="preserve">
 <value>New Value</value>
 </data>
+<data name="TK_DOUBLE_COIN_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
 </root>

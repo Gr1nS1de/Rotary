@@ -1,8 +1,9 @@
 ,ru,en
-TK_LIKE_NAME,спасибо за игру!,thank you!
+TK_LIKE_NAME,спасибо вас!,Thank you!
 TK_LANGUAGE_NAME,язык,language
 TK_SETTINGS_NAME,настройки,settings
 TK_GIFT_NAME,подарок,gift
 TK_RATE_NAME,оценить,rate
 TK_ACHIEVEMENTS_NAME,достижения,achievements
-TK_STORE_NAME,магазин монет,coin store
+TK_STORE_NAME,лавка монет,coins store
+TK_DOUBLE_COIN_NAME,двойной коин,double coin

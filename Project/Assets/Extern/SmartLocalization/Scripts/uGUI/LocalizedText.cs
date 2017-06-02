@@ -4,18 +4,11 @@
 	using UnityEngine.UI;
 	using System.Collections;
 
-	public enum LocalizationTextState
-	{
-		NONE		= 0,
-		TO_UPPER,
-		TO_UPPER_FIRST,
-		TO_LOWER
-	}
-
 	[RequireComponent (typeof (Text))]
 	public class LocalizedText : MonoBehaviour 
 	{
 		public string localizedKey 	= "INSERT_KEY_HERE";
+		public string localizedKeyRand = "";
 		Text textObject;
 		[Tooltip("Show empty string if key was not found.")]
 		public bool IsShowEmpty		= false;			//Show empty string if key was not found.
@@ -60,7 +53,9 @@
 				}
 			}
 
-			textObject.text = Localization.CheckKey (localizedKey);
+			bool isRandomText = !string.IsNullOrEmpty (localizedKeyRand);
+
+			textObject.text = isRandomText ? Random.Range(0, 2 ) == 0 ? Localization.CheckKey (localizedKeyRand) : Localization.CheckKey (localizedKey) : Localization.CheckKey (localizedKey);
 
 			switch (textState)
 			{

@@ -116,7 +116,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader><data name="TK_LIKE_NAME" xml:space="preserve">
-<value>спасибо за игру!</value>
+<value>спасибо вас!</value>
 </data>
 <data name="TK_LANGUAGE_NAME" xml:space="preserve">
 <value>язык</value>
@@ -134,6 +134,9 @@
 <value>достижения</value>
 </data>
 <data name="TK_STORE_NAME" xml:space="preserve">
-<value>магазин монет</value>
+<value>лавка монет</value>
+</data>
+<data name="TK_DOUBLE_COIN_NAME" xml:space="preserve">
+<value>двойной коин</value>
 </data>
 </root>

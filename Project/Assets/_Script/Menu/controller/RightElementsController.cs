@@ -143,10 +143,15 @@ public class RightElementsController : Controller
 			case RightElementId.ButtonBack:
 				{
 					OnBackPressed ();
-					MoveRightPanel ();
 
-					if(_backButtonStack.Count > 0)
+					if (_backButtonStack.Count > 0)
+					{
 						uiState = _backButtonStack.Peek ();
+					}
+					else
+					{
+						MoveRightPanel ();
+					}
 					break;
 				}
 		}
@@ -183,7 +188,7 @@ public class RightElementsController : Controller
 			if (_gameServicesOpenSequence.IsActive ())
 				_gameServicesOpenSequence.Rewind ();
 			
-			if (_gameServicesCloseSequence.IsActive ())
+			if (_gameServicesCloseSequence != null && _gameServicesCloseSequence.IsActive ())
 				_gameServicesCloseSequence.Rewind ();
 		}
 
@@ -224,7 +229,7 @@ public class RightElementsController : Controller
 			if (_gameServicesOpenSequence.IsActive ())
 				_gameServicesOpenSequence.Rewind ();
 
-			if (_gameServicesCloseSequence.IsActive ())
+			if (_gameServicesCloseSequence != null && _gameServicesCloseSequence.IsActive ())
 				_gameServicesCloseSequence.Rewind ();
 		}
 
