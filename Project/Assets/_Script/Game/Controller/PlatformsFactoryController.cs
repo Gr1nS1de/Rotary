@@ -54,7 +54,7 @@ public class PlatformsFactoryController : Controller
 		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformTypes.Horizontal);
 		Vector3 screenSize = GM.Instance.ScreenSize;
 
-		Vector3 platformPosition = new Vector3( (-screenSize.x / 2f) + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.5f), 0f );
+		Vector3 platformPosition = new Vector3( screenSize.x / 2f + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.5f), 0f );
 
 		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.Horizontal);
 	}

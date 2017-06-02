@@ -29,6 +29,11 @@ public class InputController : Controller
 	public void OnDrag(DragGesture e)
 	{
 		if(e.StartSelection != null)
-			Notify (N.OnGameInput___, NotifyType.GAME, e.StartSelection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
+			Notify (N.OnPlatformInput___, NotifyType.GAME, e.StartSelection, Camera.main.ScreenToWorldPoint(e.Position), e.Phase);
+	}
+
+	public void OnTap(TapGesture e)
+	{
+		Notify (N.OnDoubleTapInput, NotifyType.GAME);
 	}
 }

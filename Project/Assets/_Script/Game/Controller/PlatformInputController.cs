@@ -23,7 +23,7 @@ public class PlatformInputController : Controller
 					break;
 				}
 
-			case N.OnGameInput___:
+			case N.OnPlatformInput___:
 				{
 					GameObject dragItem = (GameObject)data [0];
 					Vector3 inputPoint = (Vector3)data [1];

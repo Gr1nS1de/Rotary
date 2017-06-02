@@ -92,6 +92,7 @@ public class DistructibleController : Controller
 						if (clone.GetComponent<Collider2D> ())
 							foreach (Collider2D collider in clone.GetComponents<Collider2D>())
 							{
+								
 								StartCoroutine (ResetCollider(clone.transform, collider));
 							}
 
@@ -125,7 +126,7 @@ public class DistructibleController : Controller
 
 		Collider2D colliderComponent = (Collider2D)clone.gameObject.AddComponent(colliderType);
 
-		colliderComponent.isTrigger = true;
+		colliderComponent.isTrigger = false;
 	}
 
 }

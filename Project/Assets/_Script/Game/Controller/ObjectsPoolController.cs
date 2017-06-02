@@ -184,9 +184,6 @@ public class ObjectsPoolController : Controller
 		{
 			itemView = Instantiate (game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType),
 									game.view.transform.Find("_Items"));
-
-			if (!gameObject.activeInHierarchy)
-				gameObject.SetActive (true);
 		}
 
 		if (objectPosition == null)
@@ -197,6 +194,9 @@ public class ObjectsPoolController : Controller
 		{
 			itemView.transform.position = objectPosition.GetValueOrDefault ();
 		}
+
+		if (!itemView.gameObject.activeInHierarchy)
+			itemView.gameObject.SetActive (true);
 
 		itemView.OnInit ();
 

@@ -43,7 +43,7 @@ public class ItemViewEditor : Editor
 		{
 			case ItemTypes.Coin:
 				{
-					//EditorGUILayout.ObjectField("Main Platform Renderer", _mainRenderer.objectReferenceValue, typeof(SpriteRenderer), true);
+					data.DoubleCoinRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Double Coin Renderer", data.DoubleCoinRenderer, typeof(SpriteRenderer), true);
 					break;
 				}
 

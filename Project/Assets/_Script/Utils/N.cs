@@ -3,8 +3,9 @@ using System.Collections;
 
 public class N : MonoBehaviour
 {
-	#region Gears notifications
-	public const string OnGameInput___				= "on.game.input";
+	#region Input notifications
+	public const string OnPlatformInput___			= "on.platform.input";
+	public const string OnDoubleTapInput			= "on.double.tap.input";
 	#endregion
 
 	#region Purchase notifications

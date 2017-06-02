@@ -34,6 +34,9 @@ public class CenterElementView : ThemeElementView
 
 		foreach (Graphic element in GraphicIcons)
 		{
+			if (element == null)
+				continue;
+			
 			if (isImmediate)
 			{
 				element.color = menuTheme.IconsColor;

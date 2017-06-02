@@ -16,6 +16,7 @@ public class ItemView : PoolingObjectView
 	public D2dDestructible DimondRenderer;
 	[SerializeField]
 	public SpriteRenderer CoinRenderer;
+	public SpriteRenderer DoubleCoinRenderer;
 	public tk2dTextMesh CountRenderer;
 
 	private bool _isWasVisible = false;
@@ -23,7 +24,6 @@ public class ItemView : PoolingObjectView
 	private bool _isPlayerImpact = false;
 	private Sequence _itemInitSequence = null;
 	private Sequence _itemImpactSequence = null;
-	private int _crystalFragmetsCollised = 0;
 
 	//public void Start()
 	//{
@@ -240,14 +240,10 @@ public class ItemView : PoolingObjectView
 		{
 			case ItemTypes.Crystal:
 				{
-					if (++_crystalFragmetsCollised > CrystalFractureCount)
-					{
-						CountRenderer.DOFade (1f, 0.1f);
-						CountRenderer.text = string.Format ("+{0}", _crystalFragmetsCollised);
-						CountRenderer.transform.position = triggerDetector.transform.position;
+					CountRenderer.DOFade (1f, 0.1f);
+					CountRenderer.text = string.Format ("+{0}", CrystalFractureCount);
+					CountRenderer.transform.position = triggerDetector.transform.position;
 
-						Debug.LogFormat ("Impact crystal to player");
-					}
 					break;
 				}
 		}
