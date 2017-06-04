@@ -142,6 +142,7 @@ public class GameController : Controller
 		_gameModel.gameOverData.CoinsCount = 0;
 		_gameModel.gameOverData.CrystalsCount = 0;
 		_gameModel.gameOverData.ScoreCount = 0;
+		_gameModel.gameOverData.MagnetsCount = 0;
 		_gameModel.gameOverData.GameType = _gameModel.gameType;
 
 		//m_PointText.text = _pointScore.ToString();

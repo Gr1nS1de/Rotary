@@ -11,6 +11,7 @@ public class ObjectsPoolController : Controller
 
 	private List<PoolingObjectView>		_poolObjectsList			{ get { return game.model.objectsPoolModel.poolObjectsList;}}
 	private List<PoolingObjectView>		_instantiatedObjectsList	{ get { return game.model.objectsPoolModel.instantiatedObjectsList;}}
+	//private List<PoolingObjectView>		_waitPoolingObjectsList		= new List<PoolingObjectView>();
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -112,6 +113,12 @@ public class ObjectsPoolController : Controller
 				{
 					ItemTypes itemType = (ItemTypes)objectType;
 
+					// If want to pool Magnet at vertical platform - go swap to pool item. :)
+					if (itemType == ItemTypes.Magnet && (_objectsPoolModel.lastPooledPlatform.platformType == PlatformTypes.Vertical || _objectsPoolModel.lastPooledPlatform.platformType == PlatformTypes.Vertical_Moving))
+					{
+						itemType = Random.Range (0, 2) == 1 ? ItemTypes.Coin : ItemTypes.Crystal;
+					}
+
 					PoolItem (itemType, objectCount, objectPosition);
 					break;
 				}
@@ -194,7 +201,7 @@ public class ObjectsPoolController : Controller
 		{
 			itemView.transform.position = objectPosition.GetValueOrDefault ();
 		}
-
+			
 		if (!itemView.gameObject.activeInHierarchy)
 			itemView.gameObject.SetActive (true);
 
@@ -222,6 +229,7 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
+			case PlatformTypes.Vertical_Moving:
 			case PlatformTypes.Vertical:
 				{
 					float platformsGap = game.model.playerModel.playerRendererSize.y + _platformsFactoryModel.verticalPlatformsGap;

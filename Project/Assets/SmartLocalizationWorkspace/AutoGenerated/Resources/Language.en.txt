@@ -115,8 +115,11 @@
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader><data name="TK_LIKE_NAME" xml:space="preserve">
-<value>Thank you!</value>
+  </resheader><data name="TK_LIKE_00_NAME" xml:space="preserve">
+<value>thank you!</value>
+</data>
+<data name="TK_LIKE_01_NAME" xml:space="preserve">
+<value>love you!</value>
 </data>
 <data name="TK_LANGUAGE_NAME" xml:space="preserve">
 <value>language</value>
@@ -138,5 +141,11 @@
 </data>
 <data name="TK_DOUBLE_COIN_NAME" xml:space="preserve">
 <value>double coin</value>
+</data>
+<data name="TK_COINS_PACK_00_NAME" xml:space="preserve">
+<value>3 000 coins</value>
+</data>
+<data name="TK_COINS_PACK_01_NAME" xml:space="preserve">
+<value>15 000 coins</value>
 </data>
 </root>

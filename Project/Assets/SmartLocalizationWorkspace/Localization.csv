@@ -1,9 +1,12 @@
 ,ru,en
-TK_LIKE_NAME,спасибо вас!,Thank you!
+TK_LIKE_00_NAME,спасибо вам!,thank you!
+TK_LIKE_01_NAME,люблю вас!,love you!
 TK_LANGUAGE_NAME,язык,language
 TK_SETTINGS_NAME,настройки,settings
 TK_GIFT_NAME,подарок,gift
 TK_RATE_NAME,оценить,rate
 TK_ACHIEVEMENTS_NAME,достижения,achievements
-TK_STORE_NAME,лавка монет,coins store
-TK_DOUBLE_COIN_NAME,двойной коин,double coin
+TK_STORE_NAME,лавка коинов,coins store
+TK_DOUBLE_COIN_NAME,коин удвоитель,double coin
+TK_COINS_PACK_00_NAME,3 000 коинов,3 000 coins
+TK_COINS_PACK_01_NAME,15 000 коинов,15 000 coins

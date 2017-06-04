@@ -26,6 +26,13 @@ public class ItemViewEditor : Editor
 					_mainRenderer = serializedObject.FindProperty ("DimondRenderer");
 					break;
 				}
+
+			case ItemTypes.Magnet:
+				{
+					_mainRenderer = serializedObject.FindProperty ("MagnetRenderer");
+					break;
+				}
+
 		}
 	}
 
@@ -35,7 +42,6 @@ public class ItemViewEditor : Editor
 
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
 		data.ItemType = (ItemTypes)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
-		data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
 
 		EditorGUILayout.PropertyField(_mainRenderer, true);
 
@@ -44,6 +50,7 @@ public class ItemViewEditor : Editor
 			case ItemTypes.Coin:
 				{
 					data.DoubleCoinRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Double Coin Renderer", data.DoubleCoinRenderer, typeof(SpriteRenderer), true);
+					data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
 					break;
 				}
 
@@ -51,6 +58,7 @@ public class ItemViewEditor : Editor
 				{
 					data.CrystalFractureCount = EditorGUILayout.IntField ("Crystal Fracture Count", data.CrystalFractureCount);
 					data.CrystalDestroyTime = EditorGUILayout.FloatField ("Crystal Destroy Time", data.CrystalDestroyTime);
+					data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
 					break;
 				}
 		}

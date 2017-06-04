@@ -17,11 +17,13 @@ public class ItemView : PoolingObjectView
 	[SerializeField]
 	public SpriteRenderer CoinRenderer;
 	public SpriteRenderer DoubleCoinRenderer;
+	public SpriteRenderer MagnetRenderer;
 	public tk2dTextMesh CountRenderer;
 
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
 	private bool _isPlayerImpact = false;
+	private Tween _magnetTurnTween = null;
 	private Sequence _itemInitSequence = null;
 	private Sequence _itemImpactSequence = null;
 
@@ -101,6 +103,12 @@ public class ItemView : PoolingObjectView
 					rendererSize = DimondRenderer.GetComponent<MeshRenderer> ().bounds.size;
 					break;
 				}
+
+			case ItemTypes.Magnet:
+				{
+					rendererSize = MagnetRenderer.bounds.size;
+					break;
+				}
 		}
 
 		return rendererSize;
@@ -124,6 +132,12 @@ public class ItemView : PoolingObjectView
 					isVisible = DimondRenderer.GetComponent<MeshRenderer> ().isVisible;
 					break;
 				}
+
+			case ItemTypes.Magnet:
+				{
+					isVisible = MagnetRenderer.isVisible;
+					break;
+				}
 		}
 
 		return isVisible;
@@ -143,6 +157,46 @@ public class ItemView : PoolingObjectView
 		}else
 			if (_isWasVisible)
 			{
+			switch (ItemType)
+			{
+				case ItemTypes.Magnet:
+					{
+						Vector3 currentPlayerPosition = game.view.playerView.PlayerRenderer.transform.position;
+						//Debug.LogErrorFormat ("Distance to player: {0}", Vector2.Distance (currentPlayerPosition, transform.position));
+						if (Vector2.Distance (currentPlayerPosition, transform.position) < 7.5f)
+						{
+							if (_magnetTurnTween == null || _magnetTurnTween.IsActive())
+							{
+								if (_magnetTurnTween == null)
+								{
+									var dir = currentPlayerPosition - transform.position;
+									var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+
+									_magnetTurnTween = MagnetRenderer.transform
+										.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.3f)
+										.OnComplete (() =>
+										{
+										}).SetId (this);
+								}
+							}
+							else
+							{
+								//MagnetRenderer.transform.DOLookAt (currentPlayerPosition, 0.05f, AxisConstraint.W, new Vector3(0f, 1f, 0f));
+								var dir = currentPlayerPosition - transform.position;
+								var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+
+								MagnetRenderer.transform.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.05f);
+								transform.DOShakeRotation (0.5f, new Vector3 (0f, 0f, 10f));
+							}
+						}
+						break;
+					}
+
+				default:
+					{
+						break;
+					}
+			}
 				if (!IsObjectVisible())
 				{
 					OnInvisible ();

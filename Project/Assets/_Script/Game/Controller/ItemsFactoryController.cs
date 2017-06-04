@@ -240,7 +240,7 @@ public class ItemsFactoryController : Controller
 	{
 		int randomPercentChance = 0;
 
-		return randomPercentChance;
+		//return randomPercentChance;
 
 		switch (game.model.gameSpeedState)
 		{

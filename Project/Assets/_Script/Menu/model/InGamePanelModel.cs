@@ -8,7 +8,10 @@ public class InGamePanelModel : Model
 	public Text 				textCoinsCount			{ get { return _textCoinsCount; } }
 	public Text 				textCrystalsCount		{ get { return _textCrystalsCount; } }
 	public Text 				textRecord				{ get { return _textRecord; } }
+	public Text 				textScore				{ get { return _textScore; } }
 
+	[SerializeField]
+	private Text				_textScore;
 	[SerializeField]
 	private Text				_textRecord;
 	[SerializeField]

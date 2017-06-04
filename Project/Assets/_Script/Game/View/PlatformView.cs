@@ -39,19 +39,16 @@ public class PlatformView : PoolingObjectView, IPoolObject
 				}
 
 			case PlatformTypes.Vertical_Moving:
+				{
+					InitVerticalPlatform (game.model.playerModel.playerRendererSize.y);
+					Vector3 bottomPoint = new Vector3 (transform.position.x, (-GM.Instance.ScreenSize.y / 2f + _verticalPlatformGapHeight * 0.6f), transform.position.z);
+
+					transform.position = bottomPoint;
+					break;
+				}
 			case PlatformTypes.Vertical:
 				{
-					Vector3 verticalPlatformSize = VerticalPlatformRenderers [0].bounds.size;
-					Vector3 topPlatformPosition = VerticalPlatformRenderers [0].transform.localPosition;
-					Vector3 bottomPlatformPosition = VerticalPlatformRenderers [1].transform.localPosition;
-
-					_verticalPlatformGapHeight = game.model.playerModel.playerRendererSize.y + platformsFactoryModel.verticalPlatformsGap;
-
-					topPlatformPosition.y = verticalPlatformSize.y / 2f + _verticalPlatformGapHeight / 2f;
-					bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - _verticalPlatformGapHeight / 2f;
-
-					VerticalPlatformRenderers [0].transform.localPosition = topPlatformPosition;
-					VerticalPlatformRenderers [1].transform.localPosition = bottomPlatformPosition;
+					InitVerticalPlatform ();
 					break;
 				}
 		}
@@ -82,9 +79,12 @@ public class PlatformView : PoolingObjectView, IPoolObject
 				{
 					float screenHeight = GM.Instance.ScreenSize.y;
 
+					Vector3 upperPoint = new Vector3 (transform.position.x, (screenHeight / 2f - _verticalPlatformGapHeight * 0.6f), transform.position.z);
+					Vector3 bottomPoint = new Vector3 (transform.position.x, (-screenHeight / 2f + _verticalPlatformGapHeight * 0.6f), transform.position.z);
+
 					_platformInitSequence
-						.Append(transform.DOMoveY (screenHeight / 2f - _verticalPlatformGapHeight * 0.6f, 1f))
-						.Append(transform.DOMoveY (-screenHeight / 2f + _verticalPlatformGapHeight * 0.6f, 1f))
+						.Append(transform.DOLocalMoveY(upperPoint.y, 2f).SetEase(Ease.Linear))
+						.Append(transform.DOLocalMoveY(bottomPoint.y, 2f).SetEase(Ease.Linear))
 						.SetLoops(-1)
 						.SetRecyclable(true)
 						.SetAutoKill(false);
@@ -94,6 +94,21 @@ public class PlatformView : PoolingObjectView, IPoolObject
 				}
 
 		}
+	}
+
+	private void InitVerticalPlatform(float gapHeight = -1f)
+	{
+		Vector3 verticalPlatformSize = VerticalPlatformRenderers [0].bounds.size;
+		Vector3 topPlatformPosition = VerticalPlatformRenderers [0].transform.localPosition;
+		Vector3 bottomPlatformPosition = VerticalPlatformRenderers [1].transform.localPosition;
+
+		_verticalPlatformGapHeight = game.model.playerModel.playerRendererSize.y + (gapHeight == -1f ? platformsFactoryModel.verticalPlatformsGap : gapHeight);
+
+		topPlatformPosition.y = verticalPlatformSize.y / 2f + _verticalPlatformGapHeight / 2f;
+		bottomPlatformPosition.y = -verticalPlatformSize.y / 2f - _verticalPlatformGapHeight / 2f;
+
+		VerticalPlatformRenderers [0].transform.localPosition = topPlatformPosition;
+		VerticalPlatformRenderers [1].transform.localPosition = bottomPlatformPosition;
 	}
 
 	public bool IsObjectVisible()
@@ -189,8 +204,13 @@ public class PlatformView : PoolingObjectView, IPoolObject
 		_isInPool = true;
 
 
-		if(_platformInitSequence != null)
-			_platformInitSequence.Rewind ();
+		if (_platformInitSequence != null)
+		{
+			if (_platformInitSequence.IsActive ())
+				_platformInitSequence.Kill ();
+
+			_platformInitSequence = null;
+		}
 	}
 }
 

@@ -115,8 +115,11 @@
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader><data name="TK_LIKE_NAME" xml:space="preserve">
-<value>спасибо вас!</value>
+  </resheader><data name="TK_LIKE_00_NAME" xml:space="preserve">
+<value>спасибо вам!</value>
+</data>
+<data name="TK_LIKE_01_NAME" xml:space="preserve">
+<value>люблю вас!</value>
 </data>
 <data name="TK_LANGUAGE_NAME" xml:space="preserve">
 <value>язык</value>
@@ -134,9 +137,15 @@
 <value>достижения</value>
 </data>
 <data name="TK_STORE_NAME" xml:space="preserve">
-<value>лавка монет</value>
+<value>лавка коинов</value>
 </data>
 <data name="TK_DOUBLE_COIN_NAME" xml:space="preserve">
-<value>двойной коин</value>
+<value>коин удвоитель</value>
+</data>
+<data name="TK_COINS_PACK_00_NAME" xml:space="preserve">
+<value>3 000 коинов</value>
+</data>
+<data name="TK_COINS_PACK_01_NAME" xml:space="preserve">
+<value>15 000 коинов</value>
 </data>
 </root>

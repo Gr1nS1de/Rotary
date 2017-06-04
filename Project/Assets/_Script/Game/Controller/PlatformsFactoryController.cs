@@ -85,12 +85,24 @@ public class PlatformsFactoryController : Controller
 					if (Random.Range (0, 10) > 8)
 					{
 						game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Vertical);
+							
 					}
 					break;
 				}
-
+			
 			case PlatformTypes.Vertical:
 				{
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Horizontal);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 2) == 1 ? PlatformTypes.Vertical : PlatformTypes.Vertical_Moving);
+
+					break;
+				}
+
+			case PlatformTypes.Vertical_Moving:
+				{
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Horizontal);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 3) == 1 ? PlatformTypes.Vertical : PlatformTypes.Vertical_Moving);
+
 					break;
 				}
 		}
