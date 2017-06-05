@@ -7,6 +7,8 @@ public class ItemsFactoryController : Controller
 
 	public ItemsFactoryModel _itemsFactoryModel	{ get { return game.model.itemsFactoryModel; } } 
 
+	private int 			_itemsNotSpawnedRow = 0;
+
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
@@ -52,32 +54,117 @@ public class ItemsFactoryController : Controller
 	{
 	}
 
+	//Check item spawn on platform invisible
 	private void CheckItemSpawn(PlatformView platformView)
 	{
 		int scoreCount = game.model.currentScore;
 		float randomItemSpawn = Random.value;
 
-		if (scoreCount >= 3 && scoreCount < 15)
+		_itemsNotSpawnedRow++;
+
+
+		if (scoreCount >= 0 && scoreCount <= 3)
+		{
+			if (Random.Range (0, 4) == 0)
+				GoPoolItem (ItemTypes.Crystal);
+			else if( Random.Range(0,11) < 7)
+				GoPoolItem( ItemTypes.Magnet) ;
+			else if(Random.Range(0,3) == 0)
+				GoPoolItem(GetRandomItem());
+			else
+			{
+				//Spawn nothing :)
+			}
+		}
+
+		if (scoreCount > 3 && scoreCount < 15)
 		{
 			if (randomItemSpawn <= 0.2f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, GetRandomItem());
+				GoPoolItem(GetRandomItem());
 			}
 		}
 		else if (scoreCount >= 15 && scoreCount < 25)
 		{
 			if (randomItemSpawn <= 0.3f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, GetRandomItem());
+				GoPoolItem(GetRandomItem());
 			}
 		}
 		else if (scoreCount >= 25)
 		{
 			if (randomItemSpawn <= 0.6f)
 			{
-				game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, 1, null, GetRandomItem());
+				GoPoolItem(GetRandomItem());
 			}
 		}
+
+		if (_itemsNotSpawnedRow >= Random.Range (3, 5))
+		{
+			ItemTypes penaltyItem = GetRandomPenaltyItem ();
+			GoPoolItem (penaltyItem);
+		}
+	}
+
+	private void GoPoolItem(ItemTypes itemType, int count = 1)
+	{
+		_itemsNotSpawnedRow = 0;
+
+		game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, count, null, itemType);
+	}
+
+	private ItemTypes GetRandomPenaltyItem()
+	{
+		ItemTypes randomPenaltyItemType = ItemTypes.Coin;
+		string[] itemNames = System.Enum.GetNames (typeof(ItemTypes));
+		List<float> itemsChances = new List<float>();
+		int scoreCount = game.model.currentScore;
+
+		//Debug.LogFormat ("1. Get random item. Game speed state: {0}", game.model.gameSpeedState);
+
+		for (int i = 0; i < itemNames.Length; i++) 
+		{
+			switch ((ItemTypes)System.Enum.Parse(typeof(ItemTypes), itemNames[i])) 
+			{
+				case ItemTypes.Coin:
+					{
+						int coinChance = 5;
+
+						itemsChances.Add(coinChance);
+
+						//Debug.LogFormat ("2. Add coin chance: {0}", coinChance);
+						break;
+					}
+
+				case ItemTypes.Crystal:
+					{
+						int crystalChance = 10;
+
+						itemsChances.Add(crystalChance);
+
+						//Debug.LogFormat ("3. Add crystal chance: {0}", crystalChance);
+						break;
+					}
+
+				case ItemTypes.Magnet:
+					{
+						int magnetChance = 85;
+
+						itemsChances.Add(magnetChance);
+
+						//Debug.LogFormat ("4. Add magnet chance: {0}", magnetChance);
+						break;
+					}
+			} 
+		}
+
+		int choosedItemIndex = ChooseRandomItem (itemsChances);
+
+		randomPenaltyItemType = (ItemTypes)System.Enum.Parse (typeof(ItemTypes), itemNames [choosedItemIndex]);
+
+		//Debug.LogFormat ("5. Go pool {0}", randomItemType);
+
+		return randomPenaltyItemType;
 	}
 
 	private ItemTypes GetRandomItem()

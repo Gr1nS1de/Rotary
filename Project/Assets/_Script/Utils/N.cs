@@ -9,7 +9,15 @@ public class N : MonoBehaviour
 	#endregion
 
 	#region Purchase notifications
+	public const string PurchaseProductsLoaded		= "purchase.products.loaded";
+
 	public const string PurchaseDoubleCoin			= "purchase.double.coin";
+	public const string PurchaseCoinsPack_00		= "purchase.coins.pack.00";
+	public const string PurchaseCoinsPack_01		= "purchase.coins.pack.01";
+
+	public const string OnPurchasedDoubleCoin		= "on.purchased.double.coin";
+	public const string OnPurchasedCoinsPack_00		= "on.purchased.coins.pack.00";
+	public const string OnPurchasedCoinsPack_01		= "on.purchased.coins.pack.01";
 	#endregion
 
 	#region Game notifications

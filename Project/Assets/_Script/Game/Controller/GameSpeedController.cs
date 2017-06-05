@@ -77,7 +77,7 @@ public class GameSpeedController : Controller
 		{
 			case GameSpeedState.Speed_1:
 				{
-					game.model.gameSpeed = 4f;
+					game.model.gameSpeed = 4.5f;
 					game.model.platformsFactoryModel.verticalPlatformsGap = Random.Range(1.3f, 1.5f);
 
 					DestroyIncreasingSpeedTween ();

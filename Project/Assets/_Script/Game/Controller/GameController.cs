@@ -67,14 +67,6 @@ public class GameController : Controller
 					OnPlayerImpactItem (itemView);
 					break;
 				}
-
-			case N.PurchaseDoubleCoin:
-				{
-					Prefs.PlayerData.SetDoubleCoin ();
-					_gameModel.isDoubleCoin = true;
-					break;
-				}
-
 			case N.PlayerLeftPlatform_:
 				{
 					PlatformView platformView = (PlatformView)data [0];
@@ -86,10 +78,27 @@ public class GameController : Controller
 			case N.OnPlayerInvisible:
 				{
 					GameOver ();
+					break;
+				}
 
-					_gameModel.gameState = GameState.GameOver;
+			case N.OnPurchasedCoinsPack_00:
+				{
+					Prefs.PlayerData.CreditCoins (3000);
+					game.model.coinsCount += 3000;
+					break;
+				}
 
-					Notify (N.GameOver_, NotifyType.ALL, new GameOverData (_gameModel.gameOverData));
+			case N.OnPurchasedCoinsPack_01:
+				{
+					Prefs.PlayerData.CreditCoins (15000);
+					game.model.coinsCount += 15000;
+					break;
+				}
+
+			case N.OnPurchasedDoubleCoin:
+				{
+					Prefs.PlayerData.SetDoubleCoin ();
+					_gameModel.isDoubleCoin = true;
 					break;
 				}
 
@@ -180,6 +189,12 @@ public class GameController : Controller
 			case ItemTypes.Magnet:
 				{
 					_gameModel.gameOverData.MagnetsCount++;
+
+					DOVirtual.DelayedCall (0.3f, () =>
+					{
+						GameOver ();
+
+					});
 					break;
 				}
 		}
@@ -207,6 +222,10 @@ public class GameController : Controller
 	private void GameOver()
 	{
 		IncreasePlayedGamesCount ();
+
+		_gameModel.gameState = GameState.GameOver;
+
+		Notify (N.GameOver_, NotifyType.ALL, new GameOverData (_gameModel.gameOverData));
 
 		//ReportScoreToLeaderboard(point);
 

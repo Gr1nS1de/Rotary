@@ -122,6 +122,12 @@ public class WeaponTrail : MonoBehaviour {
             
         }
     }
+
+	void Update()
+	{
+		Itterate (Time.time);
+		UpdateTrail (Time.time, Time.deltaTime);
+	}
     public void UpdateTrail(float currentTime, float deltaTime) { // ** call once a frame **
     
         // Rebuild the mesh	

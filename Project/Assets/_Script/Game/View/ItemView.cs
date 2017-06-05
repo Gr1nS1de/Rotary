@@ -19,6 +19,7 @@ public class ItemView : PoolingObjectView
 	public SpriteRenderer DoubleCoinRenderer;
 	public SpriteRenderer MagnetRenderer;
 	public tk2dTextMesh CountRenderer;
+	public WeaponTrail MagnetTrail;
 
 	private bool _isWasVisible = false;
 	private bool _isInPool = true;
@@ -48,6 +49,9 @@ public class ItemView : PoolingObjectView
 		if(CoinRenderer != null)
 			CoinRenderer.color = new Color (CoinRenderer.color.r, CoinRenderer.color.g, CoinRenderer.color.b, 1f);
 
+		if (ItemType == ItemTypes.Magnet)
+			MagnetRenderer.transform.eulerAngles = new Vector3 (0f, 0f, Random.Range(0f, 180f));
+
 		if (_itemInitSequence == null)
 			SetupItemTweening ();
 		else
@@ -63,7 +67,7 @@ public class ItemView : PoolingObjectView
 			case ItemTypes.Coin:
 				{
 					_itemInitSequence
-						.Append(CoinRenderer.transform.DOPunchScale (new Vector3(0.15f, 0.15f, 0f), 0.6f, 1, 1f).SetEase(Ease.InBounce))
+						.Append(CoinRenderer.transform.DOPunchScale (new Vector3(0.25f, 0.25f, 0f), 0.6f, 1, 1f).SetEase(Ease.InBounce))
 						.SetLoops(-1)
 						.SetRecyclable(true)
 						.SetAutoKill(false);
@@ -165,6 +169,8 @@ public class ItemView : PoolingObjectView
 						//Debug.LogErrorFormat ("Distance to player: {0}", Vector2.Distance (currentPlayerPosition, transform.position));
 						if (Vector2.Distance (currentPlayerPosition, transform.position) < 7.5f)
 						{
+								//MagnetTrail.Itterate (Time.time);
+								//MagnetTrail.UpdateTrail (Time.time, Time.deltaTime);
 							if (_magnetTurnTween == null || _magnetTurnTween.IsActive())
 							{
 								if (_magnetTurnTween == null)

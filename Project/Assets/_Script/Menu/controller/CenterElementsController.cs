@@ -86,11 +86,13 @@ public class CenterElementsController : Controller
 
 			case CenterElementId.Store_ButtonCoinsPack_00:
 				{
+					Notify (N.PurchaseCoinsPack_00);
 					break;
 				}
 
 			case CenterElementId.Store_ButtonCoinsPack_01:
 				{
+					Notify (N.PurchaseCoinsPack_01);
 					break;
 				}
 

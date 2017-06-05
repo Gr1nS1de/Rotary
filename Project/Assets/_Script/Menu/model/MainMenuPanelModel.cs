@@ -8,7 +8,16 @@ public class MainMenuPanelModel : Model
 	public Text 				textCrystalsCount		{ get { return _textCrystalsCount; } }
 	public Text 				textRecord				{ get { return _textRecord; } }
 	public bool 				isGameServicesOpened	{ get { return _isGameServicesOpened; } set { _isGameServicesOpened = value;} }
+	public Text 				textDoubleCoin			{ get { return _textDoubleCoin; } }
+	public Text 				textCoinsPack_00		{ get { return _textCoinsPack_00; } }
+	public Text 				textCoinsPack_01		{ get { return _textCoinsPack_01; } }
 
+	[SerializeField]
+	private Text				_textCoinsPack_01;
+	[SerializeField]
+	private Text				_textCoinsPack_00;
+	[SerializeField]
+	private Text				_textDoubleCoin;
 	[SerializeField]
 	private bool				_isGameServicesOpened;
 	[SerializeField]

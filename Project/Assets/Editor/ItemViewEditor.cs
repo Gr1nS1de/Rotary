@@ -61,6 +61,12 @@ public class ItemViewEditor : Editor
 					data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
 					break;
 				}
+			case ItemTypes.Magnet:
+				{
+					data.MagnetTrail = (WeaponTrail)EditorGUILayout.ObjectField ("Magnet Renderer", data.MagnetTrail, typeof(WeaponTrail));
+
+					break;
+				}
 		}
 
 		serializedObject.ApplyModifiedProperties();
