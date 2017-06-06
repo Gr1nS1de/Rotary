@@ -41,7 +41,7 @@ public class MainMenuPanelController : Controller
 					//ItemTypes itemType = (ItemTypes)data [0];
 					//int count = (int)data [1];
 
-					DelayUpdateLeftStatistics ();
+					UpdateLeftStatistics ();
 					break;
 				}
 
@@ -76,14 +76,6 @@ public class MainMenuPanelController : Controller
 	private void OnGameOver()
 	{
 		UpdateLeftStatistics ();
-	}
-
-	private void DelayUpdateLeftStatistics()
-	{
-		DOVirtual.DelayedCall (0.1f, () =>
-		{
-			UpdateLeftStatistics();
-		});
 	}
 
 	private void UpdateLeftStatistics()
