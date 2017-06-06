@@ -11,7 +11,10 @@ public class MainMenuPanelModel : Model
 	public Text 				textDoubleCoin			{ get { return _textDoubleCoin; } }
 	public Text 				textCoinsPack_00		{ get { return _textCoinsPack_00; } }
 	public Text 				textCoinsPack_01		{ get { return _textCoinsPack_01; } }
+	public CanvasGroup			panelRewardVideo		{ get { return _panelRewardVideo; } }
 
+	[SerializeField]
+	private CanvasGroup			_panelRewardVideo;
 	[SerializeField]
 	private Text				_textCoinsPack_01;
 	[SerializeField]

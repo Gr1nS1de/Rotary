@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SmartLocalization;
+using UnityEngine.Advertisements;
 
 public class CenterElementsController : Controller
 {
@@ -58,6 +59,12 @@ public class CenterElementsController : Controller
 			case CenterElementId.Like_ButtonDailyGift:
 				{
 					ui.controller.GoToWindowState (UIWindowState.DailyGift);
+					break;
+				}
+
+			case CenterElementId.ButtonShowRewardVideo:
+				{
+					ui.controller.RewardVideoController.ShowRewardedAd ();
 					break;
 				}
 

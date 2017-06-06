@@ -30,13 +30,18 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
-			case N.OnPurchasedCoinsPack_00:
-			case N.OnPurchasedCoinsPack_01:
+			case N.OnEndShowAdVideo_:
 				{
-					DOVirtual.DelayedCall (0.1f, () =>
-					{
-						UpdateLeftStatistics();
-					});
+					
+					break;
+				}
+
+			case N.PlayerItemCountChange__:
+				{
+					//ItemTypes itemType = (ItemTypes)data [0];
+					//int count = (int)data [1];
+
+					DelayUpdateLeftStatistics ();
 					break;
 				}
 
@@ -71,6 +76,14 @@ public class MainMenuPanelController : Controller
 	private void OnGameOver()
 	{
 		UpdateLeftStatistics ();
+	}
+
+	private void DelayUpdateLeftStatistics()
+	{
+		DOVirtual.DelayedCall (0.1f, () =>
+		{
+			UpdateLeftStatistics();
+		});
 	}
 
 	private void UpdateLeftStatistics()

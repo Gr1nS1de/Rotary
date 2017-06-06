@@ -27,6 +27,7 @@ public class N : MonoBehaviour
 	public const string GameContinue				= "game.continue";
 	public const string GameOver_					= "game.over";
 	public const string GameAddScore				= "game.add.score";
+	public const string PlayerItemCountChange__			= "game.coins.change";
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnItemInvisible_			= "on.item.invisible";
@@ -43,6 +44,9 @@ public class N : MonoBehaviour
 
 	public const string CenterButtonPressed_ 		= "center.button.pressed";
 	public const string RightButtonPressed_ 		= "right.button.pressed";
+	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
+	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
+	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
 	#endregion
 
 	#region player notifications
@@ -52,7 +56,7 @@ public class N : MonoBehaviour
 	#endregion
 
 	#region Resources notifications
-	public const string RCAwakeLoad					= "rc.awake.load";
-	public const string RCLoadGameTheme_			= "rc.load.game_theme";
+	public const string RCAwakeLoad					= "resource.controllers.awake.load";
+	public const string RCLoadGameTheme_			= "resource.controllers.load.game_theme";
 	#endregion
 }

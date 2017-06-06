@@ -10,7 +10,7 @@ public class GameController : Controller
 	#region Declare controllers reference
 	public CameraController					cameraController				{ get { return _cameraController 			= SearchLocal<CameraController>(			_cameraController,				typeof(CameraController).Name ); } }
 	public GameSoundController				gameSoundController				{ get { return _gameSoundController			= SearchLocal<GameSoundController>(			_gameSoundController,			typeof(GameSoundController).Name ); } }
-	public ResourcesController				resourcesController				{ get { return _resourcesController 		= SearchLocal<ResourcesController>(			_resourcesController,			typeof(ResourcesController).Name ); } }
+	public GameResourcesController			resourcesController				{ get { return _resourcesController 		= SearchLocal<GameResourcesController>(			_resourcesController,			typeof(GameResourcesController).Name ); } }
 	public ObjectsPoolController			objectsPoolController			{ get { return _objectsPoolController 		= SearchLocal<ObjectsPoolController> (		_objectsPoolController, 		typeof(ObjectsPoolController).Name);}}
 	public PlayerController 				playerController				{ get { return _playerController			= SearchLocal<PlayerController>(			_playerController,				typeof(PlayerController).Name );}}
 	public ItemsFactoryController			itemsFactoryController			{ get { return _itemsFactoryController		= SearchLocal<ItemsFactoryController>(		_itemsFactoryController,		typeof(ItemsFactoryController).Name );}}
@@ -27,7 +27,7 @@ public class GameController : Controller
 	private PlayerController				_playerController;
 	private CameraController				_cameraController;
 	private GameSoundController				_gameSoundController;
-	private ResourcesController				_resourcesController;
+	private GameResourcesController			_resourcesController;
 	private ObjectsPoolController 			_objectsPoolController;
 	#endregion
 
@@ -47,7 +47,7 @@ public class GameController : Controller
 				{
 					OnStart();
 
-					_gameModel.gameState = GameState.MainMenu;
+					ChangeGameState( GameState.MainMenu );
 					break;
 				}
 
@@ -55,7 +55,7 @@ public class GameController : Controller
 				{
 					OnGameStartPlay ();
 
-					_gameModel.gameState = GameState.Playing;
+					ChangeGameState (GameState.Playing);
 					break;
 				}
 
@@ -83,15 +83,13 @@ public class GameController : Controller
 
 			case N.OnPurchasedCoinsPack_00:
 				{
-					Prefs.PlayerData.CreditCoins (3000);
-					game.model.coinsCount += 3000;
+					ChangePlayerItemCount (ItemTypes.Coin, 3000);
 					break;
 				}
 
 			case N.OnPurchasedCoinsPack_01:
 				{
-					Prefs.PlayerData.CreditCoins (15000);
-					game.model.coinsCount += 15000;
+					ChangePlayerItemCount (ItemTypes.Coin, 15000);
 					break;
 				}
 
@@ -102,15 +100,28 @@ public class GameController : Controller
 					break;
 				}
 
+			case N.OnEndShowAdVideo_:
+				{
+					bool isSuccess = (bool)data [0];
+
+					if (isSuccess)
+					{
+						int rewardCoinsCount = 50;
+
+						ChangePlayerItemCount (ItemTypes.Coin, rewardCoinsCount);
+					}
+					break;
+				}
+
 			case N.GamePause:
 				{
-					_gameModel.gameState = GameState.Pause;
+					ChangeGameState(GameState.Pause);
 					break;
 				}
 
 			case N.GameContinue:
 				{
-					_gameModel.gameState = GameState.Playing;
+					ChangeGameState( GameState.Playing);
 					break;
 				}
 		}
@@ -155,7 +166,44 @@ public class GameController : Controller
 		_gameModel.gameOverData.GameType = _gameModel.gameType;
 
 		//m_PointText.text = _pointScore.ToString();
+	}
 
+	private void ChangeGameState(GameState gameState)
+	{
+		Debug.LogFormat ("GameState = {0}", gameState); 
+
+		_gameModel.gameState = gameState;
+	}
+
+	private void ChangePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
+	{
+		switch(itemType)
+		{
+			case ItemTypes.Coin:
+				{
+					if (count > 0)
+						Prefs.PlayerData.CreditCoins (count);
+					else
+						Prefs.PlayerData.DebitCoins (count);
+					
+					game.model.coinsCount += count;
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					if (count > 0)
+						Prefs.PlayerData.CreditCrystals (count);
+					else
+						Prefs.PlayerData.DebitCrystals (count);
+					
+					game.model.crystalsCount += count;
+					break;
+				}
+		}
+
+		if(isNotify)
+			Notify (N.PlayerItemCountChange__, NotifyType.ALL, itemType, count);
 	}
 
 	private void OnPlayerImpactItem(ItemView itemView)
@@ -168,10 +216,9 @@ public class GameController : Controller
 				{
 					int coinsCount = (_gameModel.isDoubleCoin ? 2 : 1);
 
-					_gameModel.coinsCount += coinsCount;
-					_gameModel.gameOverData.CoinsCount += coinsCount;
+					ChangePlayerItemCount(ItemTypes.Coin, coinsCount, false);
 
-					Prefs.PlayerData.CreditCoins (coinsCount);
+					_gameModel.gameOverData.CoinsCount += coinsCount;
 					break;
 				}
 
@@ -179,10 +226,9 @@ public class GameController : Controller
 				{
 					int crystalsCount = itemView.CrystalFractureCount;
 
-					_gameModel.crystalsCount += crystalsCount;
-					_gameModel.gameOverData.CrystalsCount += crystalsCount;
+					ChangePlayerItemCount (ItemTypes.Crystal, crystalsCount, false);
 
-					Prefs.PlayerData.CreditCrystals (crystalsCount);
+					_gameModel.gameOverData.CrystalsCount += crystalsCount;
 					break;
 				}
 
@@ -223,7 +269,7 @@ public class GameController : Controller
 	{
 		IncreasePlayedGamesCount ();
 
-		_gameModel.gameState = GameState.GameOver;
+		ChangeGameState( GameState.GameOver);
 
 		Notify (N.GameOver_, NotifyType.ALL, new GameOverData (_gameModel.gameOverData));
 

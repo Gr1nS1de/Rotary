@@ -68,7 +68,7 @@ public class GameOverData
 public class GameModel : Model
 {
 	#region Game model
-	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; Debug.LogFormat ("GameState = {0}", value); } }
+	public GameState					gameState				{ get { return _gameState; } 		set { _gameState 	= value; } }
 	public int							currentScore			{ get { return _currentScore; } 	set { _currentScore = value; } }
 	public GameTheme 					gameTheme				{ get { return _gameTheme; } 		set { _gameTheme = value;}}
 	public float			 			gameSpeed				{ get { return _gameSpeed; } 		set { _gameSpeed = value;}}
@@ -106,7 +106,7 @@ public class GameModel : Model
 	public CameraModel					cameraModel				{ get { return _cameraModel 				= SearchLocal<CameraModel>(					_cameraModel,				typeof(CameraModel).Name); } }
 	public DistructibleModel			distructibleModel		{ get { return _distructibleModel 			= SearchLocal<DistructibleModel>( 			_distructibleModel, 		typeof(DistructibleModel).Name ); } }
 	public GameSoundModel				soundModel				{ get { return _soundModel 					= SearchLocal<GameSoundModel>(				_soundModel,				typeof(GameSoundModel).Name ); } }
-	public RCModel						RCModel					{ get { return _RCModel 					= SearchLocal<RCModel>(						_RCModel,					typeof(RCModel).Name ); } }
+	//public GameRCModel				GameRCModel				{ get { return _GameRCModel 				= SearchLocal<GameRCModel>(						_GameRCModel,					typeof(GameRCModel).Name ); } }
 	public ObjectsPoolModel				objectsPoolModel		{ get { return _objectsPoolModel			= SearchLocal<ObjectsPoolModel>(			_objectsPoolModel,			typeof(ObjectsPoolModel).Name );}}
 	public PlayerModel 					playerModel				{ get { return _playerModel					= SearchLocal<PlayerModel>(					_playerModel,				typeof(PlayerModel).Name );}}
 	public PlatformsFactoryModel		platformsFactoryModel	{ get { return _platformsFactoryModel		= SearchLocal<PlatformsFactoryModel>(		_platformsFactoryModel,		typeof(PlatformsFactoryModel).Name );}}
@@ -115,7 +115,7 @@ public class GameModel : Model
 	public ItemModel					itemModel				{ get { return _itemModel					= SearchLocal<ItemModel>(					_itemModel,					typeof(ItemModel).Name );}}
 	public PlatformModel				platformModel			{ get { return _platformModel				= SearchLocal<PlatformModel>(				_platformModel,				typeof(PlatformModel).Name );}}
 
-	private PlatformModel					_platformModel;
+	private PlatformModel				_platformModel;
 	private ItemModel					_itemModel;
 	private BonusesFactoryModel			_bonusesFactoryModel;
 	private ItemsFactoryModel			_itemsFactoryModel;
@@ -124,8 +124,9 @@ public class GameModel : Model
 	private CameraModel					_cameraModel;
 	private DistructibleModel   		_distructibleModel;
 	private GameSoundModel				_soundModel;
-	private RCModel						_RCModel;
+	//private GameRCModel				_GameRCModel;
 	private ObjectsPoolModel			_objectsPoolModel;
 	#endregion
+
 }
 	

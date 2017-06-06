@@ -148,4 +148,16 @@
 <data name="TK_COINS_PACK_01_NAME" xml:space="preserve">
 <value>New Value</value>
 </data>
+<data name="TK_DOUBLE_COIN_PRICE_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_COINS_PACK_00_PRICE_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_COINS_PACK_01_PRICE_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_AD_VIDEO_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
 </root>

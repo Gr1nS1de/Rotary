@@ -85,7 +85,7 @@ public class GM : Controller
 
 	public void SetGameTheme(GameThemeType gameThemeType)
 	{
-		Notify (N.RCLoadGameTheme_, NotifyType.CORE, gameThemeType);
+		Notify (N.RCLoadGameTheme_, NotifyType.ALL, gameThemeType);
 	}
 	/*
 	public Gradient		backgroundMenuGradient 	{ get { return _backgroundMenuGradient; }		set { _backgroundMenuGradient = value; } } 

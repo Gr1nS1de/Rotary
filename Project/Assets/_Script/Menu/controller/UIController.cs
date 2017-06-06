@@ -10,7 +10,9 @@ public class UIController : Controller
 	public MainMenuPanelController		MainMenuPanelController			{ get { return _mainMenuPanelController		= SearchLocal<MainMenuPanelController>(		_mainMenuPanelController,	typeof(MainMenuPanelController).Name);	} }
 	public CenterElementsController		CenterElementsController		{ get { return _centerElementsController	= SearchLocal<CenterElementsController>(	_centerElementsController,	typeof(CenterElementsController).Name);	} }
 	public RightElementsController		RightElementsController			{ get { return _rightElementsController		= SearchLocal<RightElementsController>(		_rightElementsController,	typeof(RightElementsController).Name);	} }
+	public RewardVideoController		RewardVideoController			{ get { return _rewardVideoController		= SearchLocal<RewardVideoController>(		_rewardVideoController,		typeof(RewardVideoController).Name);	} }
 
+	private RewardVideoController		_rewardVideoController;
 	private RightElementsController		_rightElementsController;
 	private CenterElementsController	_centerElementsController;
 	private InGamePanelController		_inGamePanelController;

@@ -13,4 +13,5 @@ public class GameView : View
 	private PlayerView					_playerView;
 	private ObjectsPoolView				_objectsPoolView;
 
+
 }
