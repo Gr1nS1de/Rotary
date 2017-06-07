@@ -12,12 +12,12 @@ public static class Prefs
 
 		public static bool IsRewardVideoTimerInited()
 		{
-			return PlayerPrefs.GetString (RewardAdVideoTimestamp, "0") != "0";
+			return PlayerPrefs.HasKey (RewardAdVideoTimestamp);
 		}
 
 		public static DateTime GetRewardAdVideoTimestamp () 
 		{
-			long tmp = Convert.ToInt64(PlayerPrefs.GetString(RewardAdVideoTimestamp, "0"));
+			long tmp = Convert.ToInt64(PlayerPrefs.GetString(RewardAdVideoTimestamp));
 
 			return DateTime.FromBinary(tmp);
 		}

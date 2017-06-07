@@ -9,7 +9,7 @@ public class RewardVideoController : Controller
 	public const string 	REWARD_VIDEO_ID 				= "ca-app-pub-1531752806194430/5226856705";
 	private const int 		REWARD_VIDEO_MAX_SHOW_COUNT 	= 5;
 
-	private System.DateTime _rewardAdVideoTimestamp;
+	private System.DateTime _rewardAdVideoTimestamp 		= new System.DateTime(0);
 	private bool 			_isRewardedVideoShown 			= false;
 	private int 			_rewardVideoShowCount			= 0;
 	private CanvasGroup		_rewardVideoCanvasGroup 		= null;
@@ -53,9 +53,13 @@ public class RewardVideoController : Controller
 
 
 		_rewardVideoCanvasGroup = ui.model.mainMenuPanelModel.panelRewardVideo;
-		_rewardAdVideoTimestamp = Prefs.PlayerTimers.GetRewardAdVideoTimestamp ();
 
-		CheckRewardVideoShowTime ();
+		if (Prefs.PlayerTimers.IsRewardVideoTimerInited ())
+		{
+			_rewardAdVideoTimestamp = Prefs.PlayerTimers.GetRewardAdVideoTimestamp ();
+
+			CheckRewardVideoShowTime ();
+		}
 	}
 
 	#region Public methods
@@ -127,8 +131,6 @@ public class RewardVideoController : Controller
 
 	private void CheckRewardVideoShowTime()
 	{
-		System.DateTime rewardVideoTimestamp = Prefs.PlayerTimers.GetRewardAdVideoTimestamp ();
-
 		if (Prefs.PlayerTimers.IsRewardVideoTimerInited())
 		{
 			if (IsCanShowRewardVideo())
@@ -158,12 +160,14 @@ public class RewardVideoController : Controller
 
 		if (isSuccess)
 		{
-			Prefs.PlayerTimers.SetRewardAdVideoTimestamp (UnbiasedTime.Instance.Now ().AddHours (1));
+			_rewardAdVideoTimestamp = UnbiasedTime.Instance.Now ().AddHours (1);
 		}
 		else
 		{
-			Prefs.PlayerTimers.SetRewardAdVideoTimestamp (UnbiasedTime.Instance.Now ().AddMinutes (3));
+			_rewardAdVideoTimestamp =  UnbiasedTime.Instance.Now ().AddMinutes (10);
 		}
+
+		Prefs.PlayerTimers.SetRewardAdVideoTimestamp (_rewardAdVideoTimestamp);
 
 		Notify (N.OnEndShowAdVideo_, NotifyType.ALL, isSuccess);
 		SetActiveRewardVideoButton (false);
@@ -173,17 +177,20 @@ public class RewardVideoController : Controller
 	{
 		if (paused) 
 		{
-			Prefs.PlayerTimers.SetRewardAdVideoTimestamp(_rewardAdVideoTimestamp);
+			if(_rewardAdVideoTimestamp.Ticks != 0)
+				Prefs.PlayerTimers.SetRewardAdVideoTimestamp(_rewardAdVideoTimestamp);
 		}
 		else 
 		{
-			_rewardAdVideoTimestamp = Prefs.PlayerTimers.GetRewardAdVideoTimestamp();
+			if(_rewardAdVideoTimestamp.Ticks != 0)
+				_rewardAdVideoTimestamp = Prefs.PlayerTimers.GetRewardAdVideoTimestamp();
 		}
 	}
 
 	void OnApplicationQuit () 
 	{
-		Prefs.PlayerTimers.SetRewardAdVideoTimestamp(_rewardAdVideoTimestamp);
+		if(_rewardAdVideoTimestamp.Ticks != 0)
+			Prefs.PlayerTimers.SetRewardAdVideoTimestamp(_rewardAdVideoTimestamp);
 	}
 
 }
