@@ -13,12 +13,12 @@ public class ItemView : PoolingObjectView
 	public float 		CrystalDestroyTime = 2f;
 
 	[SerializeField]
-	public D2dDestructible DimondRenderer;
+	public D2dDestructible CrystalRenderer;
 	[SerializeField]
 	public SpriteRenderer CoinRenderer;
 	public SpriteRenderer DoubleCoinRenderer;
 	public SpriteRenderer MagnetRenderer;
-	public tk2dTextMesh CountRenderer;
+	public tk2dTextMesh[] CountRenderers;
 	public WeaponTrail MagnetTrail;
 
 	private bool _isWasVisible = false;
@@ -40,11 +40,7 @@ public class ItemView : PoolingObjectView
 		_isInPool = false;
 		_isPlayerImpact = false;
 
-		if (CountRenderer != null)
-		{
-			CountRenderer.color = new Color (CountRenderer.color.r, CountRenderer.color.g, CountRenderer.color.b, 0f);
-			CountRenderer.transform.localPosition = Vector3.zero;
-		}
+		ResetCountRenderers ();
 
 		if(CoinRenderer != null)
 			CoinRenderer.color = new Color (CoinRenderer.color.r, CoinRenderer.color.g, CoinRenderer.color.b, 1f);
@@ -56,6 +52,18 @@ public class ItemView : PoolingObjectView
 			SetupItemTweening ();
 		else
 			_itemInitSequence.Restart ();
+	}
+
+	private void ResetCountRenderers()
+	{
+		if (CountRenderers != null)
+		{
+			foreach (var renderer in CountRenderers)
+			{
+				renderer.color = new Color (renderer.color.r, renderer.color.g, renderer.color.b, 0f);
+				renderer.transform.localPosition = Vector3.zero;
+			}
+		}
 	}
 
 	private void SetupItemTweening()
@@ -77,7 +85,7 @@ public class ItemView : PoolingObjectView
 			case ItemTypes.Crystal:
 				{
 					_itemInitSequence
-						.Append(DimondRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+						.Append(CrystalRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
 						.SetLoops(-1)
 						.SetRecyclable(true)
 						.SetAutoKill(false);
@@ -104,7 +112,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
-					rendererSize = DimondRenderer.GetComponent<MeshRenderer> ().bounds.size;
+					rendererSize = CrystalRenderer.GetComponent<MeshRenderer> ().bounds.size;
 					break;
 				}
 
@@ -133,7 +141,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
-					isVisible = DimondRenderer.GetComponent<MeshRenderer> ().isVisible;
+					isVisible = CrystalRenderer.GetComponent<MeshRenderer> ().isVisible;
 					break;
 				}
 
@@ -161,54 +169,61 @@ public class ItemView : PoolingObjectView
 		}else
 			if (_isWasVisible)
 			{
-			switch (ItemType)
-			{
-				case ItemTypes.Magnet:
-					{
-						Vector3 currentPlayerPosition = game.view.playerView.PlayerRenderer.transform.position;
-						//Debug.LogErrorFormat ("Distance to player: {0}", Vector2.Distance (currentPlayerPosition, transform.position));
-						if (Vector2.Distance (currentPlayerPosition, transform.position) < 7.5f)
-						{
-								//MagnetTrail.Itterate (Time.time);
-								//MagnetTrail.UpdateTrail (Time.time, Time.deltaTime);
-							if (_magnetTurnTween == null || _magnetTurnTween.IsActive())
-							{
-								if (_magnetTurnTween == null)
-								{
-									var dir = currentPlayerPosition - transform.position;
-									var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+				UpdateItemOnVisible ();
 
-									_magnetTurnTween = MagnetRenderer.transform
-										.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.3f)
-										.OnComplete (() =>
-										{
-										}).SetId (this);
-								}
-							}
-							else
-							{
-								//MagnetRenderer.transform.DOLookAt (currentPlayerPosition, 0.05f, AxisConstraint.W, new Vector3(0f, 1f, 0f));
-								var dir = currentPlayerPosition - transform.position;
-								var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
-
-								MagnetRenderer.transform.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.05f);
-								transform.DOShakeRotation (0.5f, new Vector3 (0f, 0f, 10f));
-							}
-						}
-						break;
-					}
-
-				default:
-					{
-						break;
-					}
-			}
 				if (!IsObjectVisible())
 				{
 					OnInvisible ();
 				}
 			}
 				
+	}
+
+	private void UpdateItemOnVisible()
+	{
+		switch (ItemType)
+		{
+			case ItemTypes.Magnet:
+				{
+					Vector3 currentPlayerPosition = game.view.playerView.PlayerRenderer.transform.position;
+					//Debug.LogErrorFormat ("Distance to player: {0}", Vector2.Distance (currentPlayerPosition, transform.position));
+					if (Vector2.Distance (currentPlayerPosition, transform.position) < 7.5f)
+					{
+						//MagnetTrail.Itterate (Time.time);
+						//MagnetTrail.UpdateTrail (Time.time, Time.deltaTime);
+						if (_magnetTurnTween == null || _magnetTurnTween.IsActive())
+						{
+							if (_magnetTurnTween == null)
+							{
+								var dir = currentPlayerPosition - transform.position;
+								var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+
+								_magnetTurnTween = MagnetRenderer.transform
+									.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.3f)
+									.OnComplete (() =>
+									{
+									}).SetId (this);
+							}
+						}
+						else
+						{
+							//MagnetRenderer.transform.DOLookAt (currentPlayerPosition, 0.05f, AxisConstraint.W, new Vector3(0f, 1f, 0f));
+							var dir = currentPlayerPosition - transform.position;
+							var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+
+							MagnetRenderer.transform.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.05f);
+							transform.DOShakeRotation (0.5f, new Vector3 (0f, 0f, 10f));
+						}
+					}
+					break;
+				}
+
+			default:
+				{
+					break;
+				}
+		}
+
 	}
 
 	public void OnVisible()
@@ -247,10 +262,15 @@ public class ItemView : PoolingObjectView
 							.Join(CoinRenderer.transform.DOPunchPosition(Vector3.up * 2f, 0.4f, 0, 0))
 							.Insert(0.2f, CoinRenderer.DOFade(0f, 0.3f))
 							.Append(CoinRenderer.transform.DOPunchScale(-Vector3.one * 1.5f, 0.2f, 0, 0f))
-							.Insert(0.05f, CountRenderer.transform.DOLocalMoveY(2f, 0.5f))
-							.Insert(0.05f, CountRenderer.DOFade(1f, 0.1f))
 							.SetRecyclable(true)
 							.SetAutoKill(false);
+
+						foreach (var renderer in CountRenderers)
+						{
+							_itemImpactSequence
+								.Insert(0.05f, renderer.transform.DOLocalMoveY(2f, 0.5f))
+								.Insert(0.05f, renderer.DOFade(1f, 0.1f));
+							}
 					}
 
 					_itemImpactSequence.Play ();
@@ -300,9 +320,12 @@ public class ItemView : PoolingObjectView
 		{
 			case ItemTypes.Crystal:
 				{
-					CountRenderer.DOFade (1f, 0.1f);
-					CountRenderer.text = string.Format ("+{0}", CrystalFractureCount);
-					CountRenderer.transform.position = triggerDetector.transform.position;
+					foreach (var renderer in CountRenderers)
+					{
+						renderer.DOFade (1f, 0.1f);
+						renderer.text = string.Format ("+{0}", CrystalFractureCount);
+						renderer.transform.position = triggerDetector.transform.position;
+					}
 
 					break;
 				}

@@ -47,7 +47,7 @@ public class GameController : Controller
 				{
 					OnStart();
 
-					ChangeGameState( GameState.MainMenu );
+					GoGameState( GameState.MainMenu );
 					break;
 				}
 
@@ -55,7 +55,7 @@ public class GameController : Controller
 				{
 					OnGameStartPlay ();
 
-					ChangeGameState (GameState.Playing);
+					GoGameState (GameState.Playing);
 					break;
 				}
 
@@ -115,13 +115,13 @@ public class GameController : Controller
 
 			case N.GamePause:
 				{
-					ChangeGameState(GameState.Pause);
+					GoGameState(GameState.Pause);
 					break;
 				}
 
 			case N.GameContinue:
 				{
-					ChangeGameState( GameState.Playing);
+					GoGameState( GameState.Playing);
 					break;
 				}
 		}
@@ -168,7 +168,7 @@ public class GameController : Controller
 		//m_PointText.text = _pointScore.ToString();
 	}
 
-	private void ChangeGameState(GameState gameState)
+	private void GoGameState(GameState gameState)
 	{
 		Debug.LogFormat ("GameState = {0}", gameState); 
 
@@ -269,7 +269,7 @@ public class GameController : Controller
 	{
 		IncreasePlayedGamesCount ();
 
-		ChangeGameState( GameState.GameOver);
+		GoGameState( GameState.GameOver);
 
 		Notify (N.GameOver_, NotifyType.ALL, new GameOverData (_gameModel.gameOverData));
 

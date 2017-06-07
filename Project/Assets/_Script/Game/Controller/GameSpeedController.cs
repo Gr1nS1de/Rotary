@@ -17,6 +17,12 @@ public class GameSpeedController : Controller
 					break;
 				}
 
+			case N.GameStart:
+				{
+					SetGameSpeed (GameSpeedState.Speed_5);
+					break;
+				}
+
 			case N.GameAddScore:
 				{
 					CheckGameSpeedState ();

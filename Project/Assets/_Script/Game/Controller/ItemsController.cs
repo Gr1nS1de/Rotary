@@ -62,7 +62,7 @@ public class ItemsController : Controller
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
 					SetCrystalFractureCount(itemView);
-					game.controller.distructibleController.BreakItem(itemType, itemView.DimondRenderer, itemView.CrystalFractureCount, contactPoint);
+					game.controller.distructibleController.BreakItem(itemType, itemView.CrystalRenderer, itemView.CrystalFractureCount, contactPoint);
 
 					Destroy (itemView.gameObject, itemView.CrystalDestroyTime + 1f);
 					break;

@@ -32,7 +32,7 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (- GM.Instance.ScreenSize.x / 2f + (GM.Instance.ScreenSize.x * _playerModel.initScreenPosX)  - game.view.cameraView.transform.position.x);
 
-		PlayerRenderer.transform.DOMove (Vector3.zero, 0.3f)
+		PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f)
 			.OnComplete (() =>
 		{
 

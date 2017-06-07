@@ -23,7 +23,7 @@ public class ItemViewEditor : Editor
 
 			case ItemTypes.Crystal:
 				{
-					_mainRenderer = serializedObject.FindProperty ("DimondRenderer");
+					_mainRenderer = serializedObject.FindProperty ("CrystalRenderer");
 					break;
 				}
 
@@ -50,7 +50,10 @@ public class ItemViewEditor : Editor
 			case ItemTypes.Coin:
 				{
 					data.DoubleCoinRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Double Coin Renderer", data.DoubleCoinRenderer, typeof(SpriteRenderer), true);
-					data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
+					//data.CountRenderers = (tk2dTextMesh[])EditorGUILayout.ObjectField ("Count Renderers", data.CountRenderers, typeof(tk2dTextMesh[]));
+
+					EditorGUILayout.PropertyField(serializedObject.FindProperty("CountRenderers"), true); //(tk2dTextMesh[])EditorGUILayout.ObjectField ("Count Renderers", data.CountRenderers, typeof(tk2dTextMesh[]));
+
 					break;
 				}
 
@@ -58,7 +61,8 @@ public class ItemViewEditor : Editor
 				{
 					data.CrystalFractureCount = EditorGUILayout.IntField ("Crystal Fracture Count", data.CrystalFractureCount);
 					data.CrystalDestroyTime = EditorGUILayout.FloatField ("Crystal Destroy Time", data.CrystalDestroyTime);
-					data.CountRenderer = (tk2dTextMesh)EditorGUILayout.ObjectField ("Count Renderer", data.CountRenderer, typeof(tk2dTextMesh));
+					//data.CountRenderers = 
+					EditorGUILayout.PropertyField(serializedObject.FindProperty("CountRenderers"), true); //(tk2dTextMesh[])EditorGUILayout.ObjectField ("Count Renderers", data.CountRenderers, typeof(tk2dTextMesh[]));
 					break;
 				}
 			case ItemTypes.Magnet:
