@@ -50,7 +50,7 @@ public class CenterElementView : ThemeElementView
 
 	private void OnButtonClicked()
 	{
-		Notify (N.CenterButtonPressed_, NotifyType.UI, ElementId);
+		Notify (N.OnCenterButtonPressed_, NotifyType.UI, ElementId);
 	}
 
 	private void RegisterEvents()

@@ -47,7 +47,7 @@ public class RightElementView : ThemeElementView
 
 	private void OnButtonClicked()
 	{
-		Notify (N.RightButtonPressed_, NotifyType.UI, ElementId);
+		Notify (N.OnRightButtonPressed_, NotifyType.UI, ElementId);
 	}
 
 	private void RegisterEvents()

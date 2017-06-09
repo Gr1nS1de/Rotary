@@ -27,7 +27,7 @@ public class N : MonoBehaviour
 	public const string GameContinue				= "game.continue";
 	public const string GameOver_					= "game.over";
 	public const string GameAddScore				= "game.add.score";
-	public const string PlayerItemCountChange__			= "game.coins.change";
+	public const string PlayerItemCountChange__		= "game.coins.change";
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnItemInvisible_			= "on.item.invisible";
@@ -42,12 +42,13 @@ public class N : MonoBehaviour
 	public const string UIThemeChanged_				= "ui.theme.changed";
 	public const string UIStateChanged_				= "ui.state.changed";
 
-	public const string CenterButtonPressed_ 		= "center.button.pressed";
-	public const string RightButtonPressed_ 		= "right.button.pressed";
+	public const string OnCenterButtonPressed_ 		= "on.center.button.pressed";
+	public const string OnRightButtonPressed_ 		= "on.right.button.pressed";
 	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
 	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
 	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
 	public const string OnClickDailtGiftElement_	= "on.click.daily.gift.element";
+	public const string ShowNewGift_					= "show.new.gift";
 	#endregion
 
 	#region player notifications

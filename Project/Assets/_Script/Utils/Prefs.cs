@@ -11,7 +11,7 @@ public static class Prefs
 		public const string HourGiftTimestamp 		= "hour.gift.timestamp";
 		public const string DayGiftTimestamp		= "day.gift.timestamp";
 		public const string DaysReturn				= "days.return";
-		public const string ActivatedGifts			= "actiavted.gifts";
+		public const string GiftsArray				= "gifts.array";
 
 		public static bool IsRewardVideoTimerInited()
 		{
@@ -21,7 +21,7 @@ public static class Prefs
 
 		public static void InitGiftsArray(int[] giftsArray)
 		{
-			PlayerPrefsX.SetIntArray (ActivatedGifts, giftsArray);
+			PlayerPrefsX.SetIntArray (GiftsArray, giftsArray);
 		}
 
 		public static bool IsGiftActive(DailyGiftElementId elementId)
@@ -31,18 +31,18 @@ public static class Prefs
 			return activatedGifts [(int)elementId * 2 + 1] == 1;
 		}
 
-		public static void SetGiftActivated(DailyGiftElementId elementId, bool isActivated)
+		public static void SetGiftActivated(DailyGiftElementId giftId, bool isActivated)
 		{
-			int[] activatedGifts = GetGiftsArray ();
+			int[] giftsArray = GetGiftsArray ();
 
-			activatedGifts [(int)elementId * 2 + 1] = isActivated ? 1 : 0;
+			giftsArray [(int)giftId * 2 + 1] = isActivated ? 1 : 0;
 
-			PlayerPrefsX.SetIntArray (ActivatedGifts, activatedGifts);
+			PlayerPrefsX.SetIntArray (GiftsArray, giftsArray);
 		}
 
 		public static int[] GetGiftsArray()
 		{
-			return PlayerPrefsX.GetIntArray (ActivatedGifts);
+			return PlayerPrefsX.GetIntArray (GiftsArray);
 		}
 
 		public static void IncreaseDaysReturn()
@@ -58,6 +58,15 @@ public static class Prefs
 		public static void ClearDaysReturn()
 		{
 			PlayerPrefs.SetInt (DaysReturn, 0);
+			SetDayGiftTimestamp (new DateTime (0));
+			int[] giftsArray = GetGiftsArray ();
+
+			for (int i = 2; i < giftsArray.Length; i+=2)
+			{
+				giftsArray [i] = 0;
+			}
+
+			PlayerPrefsX.SetIntArray (GiftsArray, giftsArray);
 		}
 
 		public static DateTime GetRewardAdVideoTimestamp () 

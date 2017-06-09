@@ -8,6 +8,8 @@ public class MainMenuPanelController : Controller
 {
 	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
 
+	private bool					_isHourGiftActive			= false;
+
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
 		switch (alias)
@@ -30,9 +32,30 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
+			case N.OnStartShowAdVideo:
+				{
+					break;
+				}
+
 			case N.OnEndShowAdVideo_:
 				{
 					
+					break;
+				}
+
+			case N.ShowNewGift_:
+				{
+					DailyGiftElementId giftId = (DailyGiftElementId)data [0];
+
+					SetActiveGift  (giftId, true);
+					break;
+				}
+
+			case N.OnClickDailtGiftElement_:
+				{
+					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
+
+					OnClickDailyGiftElement(dailyGiftElementId);
 					break;
 				}
 
@@ -61,6 +84,38 @@ public class MainMenuPanelController : Controller
 		RegisterEvents();
 		UpdateLeftStatistics ();
 		InitStorePrices ();
+
+		InvokeRepeating("TickOneSecond",0f, 1f);
+	}
+
+	private void TickOneSecond()
+	{
+		if (!_isHourGiftActive)
+		{
+			if (_mainMenuPanelModel.panelHourGiftTitle.alpha > 0f)
+			{
+				_mainMenuPanelModel.panelHourGiftTitle.DOFade (0f, 0.5f);
+			} 
+
+			if (_mainMenuPanelModel.textHourGiftTimer.color.a < 1f)
+			{
+				_mainMenuPanelModel.textHourGiftTimer.DOFade (1f, 0.5f);
+			}
+
+			_mainMenuPanelModel.textHourGiftTimer.text = string.Format ("{0:00}:{1:00}", ui.model.giftHourTimer.Minutes, ui.model.giftHourTimer.Seconds);
+		}
+		else
+		{
+			if (_mainMenuPanelModel.textHourGiftTimer.color.a > 0f)
+			{
+				_mainMenuPanelModel.textHourGiftTimer.DOFade (0f, 0.5f);
+			}  
+
+			if (_mainMenuPanelModel.panelHourGiftTitle.alpha < 1f)
+			{
+				_mainMenuPanelModel.panelHourGiftTitle.DOFade (1f, 0.5f);
+			}
+		}
 	}
 
 	private void RegisterEvents()
@@ -71,6 +126,27 @@ public class MainMenuPanelController : Controller
 	private void OnLanguageChanged(LanguageManager langManager)
 	{
 		InitStorePrices ();
+	}
+
+
+	private void OnClickDailyGiftElement(DailyGiftElementId elementId)
+	{
+		switch (elementId)
+		{
+			case DailyGiftElementId.GiftHour_00:
+				{
+
+					break;
+				}
+
+			default:
+				{
+
+					break;
+				}
+		}
+
+		SetActiveGift (elementId, false);
 	}
 
 	private void OnGameOver()
@@ -102,5 +178,13 @@ public class MainMenuPanelController : Controller
 			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (),  Localization.CheckKey("TK_COINS_PACK_01_PRICE_NAME"));
 
 		}
+	}
+
+	private void SetActiveGift(DailyGiftElementId giftId, bool isActive)
+	{
+		if (giftId == DailyGiftElementId.GiftHour_00)
+			_isHourGiftActive = isActive;
+		
+		ui.view.GetDailyGiftElement (giftId).SetActive (isActive);
 	}
 }

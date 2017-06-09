@@ -12,7 +12,13 @@ public class MainMenuPanelModel : Model
 	public Text 				textCoinsPack_00		{ get { return _textCoinsPack_00; } }
 	public Text 				textCoinsPack_01		{ get { return _textCoinsPack_01; } }
 	public CanvasGroup			panelRewardVideo		{ get { return _panelRewardVideo; } }
+	public Text 				textHourGiftTimer		{ get { return _textHourGiftTimer; } }
+	public CanvasGroup 			panelHourGiftTitle		{ get { return _panelHourGiftTitle; } }
 
+	[SerializeField]
+	private CanvasGroup			_panelHourGiftTitle;
+	[SerializeField]
+	private Text				_textHourGiftTimer;
 	[SerializeField]
 	private CanvasGroup			_panelRewardVideo;
 	[SerializeField]

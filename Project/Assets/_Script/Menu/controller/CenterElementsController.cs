@@ -17,7 +17,7 @@ public class CenterElementsController : Controller
 					break;
 				}
 
-			case N.CenterButtonPressed_:
+			case N.OnCenterButtonPressed_:
 				{
 					CenterElementId centerElementId = (CenterElementId)data [0];
 

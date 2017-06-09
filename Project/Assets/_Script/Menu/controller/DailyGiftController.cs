@@ -22,6 +22,7 @@ public class DailyGiftController : Controller
 	private System.DateTime 	_hourGiftTimestamp;
 	private System.DateTime 	_dayGiftTimestamp;
 	private int 				_daysReturn;
+	private int[] 				_giftsArray;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -40,20 +41,28 @@ public class DailyGiftController : Controller
 					OnClickDailyGiftElement(dailyGiftElementId);
 					break;
 				}
-					
 		}
 	}
 
 	private void OnStart()
 	{
-		InvokeRepeating("TickOneSecond",0f, 1f);
+		if (Prefs.PlayerTimers.GetGiftsArray ().Length == 0)
+		{
+			InitGiftsArray ();
+		}
 
+		SetDefaults ();
+		CheckCurrentGifts ();
+
+		InvokeRepeating("TickOneSecond",0f, 1f);
+	}
+
+	private void SetDefaults()
+	{
 		_hourGiftTimestamp = Prefs.PlayerTimers.GetHourGiftTimestamp ();
 		_dayGiftTimestamp = Prefs.PlayerTimers.GetDayGiftTimestamp ();
 		_daysReturn = Prefs.PlayerTimers.GetDaysReturn ();
-
-		if (Prefs.PlayerTimers.GetGiftsArray ().Length == 0)
-			InitGiftsArray ();
+		_giftsArray = Prefs.PlayerTimers.GetGiftsArray ();
 	}
 
 	private void InitGiftsArray()
@@ -68,20 +77,30 @@ public class DailyGiftController : Controller
 
 			giftIndex++;
 		}
+
+		_giftsArray = giftsArray;
+		Prefs.PlayerTimers.InitGiftsArray (giftsArray);
 	}
 
-	private void SetActiveGift(DailyGiftElementId elementId)
+	private void CheckCurrentGifts()
 	{
-		switch(elementId)
+		//Day gifts
+		if (Prefs.PlayerTimers.GetDayGiftTimestamp ().AddDays (1) < UnbiasedTime.Instance.Now ())
 		{
-			case DailyGiftElementId.GiftHour_00:
-				{
-					if (ui.view.GetDailyGiftElement (DailyGiftElementId.GiftHour_00).IsActive)
-					{
+			ClearDayGifts ();
+		}
 
-					}
-					break;
-				}
+		if (IsHourGiftActive ())
+			SetActiveGift (DailyGiftElementId.GiftHour_00, true);
+
+		for (int i = 1; i < System.Enum.GetNames (typeof(DailyGiftElementId)).Length; i++)
+		{
+			DailyGiftElementId giftId = (DailyGiftElementId)System.Enum.ToObject (typeof(DailyGiftElementId), i);
+
+			if (i <= _daysReturn && Prefs.PlayerTimers.IsGiftActive (giftId))
+			{
+				SetActiveGift (giftId, true);
+			}
 		}
 	}
 
@@ -91,17 +110,39 @@ public class DailyGiftController : Controller
 		{
 			case DailyGiftElementId.GiftHour_00:
 				{
-					GetHourGift ();
+					SetupHourGiftTime ();
 					break;
 				}
 
 			default:
 				{
-					GetDayGift (elementId);
 					break;
 				}
-					
+
 		}
+
+		SetActiveGift (elementId, false);
+	}
+
+	private void SetActiveGift(DailyGiftElementId giftId, bool isActive)
+	{
+		Prefs.PlayerTimers.SetGiftActivated (giftId, isActive);
+		SetDefaults ();
+
+		if(isActive)
+			Notify (N.ShowNewGift_, NotifyType.UI, giftId);
+	}
+
+	private void ClearDayGifts()
+	{
+		Prefs.PlayerTimers.ClearDaysReturn ();
+
+		SetDefaults ();
+	}
+
+	private bool IsHourGiftActive()
+	{
+		return _giftsArray [1] == 1;
 	}
 
 	private void TickOneSecond()
@@ -110,23 +151,57 @@ public class DailyGiftController : Controller
 
 		if (unbiasedTime.Ticks >= _hourGiftTimestamp.Ticks)
 		{
-			GetHourGift ();
+			if (!IsHourGiftActive ())
+			{
+				OnNewGiftTime (true);	//Hour gift
+			}
+		}
+		else
+		{
+			if (!IsHourGiftActive ())
+			{
+				ui.model.giftHourTimer = _hourGiftTimestamp.Subtract(unbiasedTime);
+
+			}
 		}
 
 		if (unbiasedTime.Ticks >= _dayGiftTimestamp.Ticks)
 		{
-			//GetDayGift ();
+			OnNewGiftTime (false);	//Day gift
 		}
 	}
 
-	private void GetHourGift()
+	private void OnNewGiftTime(bool isHour)
+	{
+		DailyGiftElementId giftId;
+
+		if (isHour)
+		{
+			SetupHourGiftTime ();
+			giftId = DailyGiftElementId.GiftHour_00;
+		}
+		else
+		{
+			_daysReturn++;
+			Prefs.PlayerTimers.IncreaseDaysReturn ();
+
+			int returnDaysId = Mathf.Clamp (_daysReturn, 0, System.Enum.GetNames (typeof(DailyGiftElementId)).Length);
+
+			SetuoDayGiftTime ();
+			giftId = (DailyGiftElementId)System.Enum.Parse(typeof(DailyGiftElementId), System.Enum.GetNames(typeof(DailyGiftElementId))[returnDaysId]);
+		}
+
+		SetActiveGift (giftId, true);
+	}
+
+	private void SetupHourGiftTime()
 	{
 		_hourGiftTimestamp = UnbiasedTime.Instance.Now ().AddHours (1);
 
 		Prefs.PlayerTimers.SetHourGiftTimestamp(_hourGiftTimestamp);
 	}
 
-	private void GetDayGift(DailyGiftElementId elementId)
+	private void SetuoDayGiftTime()
 	{
 		_dayGiftTimestamp = UnbiasedTime.Instance.Now ().AddDays (1);
 		_daysReturn++;

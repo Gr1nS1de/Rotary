@@ -54,7 +54,9 @@ public class UIModel : Model
 	public CanvasGroup 			inGamePanel			{ get { return _inGamePanel; } }
 	public CanvasGroup 			mainMenuPanel		{ get { return _mainMenuPanel; } }
 	public CanvasGroup 			rightElementsPanel	{ get { return _rightElementsPanel; } }
+	public System.TimeSpan		giftHourTimer		{ get { return _giftHourTimer; }  set {_giftHourTimer = value;}}
 
+	private System.TimeSpan		_giftHourTimer;
 	[SerializeField]
 	private CanvasGroup			_rightElementsPanel;
 	[SerializeField]

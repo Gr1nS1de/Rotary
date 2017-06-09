@@ -22,7 +22,7 @@ public class RightElementsController : Controller
 					break;
 				}
 
-			case N.RightButtonPressed_:
+			case N.OnRightButtonPressed_:
 				{
 					RightElementId rightElementId = (RightElementId)data [0];
 
