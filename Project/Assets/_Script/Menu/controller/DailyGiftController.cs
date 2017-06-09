@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public enum DailyGiftElementId
 {
@@ -19,6 +20,8 @@ public enum DailyGiftElementId
 
 public class DailyGiftController : Controller
 {
+	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
+
 	private System.DateTime 	_hourGiftTimestamp;
 	private System.DateTime 	_dayGiftTimestamp;
 	private int 				_daysReturn;
@@ -129,8 +132,7 @@ public class DailyGiftController : Controller
 		Prefs.PlayerTimers.SetGiftActivated (giftId, isActive);
 		SetDefaults ();
 
-		if(isActive)
-			Notify (N.ShowNewGift_, NotifyType.UI, giftId);
+		ui.view.GetDailyGiftElement (giftId).SetActive (isActive);
 	}
 
 	private void ClearDayGifts()
@@ -148,6 +150,7 @@ public class DailyGiftController : Controller
 	private void TickOneSecond()
 	{
 		System.DateTime unbiasedTime = UnbiasedTime.Instance.Now ();
+		System.TimeSpan? giftHourTimer = null;
 
 		if (unbiasedTime.Ticks >= _hourGiftTimestamp.Ticks)
 		{
@@ -160,7 +163,7 @@ public class DailyGiftController : Controller
 		{
 			if (!IsHourGiftActive ())
 			{
-				ui.model.giftHourTimer = _hourGiftTimestamp.Subtract(unbiasedTime);
+				giftHourTimer = _hourGiftTimestamp.Subtract(unbiasedTime);
 
 			}
 		}
@@ -169,6 +172,8 @@ public class DailyGiftController : Controller
 		{
 			OnNewGiftTime (false);	//Day gift
 		}
+
+		CheckHourGiftView (giftHourTimer);
 	}
 
 	private void OnNewGiftTime(bool isHour)
@@ -192,6 +197,37 @@ public class DailyGiftController : Controller
 		}
 
 		SetActiveGift (giftId, true);
+	}
+
+	private void CheckHourGiftView(System.TimeSpan? giftHourTimer)
+	{
+		if (!IsHourGiftActive())
+		{
+			if (_mainMenuPanelModel.panelHourGiftTitle.alpha > 0f)
+			{
+				_mainMenuPanelModel.panelHourGiftTitle.DOFade (0f, 0.5f);
+			} 
+
+			if (_mainMenuPanelModel.textHourGiftTimer.color.a < 1f)
+			{
+				_mainMenuPanelModel.textHourGiftTimer.DOFade (1f, 0.5f);
+			}
+
+			if(giftHourTimer !=  null)
+				_mainMenuPanelModel.textHourGiftTimer.text = string.Format ("{0:00}:{1:00}", giftHourTimer.GetValueOrDefault().Minutes, giftHourTimer.GetValueOrDefault().Seconds);
+		}
+		else
+		{
+			if (_mainMenuPanelModel.textHourGiftTimer.color.a > 0f)
+			{
+				_mainMenuPanelModel.textHourGiftTimer.DOFade (0f, 0.5f);
+			}  
+
+			if (_mainMenuPanelModel.panelHourGiftTitle.alpha < 1f)
+			{
+				_mainMenuPanelModel.panelHourGiftTitle.DOFade (1f, 0.5f);
+			}
+		}
 	}
 
 	private void SetupHourGiftTime()

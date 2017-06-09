@@ -16,6 +16,7 @@ public class DailyGiftElementView : View
 	{
 		_button = GetComponent<Button> ();
 		_button.onClick.AddListener (OnButtonClick);
+		_button.interactable = false;
 
 		InitActiveSequence ();
 	}
@@ -40,10 +41,12 @@ public class DailyGiftElementView : View
 		if (isActive)
 		{
 			_activeSequence.Play ();
+			_button.interactable = true;
 		}
 		else
 		{
 			_activeSequence.Rewind ();
+			_button.interactable = false;
 		}
 	}
 

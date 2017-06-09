@@ -148,8 +148,6 @@ public class PurchaseController : Controller
 					Notify (N.OnPurchasedCoinsPack_01);
 					break;
 				}
-
-
 		}
 	}
 
@@ -196,7 +194,6 @@ public class PurchaseController : Controller
 	{
 
 		AndroidInAppPurchaseManager.ActionBillingSetupFinished -= OnBillingConnected;
-
 
 		if(result.IsSuccess) 
 		{
