@@ -47,6 +47,7 @@ public class N : MonoBehaviour
 	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
 	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
 	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
+	public const string OnClickDailtGiftElement_	= "on.click.daily.gift.element";
 	#endregion
 
 	#region player notifications

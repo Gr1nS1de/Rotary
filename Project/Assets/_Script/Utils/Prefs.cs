@@ -9,10 +9,55 @@ public static class Prefs
 	{
 		public const string RewardAdVideoTimestamp 	= "reward.ad.video.timestamp";
 		public const string HourGiftTimestamp 		= "hour.gift.timestamp";
+		public const string DayGiftTimestamp		= "day.gift.timestamp";
+		public const string DaysReturn				= "days.return";
+		public const string ActivatedGifts			= "actiavted.gifts";
 
 		public static bool IsRewardVideoTimerInited()
 		{
+
 			return PlayerPrefs.HasKey (RewardAdVideoTimestamp);
+		}
+
+		public static void InitGiftsArray(int[] giftsArray)
+		{
+			PlayerPrefsX.SetIntArray (ActivatedGifts, giftsArray);
+		}
+
+		public static bool IsGiftActive(DailyGiftElementId elementId)
+		{
+			int[] activatedGifts = GetGiftsArray ();
+
+			return activatedGifts [(int)elementId * 2 + 1] == 1;
+		}
+
+		public static void SetGiftActivated(DailyGiftElementId elementId, bool isActivated)
+		{
+			int[] activatedGifts = GetGiftsArray ();
+
+			activatedGifts [(int)elementId * 2 + 1] = isActivated ? 1 : 0;
+
+			PlayerPrefsX.SetIntArray (ActivatedGifts, activatedGifts);
+		}
+
+		public static int[] GetGiftsArray()
+		{
+			return PlayerPrefsX.GetIntArray (ActivatedGifts);
+		}
+
+		public static void IncreaseDaysReturn()
+		{
+			PlayerPrefs.SetInt (DaysReturn, GetDaysReturn() + 1);
+		}
+
+		public static int GetDaysReturn()
+		{
+			return PlayerPrefs.GetInt (DaysReturn, 0);
+		}
+
+		public static void ClearDaysReturn()
+		{
+			PlayerPrefs.SetInt (DaysReturn, 0);
 		}
 
 		public static DateTime GetRewardAdVideoTimestamp () 
@@ -22,9 +67,43 @@ public static class Prefs
 			return DateTime.FromBinary(tmp);
 		}
 
+		public static DateTime GetHourGiftTimestamp () 
+		{
+			long tmp = Convert.ToInt64(PlayerPrefs.GetString(HourGiftTimestamp, "0"));
+
+			if (tmp == 0)
+			{
+				return new DateTime (0);
+			}
+
+			return DateTime.FromBinary(tmp);
+		}
+
+		public static DateTime GetDayGiftTimestamp () 
+		{
+			long tmp = Convert.ToInt64(PlayerPrefs.GetString(DayGiftTimestamp, "0"));
+
+			if (tmp == 0)
+			{
+				return new DateTime (0);
+			}
+
+			return DateTime.FromBinary(tmp);
+		}
+
 		public static void SetRewardAdVideoTimestamp (DateTime time) 
 		{
 			PlayerPrefs.SetString(RewardAdVideoTimestamp, time.ToBinary().ToString());
+		}
+
+		public static void SetHourGiftTimestamp(DateTime time)
+		{
+			PlayerPrefs.SetString(HourGiftTimestamp, time.ToBinary().ToString());
+		}
+
+		public static void SetDayGiftTimestamp(DateTime time)
+		{
+			PlayerPrefs.SetString(DayGiftTimestamp, time.ToBinary().ToString());
 		}
 	}
 

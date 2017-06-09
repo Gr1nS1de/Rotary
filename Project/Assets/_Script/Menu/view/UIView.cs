@@ -3,9 +3,11 @@ using System.Collections;
 
 public class UIView : View
 {
-	public RightElementView[]	rightElementsArray		{ get { return _rightElementsArray == null ? _rightElementsArray	= SearchLocal<RightElementView>(	_rightElementsArray,	typeof(RightElementView).Name) : _rightElementsArray; 	} }
+	public RightElementView[]		rightElementsArray		{ get { return _rightElementsArray == null ? 	_rightElementsArray			= SearchLocal<RightElementView>(		_rightElementsArray,		typeof(RightElementView).Name) : _rightElementsArray; 	} }
+	public DailyGiftElementView[]	dailyGiftElementsArray	{ get { return _dailyGiftElementsArray == null ? _dailyGiftElementsArray	= SearchLocal<DailyGiftElementView>(	_dailyGiftElementsArray,	typeof(DailyGiftElementView).Name) : _dailyGiftElementsArray; 	} }
 
-	private RightElementView[]	_rightElementsArray = null;
+	private DailyGiftElementView[]	_dailyGiftElementsArray = null;
+	private RightElementView[]		_rightElementsArray = null;
 
 	public RightElementView GetRightElement(RightElementId rightElementId)
 	{
@@ -21,6 +23,22 @@ public class UIView : View
 		}
 
 		return rightElementView;
+	}
+
+	public DailyGiftElementView GetDailyGiftElement(DailyGiftElementId rightElementId)
+	{
+		DailyGiftElementView dailyElementView = null;
+
+		foreach (DailyGiftElementView dailyElement in dailyGiftElementsArray)
+		{
+			if (dailyElement.ElementId == rightElementId)
+			{
+				dailyElementView = dailyElement;
+				break;
+			}
+		}
+
+		return dailyElementView;
 	}
 	/*
 	public MainMenuVIew				mainMenuView			{ get { return _mainMenuView		= SearchLocal<MainMenuVIew>(		_mainMenuView,			typeof(MainMenuVIew).Name );}}

@@ -65,22 +65,15 @@ public class RewardVideoController : Controller
 	#region Public methods
 	public void ShowRewardedAd()
 	{
-		if (Advertisement.IsReady (REWRD_VIDEO_ZONE_ID))
-		{
-			var options = new ShowOptions { resultCallback = HandleShowResult };
-			Advertisement.Show (REWRD_VIDEO_ZONE_ID, options);
-			Notify (N.OnStartShowAdVideo);
-		}
-		else
-		{
-			Debug.LogError ("ShowRewardedAd. Video is not loaded.");
-		}
+		var options = new ShowOptions { resultCallback = HandleShowResult };
+		Advertisement.Show (REWRD_VIDEO_ZONE_ID, options);
+		Notify (N.OnStartShowAdVideo);
 	}
 	#endregion
 
 	private bool IsCanShowRewardVideo()
 	{
-		return (!_isRewardedVideoShown && UnbiasedTime.Instance.Now ().Ticks > Prefs.PlayerTimers.GetRewardAdVideoTimestamp ().Ticks);
+		return (Advertisement.IsReady (REWRD_VIDEO_ZONE_ID) && !_isRewardedVideoShown && UnbiasedTime.Instance.Now ().Ticks > Prefs.PlayerTimers.GetRewardAdVideoTimestamp ().Ticks);
 	}
 
 	private void ShowRewardVideo()

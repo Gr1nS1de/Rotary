@@ -56,22 +56,23 @@ public class RightElementsController : Controller
 		UpdateRightButtons (ui.model.uiWindowState);
 	}
 
-	private void MoveRightPanel()
+	private void MoveRightPanel(System.Action callbackHidden)
 	{
-		
-		if (_rightPanelMoveSequence == null)
-		{
-			RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
+		RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
 
-			_rightPanelMoveSequence = DOTween.Sequence ();
-			_rightPanelMoveSequence.SetRecyclable (true).SetAutoKill (false);
-			_rightPanelMoveSequence.Append (rightPanelRect.DOPunchAnchorPos (new Vector2 (-rightPanelRect.rect.width, 0f), 0.5f, 0, 1f));
-		}
-		else
-		{
-			if (_rightPanelMoveSequence.IsActive ())
-				_rightPanelMoveSequence.Rewind ();
-		}
+		if (_rightPanelMoveSequence != null && _rightPanelMoveSequence.IsActive ())
+			_rightPanelMoveSequence.Kill ();
+		
+		_rightPanelMoveSequence = DOTween.Sequence ();
+
+		_rightPanelMoveSequence
+			.Append (rightPanelRect.DOPunchAnchorPos (new Vector2 (-rightPanelRect.rect.width, 0f), 0.5f, 0, 1f))
+			.InsertCallback (0.1f, () =>
+			{
+				if(callbackHidden != null)
+					callbackHidden();
+			});
+		
 			
 		_rightPanelMoveSequence.Play ();
 	}
@@ -80,10 +81,11 @@ public class RightElementsController : Controller
 	{
 		UIWindowState uiState = UIWindowState.MainMenu;
 		bool isChangeWindowState = true;
+		bool isMoveRightPanel = false;
 
 		if (_backButtonStack.Count == 0 && rightElementId != RightElementId.ButtonBack && rightElementId != RightElementId.ButtonGameServices)
 		{
-			MoveRightPanel ();
+			isMoveRightPanel = true;
 		}
 
 		switch (rightElementId)
@@ -150,7 +152,8 @@ public class RightElementsController : Controller
 					}
 					else
 					{
-						MoveRightPanel ();
+						uiState = UIWindowState.MainMenu;
+						isMoveRightPanel = true;
 					}
 					break;
 				}
@@ -158,8 +161,19 @@ public class RightElementsController : Controller
 
 		if (isChangeWindowState)
 		{
-			ui.model.mainMenuPanelModel.isGameServicesOpened = false;
-			ui.controller.GoToWindowState (uiState);
+			if (!isMoveRightPanel)
+			{
+				ui.model.mainMenuPanelModel.isGameServicesOpened = false;
+				ui.controller.GoToWindowState (uiState);
+			}
+			else
+			{
+				MoveRightPanel (()=>
+				{
+					ui.model.mainMenuPanelModel.isGameServicesOpened = false;
+					ui.controller.GoToWindowState (uiState);
+				});
+			}
 		}
 	}
 
@@ -315,7 +329,6 @@ public class RightElementsController : Controller
 		if (_backButtonStack.Count <= 1)
 		{
 			ClearBackStack ();
-			ui.controller.GoToWindowState (UIWindowState.MainMenu);
 		}
 		else if (_backButtonStack.Count > 1)
 		{

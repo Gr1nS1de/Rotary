@@ -155,7 +155,7 @@ public abstract class Element : MonoBehaviour
 		}
 
 		List<T> searchFor = new List<T>( transform.GetComponents<T>());
-		searchFor.AddRange (transform.GetComponentsInChildren<T> ());
+		searchFor.AddRange (transform.GetComponentsInChildren<T> (true));
 
 		if ( searchFor.Count > 0 && storeKey != "" )
 		{
