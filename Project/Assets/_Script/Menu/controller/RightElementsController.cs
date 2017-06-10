@@ -39,7 +39,7 @@ public class RightElementsController : Controller
 					break;
 				}
 
-			case N.UIStateChanged_:
+			case N.UIWindowStateChanged_:
 				{
 					UIWindowState uiState = (UIWindowState)data [0];
 

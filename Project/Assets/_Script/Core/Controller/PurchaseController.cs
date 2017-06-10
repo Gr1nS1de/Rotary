@@ -214,10 +214,11 @@ public class PurchaseController : Controller
 		{
 			UpdateStoreData();
 			_isInited = true;
-			Notify (N.PurchaseProductsLoaded);
 		} else {
 			//AndroidMessage.Create("Connection Responce", result.Response.ToString() + " " + result.Message);
 		}
+
+		Notify (N.PurchaseProductsLoaded_, NotifyType.ALL, result.IsSuccess);
 	}
 
 	private void UpdateStoreData() 

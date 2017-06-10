@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using SmartLocalization;
 using DG.Tweening;
@@ -9,6 +10,7 @@ public class MainMenuPanelController : Controller
 	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
 
 	private bool					_isHourGiftActive			= false;
+	private bool					_isStorePricesInited		= false;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -26,9 +28,11 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
-			case N.PurchaseProductsLoaded:
+			case N.PurchaseProductsLoaded_:
 				{
-					InitStorePrices ();
+					bool isSuccess = (bool)data[0];
+
+					InitStorePrices (isSuccess);
 					break;
 				}
 
@@ -67,7 +71,6 @@ public class MainMenuPanelController : Controller
 		//TODO: Update statistics with pop animation.
 		RegisterEvents();
 		UpdateLeftStatistics ();
-		InitStorePrices ();
 
 	}
 
@@ -78,7 +81,7 @@ public class MainMenuPanelController : Controller
 
 	private void OnLanguageChanged(LanguageManager langManager)
 	{
-		InitStorePrices ();
+		OnUpdateStorePricesLang ();
 	}
 		
 	private void OnGameOver()
@@ -95,20 +98,40 @@ public class MainMenuPanelController : Controller
 		Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 	}
 
-	private void InitStorePrices()
+	private void InitStorePrices(bool isSuccessConnection)
 	{
-		if (AndroidInAppPurchaseManager.Client.IsInventoryLoaded)
+		if (isSuccessConnection)
 		{
 			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.DOUBLE_COIN).LocalizedPrice);
 			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_00).LocalizedPrice);
 			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_01).LocalizedPrice);
+
+			_isStorePricesInited = true;
 		}
 		else
 		{
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper(), Localization.CheckKey("TK_DOUBLE_COIN_PRICE_NAME"));
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (),  Localization.CheckKey("TK_COINS_PACK_00_PRICE_NAME"));
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (),  Localization.CheckKey("TK_COINS_PACK_01_PRICE_NAME"));
+			OnUpdateStorePricesLang ();
+		}
 
+	}
+
+	private void OnUpdateStorePricesLang()
+	{
+		if (_isStorePricesInited)
+		{
+			string[] doubleCoinTextSplitted = _mainMenuPanelModel.textDoubleCoin.text.Split ('-');
+			string[] coinsPack_00TextSplitted = _mainMenuPanelModel.textCoinsPack_00.text.Split ('-');
+			string[] coinsPack_01TextSplitted = _mainMenuPanelModel.textCoinsPack_01.text.Split ('-');
+
+			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), doubleCoinTextSplitted [1]);
+			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), coinsPack_00TextSplitted [1]);
+			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), coinsPack_01TextSplitted [1]);
+		}
+		else
+		{
+			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper());
+			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper ());
+			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - ;(", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper ());
 		}
 	}
 }

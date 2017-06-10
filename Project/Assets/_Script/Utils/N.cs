@@ -9,7 +9,7 @@ public class N : MonoBehaviour
 	#endregion
 
 	#region Purchase notifications
-	public const string PurchaseProductsLoaded		= "purchase.products.loaded";
+	public const string PurchaseProductsLoaded_		= "purchase.products.loaded";
 
 	public const string PurchaseDoubleCoin			= "purchase.double.coin";
 	public const string PurchaseCoinsPack_00		= "purchase.coins.pack.00";
@@ -36,19 +36,6 @@ public class N : MonoBehaviour
 	public const string OnPlayerNewRecord_			= "on.player.new.record";
 
 	public const string GameThemeChanged_			= "game.theme.changed";
-	#endregion
-
-	#region Menu notifications
-	public const string UIThemeChanged_				= "ui.theme.changed";
-	public const string UIStateChanged_				= "ui.state.changed";
-
-	public const string OnCenterButtonPressed_ 		= "on.center.button.pressed";
-	public const string OnRightButtonPressed_ 		= "on.right.button.pressed";
-	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
-	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
-	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
-	public const string OnClickDailtGiftElement_	= "on.click.daily.gift.element";
-	#endregion
 
 	#region player notifications
 	//public const string DestructibleBreakEntity___ 	= "destructible.break.entity";
@@ -56,7 +43,22 @@ public class N : MonoBehaviour
 	public const string PlayerLeftPlatform_			= "player.left.platform";
 	#endregion
 
-	#region Resources notifications
+	#endregion
+
+	#region Menu notifications
+	public const string UIThemeChanged_				= "ui.theme.changed";
+	public const string UIWindowStateChanged_		= "ui.window.state.changed";
+
+	public const string OnCenterButtonPressed_ 		= "on.center.button.pressed";
+	public const string OnRightButtonPressed_ 		= "on.right.button.pressed";
+	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
+	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
+	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
+	public const string OnPlayerGetGift_			= "on.player.get.gift";
+	public const string OnPlayerBuySkin_			= "on.player.buy.skin";
+	#endregion
+
+	#region Resources controllers notifications
 	public const string RCAwakeLoad					= "resource.controllers.awake.load";
 	public const string RCLoadGameTheme_			= "resource.controllers.load.game_theme";
 	#endregion

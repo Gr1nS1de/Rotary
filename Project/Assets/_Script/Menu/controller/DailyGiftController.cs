@@ -37,7 +37,7 @@ public class DailyGiftController : Controller
 					break;
 				}
 
-			case N.OnClickDailtGiftElement_:
+			case N.OnPlayerGetGift_:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
 

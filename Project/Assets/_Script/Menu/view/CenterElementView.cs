@@ -70,7 +70,7 @@ public class CenterElementView : ThemeElementView
 			ButtonBackground.onClick.RemoveListener(OnButtonClicked);
 		}
 
-		if(ui.controller.CenterElementsController != null)
+		if(ui != null && ui.controller != null && ui.controller.CenterElementsController != null)
 			ui.controller.CenterElementsController.ActionUIThemeChanged -= OnUIThemeChanged;
 	}
 }

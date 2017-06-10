@@ -211,8 +211,8 @@ public class ItemView : PoolingObjectView
 							var dir = currentPlayerPosition - transform.position;
 							var angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
 
-							MagnetRenderer.transform.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 0.05f);
-							transform.DOShakeRotation (0.5f, new Vector3 (0f, 0f, 10f));
+							MagnetRenderer.transform.DORotate (Quaternion.AngleAxis (angle - 90, Vector3.forward).eulerAngles, 5f * Time.deltaTime);
+							transform.DOShakeRotation (0.5f, new Vector3 (0f, 0f, 30f), 3, 90f, true);
 						}
 					}
 					break;
@@ -302,6 +302,14 @@ public class ItemView : PoolingObjectView
 							.SetAutoKill(false);
 					}
 
+					foreach (var renderer in CountRenderers)
+					{
+						renderer.DOFade (1f, 0.1f);
+						renderer.text = string.Format ("+{0}", CrystalFractureCount);
+						renderer.transform.position = transform.position;
+					}
+
+
 					_itemImpactSequence.Play ();
 
 					break;
@@ -339,6 +347,14 @@ public class ItemView : PoolingObjectView
 
 		if (_itemImpactSequence != null)
 			_itemImpactSequence.Rewind ();
+
+		if (_magnetTurnTween != null)
+		{
+			if(_magnetTurnTween.IsActive())
+				_magnetTurnTween.Kill ();
+			
+			_magnetTurnTween = null;
+		}
 		
 		_isInPool = true;
 	}

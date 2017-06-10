@@ -16,7 +16,9 @@ public class DailyGiftElementView : View
 	{
 		_button = GetComponent<Button> ();
 		_button.onClick.AddListener (OnButtonClick);
-		_button.interactable = false;
+
+		if(!IsActive)
+			_button.interactable = false;
 
 		InitActiveSequence ();
 	}
@@ -30,7 +32,10 @@ public class DailyGiftElementView : View
 			.Append(transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0f), 0.5f, 1))
 			.SetLoops(-1);
 
-		_activeSequence.Rewind ();
+		if (!IsActive)
+			_activeSequence.Rewind ();
+		else
+			_activeSequence.Play ();
 	}
 
 
@@ -41,12 +46,16 @@ public class DailyGiftElementView : View
 		if (isActive)
 		{
 			_activeSequence.Play ();
-			_button.interactable = true;
+
+			if(_button != null)
+				_button.interactable = true;
 		}
 		else
 		{
 			_activeSequence.Rewind ();
-			_button.interactable = false;
+
+			if(_button != null)
+				_button.interactable = false;
 		}
 	}
 
@@ -55,7 +64,7 @@ public class DailyGiftElementView : View
 		if (IsActive)
 		{
 			SetActive (false);
-			Notify (N.OnClickDailtGiftElement_, NotifyType.ALL, ElementId);
+			Notify (N.OnPlayerGetGift_, NotifyType.ALL, ElementId);
 		}
 	}
 }

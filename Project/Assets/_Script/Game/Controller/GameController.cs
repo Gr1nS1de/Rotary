@@ -100,6 +100,14 @@ public class GameController : Controller
 					break;
 				}
 
+			case N.OnPlayerBuySkin_:
+				{
+					string skinId = (string)data [0];
+					int skinIndex = int.Parse(skinId.Split ('_') [1]);
+
+					break;
+				}
+
 			case N.OnEndShowAdVideo_:
 				{
 					bool isSuccess = (bool)data [0];

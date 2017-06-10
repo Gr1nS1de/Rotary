@@ -39,22 +39,25 @@ public class UIModel : Model
 {
 
 	#region UI Model
-	public UIPanelState			uiMainState			{ get { return _uiPanelState; } 	set { _uiPanelState 	= value;} }
-	public UITheme 				menuTheme			{ get { return _menuTheme; } 		set { _menuTheme 		= value;} }
-	public UIWindowState		uiWindowState		{ get { return _uiWindowState; } 	set { _uiWindowState 	= value; } }
-	public CanvasGroup 			mainMenuWindow		{ get { return _mainMenuWindow; } }
-	public CanvasGroup 			storeWindow			{ get { return _storeWindow; } }
-	public CanvasGroup 			settingsWindow		{ get { return _settingsWindow; } }
-	public CanvasGroup 			likeWindow			{ get { return _likeWindow; } }
-	public CanvasGroup 			dailyGiftWindow		{ get { return _dailyGiftWindow; } }
-	public CanvasGroup 			achievementsWindow	{ get { return _achievementsWindow; } }
-	public CanvasGroup 			playerSkinWindow	{ get { return _playerSkinWindow; } }
-	public CanvasGroup 			pauseWindow			{ get { return _pauseWindow; } }
-	public CanvasGroup 			gameOverWindow		{ get { return _gameOverWindow; } }
-	public CanvasGroup 			inGamePanel			{ get { return _inGamePanel; } }
-	public CanvasGroup 			mainMenuPanel		{ get { return _mainMenuPanel; } }
-	public CanvasGroup 			rightElementsPanel	{ get { return _rightElementsPanel; } }
+	public UIPanelState			uiMainState				{ get { return _uiPanelState; } 	set { _uiPanelState 	= value;} }
+	public UITheme 				menuTheme				{ get { return _menuTheme; } 		set { _menuTheme 		= value;} }
+	public UIWindowState		uiWindowState			{ get { return _uiWindowState; } 	set { _uiWindowState 	= value; } }
+	public CanvasGroup 			mainMenuWindow			{ get { return _mainMenuWindow; } }
+	public CanvasGroup 			storeWindow				{ get { return _storeWindow; } }
+	public CanvasGroup 			settingsWindow			{ get { return _settingsWindow; } }
+	public CanvasGroup 			likeWindow				{ get { return _likeWindow; } }
+	public CanvasGroup 			dailyGiftWindow			{ get { return _dailyGiftWindow; } }
+	public CanvasGroup 			achievementsWindow		{ get { return _achievementsWindow; } }
+	public CanvasGroup 			playerSkinWindow		{ get { return _playerSkinWindow; } }
+	public CanvasGroup 			pauseWindow				{ get { return _pauseWindow; } }
+	public CanvasGroup 			gameOverWindow			{ get { return _gameOverWindow; } }
+	public CanvasGroup 			inGamePanel				{ get { return _inGamePanel; } }
+	public CanvasGroup 			mainMenuPanel			{ get { return _mainMenuPanel; } }
+	public CanvasGroup 			rightElementsPanel		{ get { return _rightElementsPanel; } }
+	public GridLayoutGroup 		playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
 
+	[SerializeField]
+	private GridLayoutGroup		_playerSkinElementsPanel;
 	[SerializeField]
 	private CanvasGroup			_rightElementsPanel;
 	[SerializeField]

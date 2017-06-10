@@ -11,7 +11,9 @@ public class UIController : Controller
 	public CenterElementsController		CenterElementsController		{ get { return _centerElementsController	= SearchLocal<CenterElementsController>(	_centerElementsController,	typeof(CenterElementsController).Name);	} }
 	public RightElementsController		RightElementsController			{ get { return _rightElementsController		= SearchLocal<RightElementsController>(		_rightElementsController,	typeof(RightElementsController).Name);	} }
 	public RewardVideoController		RewardVideoController			{ get { return _rewardVideoController		= SearchLocal<RewardVideoController>(		_rewardVideoController,		typeof(RewardVideoController).Name);	} }
+	public PlayerSkinController			PlayerSkinController			{ get { return _playerSkinController		= SearchLocal<PlayerSkinController>(		_playerSkinController,		typeof(PlayerSkinController).Name);	} }
 
+	private PlayerSkinController		_playerSkinController;
 	private RewardVideoController		_rewardVideoController;
 	private RightElementsController		_rightElementsController;
 	private CenterElementsController	_centerElementsController;
@@ -77,7 +79,7 @@ public class UIController : Controller
 
 		ui.model.uiWindowState = uiState;
 
-		Notify (N.UIStateChanged_, NotifyType.UI, uiState);
+		Notify (N.UIWindowStateChanged_, NotifyType.UI, uiState);
 	}
 	#endregion
 

@@ -3,11 +3,13 @@ using System.Collections;
 
 public class UIView : View
 {
-	public RightElementView[]		rightElementsArray		{ get { return _rightElementsArray == null ? 	_rightElementsArray			= SearchLocal<RightElementView>(		_rightElementsArray,		typeof(RightElementView).Name) : _rightElementsArray; 	} }
-	public DailyGiftElementView[]	dailyGiftElementsArray	{ get { return _dailyGiftElementsArray == null ? _dailyGiftElementsArray	= SearchLocal<DailyGiftElementView>(	_dailyGiftElementsArray,	typeof(DailyGiftElementView).Name) : _dailyGiftElementsArray; 	} }
-
-	private DailyGiftElementView[]	_dailyGiftElementsArray = null;
-	private RightElementView[]		_rightElementsArray = null;
+	public RightElementView[]		rightElementsArray			{ get { return _rightElementsArray == null ? 		_rightElementsArray			= SearchLocal<RightElementView>(		_rightElementsArray,		typeof(RightElementView).Name) : 		_rightElementsArray; 	} }
+	public DailyGiftElementView[]	dailyGiftElementsArray		{ get { return _dailyGiftElementsArray == null ? 	_dailyGiftElementsArray		= SearchLocal<DailyGiftElementView>(	_dailyGiftElementsArray,	typeof(DailyGiftElementView).Name) : 	_dailyGiftElementsArray; 	} }
+	public PlayerSkinView[]			playerSkinsElementsArray	{ get { return _playerSkinsElementsArray == null ?	_playerSkinsElementsArray	= SearchLocal<PlayerSkinView>(			_playerSkinsElementsArray,	typeof(PlayerSkinView).Name) : 			_playerSkinsElementsArray; 	} }
+		
+	private PlayerSkinView[]		_playerSkinsElementsArray 	= null;
+	private DailyGiftElementView[]	_dailyGiftElementsArray 	= null;
+	private RightElementView[]		_rightElementsArray 		= null;
 
 	public RightElementView GetRightElement(RightElementId rightElementId)
 	{
@@ -40,6 +42,23 @@ public class UIView : View
 
 		return dailyElementView;
 	}
+
+	public PlayerSkinView GetPlayerSkinElement(string playerSkinId)
+	{
+		PlayerSkinView playerSkinElementView = null;
+
+		foreach (PlayerSkinView playerSkinElement in playerSkinsElementsArray)
+		{
+			if (playerSkinElement.SkinId == playerSkinId)
+			{
+				playerSkinElementView = playerSkinElement;
+				break;
+			}
+		}
+
+		return playerSkinElementView;
+	}
+
 	/*
 	public MainMenuVIew				mainMenuView			{ get { return _mainMenuView		= SearchLocal<MainMenuVIew>(		_mainMenuView,			typeof(MainMenuVIew).Name );}}
 	public SettingsView				settingsView			{ get { return _settingsView		= SearchLocal<SettingsView>(		_settingsView,			typeof(SettingsView).Name );}}

@@ -11,6 +11,15 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </receiver>
+        <!-- AppMetrica Services and Receivers -->
+    <service android:enabled="true" android:exported="true" android:name="com.yandex.metrica.MetricaService" android:process=":Metrica">
+      <intent-filter>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <action android:name="com.yandex.metrica.IMetricaService"/>
+        <data android:scheme="metrica"/>
+      </intent-filter>
+      <meta-data android:name="metrica:api:level" android:value="52"/>
+    </service>
     <service android:name="com.androidnative.features.notifications.LocalNotificationService" />
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
     <activity android:name="com.unity3d.player.UnityPlayerActivity" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:launchMode="singleTask" android:screenOrientation="landscape">

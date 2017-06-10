@@ -63,6 +63,8 @@ public class AppMetrica : MonoBehaviour
 		var configuration = new YandexAppMetricaConfig(APIKey) { 
 			SessionTimeout = (int)SessionTimeoutSec,
 			LoggingEnabled = LoggingEnabled,
+			HandleFirstActivationAsUpdateEnabled = HandleFirstActivationAsUpdate,
+			TrackLocationEnabled = false
 		};
 
 		#if !APP_METRICA_TRACK_LOCATION_DISABLED
@@ -181,7 +183,7 @@ public class AppMetrica : MonoBehaviour
 			eventParams.Add (string.Format("{0}", aEvent.itemType), 
 				new Dictionary<string, object>()
 			{
-				{aEvent.itemId, aEvent.amount / 100}
+				{aEvent.itemId, aEvent.amount}
 			} );
 
 			//Debug.LogFormat("send GA Busines Event cartType = {0}; itemType = {1}; itemId = {2}; amount = {3}, currency = {4}", aEvent.cartType, aEvent.itemType, aEvent.itemId, aEvent.amount, aEvent.currency);

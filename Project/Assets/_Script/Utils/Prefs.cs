@@ -27,8 +27,9 @@ public static class Prefs
 		public static bool IsGiftActive(DailyGiftElementId elementId)
 		{
 			int[] activatedGifts = GetGiftsArray ();
+			int giftIndex = (int)elementId;
 
-			return activatedGifts [(int)elementId * 2 + 1] == 1;
+			return activatedGifts [giftIndex * 2 + 1] == 1;
 		}
 
 		public static void SetGiftActivated(DailyGiftElementId giftId, bool isActivated)
@@ -124,6 +125,34 @@ public static class Prefs
 		public const string CrystalsCount		= "crystals.count";
 		public const string IsDoubleCoin		= "is.double.coin";
 		public const string Record 				= "record";
+		public const string CurrentSkin			= "current.skin";
+		public const string SkinsArray			= "skins.array";
+
+		public static void InitSkinsArray(int[] skinsArray)
+		{
+			PlayerPrefsX.SetIntArray (SkinsArray, skinsArray);
+		}
+
+		public static bool IsSkinActive(int skinIndex)
+		{
+			int[] skinsArray = GetSkinsArray ();
+
+			return skinsArray [skinIndex * 2 + 1] == 1;
+		}
+
+		public static void SetActiveSkin(int skinIndex, bool isActivated)
+		{
+			int[] giftsArray = GetSkinsArray ();
+
+			giftsArray [(int)skinIndex * 2 + 1] = isActivated ? 1 : 0;
+
+			PlayerPrefsX.SetIntArray (SkinsArray, giftsArray);
+		}
+
+		public static int[] GetSkinsArray()
+		{
+			return PlayerPrefsX.GetIntArray (SkinsArray);
+		}
 	
 		public static void IncreasePlayedGamesCount()
 		{
