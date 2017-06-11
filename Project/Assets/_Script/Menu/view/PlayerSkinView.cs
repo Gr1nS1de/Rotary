@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerSkinView : View
 {
-	public Image				SkinImage;
 	public CanvasGroup 			SkinPricePanel;
 	[HideInInspector]
 	public string 				SkinId;
@@ -13,24 +12,22 @@ public class PlayerSkinView : View
 	public Sprite		 		SkinSprite;
 	[HideInInspector]
 	public int					SkinPrice;
+	public Text					SkinPriceText;
 	public bool					IsActive;
 	public bool					IsAvailable			= false;
 
 	private Button 				_button;
 	private Sequence 			_availableSequence;
 
-	void Start()
-	{		
+	public void OnInit(int skinPrice, bool isActive)
+	{
 		_button = GetComponent<Button> ();
 		_button.onClick.AddListener (OnButtonClick);
 
 		InitAvailableSequence ();
-	}
 
-	public void OnInit(int skinPrice, bool isActive)
-	{
-		SkinImage.sprite = SkinSprite;
 		SkinPrice = skinPrice;
+		SkinPriceText.text = string.Format ("{0}", skinPrice);
 
 		if(isActive)
 			SetSkinActive ();
@@ -40,8 +37,11 @@ public class PlayerSkinView : View
 	{
 		if (!IsActive && IsAvailable)
 		{
-			SetSkinActive ();
 			Notify (N.OnPlayerBuySkin_, NotifyType.ALL, SkinId);
+		}
+		else if (IsActive)
+		{
+			Notify (N.OnPlayerSelectSkin_, NotifyType.ALL, SkinId);
 		}
 	}
 
@@ -59,6 +59,9 @@ public class PlayerSkinView : View
 
 	public void SetAvailable(bool isAvailable)
 	{
+		if (IsActive)
+			return;
+		
 		IsAvailable = isAvailable;
 
 		if (isAvailable)
@@ -72,16 +75,21 @@ public class PlayerSkinView : View
 		{
 			_availableSequence.Rewind ();
 
-			if(_button != null && !IsActive)
+			if (_button != null)
+			{
 				_button.interactable = false;
+			}
 		}
 	}
 
 	public void SetSkinActive()
 	{
 		IsActive = true;
+		IsAvailable = false;
 		SkinPricePanel.alpha = 0;
-		SkinImage.DOFade (1f, 0.3f);
+
+		if(_availableSequence != null)
+			_availableSequence.Rewind ();
 	}
 
 }

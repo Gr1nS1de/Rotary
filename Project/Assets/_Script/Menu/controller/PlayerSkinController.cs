@@ -36,6 +36,7 @@ public class PlayerSkinController : Controller
 					int skinIndex = int.Parse(skinId.Split ('_') [1]);
 
 					SetSkinActive (skinIndex);
+					UpdateAvailableSkins ();
 					break;
 				}
 		}
@@ -91,7 +92,7 @@ public class PlayerSkinController : Controller
 
 		if (skinIndex >= 0 && skinIndex <= 3)
 		{
-			skinPrice = 30;
+			skinPrice = 40;
 		}
 		else if (skinIndex >= 4 && skinIndex <= 7)
 		{
@@ -144,7 +145,11 @@ public class PlayerSkinController : Controller
 
 	private void SetSkinActive(int skinIndex)
 	{
+		Prefs.PlayerData.SetActiveSkin (skinIndex, true);
 
+		_playerSkinsViewList [skinIndex].SetSkinActive ();
+		_playerSkinsViewList [skinIndex].SetAvailable (false);
+		_currentSkinsArray = Prefs.PlayerData.GetSkinsArray ();
 	}
 }
 

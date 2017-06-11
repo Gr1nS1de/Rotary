@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState
+{
+	MainMenu,
+	PlayerSkinWindow,
+	GamePlay,
+	GamePause
+}
+
 public class PlayerModel : Model 
 {
 	public float					angularSpeed		{ get { return _angularSpeed; } 		set { _angularSpeed	= value; } }

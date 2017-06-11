@@ -48,7 +48,29 @@ public class PlayerController : Controller
 					int score = (int)data [0];
 					break;
 				}
-					
+
+
+			case N.OnPlayerSelectSkin_:
+				{
+					string skinId = (string)data [0];
+					//int skinIndex = int.Parse(skinId.Split ('_') [1]);
+
+					ChangePlayerSkin (skinId);
+
+					break;
+				}
+
+			case N.UIWindowStateChanged_:
+				{
+					UIWindowState windowState = (UIWindowState)data [0];
+
+					if (windowState == UIWindowState.PlayerSkin)
+					{
+						GoToState (PlayerState.PlayerSkinWindow);
+					}
+					break;
+				}
+
 			case N.GameOver_:
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];
@@ -62,6 +84,39 @@ public class PlayerController : Controller
 
 	private void OnStart()
 	{
+	}
+
+	private void GoToState(PlayerState playerState)
+	{
+		switch (playerState)
+		{
+			case PlayerState.MainMenu:
+				{
+					break;
+				}
+
+			case PlayerState.PlayerSkinWindow:
+				{
+					break;
+				}
+
+			case PlayerState.GamePause:
+				{
+					break;
+				}
+
+			case PlayerState.GamePlay:
+				{
+					break;
+				}
+		}
+	}
+
+	private void ChangePlayerSkin(string skinId)
+	{
+		PlayerSkinView selectedSkinView = ui.view.GetPlayerSkinElement (skinId);
+
+		_playerView.PlayerRenderer.sprite = selectedSkinView.SkinSprite;
 	}
 
 	private void OnPlayerImpactItem(ItemView itemView)

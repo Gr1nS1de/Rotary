@@ -75,11 +75,10 @@ public class UIController : Controller
 		DOVirtual.DelayedCall (0.15f, () =>
 		{
 			SetWindowActive(uiState, true);
+			ui.model.uiWindowState = uiState;
+
+			Notify (N.UIWindowStateChanged_, NotifyType.UI, uiState);
 		});
-
-		ui.model.uiWindowState = uiState;
-
-		Notify (N.UIWindowStateChanged_, NotifyType.UI, uiState);
 	}
 	#endregion
 

@@ -103,7 +103,9 @@ public class GameController : Controller
 			case N.OnPlayerBuySkin_:
 				{
 					string skinId = (string)data [0];
-					int skinIndex = int.Parse(skinId.Split ('_') [1]);
+					//int skinIndex = int.Parse(skinId.Split ('_') [1]);
+
+					OnPlayerBuySkin (skinId);
 
 					break;
 				}
@@ -183,16 +185,25 @@ public class GameController : Controller
 		_gameModel.gameState = gameState;
 	}
 
+	private void OnPlayerBuySkin(string skinId)
+	{
+		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
+
+		ChangePlayerItemCount (ItemTypes.Coin, -skinPrice);
+	}
+
 	private void ChangePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
 	{
+		int absCount = Mathf.Abs (count);
+
 		switch(itemType)
 		{
 			case ItemTypes.Coin:
 				{
 					if (count > 0)
-						Prefs.PlayerData.CreditCoins (count);
+						Prefs.PlayerData.CreditCoins (absCount);
 					else
-						Prefs.PlayerData.DebitCoins (count);
+						Prefs.PlayerData.DebitCoins (absCount);
 					
 					game.model.coinsCount += count;
 					break;
@@ -201,9 +212,9 @@ public class GameController : Controller
 			case ItemTypes.Crystal:
 				{
 					if (count > 0)
-						Prefs.PlayerData.CreditCrystals (count);
+						Prefs.PlayerData.CreditCrystals (absCount);
 					else
-						Prefs.PlayerData.DebitCrystals (count);
+						Prefs.PlayerData.DebitCrystals (absCount);
 					
 					game.model.crystalsCount += count;
 					break;

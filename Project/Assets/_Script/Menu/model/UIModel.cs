@@ -54,10 +54,7 @@ public class UIModel : Model
 	public CanvasGroup 			inGamePanel				{ get { return _inGamePanel; } }
 	public CanvasGroup 			mainMenuPanel			{ get { return _mainMenuPanel; } }
 	public CanvasGroup 			rightElementsPanel		{ get { return _rightElementsPanel; } }
-	public GridLayoutGroup 		playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
 
-	[SerializeField]
-	private GridLayoutGroup		_playerSkinElementsPanel;
 	[SerializeField]
 	private CanvasGroup			_rightElementsPanel;
 	[SerializeField]

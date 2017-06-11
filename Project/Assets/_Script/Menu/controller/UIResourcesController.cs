@@ -35,7 +35,7 @@ public class UIResourcesController : Controller
 		//Load this views to ui model for PlayerSkinController
 		for (int i = 0; i < playerSkinsSpritesList.Count; i++)
 		{
-			PlayerSkinView playerSkin = Instantiate (playerSkinPrefab) as PlayerSkinView;
+			PlayerSkinView playerSkin = Instantiate (playerSkinPrefab, ui.model.mainMenuPanelModel.playerSkinElementsPanel.transform) as PlayerSkinView;
 			Sprite skinSprite = playerSkinsSpritesList [i];
 
 			playerSkin.name = string.Format ("PlayerSkin_{0:00}", i);
@@ -44,7 +44,7 @@ public class UIResourcesController : Controller
 
 			ui.model.mainMenuPanelModel.playerSkinsDictionary.Add (playerSkin.SkinId, playerSkin);
 
-			playerSkin.gameObject.SetActive (false);
+			playerSkin.gameObject.SetActive (true);
 
 			playerSkinsViewList.Add (playerSkin);
 		}

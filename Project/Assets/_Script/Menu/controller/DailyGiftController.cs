@@ -88,7 +88,7 @@ public class DailyGiftController : Controller
 	private void CheckCurrentGifts()
 	{
 		//Day gifts
-		if (Prefs.PlayerTimers.GetDayGiftTimestamp ().AddDays (1) < UnbiasedTime.Instance.Now ())
+		if (_dayGiftTimestamp.AddDays (1) < UnbiasedTime.Instance.Now ())
 		{
 			ClearDayGifts ();
 		}
@@ -129,7 +129,7 @@ public class DailyGiftController : Controller
 
 	private void SetActiveGift(DailyGiftElementId giftId, bool isActive)
 	{
-		Prefs.PlayerTimers.SetGiftActivated (giftId, isActive);
+		Prefs.PlayerTimers.SetGiftActive (giftId, isActive);
 		SetDefaults ();
 
 		ui.view.GetDailyGiftElement (giftId).SetActive (isActive);
@@ -192,7 +192,7 @@ public class DailyGiftController : Controller
 
 			int returnDaysId = Mathf.Clamp (_daysReturn, 0, System.Enum.GetNames (typeof(DailyGiftElementId)).Length);
 
-			SetuoDayGiftTime ();
+			SetupDayGiftTime ();
 			giftId = (DailyGiftElementId)System.Enum.Parse(typeof(DailyGiftElementId), System.Enum.GetNames(typeof(DailyGiftElementId))[returnDaysId]);
 		}
 
@@ -237,9 +237,9 @@ public class DailyGiftController : Controller
 		Prefs.PlayerTimers.SetHourGiftTimestamp(_hourGiftTimestamp);
 	}
 
-	private void SetuoDayGiftTime()
+	private void SetupDayGiftTime()
 	{
-		_dayGiftTimestamp = UnbiasedTime.Instance.Now ().AddDays (1);
+		_dayGiftTimestamp = _dayGiftTimestamp.Ticks > 0 ? _dayGiftTimestamp.AddDays (1) : UnbiasedTime.Instance.Now ().AddDays(1);
 		_daysReturn++;
 
 		Prefs.PlayerTimers.SetDayGiftTimestamp(_dayGiftTimestamp);

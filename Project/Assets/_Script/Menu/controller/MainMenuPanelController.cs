@@ -123,9 +123,9 @@ public class MainMenuPanelController : Controller
 			string[] coinsPack_00TextSplitted = _mainMenuPanelModel.textCoinsPack_00.text.Split ('-');
 			string[] coinsPack_01TextSplitted = _mainMenuPanelModel.textCoinsPack_01.text.Split ('-');
 
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), doubleCoinTextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), coinsPack_00TextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), coinsPack_01TextSplitted [1]);
+			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), doubleCoinTextSplitted [1]);
+			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), coinsPack_00TextSplitted [1]);
+			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), coinsPack_01TextSplitted [1]);
 		}
 		else
 		{

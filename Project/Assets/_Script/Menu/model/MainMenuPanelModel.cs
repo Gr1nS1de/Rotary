@@ -17,7 +17,10 @@ public class MainMenuPanelModel : Model
 	public CanvasGroup 							panelHourGiftTitle		{ get { return _panelHourGiftTitle; } }
 	public Dictionary<string, PlayerSkinView>	playerSkinsDictionary	{ get { return _playerSkinsDictionary; }}
 	public PlayerSkinView						playerSkinPrefab		{ get { return _playerSkinPrefab; }}
+	public GridLayoutGroup 						playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
 
+	[SerializeField]
+	private GridLayoutGroup						_playerSkinElementsPanel;
 	[SerializeField]
 	private PlayerSkinView						_playerSkinPrefab;
 	[SerializeField]

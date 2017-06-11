@@ -32,7 +32,7 @@ public static class Prefs
 			return activatedGifts [giftIndex * 2 + 1] == 1;
 		}
 
-		public static void SetGiftActivated(DailyGiftElementId giftId, bool isActivated)
+		public static void SetGiftActive(DailyGiftElementId giftId, bool isActivated)
 		{
 			int[] giftsArray = GetGiftsArray ();
 
