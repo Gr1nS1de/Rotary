@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerSkinView : View
 {
+	public Image 				SkinImage;
 	public CanvasGroup 			SkinPricePanel;
 	[HideInInspector]
 	public int	 				SkinId;
@@ -28,6 +29,7 @@ public class PlayerSkinView : View
 
 		SkinPrice = skinPrice;
 		SkinPriceText.text = string.Format ("{0}", skinPrice);
+		SkinImage.sprite = SkinSprite;
 
 		if(isActive)
 			SetSkinActive ();
