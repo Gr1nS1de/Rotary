@@ -7,7 +7,7 @@ public class PlayerSkinView : View
 {
 	public CanvasGroup 			SkinPricePanel;
 	[HideInInspector]
-	public string 				SkinId;
+	public int	 				SkinId;
 	[HideInInspector]
 	public Sprite		 		SkinSprite;
 	[HideInInspector]
@@ -35,13 +35,16 @@ public class PlayerSkinView : View
 
 	private void OnButtonClick()
 	{
-		if (!IsActive && IsAvailable)
+		if (!IsActive)
 		{
-			Notify (N.OnPlayerBuySkin_, NotifyType.ALL, SkinId);
+			if (IsAvailable)
+				Notify (N.OnPlayerBuySkin_, NotifyType.ALL, SkinId);
+			else
+				Notify (N.OnPlayerSelectSkin__, NotifyType.ALL, SkinId, false);	
 		}
-		else if (IsActive)
+		else
 		{
-			Notify (N.OnPlayerSelectSkin_, NotifyType.ALL, SkinId);
+			Notify (N.OnPlayerSelectSkin__, NotifyType.ALL, SkinId, true);
 		}
 	}
 
@@ -67,18 +70,10 @@ public class PlayerSkinView : View
 		if (isAvailable)
 		{
 			_availableSequence.Play ();
-
-			if(_button != null)
-				_button.interactable = true;
 		}
 		else
 		{
 			_availableSequence.Rewind ();
-
-			if (_button != null)
-			{
-				_button.interactable = false;
-			}
 		}
 	}
 

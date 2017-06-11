@@ -13,13 +13,14 @@ public class GM : Controller
 {
 	public static GM Instance;
 
-	public GameThemeType DefaultGameTheme = GameThemeType.DarkBlueGarage;
+	private const string 		LeaderBoardPrivate = "http://dreamlo.com/lb/HmyLFso9EUmOvvnmRzgKsw1og-BQzKSU-1t0Vk36HwIg";
+
+	public GameThemeType 		DefaultGameTheme = GameThemeType.DarkBlueGarage;
 	[HideInInspector]
-	public Vector2 ScreenSize;
+	public Vector2 				ScreenSize;
+	public bool 				IsLoggsEnabled = true;
 
-	private const string LeaderBoardPrivate = "http://dreamlo.com/lb/HmyLFso9EUmOvvnmRzgKsw1og-BQzKSU-1t0Vk36HwIg";
-
-	private AnalyticsManager _analyticsManager = null;
+	private AnalyticsManager 	_analyticsManager = null;
 
 	void Awake()
 	{
@@ -30,6 +31,7 @@ public class GM : Controller
 			InitGameSettings ();
 			InitTweening ();
 			Localization.InitLanguage ();
+			Debug.logger.logEnabled = IsLoggsEnabled;
 		}
 		else
 		{

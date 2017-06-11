@@ -50,10 +50,10 @@ public class PlayerController : Controller
 				}
 
 
-			case N.OnPlayerSelectSkin_:
+			case N.OnPlayerSelectSkin__:
 				{
-					string skinId = (string)data [0];
-					//int skinIndex = int.Parse(skinId.Split ('_') [1]);
+					int skinId = (int)data [0];
+					bool isAvailable = (bool)data [1];
 
 					ChangePlayerSkin (skinId);
 
@@ -112,7 +112,7 @@ public class PlayerController : Controller
 		}
 	}
 
-	private void ChangePlayerSkin(string skinId)
+	private void ChangePlayerSkin(int skinId)
 	{
 		PlayerSkinView selectedSkinView = ui.view.GetPlayerSkinElement (skinId);
 

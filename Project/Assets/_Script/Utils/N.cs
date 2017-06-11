@@ -56,7 +56,7 @@ public class N : MonoBehaviour
 	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
 	public const string OnPlayerGetGift_			= "on.player.get.gift";
 	public const string OnPlayerBuySkin_			= "on.player.buy.skin";
-	public const string OnPlayerSelectSkin_			= "on.player.select.skin";
+	public const string OnPlayerSelectSkin__			= "on.player.select.skin";
 	#endregion
 
 	#region Resources controllers notifications

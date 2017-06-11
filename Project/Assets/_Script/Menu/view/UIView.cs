@@ -43,7 +43,7 @@ public class UIView : View
 		return dailyElementView;
 	}
 
-	public PlayerSkinView GetPlayerSkinElement(string playerSkinId)
+	public PlayerSkinView GetPlayerSkinElement(int playerSkinId)
 	{
 		PlayerSkinView playerSkinElementView = null;
 

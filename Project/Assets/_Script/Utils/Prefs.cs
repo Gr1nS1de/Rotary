@@ -119,34 +119,63 @@ public static class Prefs
 
 	public static class PlayerData
 	{
-		public const string GamesPlayedCount 	= "games.played.count";
-		public const string CurrentLanguage 	= "current.language";
-		public const string CoinsCount			= "coins.count";
-		public const string CrystalsCount		= "crystals.count";
-		public const string IsDoubleCoin		= "is.double.coin";
-		public const string Record 				= "record";
-		public const string CurrentSkin			= "current.skin";
-		public const string SkinsArray			= "skins.array";
+		public const string GamesPlayedCount 			= "games.played.count";
+		public const string CurrentLanguage 			= "current.language";
+		public const string CoinsCount					= "coins.count";
+		public const string CrystalsCount				= "crystals.count";
+		public const string IsDoubleCoin				= "is.double.coin";
+		public const string Record 						= "record";
+		public const string CurrentSkin					= "current.skin";
+		public const string SkinsArray					= "skins.array";
+		public const string SkinsStatisticsGamesPlayed	= "skin.statistics.games.played";
 
 		public static void InitSkinsArray(int[] skinsArray)
 		{
 			PlayerPrefsX.SetIntArray (SkinsArray, skinsArray);
+			InitSkinsGamesPlayedStatistics (skinsArray);
 		}
 
-		public static bool IsSkinActive(int skinIndex)
+		public static void InitSkinsGamesPlayedStatistics(int[] skinsArray)
+		{
+			PlayerPrefsX.SetIntArray (SkinsStatisticsGamesPlayed, skinsArray);
+		}
+
+		public static void IncreaseSkinPlayedGamesStatistics(int skinId)
+		{
+			int[] skinsStatisticsArray = GetSkinsStatisticsGamesPlayedArray ();
+			int currentGamesPlayed = skinsStatisticsArray [skinId * 2 + 1];
+
+			skinsStatisticsArray [skinId * 2 + 1] = ++currentGamesPlayed;
+
+			InitSkinsGamesPlayedStatistics (skinsStatisticsArray);
+		}
+
+		public static int GetSkinsGamesPlayed(int skinId)
+		{
+			int[] skinsStatisticsArray = GetSkinsStatisticsGamesPlayedArray ();
+
+			return skinsStatisticsArray [skinId * 2 + 1];
+		}
+
+		public static bool IsSkinActive(int skinId)
 		{
 			int[] skinsArray = GetSkinsArray ();
 
-			return skinsArray [skinIndex * 2 + 1] == 1;
+			return skinsArray [skinId * 2 + 1] == 1;
 		}
 
-		public static void SetActiveSkin(int skinIndex, bool isActivated)
+		public static void SetActiveSkin(int skinId, bool isActivated)
 		{
 			int[] giftsArray = GetSkinsArray ();
 
-			giftsArray [(int)skinIndex * 2 + 1] = isActivated ? 1 : 0;
+			giftsArray [(int)skinId * 2 + 1] = isActivated ? 1 : 0;
 
 			PlayerPrefsX.SetIntArray (SkinsArray, giftsArray);
+		}
+
+		public static int[] GetSkinsStatisticsGamesPlayedArray()
+		{
+			return PlayerPrefsX.GetIntArray (SkinsStatisticsGamesPlayed);
 		}
 
 		public static int[] GetSkinsArray()

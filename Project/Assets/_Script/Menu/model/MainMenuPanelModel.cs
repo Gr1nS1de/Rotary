@@ -15,7 +15,7 @@ public class MainMenuPanelModel : Model
 	public CanvasGroup							panelRewardVideo		{ get { return _panelRewardVideo; } }
 	public Text 								textHourGiftTimer		{ get { return _textHourGiftTimer; } }
 	public CanvasGroup 							panelHourGiftTitle		{ get { return _panelHourGiftTitle; } }
-	public Dictionary<string, PlayerSkinView>	playerSkinsDictionary	{ get { return _playerSkinsDictionary; }}
+	public List<PlayerSkinView>					playerSkinsList			{ get { return _playerSkinsList; }}
 	public PlayerSkinView						playerSkinPrefab		{ get { return _playerSkinPrefab; }}
 	public GridLayoutGroup 						playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
 
@@ -24,7 +24,7 @@ public class MainMenuPanelModel : Model
 	[SerializeField]
 	private PlayerSkinView						_playerSkinPrefab;
 	[SerializeField]
-	private Dictionary<string, PlayerSkinView>	_playerSkinsDictionary 	= new Dictionary<string, PlayerSkinView>();
+	private List<PlayerSkinView>				_playerSkinsList 	= new List<PlayerSkinView>();
 	[SerializeField]
 	private CanvasGroup							_panelHourGiftTitle;
 	[SerializeField]

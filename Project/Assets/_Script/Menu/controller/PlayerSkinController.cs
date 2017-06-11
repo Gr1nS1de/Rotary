@@ -8,6 +8,7 @@ public class PlayerSkinController : Controller
 
 	private int[]					_currentSkinsArray;
 	private List<PlayerSkinView>	_playerSkinsViewList;
+	private bool					_isStoreInited				= false;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -32,11 +33,29 @@ public class PlayerSkinController : Controller
 
 			case N.OnPlayerBuySkin_:
 				{
-					string skinId = (string)data [0];
-					int skinIndex = int.Parse(skinId.Split ('_') [1]);
+					int skinId = (int)data [0];
 
-					SetSkinActive (skinIndex);
+					SetSkinActive (skinId);
 					UpdateAvailableSkins ();
+					break;
+				}
+
+			case N.PurchaseProductsLoaded_:
+				{
+					bool isSuccess = (bool)data[0];
+
+					_isStoreInited = isSuccess;
+					break;
+				}
+
+			case N.OnPlayerSelectSkin__:
+				{
+					int skinId = (int)data [0];
+					bool isAvailable = (bool)data [1];
+
+					if (!isAvailable && _isStoreInited)
+						ui.controller.GoToWindowState (UIWindowState.Store);
+
 					break;
 				}
 		}
@@ -59,7 +78,7 @@ public class PlayerSkinController : Controller
 		{
 			PlayerSkinView playerSkinView = playerSkinsViewList [i];
 
-			playerSkinView.OnInit (GetSkinPriceByIndex (i), Prefs.PlayerData.IsSkinActive (i));
+			playerSkinView.OnInit (GetSkinPriceById (playerSkinView.SkinId), Prefs.PlayerData.IsSkinActive (playerSkinView.SkinId));
 		}
 
 		_playerSkinsViewList = playerSkinsViewList;
@@ -86,35 +105,35 @@ public class PlayerSkinController : Controller
 		}
 	}
 
-	private int GetSkinPriceByIndex(int skinIndex)
+	private int GetSkinPriceById(int skinId)
 	{
 		int skinPrice = 0;
 
-		if (skinIndex >= 0 && skinIndex <= 3)
+		if (skinId >= 0 && skinId <= 3)
 		{
 			skinPrice = 40;
 		}
-		else if (skinIndex >= 4 && skinIndex <= 7)
+		else if (skinId >= 4 && skinId <= 7)
 		{
 			skinPrice = 100;
 		}
-		else if (skinIndex >= 8 && skinIndex <= 11)
+		else if (skinId >= 8 && skinId <= 11)
 		{
 			skinPrice = 200;
 		}
-		else if (skinIndex >= 12 && skinIndex <= 15)
+		else if (skinId >= 12 && skinId <= 15)
 		{
 			skinPrice = 300;
 		}
-		else if (skinIndex >= 16 && skinIndex <= 19)
+		else if (skinId >= 16 && skinId <= 19)
 		{
 			skinPrice = 400;
 		}
-		else if (skinIndex >= 20 && skinIndex <= 23)
+		else if (skinId >= 20 && skinId <= 23)
 		{
 			skinPrice = 500;
 		}
-		else if (skinIndex >= 24 && skinIndex <= 27)
+		else if (skinId >= 24 && skinId <= 27)
 		{
 			skinPrice = 1000;
 		}
@@ -143,12 +162,12 @@ public class PlayerSkinController : Controller
 		Prefs.PlayerData.InitSkinsArray (skinsArray);
 	}
 
-	private void SetSkinActive(int skinIndex)
+	private void SetSkinActive(int skinId)
 	{
-		Prefs.PlayerData.SetActiveSkin (skinIndex, true);
+		Prefs.PlayerData.SetActiveSkin (skinId, true);
 
-		_playerSkinsViewList [skinIndex].SetSkinActive ();
-		_playerSkinsViewList [skinIndex].SetAvailable (false);
+		_playerSkinsViewList [skinId].SetSkinActive ();
+		_playerSkinsViewList [skinId].SetAvailable (false);
 		_currentSkinsArray = Prefs.PlayerData.GetSkinsArray ();
 	}
 }

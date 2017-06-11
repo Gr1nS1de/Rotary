@@ -154,4 +154,19 @@
 <data name="TK_HOUR_NAME" xml:space="preserve">
 <value>New Value</value>
 </data>
+<data name="TK_DAILY_GIFT_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_GENERAL_STATISTICS_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_PLAYED_GAMES_ALL_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_SKIN_STATISTICS_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_PLAYED_GAMES_SKIN_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
 </root>

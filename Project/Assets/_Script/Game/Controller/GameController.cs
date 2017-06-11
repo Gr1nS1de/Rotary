@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-//using DG.Tweening;
 using UnityEngine.SceneManagement;
-//using Destructible2D;
 using DG.Tweening;
 
 public class GameController : Controller
@@ -102,8 +100,7 @@ public class GameController : Controller
 
 			case N.OnPlayerBuySkin_:
 				{
-					string skinId = (string)data [0];
-					//int skinIndex = int.Parse(skinId.Split ('_') [1]);
+					int skinId = (int)data [0];
 
 					OnPlayerBuySkin (skinId);
 
@@ -185,7 +182,7 @@ public class GameController : Controller
 		_gameModel.gameState = gameState;
 	}
 
-	private void OnPlayerBuySkin(string skinId)
+	private void OnPlayerBuySkin(int skinId)
 	{
 		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
 

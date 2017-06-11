@@ -154,4 +154,19 @@
 <data name="TK_HOUR_NAME" xml:space="preserve">
 <value>час</value>
 </data>
+<data name="TK_DAILY_GIFT_NAME" xml:space="preserve">
+<value>ежедневный подарок</value>
+</data>
+<data name="TK_GENERAL_STATISTICS_NAME" xml:space="preserve">
+<value>основная статистика</value>
+</data>
+<data name="TK_PLAYED_GAMES_ALL_NAME" xml:space="preserve">
+<value>игр всего</value>
+</data>
+<data name="TK_SKIN_STATISTICS_NAME" xml:space="preserve">
+<value>статистика скина</value>
+</data>
+<data name="TK_PLAYED_GAMES_SKIN_NAME" xml:space="preserve">
+<value>игр</value>
+</data>
 </root>

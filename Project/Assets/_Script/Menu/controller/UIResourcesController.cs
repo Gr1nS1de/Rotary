@@ -39,10 +39,10 @@ public class UIResourcesController : Controller
 			Sprite skinSprite = playerSkinsSpritesList [i];
 
 			playerSkin.name = string.Format ("PlayerSkin_{0:00}", i);
-			playerSkin.SkinId = string.Format ("PlayerSkinId_{0}", i);
+			playerSkin.SkinId = i;
 			playerSkin.SkinSprite = skinSprite;
 
-			ui.model.mainMenuPanelModel.playerSkinsDictionary.Add (playerSkin.SkinId, playerSkin);
+			ui.model.mainMenuPanelModel.playerSkinsList.Add (playerSkin);
 
 			playerSkin.gameObject.SetActive (true);
 
