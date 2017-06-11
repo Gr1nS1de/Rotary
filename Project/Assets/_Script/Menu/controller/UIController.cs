@@ -77,7 +77,7 @@ public class UIController : Controller
 			SetWindowActive(uiState, true);
 			ui.model.uiWindowState = uiState;
 
-			Notify (N.UIWindowStateChanged_, NotifyType.UI, uiState);
+			Notify (N.UIWindowStateChanged_, NotifyType.ALL, uiState);
 		});
 	}
 	#endregion

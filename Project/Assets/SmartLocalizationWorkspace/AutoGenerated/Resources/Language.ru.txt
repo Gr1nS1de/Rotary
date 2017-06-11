@@ -155,7 +155,7 @@
 <value>час</value>
 </data>
 <data name="TK_DAILY_GIFT_NAME" xml:space="preserve">
-<value>ежедневный подарок</value>
+<value>ежедневный бонус</value>
 </data>
 <data name="TK_GENERAL_STATISTICS_NAME" xml:space="preserve">
 <value>основная статистика</value>

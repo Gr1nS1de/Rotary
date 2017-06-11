@@ -12,7 +12,7 @@ TK_COINS_PACK_00_NAME,3 000 коинов,3 000 coins
 TK_COINS_PACK_01_NAME,15 000 коинов,15 000 coins
 TK_DAY_NAME,день,day
 TK_HOUR_NAME,час,hour
-TK_DAILY_GIFT_NAME,ежедневный подарок,daily gift
+TK_DAILY_GIFT_NAME,ежедневный бонус,daily gift
 TK_GENERAL_STATISTICS_NAME,основная статистика,general statistics
 TK_PLAYED_GAMES_ALL_NAME,игр всего,games total
 TK_SKIN_STATISTICS_NAME,статистика скина,skin statistics

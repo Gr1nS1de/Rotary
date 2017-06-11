@@ -50,12 +50,24 @@ public class PlayerView : View
 	{
 		_lastInvisibleTimestamp = null;
 	}
-
+		
 	void Update()
 	{
-		if (game.model.gameState != GameState.Playing)
-			return;
+		if (_playerModel.playerState == PlayerState.GamePlay)
+		{
+			MovePlayer ();
+			RotatePlayer ();
 
+			if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
+				Notify (N.OnPlayerInvisible);
+		}
+
+		//Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
+		
+	}
+
+	private void MovePlayer()
+	{
 		Vector3 currentPosition = PlayerRenderer.transform.position;
 		Vector3 playerNextPosition = currentPosition;
 
@@ -71,7 +83,6 @@ public class PlayerView : View
 
 		if (currentOffsetAbs > 0.1f)
 		{
-			//_offsetBackspeedRate += 0.1f;
 			if (currentOffset > 0f)
 			{
 				_backOffsetSpeed = - currentOffsetAbs ;
@@ -87,17 +98,14 @@ public class PlayerView : View
 		{
 			_backOffsetSpeed = 0f;
 		}
+	}
 
+	private void RotatePlayer()
+	{
 		if (_playerModel.angularSpeed != 0f)
 		{
 			PlayerRenderer.transform.Rotate (0f, 0f, _playerModel.angularSpeed * game.model.gameSpeed * Time.deltaTime);
 		}
-
-		if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
-			Notify (N.OnPlayerInvisible);
-
-		//Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
-		
 	}
 
 	public override void OnRendererCollisionEnter(ViewCollisionDetect collisionDetector, Collision2D collision)
@@ -200,6 +208,22 @@ public class PlayerView : View
 				{
 					break;
 				}
+		}
+	}
+
+	public void SetStaticPlayer(bool isStatic)
+	{
+		Rigidbody2D rigitBody = PlayerRenderer.GetComponent<Rigidbody2D> ();
+
+		if (isStatic)
+		{
+			if(rigitBody.bodyType != RigidbodyType2D.Static)
+				rigitBody.bodyType = RigidbodyType2D.Static;
+		}
+		else
+		{
+			if(rigitBody.bodyType != RigidbodyType2D.Dynamic)
+				rigitBody.bodyType = RigidbodyType2D.Dynamic;
 		}
 	}
 

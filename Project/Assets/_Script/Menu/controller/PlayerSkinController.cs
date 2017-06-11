@@ -9,6 +9,7 @@ public class PlayerSkinController : Controller
 	private int[]					_currentSkinsArray;
 	private List<PlayerSkinView>	_playerSkinsViewList;
 	private bool					_isStoreInited				= false;
+	private int						_currentSkinId				= 0;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -54,7 +55,9 @@ public class PlayerSkinController : Controller
 					bool isAvailable = (bool)data [1];
 
 					if (!isAvailable && _isStoreInited)
+					{
 						ui.controller.GoToWindowState (UIWindowState.Store);
+					}
 
 					break;
 				}
@@ -63,7 +66,8 @@ public class PlayerSkinController : Controller
 
 	private void OnStart()
 	{
-		
+
+
 	}
 
 	#region public methods
@@ -72,7 +76,11 @@ public class PlayerSkinController : Controller
 		int skinsCount = playerSkinsViewList.Count;
 
 		if (Prefs.PlayerData.GetSkinsArray ().Length == 0)
+		{
 			InitSkinsArray (skinsCount);
+
+			SetSkinActive (0);
+		}
 
 		for (int i = 0; i < skinsCount; i++)
 		{
@@ -147,7 +155,7 @@ public class PlayerSkinController : Controller
 
 	private void InitSkinsArray(int skinsCount)
 	{
-		int[] skinsArray = new int[skinsCount*2];
+		int[] skinsArray = new int[skinsCount * 2];
 		int skinIndex = 0;
 
 		for(int i = 0; i< skinsArray.Length; i+=2)
@@ -159,6 +167,7 @@ public class PlayerSkinController : Controller
 		}
 
 		_currentSkinsArray = skinsArray;
+		Prefs.PlayerData.InitSkinsGamesPlayedStatistics (skinsArray);
 		Prefs.PlayerData.InitSkinsArray (skinsArray);
 	}
 
@@ -167,7 +176,6 @@ public class PlayerSkinController : Controller
 		Prefs.PlayerData.SetActiveSkin (skinId, true);
 
 		_playerSkinsViewList [skinId].SetSkinActive ();
-		_playerSkinsViewList [skinId].SetAvailable (false);
 		_currentSkinsArray = Prefs.PlayerData.GetSkinsArray ();
 	}
 }

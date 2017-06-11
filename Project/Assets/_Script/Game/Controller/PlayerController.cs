@@ -20,6 +20,7 @@ public class PlayerController : Controller
 
 			case N.GameStart:
 				{
+					GoToPlayerState (PlayerState.GamePlay);
 					InitPlayer ();
 					break;
 				}
@@ -43,19 +44,13 @@ public class PlayerController : Controller
 					break;
 				}
 
-			case N.OnPlayerNewRecord_:
-				{
-					int score = (int)data [0];
-					break;
-				}
-
-
 			case N.OnPlayerSelectSkin__:
 				{
 					int skinId = (int)data [0];
 					bool isAvailable = (bool)data [1];
 
-					ChangePlayerSkin (skinId);
+					if(isAvailable)
+						SetupPlayerSkin (skinId);
 
 					break;
 				}
@@ -64,9 +59,26 @@ public class PlayerController : Controller
 				{
 					UIWindowState windowState = (UIWindowState)data [0];
 
-					if (windowState == UIWindowState.PlayerSkin)
+					switch (windowState)
 					{
-						GoToState (PlayerState.PlayerSkinWindow);
+						case UIWindowState.Pause:
+							{
+								GoToPlayerState (PlayerState.GamePause);
+								break;
+							}
+
+						case UIWindowState.PlayerSkin:
+							{
+								GoToPlayerState (PlayerState.PlayerSkinWindow);
+								break;
+							}
+
+						default:
+							{
+								GoToPlayerState (PlayerState.MainMenu);
+								break;
+							}
+							break;
 					}
 					break;
 				}
@@ -84,24 +96,33 @@ public class PlayerController : Controller
 
 	private void OnStart()
 	{
+		_playerModel.currentSkinId = Prefs.PlayerData.GetCurrentSkinId ();
+
+		SetupPlayerSkin (_playerModel.currentSkinId);
 	}
 
-	private void GoToState(PlayerState playerState)
+	private void GoToPlayerState(PlayerState playerState)
 	{
 		switch (playerState)
 		{
 			case PlayerState.MainMenu:
 				{
+					_playerView.SetStaticPlayer (false);
 					break;
 				}
 
 			case PlayerState.PlayerSkinWindow:
 				{
+					Vector3 currentSkinImageWorldPosition = ui.model.mainMenuPanelModel.imageCurrentPlayerSkin.GetComponent<RectTransform>().TransformPoint(Camera.main.ScreenToWorldPoint( ui.model.mainMenuPanelModel.imageCurrentPlayerSkin.GetComponent<RectTransform>().rect.center));
+
+					_playerView.SetStaticPlayer (true);
+					_playerView.PlayerRenderer.transform.DOMove (currentSkinImageWorldPosition, 0.6f);
 					break;
 				}
 
 			case PlayerState.GamePause:
 				{
+					
 					break;
 				}
 
@@ -110,13 +131,21 @@ public class PlayerController : Controller
 					break;
 				}
 		}
+
+		_playerModel.playerState = playerState;
 	}
 
-	private void ChangePlayerSkin(int skinId)
+	private void SetupPlayerSkin(int skinId)
 	{
 		PlayerSkinView selectedSkinView = ui.view.GetPlayerSkinElement (skinId);
 
 		_playerView.PlayerRenderer.sprite = selectedSkinView.SkinSprite;
+
+		if (_playerModel.currentSkinId != skinId)
+		{
+			Prefs.PlayerData.SetCurrentSkin (skinId);
+			_playerModel.currentSkinId = skinId;
+		}
 	}
 
 	private void OnPlayerImpactItem(ItemView itemView)
@@ -155,6 +184,7 @@ public class PlayerController : Controller
 
 	private void ResetPlayer()
 	{
+		GoToPlayerState (PlayerState.MainMenu);
 		_playerView.PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f);
 		_playerView.ScorePlatformsList.Clear ();
 		_playerView.PlayerRenderer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -79,9 +79,9 @@ public class PlayerSkinView : View
 
 	public void SetSkinActive()
 	{
+		SetAvailable (false);
 		IsActive = true;
-		IsAvailable = false;
-		SkinPricePanel.alpha = 0;
+		SkinPricePanel.DOFade(0f, 0.3f);
 
 		if(_availableSequence != null)
 			_availableSequence.Rewind ();

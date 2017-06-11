@@ -125,19 +125,28 @@ public static class Prefs
 		public const string CrystalsCount				= "crystals.count";
 		public const string IsDoubleCoin				= "is.double.coin";
 		public const string Record 						= "record";
-		public const string CurrentSkin					= "current.skin";
+		public const string CurrentSkinId				= "current.skin.id";
 		public const string SkinsArray					= "skins.array";
 		public const string SkinsStatisticsGamesPlayed	= "skin.statistics.games.played";
 
 		public static void InitSkinsArray(int[] skinsArray)
 		{
 			PlayerPrefsX.SetIntArray (SkinsArray, skinsArray);
-			InitSkinsGamesPlayedStatistics (skinsArray);
 		}
 
 		public static void InitSkinsGamesPlayedStatistics(int[] skinsArray)
 		{
 			PlayerPrefsX.SetIntArray (SkinsStatisticsGamesPlayed, skinsArray);
+		}
+
+		public static void SetCurrentSkin(int skinId)
+		{
+			PlayerPrefs.SetInt (CurrentSkinId, skinId);
+		}
+
+		public static int GetCurrentSkinId()
+		{
+			return PlayerPrefs.GetInt (CurrentSkinId, 0);
 		}
 
 		public static void IncreaseSkinPlayedGamesStatistics(int skinId)

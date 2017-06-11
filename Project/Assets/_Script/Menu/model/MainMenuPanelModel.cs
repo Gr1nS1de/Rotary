@@ -18,7 +18,10 @@ public class MainMenuPanelModel : Model
 	public List<PlayerSkinView>					playerSkinsList			{ get { return _playerSkinsList; }}
 	public PlayerSkinView						playerSkinPrefab		{ get { return _playerSkinPrefab; }}
 	public GridLayoutGroup 						playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
+	public Image		 						imageCurrentPlayerSkin	{ get { return _imageCurrentPlayerSkin; } }
 
+	[SerializeField]
+	private Image								_imageCurrentPlayerSkin;
 	[SerializeField]
 	private GridLayoutGroup						_playerSkinElementsPanel;
 	[SerializeField]
