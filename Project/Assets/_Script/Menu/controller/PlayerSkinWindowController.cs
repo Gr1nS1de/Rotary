@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerSkinController : Controller
+public class PlayerSkinWindowController : Controller
 {
 	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
 
@@ -28,6 +28,8 @@ public class PlayerSkinController : Controller
 					if (windowState == UIWindowState.PlayerSkin)
 					{
 						UpdateAvailableSkins ();
+						ui.model.mainMenuPanelModel.textPlayerSkinGeneralGamesPlayed.text = string.Format("{0}", game.model.playedGamesCount);
+						UpdatePlayerSkinStatistics (_currentSkinId);
 					}
 					break;
 				}
@@ -57,6 +59,10 @@ public class PlayerSkinController : Controller
 					if (!isAvailable && _isStoreInited)
 					{
 						ui.controller.GoToWindowState (UIWindowState.Store);
+					}
+					else if (isAvailable)
+					{
+						UpdatePlayerSkinStatistics (skinId);
 					}
 
 					break;
@@ -92,6 +98,12 @@ public class PlayerSkinController : Controller
 		_playerSkinsViewList = playerSkinsViewList;
 	}
 	#endregion
+
+	private void UpdatePlayerSkinStatistics(int skinId)
+	{
+		ui.model.mainMenuPanelModel.textPlayerCurrentSkinGamesPlayed.text = string.Format("{0}", Prefs.PlayerData.GetSkinStatisticGamesPlayed (skinId));
+
+	}
 
 	private void UpdateAvailableSkins()
 	{

@@ -159,7 +159,7 @@ public static class Prefs
 			InitSkinsGamesPlayedStatistics (skinsStatisticsArray);
 		}
 
-		public static int GetSkinsGamesPlayed(int skinId)
+		public static int GetSkinStatisticGamesPlayed(int skinId)
 		{
 			int[] skinsStatisticsArray = GetSkinsStatisticsGamesPlayedArray ();
 

@@ -32,13 +32,6 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (- GM.Instance.ScreenSize.x / 2f + (GM.Instance.ScreenSize.x * _playerModel.initScreenPosX)  - game.view.cameraView.transform.position.x);
 
-		PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f)
-			.OnComplete (() =>
-		{
-
-			if (_playerModel.forceOnInit != 0f)
-				PlayerRenderer.transform.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
-		});
 	}
 
 	public override void OnInvisible(ViewVisibleDetect visibleDetector)

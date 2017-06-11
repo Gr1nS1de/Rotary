@@ -49,7 +49,7 @@ public class UIResourcesController : Controller
 			playerSkinsViewList.Add (playerSkin);
 		}
 
-		ui.controller.PlayerSkinController.InitPlayerSkins (playerSkinsViewList);
+		ui.controller.PlayerSkinWindowController.InitPlayerSkins (playerSkinsViewList);
 	}
 
 }

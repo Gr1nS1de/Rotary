@@ -325,6 +325,8 @@ public class GameController : Controller
 			Prefs.PlayerData.IncreasePlayedGamesCount ();
 		}
 
+		Prefs.PlayerData.IncreaseSkinPlayedGamesStatistics (_gameModel.playerModel.currentSkinId);
+
 		_gameModel.playedGamesCount = currentPlayedGamesCount;
 	}
 

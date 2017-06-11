@@ -20,7 +20,6 @@ public class PlayerController : Controller
 
 			case N.GameStart:
 				{
-					GoToPlayerState (PlayerState.GamePlay);
 					InitPlayer ();
 					break;
 				}
@@ -178,8 +177,22 @@ public class PlayerController : Controller
 	{
 		Vector2 screenSize = GM.Instance.ScreenSize;
 		Vector3 playerInitPosition = new Vector3(-screenSize.x / 2f, screenSize.y / 2f * 0.5f, 0f);
+		Rigidbody2D playerRB = _playerView.PlayerRenderer.GetComponent<Rigidbody2D> ();
 
 		_playerView.OnInit (playerInitPosition);
+
+		playerRB.transform.DOMove (Vector3.zero, 0.5f)
+			.OnComplete (() =>
+			{
+
+				playerRB.velocity = Vector2.zero;
+
+				if (_playerModel.forceOnInit != 0f)
+					playerRB.AddForce (new Vector2 (1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
+
+				GoToPlayerState (PlayerState.GamePlay);
+			});
+		
 	}
 
 	private void ResetPlayer()

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class PlayerPocketController : Controller
+public class PlayerDataController : Controller
 {
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{

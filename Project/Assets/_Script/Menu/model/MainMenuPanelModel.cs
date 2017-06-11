@@ -5,21 +5,27 @@ using UnityEngine.UI;
 
 public class MainMenuPanelModel : Model
 {
-	public Text 								textCoinsCount			{ get { return _textCoinsCount; } }
-	public Text 								textCrystalsCount		{ get { return _textCrystalsCount; } }
-	public Text 								textRecord				{ get { return _textRecord; } }
-	public bool 								isGameServicesOpened	{ get { return _isGameServicesOpened; } 	set { _isGameServicesOpened = value;} }
-	public Text 								textDoubleCoin			{ get { return _textDoubleCoin; } }
-	public Text 								textCoinsPack_00		{ get { return _textCoinsPack_00; } }
-	public Text 								textCoinsPack_01		{ get { return _textCoinsPack_01; } }
-	public CanvasGroup							panelRewardVideo		{ get { return _panelRewardVideo; } }
-	public Text 								textHourGiftTimer		{ get { return _textHourGiftTimer; } }
-	public CanvasGroup 							panelHourGiftTitle		{ get { return _panelHourGiftTitle; } }
-	public List<PlayerSkinView>					playerSkinsList			{ get { return _playerSkinsList; }}
-	public PlayerSkinView						playerSkinPrefab		{ get { return _playerSkinPrefab; }}
-	public GridLayoutGroup 						playerSkinElementsPanel	{ get { return _playerSkinElementsPanel; } }
-	public Image		 						imageCurrentPlayerSkin	{ get { return _imageCurrentPlayerSkin; } }
+	public Text 								textCoinsCount						{ get { return _textCoinsCount; } }
+	public Text 								textCrystalsCount					{ get { return _textCrystalsCount; } }
+	public Text 								textRecord							{ get { return _textRecord; } }
+	public bool 								isGameServicesOpened				{ get { return _isGameServicesOpened; } 	set { _isGameServicesOpened = value;} }
+	public Text 								textDoubleCoin						{ get { return _textDoubleCoin; } }
+	public Text 								textCoinsPack_00					{ get { return _textCoinsPack_00; } }
+	public Text 								textCoinsPack_01					{ get { return _textCoinsPack_01; } }
+	public CanvasGroup							panelRewardVideo					{ get { return _panelRewardVideo; } }
+	public Text 								textHourGiftTimer					{ get { return _textHourGiftTimer; } }
+	public CanvasGroup 							panelHourGiftTitle					{ get { return _panelHourGiftTitle; } }
+	public List<PlayerSkinView>					playerSkinsList						{ get { return _playerSkinsList; }}
+	public PlayerSkinView						playerSkinPrefab					{ get { return _playerSkinPrefab; }}
+	public GridLayoutGroup 						playerSkinElementsPanel				{ get { return _playerSkinElementsPanel; } }
+	public Image		 						imageCurrentPlayerSkin				{ get { return _imageCurrentPlayerSkin; } }
+	public Text		 							textPlayerSkinGeneralGamesPlayed	{ get { return _textPlayerSkinGeneralGamesPlayed; } }
+	public Text		 							textPlayerCurrentSkinGamesPlayed	{ get { return _textPlayerCurrentSkinGamesPlayed; } }
 
+	[SerializeField]
+	private Text								_textPlayerCurrentSkinGamesPlayed;
+	[SerializeField]
+	private Text								_textPlayerSkinGeneralGamesPlayed;
 	[SerializeField]
 	private Image								_imageCurrentPlayerSkin;
 	[SerializeField]
