@@ -39,6 +39,14 @@ public class PlayerSkinWindowController : Controller
 					int skinId = (int)data [0];
 
 					SetSkinActive (skinId);
+					break;
+				}
+
+			case N.PlayerItemCountChange__:
+				{
+					//ItemTypes itemType = (ItemTypes)data [0];
+					//int count = (int)data [1];
+
 					UpdateAvailableSkins ();
 					break;
 				}
@@ -80,12 +88,12 @@ public class PlayerSkinWindowController : Controller
 	public void InitPlayerSkins(List<PlayerSkinView> playerSkinsViewList)
 	{
 		int skinsCount = playerSkinsViewList.Count;
+		bool isFirstGame = false;
 
 		if (Prefs.PlayerData.GetSkinsArray ().Length == 0)
 		{
 			InitSkinsArray (skinsCount);
-
-			SetSkinActive (0);
+			isFirstGame = true;
 		}
 
 		for (int i = 0; i < skinsCount; i++)
@@ -96,6 +104,13 @@ public class PlayerSkinWindowController : Controller
 		}
 
 		_playerSkinsViewList = playerSkinsViewList;
+
+		if (isFirstGame)
+		{
+			SetSkinActive (0);
+		}
+
+
 	}
 	#endregion
 

@@ -70,7 +70,7 @@ public class PlatformInputController : Controller
 
 					if(!_selectedPlatformsDictionary.ContainsKey(selectedPlatform))
 						_selectedPlatformsDictionary.Add (selectedPlatform, selectedPointDelta);
-
+					/*
 					if (_selectedPlatformsDictionary.Count == 1)
 						_smoothStartAccumulative = 0.5f;
 
@@ -82,6 +82,7 @@ public class PlatformInputController : Controller
 						{
 							_smoothStartAccumulative = val;
 						}).SetUpdate(UpdateType.Fixed);
+						*/
 					break;
 				}
 
@@ -96,7 +97,7 @@ public class PlatformInputController : Controller
 				{
 					if (_selectedPlatformsDictionary.ContainsKey (selectedPlatform))
 						_selectedPlatformsDictionary.Remove (selectedPlatform);
-
+					/*
 					if (_selectedPlatformsDictionary.Count == 0)
 					{
 						if (_smoothStartTween.IsActive ())
@@ -107,7 +108,7 @@ public class PlatformInputController : Controller
 							{
 								_smoothStartAccumulative = val;
 							});
-					}
+					}*/
 					break;
 				}
 		}
@@ -122,9 +123,9 @@ public class PlatformInputController : Controller
 		float positionY = Mathf.Clamp (inputY + _selectedPlatformsDictionary[selectedPlatform].y, -_screenSize.y / 2f - _horizontalPlatformSize.y / 2f * 0.9f, _screenSize.y / 2f + _horizontalPlatformSize.y / 2f * 0.9f);
 
 		selectedPlatform
-			.DOMoveY (positionY, game.model.platformModel.horizontalPlatformInputSpeed * (1 + _smoothStartAccumulative))
+			.DOMoveY (positionY, game.model.platformModel.horizontalPlatformInputSpeed)// * (1 + _smoothStartAccumulative))
 			.SetEase(Ease.Linear)
-			.SetUpdate(UpdateType.Fixed);
+			.SetUpdate(UpdateType.Normal);
 	}
 
 	private void OnGameOver()

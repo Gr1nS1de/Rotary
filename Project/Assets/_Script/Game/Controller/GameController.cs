@@ -37,7 +37,6 @@ public class GameController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
-					OnAwakeInit ();
 					break;
 				}
 
@@ -65,58 +64,10 @@ public class GameController : Controller
 					OnPlayerImpactItem (itemView);
 					break;
 				}
-			case N.PlayerLeftPlatform_:
-				{
-					PlatformView platformView = (PlatformView)data [0];
-
-					OnAddScore ();
-					break;
-				}
 
 			case N.OnPlayerInvisible:
 				{
 					GameOver ();
-					break;
-				}
-
-			case N.OnPurchasedCoinsPack_00:
-				{
-					ChangePlayerItemCount (ItemTypes.Coin, 3000);
-					break;
-				}
-
-			case N.OnPurchasedCoinsPack_01:
-				{
-					ChangePlayerItemCount (ItemTypes.Coin, 15000);
-					break;
-				}
-
-			case N.OnPurchasedDoubleCoin:
-				{
-					Prefs.PlayerData.SetDoubleCoin ();
-					_gameModel.isDoubleCoin = true;
-					break;
-				}
-
-			case N.OnPlayerBuySkin_:
-				{
-					int skinId = (int)data [0];
-
-					OnPlayerBuySkin (skinId);
-
-					break;
-				}
-
-			case N.OnEndShowAdVideo_:
-				{
-					bool isSuccess = (bool)data [0];
-
-					if (isSuccess)
-					{
-						int rewardCoinsCount = 50;
-
-						ChangePlayerItemCount (ItemTypes.Coin, rewardCoinsCount);
-					}
 					break;
 				}
 
@@ -142,20 +93,11 @@ public class GameController : Controller
 		if (game.view.backgroundView != null)
 			Destroy (game.view.backgroundView.gameObject);
 
-		BackgroundView backgroundView = (BackgroundView)Instantiate (_gameModel.gameTheme.BackgroundView, game.view.transform);//.cameraView.transform);
+		BackgroundView backgroundView = (BackgroundView)Instantiate (_gameModel.gameTheme.BackgroundView, game.view.cameraView.transform);//.cameraView.transform);
 	
 		Notify (N.GameThemeChanged_, NotifyType.GAME, gameTheme);
 	}
 	#endregion
-
-	private void OnAwakeInit()
-	{
-		_gameModel.playerRecord = Prefs.PlayerData.GetRecord ();
-		_gameModel.coinsCount = Prefs.PlayerData.GetCoinsCount ();
-		_gameModel.crystalsCount = Prefs.PlayerData.GetCrystalsCount ();
-		_gameModel.isDoubleCoin = Prefs.PlayerData.GetDoubleCoin () == 1;
-		_gameModel.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
-	}
 
 	private void OnStart()
 	{
@@ -182,46 +124,6 @@ public class GameController : Controller
 		_gameModel.gameState = gameState;
 	}
 
-	private void OnPlayerBuySkin(int skinId)
-	{
-		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
-
-		ChangePlayerItemCount (ItemTypes.Coin, -skinPrice);
-	}
-
-	private void ChangePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
-	{
-		int absCount = Mathf.Abs (count);
-
-		switch(itemType)
-		{
-			case ItemTypes.Coin:
-				{
-					if (count > 0)
-						Prefs.PlayerData.CreditCoins (absCount);
-					else
-						Prefs.PlayerData.DebitCoins (absCount);
-					
-					game.model.coinsCount += count;
-					break;
-				}
-
-			case ItemTypes.Crystal:
-				{
-					if (count > 0)
-						Prefs.PlayerData.CreditCrystals (absCount);
-					else
-						Prefs.PlayerData.DebitCrystals (absCount);
-					
-					game.model.crystalsCount += count;
-					break;
-				}
-		}
-
-		if(isNotify)
-			Notify (N.PlayerItemCountChange__, NotifyType.ALL, itemType, count);
-	}
-
 	private void OnPlayerImpactItem(ItemView itemView)
 	{
 		ItemTypes itemType = itemView.ItemType;
@@ -232,8 +134,6 @@ public class GameController : Controller
 				{
 					int coinsCount = (_gameModel.isDoubleCoin ? 2 : 1);
 
-					ChangePlayerItemCount(ItemTypes.Coin, coinsCount, false);
-
 					_gameModel.gameOverData.CoinsCount += coinsCount;
 					break;
 				}
@@ -241,8 +141,6 @@ public class GameController : Controller
 			case ItemTypes.Crystal:
 				{
 					int crystalsCount = itemView.CrystalFractureCount;
-
-					ChangePlayerItemCount (ItemTypes.Crystal, crystalsCount, false);
 
 					_gameModel.gameOverData.CrystalsCount += crystalsCount;
 					break;
@@ -252,7 +150,7 @@ public class GameController : Controller
 				{
 					_gameModel.gameOverData.MagnetsCount++;
 
-					DOVirtual.DelayedCall (0.3f, () =>
+					DOVirtual.DelayedCall (0.1f, () =>
 					{
 						GameOver ();
 
@@ -261,29 +159,10 @@ public class GameController : Controller
 				}
 		}
 	}
-
-	private void OnAddScore()
-	{
-		_gameModel.currentScore++;
-
-		if (_gameModel.currentScore > _gameModel.playerRecord)
-		{
-			OnNewRecord (_gameModel.currentScore);
-		}
-
-		Notify (N.GameAddScore);
-	}
-
-	private void OnNewRecord(int score)
-	{
-		Prefs.PlayerData.SetRecord (score);
-		_gameModel.playerRecord = score;
-		Notify (N.OnPlayerNewRecord_, NotifyType.ALL, score);
-	}
+		
 
 	private void GameOver()
 	{
-		IncreasePlayedGamesCount ();
 
 		GoGameState( GameState.GameOver);
 
@@ -309,26 +188,7 @@ public class GameController : Controller
 			//ReloadScene();
 		//});
 	}
-
-	private void IncreasePlayedGamesCount()
-	{
-		int currentPlayedGamesCount = 1;
-
-		if (!PlayerPrefs.HasKey (Prefs.PlayerData.GamesPlayedCount))
-		{
-			PlayerPrefs.SetInt (Prefs.PlayerData.GamesPlayedCount, currentPlayedGamesCount);
-		}
-		else
-		{
-			currentPlayedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
-
-			Prefs.PlayerData.IncreasePlayedGamesCount ();
-		}
-
-		Prefs.PlayerData.IncreaseSkinPlayedGamesStatistics (_gameModel.playerModel.currentSkinId);
-
-		_gameModel.playedGamesCount = currentPlayedGamesCount;
-	}
+		
 
 	private void ReloadScene()
 	{
