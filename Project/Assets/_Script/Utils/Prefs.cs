@@ -24,24 +24,24 @@ public static class Prefs
 			PlayerPrefsX.SetIntArray (GiftsArray, giftsArray);
 		}
 
-		public static bool IsGiftActive(DailyGiftElementId elementId)
+		public static DailyGiftState GetDailyGiftState(DailyGiftElementId elementId)
 		{
-			int[] activatedGifts = GetGiftsArray ();
+			int[] activatedGifts = GetDailyGiftsArray ();
 			int giftIndex = (int)elementId;
 
-			return activatedGifts [giftIndex * 2 + 1] == 1;
+			return (DailyGiftState)System.Enum.ToObject(typeof(DailyGiftState), activatedGifts [giftIndex * 2 + 1]);
 		}
 
-		public static void SetGiftActive(DailyGiftElementId giftId, bool isActivated)
+		public static void SetDailyGiftState(DailyGiftElementId giftId, DailyGiftState giftState)
 		{
-			int[] giftsArray = GetGiftsArray ();
+			int[] giftsArray = GetDailyGiftsArray ();
 
-			giftsArray [(int)giftId * 2 + 1] = isActivated ? 1 : 0;
+			giftsArray [(int)giftId * 2 + 1] = (int)giftState;
 
 			PlayerPrefsX.SetIntArray (GiftsArray, giftsArray);
 		}
 
-		public static int[] GetGiftsArray()
+		public static int[] GetDailyGiftsArray()
 		{
 			return PlayerPrefsX.GetIntArray (GiftsArray);
 		}
@@ -60,9 +60,9 @@ public static class Prefs
 		{
 			PlayerPrefs.SetInt (DaysReturn, 0);
 			SetDayGiftTimestamp (new DateTime (0));
-			int[] giftsArray = GetGiftsArray ();
+			int[] giftsArray = GetDailyGiftsArray ();
 
-			for (int i = 2; i < giftsArray.Length; i+=2)
+			for (int i = 3; i < giftsArray.Length; i+=2)
 			{
 				giftsArray [i] = 0;
 			}

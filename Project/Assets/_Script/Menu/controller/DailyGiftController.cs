@@ -18,6 +18,14 @@ public enum DailyGiftElementId
 	GiftNextDay_11
 }
 
+public enum DailyGiftState
+{
+	Unavailable	= 0,
+	Active		= 1,
+	Activated	= 2
+
+}
+
 public class DailyGiftController : Controller
 {
 	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
@@ -49,7 +57,7 @@ public class DailyGiftController : Controller
 
 	private void OnStart()
 	{
-		if (Prefs.PlayerTimers.GetGiftsArray ().Length == 0)
+		if (Prefs.PlayerTimers.GetDailyGiftsArray ().Length == 0)
 		{
 			InitGiftsArray ();
 		}
@@ -65,7 +73,7 @@ public class DailyGiftController : Controller
 		_hourGiftTimestamp = Prefs.PlayerTimers.GetHourGiftTimestamp ();
 		_dayGiftTimestamp = Prefs.PlayerTimers.GetDayGiftTimestamp ();
 		_daysReturn = Prefs.PlayerTimers.GetDaysReturn ();
-		_giftsArray = Prefs.PlayerTimers.GetGiftsArray ();
+		_giftsArray = Prefs.PlayerTimers.GetDailyGiftsArray ();
 	}
 
 	private void InitGiftsArray()
@@ -76,7 +84,7 @@ public class DailyGiftController : Controller
 		for(int i = 0; i< giftsArray.Length; i+=2)
 		{
 			giftsArray [i] = giftIndex;
-			giftsArray [i + 1] = 0;
+			giftsArray [i + 1] = (int)DailyGiftState.Unavailable;
 
 			giftIndex++;
 		}
@@ -87,23 +95,21 @@ public class DailyGiftController : Controller
 
 	private void CheckCurrentGifts()
 	{
+		Debug.LogFormat ("CheckCurentGifts. _dayGiftTime: {0}. _hourGiftTime: {1}. Current time: {2}", _dayGiftTimestamp, _hourGiftTimestamp, UnbiasedTime.Instance.Now ());
 		//Day gifts
 		if (_dayGiftTimestamp.AddDays (1) < UnbiasedTime.Instance.Now ())
 		{
+			
 			ClearDayGifts ();
 		}
 
-		if (IsHourGiftActive ())
-			SetActiveGift (DailyGiftElementId.GiftHour_00, true);
+		SetGiftState (DailyGiftElementId.GiftHour_00, GetHourGiftState());
 
 		for (int i = 1; i < System.Enum.GetNames (typeof(DailyGiftElementId)).Length; i++)
 		{
 			DailyGiftElementId giftId = (DailyGiftElementId)System.Enum.ToObject (typeof(DailyGiftElementId), i);
 
-			if (i <= _daysReturn && Prefs.PlayerTimers.IsGiftActive (giftId))
-			{
-				SetActiveGift (giftId, true);
-			}
+			SetGiftState (giftId, Prefs.PlayerTimers.GetDailyGiftState (giftId));
 		}
 	}
 
@@ -124,15 +130,15 @@ public class DailyGiftController : Controller
 
 		}
 
-		SetActiveGift (elementId, false);
+		SetGiftState (elementId, DailyGiftState.Activated);
 	}
 
-	private void SetActiveGift(DailyGiftElementId giftId, bool isActive)
+	private void SetGiftState(DailyGiftElementId giftId, DailyGiftState giftState)
 	{
-		Prefs.PlayerTimers.SetGiftActive (giftId, isActive);
+		Prefs.PlayerTimers.SetDailyGiftState (giftId, giftState);
 		SetDefaults ();
 
-		ui.view.GetDailyGiftElement (giftId).SetActive (isActive);
+		ui.view.GetDailyGiftElement (giftId).GoToState (giftState);
 	}
 
 	private void ClearDayGifts()
@@ -142,9 +148,9 @@ public class DailyGiftController : Controller
 		SetDefaults ();
 	}
 
-	private bool IsHourGiftActive()
+	private DailyGiftState GetHourGiftState()
 	{
-		return _giftsArray [1] == 1;
+		return (DailyGiftState)System.Enum.ToObject((typeof(DailyGiftState)), _giftsArray [1]);
 	}
 
 	private void TickOneSecond()
@@ -154,14 +160,14 @@ public class DailyGiftController : Controller
 
 		if (unbiasedTime.Ticks >= _hourGiftTimestamp.Ticks)
 		{
-			if (!IsHourGiftActive ())
+			if (GetHourGiftState () != DailyGiftState.Active)
 			{
 				OnNewGiftTime (true);	//Hour gift
 			}
 		}
 		else
 		{
-			if (!IsHourGiftActive ())
+			if (GetHourGiftState () == DailyGiftState.Activated)
 			{
 				giftHourTimer = _hourGiftTimestamp.Subtract(unbiasedTime);
 
@@ -196,12 +202,12 @@ public class DailyGiftController : Controller
 			giftId = (DailyGiftElementId)System.Enum.Parse(typeof(DailyGiftElementId), System.Enum.GetNames(typeof(DailyGiftElementId))[returnDaysId]);
 		}
 
-		SetActiveGift (giftId, true);
+		SetGiftState (giftId, DailyGiftState.Active);
 	}
 
 	private void CheckHourGiftView(System.TimeSpan? giftHourTimer)
 	{
-		if (!IsHourGiftActive())
+		if (GetHourGiftState() == DailyGiftState.Activated)
 		{
 			if (_mainMenuPanelModel.panelHourGiftTitle.alpha > 0f)
 			{

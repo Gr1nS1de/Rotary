@@ -7,20 +7,17 @@ using DG.Tweening;
 public class DailyGiftElementView : View
 {
 	public DailyGiftElementId 		ElementId;
-	public bool						IsActive;
 
 	private Button 					_button;
 	private Sequence 				_activeSequence;
+	private DailyGiftState				_giftState;
 
 	void Start()
 	{
 		_button = GetComponent<Button> ();
 		_button.onClick.AddListener (OnButtonClick);
 
-		if(!IsActive)
-			_button.interactable = false;
-
-		InitActiveSequence ();
+		GoToState (_giftState);
 	}
 
 	private void InitActiveSequence()
@@ -32,27 +29,60 @@ public class DailyGiftElementView : View
 			.Append(transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0f), 0.5f, 1))
 			.SetLoops(-1);
 
-		if (!IsActive)
-			_activeSequence.Rewind ();
-		else
-			_activeSequence.Play ();
 	}
 
 
-	public void SetActive(bool isActive)
+	public void GoToState(DailyGiftState giftState)
 	{
-		IsActive = isActive;
+		switch (giftState)
+		{
+			case DailyGiftState.Unavailable:
+				{		
 
+					if (transform.localScale != Vector3.one)
+						transform.DOScale (Vector3.one, 0.3f);
+					
+					SetButtonInteractableActive (false);
+					break;
+				}
+
+			case DailyGiftState.Active:
+				{
+					if(_activeSequence == null)
+						InitActiveSequence ();
+
+					if (transform.localScale != Vector3.one)
+						transform.DOScale (Vector3.one, 0.3f);
+					
+					SetButtonInteractableActive (true);
+					break;
+				}
+
+			case DailyGiftState.Activated:
+				{
+					SetButtonInteractableActive (false);
+					transform.DOScale(new Vector3(0.9f, 0.9f, 1f), 0.3f);
+					break;
+				}
+		}
+
+		_giftState = giftState;
+	}
+
+	private void SetButtonInteractableActive(bool isActive)
+	{
 		if (isActive)
 		{
-			_activeSequence.Play ();
+			if(_activeSequence != null)
+				_activeSequence.Play ();
 
 			if(_button != null)
 				_button.interactable = true;
 		}
 		else
 		{
-			_activeSequence.Rewind ();
+			if(_activeSequence != null)
+				_activeSequence.Rewind ();
 
 			if(_button != null)
 				_button.interactable = false;
@@ -61,11 +91,7 @@ public class DailyGiftElementView : View
 
 	private void OnButtonClick()
 	{
-		if (IsActive)
-		{
-			SetActive (false);
-			Notify (N.OnPlayerGetGift_, NotifyType.ALL, ElementId);
-		}
+		Notify (N.OnPlayerGetGift_, NotifyType.ALL, ElementId);
 	}
 }
 
