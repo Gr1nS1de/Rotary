@@ -125,7 +125,7 @@ public class PlatformInputController : Controller
 		selectedPlatform
 			.DOMoveY (positionY, game.model.platformModel.horizontalPlatformInputSpeed)// * (1 + _smoothStartAccumulative))
 			.SetEase(Ease.Linear)
-			.SetUpdate(UpdateType.Normal);
+			.SetUpdate(UpdateType.Fixed);
 	}
 
 	private void OnGameOver()

@@ -13,10 +13,13 @@ public class JellySpriteEditor : Editor
 	public SerializedProperty m_ColliderRadius;
 	public SerializedProperty m_Stiffness;
 	public SerializedProperty m_Mass;
+    public SerializedProperty m_ManualPositioning;
 	public SerializedProperty m_DampingRatio;
 	public SerializedProperty m_VertexDensity;
 	public SerializedProperty m_PhysicsMaterial2D;
 	public SerializedProperty m_PhysicsMaterial;
+    public SerializedProperty m_InterpolationMode;
+    public SerializedProperty m_InterpolationMode2D;
 	public SerializedProperty m_DistanceExponent;
 	public SerializedProperty m_MassStyle;
 	public SerializedProperty m_GravityScale;
@@ -44,6 +47,8 @@ public class JellySpriteEditor : Editor
     Color m_InitialColor;
 	int m_InitialVertexDensity;
 	int m_InitialMassStyle;
+    int m_InitialInterpolation2D;
+    int m_InitialInterpolation;
 	int m_InitialNumAttachPoints;
 	float m_InitialStiffness; 
 	float m_InitialDamping;
@@ -65,10 +70,13 @@ public class JellySpriteEditor : Editor
 		m_ColliderRadius = serializedObject.FindProperty("m_SphereRadius");
 		m_Stiffness = serializedObject.FindProperty("m_Stiffness");
 		m_Mass = serializedObject.FindProperty("m_Mass");
+        m_ManualPositioning = serializedObject.FindProperty("m_ManualPositioning");
 		m_DampingRatio = serializedObject.FindProperty("m_DampingRatio");
 		m_VertexDensity = serializedObject.FindProperty("m_VertexDensity");
 		m_PhysicsMaterial = serializedObject.FindProperty("m_PhysicsMaterial");
 		m_PhysicsMaterial2D = serializedObject.FindProperty("m_PhysicsMaterial2D");
+        m_InterpolationMode = serializedObject.FindProperty("m_Interpolation");
+        m_InterpolationMode2D = serializedObject.FindProperty("m_Interpolation2D");
 		m_DistanceExponent = serializedObject.FindProperty("m_DistanceExponent");
 		m_MassStyle = serializedObject.FindProperty("m_MassStyle");
 		m_GravityScale = serializedObject.FindProperty("m_GravityScale");
@@ -84,6 +92,7 @@ public class JellySpriteEditor : Editor
 		m_FlipX = serializedObject.FindProperty("m_FlipX");
 		m_FlipY = serializedObject.FindProperty("m_FlipY");
 		m_CollideConnected = serializedObject.FindProperty("m_CollideConnected");
+
 		m_AttachNeighbors = serializedObject.FindProperty("m_AttachNeighbors");
 		m_LockRotation = serializedObject.FindProperty("m_LockRotation");
 		m_CentralBodyKinematic = serializedObject.FindProperty("m_CentralBodyKinematic");
@@ -159,6 +168,8 @@ public class JellySpriteEditor : Editor
 	{
 		m_InitialVertexDensity = m_VertexDensity.intValue;
 		m_InitialMassStyle = m_MassStyle.enumValueIndex;
+        m_InitialInterpolation2D = m_InterpolationMode2D.enumValueIndex;
+        m_InitialInterpolation = m_InterpolationMode.enumValueIndex;
 		m_InitialStiffness = m_Stiffness.floatValue;
 		m_InitialDamping = m_DampingRatio.floatValue;
 		m_InitialMass = m_Mass.floatValue;
@@ -216,6 +227,8 @@ public class JellySpriteEditor : Editor
 		   m_InitialMass != m_Mass.floatValue ||
 		   m_InitialGravityScale != m_GravityScale.floatValue ||
 		   m_InitialAngularDrag != m_AngularDrag.floatValue ||
+           m_InitialInterpolation != m_InterpolationMode.enumValueIndex ||
+           m_InitialInterpolation2D != m_InterpolationMode2D.enumValueIndex ||
 		   m_InitialDrag != m_Drag.floatValue)
 		{
 			foreach(UnityEngine.Object targetObject in targets)
@@ -439,16 +452,19 @@ public class JellySpriteEditor : Editor
 		if(m_PhysicsMode.boolValue)
 		{
 			EditorGUILayout.PropertyField(m_PhysicsMaterial2D, new GUIContent("Physics Material"));
-			m_GravityScale.floatValue = EditorGUILayout.FloatField("Gravity Scale", m_GravityScale.floatValue);            
+			m_GravityScale.floatValue = EditorGUILayout.FloatField("Gravity Scale", m_GravityScale.floatValue);
+            EditorGUILayout.PropertyField(m_InterpolationMode2D, new GUIContent("Interpolate"));
 		}
 		else
 		{
-			EditorGUILayout.PropertyField(m_PhysicsMaterial, new GUIContent("Physics Material"));			
+			EditorGUILayout.PropertyField(m_PhysicsMaterial, new GUIContent("Physics Material"));	
+            EditorGUILayout.PropertyField(m_InterpolationMode, new GUIContent("Interpolate"));
 		}
 
         m_Drag.floatValue = EditorGUILayout.FloatField("Drag", m_Drag.floatValue);
         m_AngularDrag.floatValue = EditorGUILayout.FloatField("Angular Drag", m_AngularDrag.floatValue);
         EditorGUILayout.PropertyField(m_CollideConnected, new GUIContent("Collide Connected"));
+        EditorGUILayout.PropertyField(m_ManualPositioning, new GUIContent("Manual Positioning"));
 
 		m_Stiffness.floatValue = EditorGUILayout.FloatField("Spring Stiffness", m_Stiffness.floatValue);
 		m_DampingRatio.floatValue = EditorGUILayout.FloatField("Spring Damping", m_DampingRatio.floatValue);

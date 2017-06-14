@@ -84,6 +84,7 @@ public class PlayerSkinView : View
 		SetAvailable (false);
 		IsActive = true;
 		SkinPricePanel.DOFade(0f, 0.3f);
+		SkinPricePanel.transform.DOPunchScale (new Vector3 (0.3f, 0.3f, 0f), 0.3f);
 
 		if(_availableSequence != null)
 			_availableSequence.Rewind ();

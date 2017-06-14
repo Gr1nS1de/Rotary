@@ -11,7 +11,6 @@ using System.Collections.Generic;
 /// Jelly sprite class. Attach to any Unity sprite, and at runtime the sprite will move and
 /// distort under the influence of soft body physics.
 /// </summary>
-[ExecuteInEditMode]
 [AddComponentMenu("Jelly Sprite/Unity Jelly Sprite")]
 public class UnityJellySprite : JellySprite
 {
