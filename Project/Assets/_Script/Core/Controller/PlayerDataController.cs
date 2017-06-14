@@ -75,6 +75,14 @@ public class PlayerDataController : Controller
 					break;
 				}
 
+			case N.OnPlayerGetGift_:
+				{
+					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
+
+					OnClickDailyGiftElement(dailyGiftElementId);
+					break;
+				}
+
 			case N.GameOver_:
 				{
 					GameOverData gameOverData = (GameOverData)data[0];
@@ -129,6 +137,29 @@ public class PlayerDataController : Controller
 
 		if(isNotify)
 			Notify (N.PlayerItemCountChange__, NotifyType.ALL, itemType, count);
+	}
+
+	private void OnClickDailyGiftElement(DailyGiftElementId elementId)
+	{
+		switch (elementId)
+		{
+			case DailyGiftElementId.GiftHour_00:
+				{
+					UpdatePlayerItemCount (ItemTypes.Coin, 10);
+					break;
+				}
+
+			default:
+				{
+					int coinsGiftCount = Mathf.Clamp( Prefs.PlayerTimers.GetDaysReturn () * 10, 10, 100);
+
+					UpdatePlayerItemCount (ItemTypes.Coin, coinsGiftCount);
+
+					break;
+				}
+
+		}
+
 	}
 
 	private void OnAddScore()

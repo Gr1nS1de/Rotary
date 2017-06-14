@@ -193,12 +193,10 @@ public class DailyGiftController : Controller
 		}
 		else
 		{
-			_daysReturn++;
-			Prefs.PlayerTimers.IncreaseDaysReturn ();
-
+			SetupDayGiftTime ();
+		
 			int returnDaysId = Mathf.Clamp (_daysReturn, 0, System.Enum.GetNames (typeof(DailyGiftElementId)).Length);
 
-			SetupDayGiftTime ();
 			giftId = (DailyGiftElementId)System.Enum.Parse(typeof(DailyGiftElementId), System.Enum.GetNames(typeof(DailyGiftElementId))[returnDaysId]);
 		}
 
