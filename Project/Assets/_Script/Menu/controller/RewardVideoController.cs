@@ -11,9 +11,11 @@ public class RewardVideoController : Controller
 
 	private System.DateTime _rewardAdVideoTimestamp 		= new System.DateTime(0);
 	private bool 			_isRewardedVideoShown 			= false;
+	private bool			_isStartedShowVideo				= false;
 	private int 			_rewardVideoShowCount			= 0;
 	private CanvasGroup		_rewardVideoCanvasGroup 		= null;
 	private Sequence 		_rewardVideoButtonIdleSequence 	= null;
+	private int				_gamesPlayedThisSession			= 0;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -35,9 +37,10 @@ public class RewardVideoController : Controller
 						ShowRewardVideo ();
 					}
 
-					if(_rewardVideoShowCount <= REWARD_VIDEO_MAX_SHOW_COUNT)
+					if(_rewardVideoShowCount <= REWARD_VIDEO_MAX_SHOW_COUNT && _gamesPlayedThisSession >= 2)
 						CheckRewardVideoShowTime ();
-					
+
+					_gamesPlayedThisSession++;
 					break;
 				}
 			
@@ -65,9 +68,13 @@ public class RewardVideoController : Controller
 	#region Public methods
 	public void ShowRewardedAd()
 	{
+		if (_isStartedShowVideo)
+			return;
+		
 		var options = new ShowOptions { resultCallback = HandleShowResult };
 		Advertisement.Show (REWRD_VIDEO_ZONE_ID, options);
 		Notify (N.OnStartShowAdVideo);
+		_isStartedShowVideo = true;
 	}
 	#endregion
 
@@ -164,6 +171,7 @@ public class RewardVideoController : Controller
 
 		Notify (N.OnEndShowAdVideo_, NotifyType.ALL, isSuccess);
 		SetActiveRewardVideoButton (false);
+		_isStartedShowVideo = false;
 	}
 
 	void OnApplicationPause (bool paused)

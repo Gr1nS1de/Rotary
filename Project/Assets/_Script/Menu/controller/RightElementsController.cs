@@ -59,6 +59,7 @@ public class RightElementsController : Controller
 	private void MoveRightPanel(System.Action callbackHidden)
 	{
 		RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
+		Vector2 initRightPanelPosition = rightPanelRect.anchoredPosition;
 
 		if (_rightPanelMoveSequence != null && _rightPanelMoveSequence.IsActive ())
 			_rightPanelMoveSequence.Kill ();
@@ -69,8 +70,12 @@ public class RightElementsController : Controller
 			.Append (rightPanelRect.DOPunchAnchorPos (new Vector2 (-rightPanelRect.rect.width, 0f), 0.5f, 0, 1f))
 			.InsertCallback (0.1f, () =>
 			{
-				if(callbackHidden != null)
-					callbackHidden();
+				if (callbackHidden != null)
+					callbackHidden ();
+			})
+			.OnComplete (() =>
+			{
+				rightPanelRect.anchoredPosition = initRightPanelPosition;		
 			});
 		
 			

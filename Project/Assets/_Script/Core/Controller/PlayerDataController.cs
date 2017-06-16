@@ -223,9 +223,9 @@ public class PlayerDataController : Controller
 		}
 		else
 		{
-			currentPlayedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
-
 			Prefs.PlayerData.IncreasePlayedGamesCount ();
+
+			currentPlayedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 		}
 
 		Prefs.PlayerData.IncreaseSkinPlayedGamesStatistics (_gameModel.playerModel.currentSkinId);
