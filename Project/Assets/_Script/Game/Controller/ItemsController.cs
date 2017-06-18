@@ -15,6 +15,12 @@ public class ItemsController : Controller
 
 					break;
 				}
+
+			case N.GameStart:
+				{
+					UpdateCrystalFractureCount();
+					break;
+				}
 				/*
 			case N.DestructibleBreakEntity___:
 				{
@@ -59,7 +65,7 @@ public class ItemsController : Controller
 			case ItemTypes.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
-					SetCrystalFractureCount(itemView);
+					UpdateCrystalFractureCount();
 					game.controller.distructibleController.BreakItem(itemType, itemView.CrystalRenderer, itemView.CrystalFractureCount, contactPoint);
 
 					Destroy (itemView.gameObject, itemView.CrystalDestroyTime + 1f);
@@ -75,13 +81,13 @@ public class ItemsController : Controller
 		itemView.OnPlayerImpact ();
 	}
 
-	private void SetCrystalFractureCount(ItemView itemCrystal)
+	private void UpdateCrystalFractureCount()
 	{
 		int fractureCount = 0;
 
 		switch (game.model.gameSpeedState)
 		{
-			case GameSpeedState.Speed_1:
+			default:
 				{
 					fractureCount = 1;
 					break;
@@ -123,7 +129,7 @@ public class ItemsController : Controller
 				}
 		}
 
-		itemCrystal.CrystalFractureCount = fractureCount;
+		game.model.itemModel.crystalFractureCount = fractureCount;
 	}
 
 }

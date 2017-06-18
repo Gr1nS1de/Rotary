@@ -217,14 +217,17 @@ public class ObjectsPoolController : Controller
 
 			case ItemTypes.Crystal:
 				{
+					itemAddCount = game.model.itemModel.crystalFractureCount;
 					break;
 				}
 		}
 
-		itemView.OnInit ();
+		itemView.OnInit (itemAddCount);
 
 		_instantiatedObjectsList.Add (itemView);
 	}
+
+
 
 	private Vector3 GetItemRandomPosition(ItemTypes itemType)
 	{

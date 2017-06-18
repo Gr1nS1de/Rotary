@@ -127,6 +127,7 @@ public class PurchaseController : Controller
 
 			case DOUBLE_COIN:
 				{
+					core.playerDataController.ActivateDoubleCoin ();
 					Notify (N.OnPurchasedDoubleCoin);
 					break;
 				}
@@ -250,6 +251,7 @@ public class PurchaseController : Controller
 
 		if(AndroidInAppPurchaseManager.Client.Inventory.IsProductPurchased(DOUBLE_COIN))
 		{
+			core.playerDataController.ActivateDoubleCoin ();
 			Notify (N.OnPurchasedDoubleCoin);
 		}
 

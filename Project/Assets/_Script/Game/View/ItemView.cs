@@ -65,6 +65,7 @@ public class ItemView : PoolingObjectView
 
 			case ItemTypes.Crystal:
 				{
+					CrystalFractureCount = itemCount;
 					ActivateRendererCount (false, ItemType, CrystalFractureCount);
 					break;
 				}

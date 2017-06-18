@@ -29,7 +29,10 @@ public class MainMenuPanelModel : Model
 	public Text	 								textCrystalsAdd						{ get { return _textCrystalsAdd; } }
 	public Image	 							imageCoinIcon						{ get { return _imageCoinIcon; } }
 	public Image	 							imageCrystalIcon					{ get { return _imageCrystalIcon; } }
+	public CanvasGroup	 						panelIsDoubleCoinBoughtMark			{ get { return _panelIsDoubleCoinBoughtMark; } }
 
+	[SerializeField]
+	private CanvasGroup							_panelIsDoubleCoinBoughtMark;
 	[SerializeField]
 	private Image								_imageCrystalIcon;
 	[SerializeField]

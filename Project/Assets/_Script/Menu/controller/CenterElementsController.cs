@@ -38,6 +38,12 @@ public class CenterElementsController : Controller
 					break;
 				}
 
+			case N.OnPurchasedDoubleCoin:
+				{
+					OnUpdateStorePricesLang ();
+					break;
+				}
+
 			case N.PurchaseProductsLoaded_:
 				{
 					bool isSuccess = (bool)data[0];
@@ -138,7 +144,8 @@ public class CenterElementsController : Controller
 
 			case CenterElementId.Store_ButtonDoubleCoin:
 				{
-					Notify (N.PurchaseDoubleCoin);
+					if(!core.playerDataModel.isDoubleCoin)
+						Notify (N.PurchaseDoubleCoin);
 					break;
 				}
 		}
@@ -171,17 +178,14 @@ public class CenterElementsController : Controller
 	{
 		if (isSuccessConnection)
 		{
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.DOUBLE_COIN).LocalizedPrice);
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_00).LocalizedPrice);
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_01).LocalizedPrice);
-
 			_isStorePricesInited = true;
 		}
 		else
 		{
-			OnUpdateStorePricesLang ();
+			
 		}
 
+		OnUpdateStorePricesLang ();
 	}
 
 	private void OnUpdateStorePricesLang()
@@ -192,15 +196,23 @@ public class CenterElementsController : Controller
 			string[] coinsPack_00TextSplitted = _mainMenuPanelModel.textCoinsPack_00.text.Split ('-');
 			string[] coinsPack_01TextSplitted = _mainMenuPanelModel.textCoinsPack_01.text.Split ('-');
 
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), doubleCoinTextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), coinsPack_00TextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), coinsPack_01TextSplitted [1]);
+			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.DOUBLE_COIN).LocalizedPrice);
+			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_00).LocalizedPrice);
+			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_01).LocalizedPrice);
 		}
 		else
 		{
 			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper());
 			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper ());
 			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - ;(", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper ());
+		}
+
+		if (core.playerDataModel.isDoubleCoin)
+		{
+			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper ());
+
+			if(_mainMenuPanelModel.panelIsDoubleCoinBoughtMark.alpha < 1f)
+				_mainMenuPanelModel.panelIsDoubleCoinBoughtMark.DOFade (1f, 0.5f);
 		}
 	}
 }

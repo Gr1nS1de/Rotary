@@ -53,13 +53,6 @@ public class PlayerDataController : Controller
 					break;
 				}
 
-			case N.OnPurchasedDoubleCoin:
-				{
-					Prefs.PlayerData.SetDoubleCoin ();
-					_playerDataModel.isDoubleCoin = true;
-					break;
-				}
-
 			case N.OnPlayerGetDailyGift__:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
@@ -131,6 +124,12 @@ public class PlayerDataController : Controller
 		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
 
 		UpdatePlayerItemCount (ItemTypes.Coin, -skinPrice);
+	}
+
+	public void ActivateDoubleCoin()
+	{
+		Prefs.PlayerData.SetDoubleCoin ();
+		_playerDataModel.isDoubleCoin = true;
 	}
 	#endregion
 
