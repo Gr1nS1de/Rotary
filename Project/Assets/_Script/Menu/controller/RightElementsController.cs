@@ -161,6 +161,7 @@ public class RightElementsController : Controller
 					}else{
 						SetElementIconColor(RightElementId.ButtonGameServices, _gameServicesGreenColor, ()=>
 						{
+							GooglePlayConnection.Instance.Connect();
 							SetElementIconColor(RightElementId.ButtonGameServices, ui.model.menuTheme.IconsColor);
 						});
 					}
