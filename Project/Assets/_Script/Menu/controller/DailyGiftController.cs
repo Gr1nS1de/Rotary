@@ -45,7 +45,7 @@ public class DailyGiftController : Controller
 					break;
 				}
 
-			case N.OnPlayerGetGift_:
+			case N.OnPlayerGetDailyGift_:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
 
@@ -62,13 +62,13 @@ public class DailyGiftController : Controller
 			InitGiftsArray ();
 		}
 
-		SetDefaults ();
+		UpdateDefaults ();
 		CheckCurrentGifts ();
 
 		InvokeRepeating("TickOneSecond",0f, 1f);
 	}
 
-	private void SetDefaults()
+	private void UpdateDefaults()
 	{
 		_hourGiftTimestamp = Prefs.PlayerTimers.GetHourGiftTimestamp ();
 		_dayGiftTimestamp = Prefs.PlayerTimers.GetDayGiftTimestamp ();
@@ -113,6 +113,25 @@ public class DailyGiftController : Controller
 		}
 	}
 
+	private void CheckAvailableGift()
+	{
+		bool isGiftAvailable = false;
+
+		for (int i = 1; i < _giftsArray.Length; i+= 2)
+		{
+			if (_giftsArray [i] == 1)
+			{
+				isGiftAvailable = true;
+			}
+		}
+
+		if (ui.model.mainMenuPanelModel.isDailyGiftAvailable != isGiftAvailable)
+		{
+			ui.model.mainMenuPanelModel.isDailyGiftAvailable = isGiftAvailable;
+			Notify (N.OnDailyGiftAvailable_, NotifyType.ALL, isGiftAvailable);
+		}
+	}
+
 	private void OnClickDailyGiftElement(DailyGiftElementId elementId)
 	{
 		switch (elementId)
@@ -136,7 +155,9 @@ public class DailyGiftController : Controller
 	private void SetGiftState(DailyGiftElementId giftId, DailyGiftState giftState)
 	{
 		Prefs.PlayerTimers.SetDailyGiftState (giftId, giftState);
-		SetDefaults ();
+		UpdateDefaults ();
+
+		CheckAvailableGift ();
 
 		ui.view.GetDailyGiftElement (giftId).GoToState (giftState);
 	}
@@ -145,7 +166,7 @@ public class DailyGiftController : Controller
 	{
 		Prefs.PlayerTimers.ClearDaysReturn ();
 
-		SetDefaults ();
+		UpdateDefaults ();
 	}
 
 	private DailyGiftState GetHourGiftState()

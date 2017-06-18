@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class RightElementView : ThemeElementView
 {
-	public RightElementId ElementId;
+	public RightElementId 	ElementId;
+	public Image			ElementIconRenderer;
 
 	void Awake()
 	{

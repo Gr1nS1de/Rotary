@@ -11,6 +11,7 @@ public class MainMenuPanelController : Controller
 
 	private bool					_isHourGiftActive			= false;
 	private bool					_isStorePricesInited		= false;
+	private Tween					_dailyGiftBowTieTween		= null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -56,6 +57,14 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
+			case N.OnDailyGiftAvailable_:
+				{
+					bool isAvailable = (bool)data [0];
+
+					SetDailyGiftAvailable (isAvailable);
+					break;
+				}
+
 			case N.GameOver_:
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];
@@ -96,6 +105,29 @@ public class MainMenuPanelController : Controller
 		_mainMenuPanelModel.textCrystalsCount.text = string.Format("{0}", Utils.SweetMoney(game.model.crystalsCount));
 
 		Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
+	}
+
+	private void SetDailyGiftAvailable(bool isGiftAvailable)
+	{
+		if (_dailyGiftBowTieTween == null)
+		{
+			_dailyGiftBowTieTween = ui.model.mainMenuPanelModel.imageDailyGiftBowTie.transform
+				.DOPunchScale (new Vector3 (0.1f, 0.1f, 0f), 0.5f, 1)
+				.SetAutoKill(false)
+				.SetRecyclable(true)
+				.SetLoops(-1);
+		}
+
+		if (isGiftAvailable)
+		{
+			_dailyGiftBowTieTween.Play ();
+			ui.model.mainMenuPanelModel.imageDailyGiftBowTie.DOFade (1f, 0.3f);
+		}
+		else
+		{
+			_dailyGiftBowTieTween.Rewind ();
+			ui.model.mainMenuPanelModel.imageDailyGiftBowTie.DOFade (0f, 0.3f);
+		}
 	}
 
 	private void InitStorePrices(bool isSuccessConnection)

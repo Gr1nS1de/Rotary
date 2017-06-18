@@ -21,7 +21,12 @@ public class MainMenuPanelModel : Model
 	public Image		 						imageCurrentPlayerSkin				{ get { return _imageCurrentPlayerSkin; } }
 	public Text		 							textPlayerSkinGeneralGamesPlayed	{ get { return _textPlayerSkinGeneralGamesPlayed; } }
 	public Text		 							textPlayerCurrentSkinGamesPlayed	{ get { return _textPlayerCurrentSkinGamesPlayed; } }
+	public bool		 							isDailyGiftAvailable				{ get { return _isDailyGiftAvailable; } set {_isDailyGiftAvailable = value;}}
+	public Image	 							imageDailyGiftBowTie				{ get { return _imageDailyGiftBowTie; } }
 
+	[SerializeField]
+	private Image								_imageDailyGiftBowTie;
+	private bool								_isDailyGiftAvailable;
 	[SerializeField]
 	private Text								_textPlayerCurrentSkinGamesPlayed;
 	[SerializeField]

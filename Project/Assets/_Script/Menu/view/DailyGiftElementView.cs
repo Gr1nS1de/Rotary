@@ -91,7 +91,7 @@ public class DailyGiftElementView : View
 
 	private void OnButtonClick()
 	{
-		Notify (N.OnPlayerGetGift_, NotifyType.ALL, ElementId);
+		Notify (N.OnPlayerGetDailyGift_, NotifyType.ALL, ElementId);
 	}
 }
 

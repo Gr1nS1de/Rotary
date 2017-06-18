@@ -45,13 +45,36 @@ public class ItemView : PoolingObjectView
 		if(CoinRenderer != null)
 			CoinRenderer.color = new Color (CoinRenderer.color.r, CoinRenderer.color.g, CoinRenderer.color.b, 1f);
 
-		if (ItemType == ItemTypes.Magnet)
-			MagnetRenderer.transform.eulerAngles = new Vector3 (0f, 0f, Random.Range(0f, 180f));
+		InitItem ();
 
 		if (_itemInitSequence == null)
 			SetupItemTweening ();
 		else
 			_itemInitSequence.Restart ();
+	}
+
+	private void InitItem()
+	{
+		switch (ItemType)
+		{
+			case ItemTypes.Coin:
+				{
+					ActivateRendererCount (false, ItemType, game.model.isDoubleCoin ? 2 : 1);
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					ActivateRendererCount (false, ItemType, CrystalFractureCount);
+					break;
+				}
+
+			case ItemTypes.Magnet:
+				{
+					MagnetRenderer.transform.eulerAngles = new Vector3 (0f, 0f, Random.Range(0f, 180f));
+					break;
+				}
+		}
 	}
 
 	private void ResetCountRenderers()
@@ -302,13 +325,7 @@ public class ItemView : PoolingObjectView
 							.SetAutoKill(false);
 					}
 
-					foreach (var renderer in CountRenderers)
-					{
-						renderer.DOFade (1f, 0.1f);
-						renderer.text = string.Format ("+{0}", CrystalFractureCount);
-						renderer.transform.position = transform.position;
-					}
-
+					ActivateRendererCount (true, ItemType);
 
 					_itemImpactSequence.Play ();
 
@@ -322,19 +339,31 @@ public class ItemView : PoolingObjectView
 		}
 	}
 
+
+	private void ActivateRendererCount(bool isAcivate, ItemTypes ItemType, int count = -1)
+	{
+		foreach (var renderer in CountRenderers)
+		{
+			if (isAcivate)
+			{
+				renderer.DOFade (1f, 0.1f);
+			}
+			else
+			{
+				if(count > 0)
+					renderer.text = string.Format ("+{0}", count);
+				
+				renderer.transform.position = transform.position;
+			}
+		}
+	}
+
 	public override void OnRendererTriggerEnter (ViewTriggerDetect triggerDetector, Collider2D otherCollider)
 	{
 		switch (ItemType)
 		{
 			case ItemTypes.Crystal:
 				{
-					foreach (var renderer in CountRenderers)
-					{
-						renderer.DOFade (1f, 0.1f);
-						renderer.text = string.Format ("+{0}", CrystalFractureCount);
-						renderer.transform.position = triggerDetector.transform.position;
-					}
-
 					break;
 				}
 		}

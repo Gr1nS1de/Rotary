@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class RightElementsController : Controller
@@ -11,6 +12,9 @@ public class RightElementsController : Controller
 	private Sequence				_rightPanelMoveSequence = null;
 	private Sequence				_gameServicesOpenSequence = null;
 	private Sequence				_gameServicesCloseSequence = null;
+	private bool					_isGameServicesIconColorInited = false;
+	private Color					_gameServicesGreenColor = new Color(77f/ 255f, 161f / 255f, 70f/255f, 1f);
+	private Tween					_likeButtonTween = null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -36,6 +40,12 @@ public class RightElementsController : Controller
 
 					//Send theme changed event to all RightElenentView
 					ActionUIThemeChanged (uiTheme);
+
+					if (!_isGameServicesIconColorInited || GooglePlayConnection.State != GPConnectionState.STATE_CONNECTED)
+					{
+						SetElementIconColor (RightElementId.ButtonGameServices, uiTheme.IconsColor);
+						_isGameServicesIconColorInited = true;
+					}
 					break;
 				}
 
@@ -45,6 +55,22 @@ public class RightElementsController : Controller
 
 					UpdateRightButtons (uiState);
 					UpdateBackStack (uiState);
+					break;
+				}
+
+			case N.OnGameServicesConnected_:
+				{
+					bool isSuccess = (bool)data [0];
+
+					SetElementIconColor (RightElementId.ButtonGameServices, isSuccess ? _gameServicesGreenColor : ui.model.menuTheme.IconsColor);
+					break;
+				}
+
+			case N.OnDailyGiftAvailable_:
+				{
+					bool isAvailable = (bool)data [0];
+
+					SetLikeButtonDailyGiftAvailable (isAvailable);
 					break;
 				}
 		}
@@ -68,7 +94,7 @@ public class RightElementsController : Controller
 
 		_rightPanelMoveSequence
 			.Append (rightPanelRect.DOPunchAnchorPos (new Vector2 (-rightPanelRect.rect.width, 0f), 0.5f, 0, 1f))
-			.InsertCallback (0.1f, () =>
+			.InsertCallback (0.08f, () =>
 			{
 				if (callbackHidden != null)
 					callbackHidden ();
@@ -123,13 +149,20 @@ public class RightElementsController : Controller
 			case RightElementId.ButtonGameServices:
 				{
 					isChangeWindowState = false;
-
-					if(ui.model.mainMenuPanelModel.isGameServicesOpened)
+					if(GooglePlayConnection.State == GPConnectionState.STATE_CONNECTED)
 					{
-						CloseGameServices();
-					}else
-					{
-						OpenGameServices();
+						if(ui.model.mainMenuPanelModel.isGameServicesOpened)
+						{
+							CloseGameServices();
+						}else
+						{
+							OpenGameServices();
+						}
+					}else{
+						SetElementIconColor(RightElementId.ButtonGameServices, _gameServicesGreenColor, ()=>
+						{
+							SetElementIconColor(RightElementId.ButtonGameServices, ui.model.menuTheme.IconsColor);
+						});
 					}
 					break;
 				}
@@ -180,6 +213,38 @@ public class RightElementsController : Controller
 				});
 			}
 		}
+	}
+
+	private void SetLikeButtonDailyGiftAvailable (bool isGiftAvailable)
+	{
+		if (_likeButtonTween == null)
+		{
+			_likeButtonTween = ui.view.GetRightElement (RightElementId.ButtonLike).ElementIconRenderer.transform
+				.DOPunchPosition (new Vector3 (0f, 3f, 0f), 0.28f, 1)
+				.SetAutoKill(false)
+				.SetRecyclable(true)
+				.SetLoops(-1);
+		}
+
+		if (isGiftAvailable)
+			_likeButtonTween.Play ();
+		else
+			_likeButtonTween.Rewind ();
+	}
+
+	private void SetElementIconColor(RightElementId elementId, Color color, System.Action onComplete = null)
+	{
+		Graphic iconRenderer = ui.view.GetRightElement (RightElementId.ButtonGameServices).ElementIconRenderer;
+
+		if (iconRenderer != null)
+			iconRenderer.DOColor(color, 0.5f)
+				.OnComplete(()=>
+				{
+					if(onComplete != null)
+						onComplete();
+				});
+		else
+			Debug.LogErrorFormat ("SetElementIconColor. There is no icon for {0}", elementId);
 	}
 
 	private void OpenGameServices()
@@ -393,7 +458,7 @@ public class RightElementsController : Controller
 		{
 			_backButtonStack.Pop();
 		}
-
+		
 		_backButtonStack.Push (uiState);
 	}
 

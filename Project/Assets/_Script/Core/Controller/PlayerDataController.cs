@@ -75,7 +75,7 @@ public class PlayerDataController : Controller
 					break;
 				}
 
-			case N.OnPlayerGetGift_:
+			case N.OnPlayerGetDailyGift_:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
 
