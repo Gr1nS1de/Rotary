@@ -21,6 +21,7 @@
     </service>
     <service android:name="com.androidnative.features.notifications.LocalNotificationService" />
     <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="\ 169304830584" />
     <activity android:name="com.unity3d.player.UnityPlayerActivity" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:launchMode="singleTask" android:screenOrientation="landscape">
       <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="true" />
       <intent-filter>
@@ -32,6 +33,7 @@
     <activity android:name="com.androidnative.features.social.common.SocialProxyActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     <activity android:name="com.androidnative.OAuthProxyActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     <activity android:name="com.androidnative.gms.core.GooglePlaySupportActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    <activity android:name="com.androidnative.billing.core.AN_BillingProxyActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
   </application>
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -43,6 +45,5 @@
   <uses-permission android:name="android.permission.GET_TASKS" />
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
   <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 </manifest>

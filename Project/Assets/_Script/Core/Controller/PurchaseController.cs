@@ -60,7 +60,7 @@ public class PurchaseController : Controller
 		GoogleProductTemplate doubleCoin = new GoogleProductTemplate()
 		{
 			ProductType = AN_InAppType.NonConsumable,
-			SKU = "double_coin",
+			SKU = DOUBLE_COIN,
 			Title = Localization.CheckKey("TK_DOUBLE_COIN_NAME"),
 
 		};
@@ -68,7 +68,7 @@ public class PurchaseController : Controller
 		GoogleProductTemplate coinsPack_00 = new GoogleProductTemplate()
 		{
 			ProductType = AN_InAppType.Consumable,
-			SKU = "coinsPack_00",
+			SKU = COINS_PACK_00,
 			Title = Localization.CheckKey("TK_COINS_PACK_00_NAME"),
 
 		};
@@ -76,7 +76,7 @@ public class PurchaseController : Controller
 		GoogleProductTemplate coinsPack_01 = new GoogleProductTemplate()
 		{
 			ProductType = AN_InAppType.Consumable,
-			SKU = "coinsPack_01",
+			SKU = COINS_PACK_01,
 			Title = Localization.CheckKey("TK_COINS_PACK_01_NAME"),
 
 		};
