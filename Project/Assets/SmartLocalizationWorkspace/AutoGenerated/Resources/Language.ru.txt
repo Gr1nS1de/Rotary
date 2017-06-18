@@ -155,7 +155,7 @@
 <value>час</value>
 </data>
 <data name="TK_DAILY_GIFT_NAME" xml:space="preserve">
-<value>ежедневный бонус</value>
+<value>ежедневный подарок</value>
 </data>
 <data name="TK_GENERAL_STATISTICS_NAME" xml:space="preserve">
 <value>основная статистика</value>
@@ -168,5 +168,35 @@
 </data>
 <data name="TK_PLAYED_GAMES_SKIN_NAME" xml:space="preserve">
 <value>игр</value>
+</data>
+<data name="TK_ON_NAME" xml:space="preserve">
+<value>вкл.</value>
+</data>
+<data name="TK_OFF_NAME" xml:space="preserve">
+<value>выкл.</value>
+</data>
+<data name="##EMPTY_KEY №21##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_NOTICE_BUY_TITLE" xml:space="preserve">
+<value>новое приобретение</value>
+</data>
+<data name="TK_NOTICE_BUY_SKIN_DESCRIPTION" xml:space="preserve">
+<value>поздравляю с новым скином</value>
+</data>
+<data name="##EMPTY_KEY №24##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_TITLE" xml:space="preserve">
+<value>новая покупка</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_DOUBLE_COIN_DESCRIPTION" xml:space="preserve">
+<value>коин удвоитель доступен</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_COINS_PACK_00_DESCRIPTION" xml:space="preserve">
+<value>приобретено 3 000 коинов</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_COINS_PACK_01_DESCRIPTION" xml:space="preserve">
+<value>приобретено 15 000 коинов</value>
 </data>
 </root>

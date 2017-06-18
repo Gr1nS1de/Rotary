@@ -90,7 +90,9 @@ public class UIModel : Model
 	#region Declare models reference
 	public InGamePanelModel			inGamePanelModel			{ get { return _inGamePanelModel 		= SearchLocal<InGamePanelModel>(		_inGamePanelModel,		typeof(InGamePanelModel).Name);	} }
 	public MainMenuPanelModel		mainMenuPanelModel			{ get { return _mainMenuPanelModel		= SearchLocal<MainMenuPanelModel>(		_mainMenuPanelModel,	typeof(MainMenuPanelModel).Name);	} }
+	public NoticeModel				noticeModel					{ get { return _noticeModel				= SearchLocal<NoticeModel>(				_noticeModel,			typeof(NoticeModel).Name);	} }
 
+	private NoticeModel				_noticeModel;
 	private MainMenuPanelModel		_mainMenuPanelModel;
 	private InGamePanelModel		_inGamePanelModel;
 	#endregion

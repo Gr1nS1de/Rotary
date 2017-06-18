@@ -169,4 +169,34 @@
 <data name="TK_PLAYED_GAMES_SKIN_NAME" xml:space="preserve">
 <value>games</value>
 </data>
+<data name="TK_ON_NAME" xml:space="preserve">
+<value>on</value>
+</data>
+<data name="TK_OFF_NAME" xml:space="preserve">
+<value>off</value>
+</data>
+<data name="##EMPTY_KEY №21##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_NOTICE_BUY_TITLE" xml:space="preserve">
+<value>new acquisition</value>
+</data>
+<data name="TK_NOTICE_BUY_SKIN_DESCRIPTION" xml:space="preserve">
+<value>congrats with new skin</value>
+</data>
+<data name="##EMPTY_KEY №24##" xml:space="preserve">
+<value>##EMPTY[]##</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_TITLE" xml:space="preserve">
+<value>new purchase</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_DOUBLE_COIN_DESCRIPTION" xml:space="preserve">
+<value>double coin available</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_COINS_PACK_00_DESCRIPTION" xml:space="preserve">
+<value>3 000 coins purchased</value>
+</data>
+<data name="TK_NOTICE_PURCHASE_COINS_PACK_01_DESCRIPTION" xml:space="preserve">
+<value>15 000 coins purchased</value>
+</data>
 </root>
