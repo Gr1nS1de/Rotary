@@ -175,7 +175,28 @@
 <data name="TK_OFF_NAME" xml:space="preserve">
 <value>New Value</value>
 </data>
-<data name="##EMPTY_KEY №21##" xml:space="preserve">
+<data name="TK_NEW_RECORD_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="TK_SCORE_NAME" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №23##" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №24##" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №25##" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №26##" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №27##" xml:space="preserve">
+<value>New Value</value>
+</data>
+<data name="##EMPTY_KEY №28##" xml:space="preserve">
 <value>New Value</value>
 </data>
 <data name="TK_NOTICE_BUY_TITLE" xml:space="preserve">
@@ -184,7 +205,7 @@
 <data name="TK_NOTICE_BUY_SKIN_DESCRIPTION" xml:space="preserve">
 <value>New Value</value>
 </data>
-<data name="##EMPTY_KEY №24##" xml:space="preserve">
+<data name="##EMPTY_KEY №31##" xml:space="preserve">
 <value>New Value</value>
 </data>
 <data name="TK_NOTICE_PURCHASE_TITLE" xml:space="preserve">

@@ -36,14 +36,20 @@ public class CenterElementView : ThemeElementView
 		{
 			if (element == null)
 				continue;
+
+			Color elementColor = element.color;
+
+			elementColor = menuTheme.IconsColor;
+
+			elementColor.a = element.color.a;
 			
 			if (isImmediate)
 			{
-				element.color = menuTheme.IconsColor;
+				element.color = elementColor;
 			}
 			else
 			{
-				element.DOColor (menuTheme.IconsColor, 0.3f);
+				element.DOColor (elementColor, 0.3f);
 			}
 		}
 	}

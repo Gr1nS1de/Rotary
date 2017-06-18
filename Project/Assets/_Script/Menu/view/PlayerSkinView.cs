@@ -37,17 +37,7 @@ public class PlayerSkinView : View
 
 	private void OnButtonClick()
 	{
-		if (!IsActive)
-		{
-			if (IsAvailable)
-				Notify (N.OnPlayerBuySkin_, NotifyType.ALL, SkinId);
-			else
-				Notify (N.OnPlayerSelectSkin__, NotifyType.ALL, SkinId, false);	
-		}
-		else
-		{
-			Notify (N.OnPlayerSelectSkin__, NotifyType.ALL, SkinId, true);
-		}
+		Notify (N.OnPlayerSelectSkin___, NotifyType.ALL, SkinId, IsActive, IsAvailable);
 	}
 
 	private void InitAvailableSequence()

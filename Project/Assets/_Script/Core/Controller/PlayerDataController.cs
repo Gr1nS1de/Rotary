@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class PlayerDataController : Controller
 {
-	private GameModel 				_gameModel	{ get { return game.model;}}
+	private PlayerDataModel 				_playerDataModel	{ get { return core.playerDataModel;}}
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -14,6 +14,12 @@ public class PlayerDataController : Controller
 			case N.RCAwakeLoad:
 				{
 					OnAwakeInit ();
+					break;
+				}
+
+			case N.GameStart:
+				{
+					_playerDataModel.currentScore = 0;
 					break;
 				}
 
@@ -47,39 +53,19 @@ public class PlayerDataController : Controller
 					break;
 				}
 
-			case N.OnPlayerBuySkin_:
-				{
-					int skinId = (int)data [0];
-
-					OnPlayerBuySkin (skinId);
-
-					break;
-				}
-
 			case N.OnPurchasedDoubleCoin:
 				{
 					Prefs.PlayerData.SetDoubleCoin ();
-					_gameModel.isDoubleCoin = true;
+					_playerDataModel.isDoubleCoin = true;
 					break;
 				}
 
-			case N.OnPurchasedCoinsPack_00:
-				{
-					UpdatePlayerItemCount (ItemTypes.Coin, 3000);
-					break;
-				}
-
-			case N.OnPurchasedCoinsPack_01:
-				{
-					UpdatePlayerItemCount (ItemTypes.Coin, 15000);
-					break;
-				}
-
-			case N.OnPlayerGetDailyGift_:
+			case N.OnPlayerGetDailyGift__:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
+					int giftCoinsCount = (int)data [1];
 
-					OnClickDailyGiftElement(dailyGiftElementId);
+					OnClickDailyGiftElement(dailyGiftElementId, giftCoinsCount);
 					break;
 				}
 
@@ -98,14 +84,15 @@ public class PlayerDataController : Controller
 
 	private void OnAwakeInit()
 	{
-		_gameModel.playerRecord = Prefs.PlayerData.GetRecord ();
-		_gameModel.coinsCount = Prefs.PlayerData.GetCoinsCount ();
-		_gameModel.crystalsCount = Prefs.PlayerData.GetCrystalsCount ();
-		_gameModel.isDoubleCoin = Prefs.PlayerData.GetDoubleCoin () == 1;
-		_gameModel.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
+		_playerDataModel.playerRecord = Prefs.PlayerData.GetRecord ();
+		_playerDataModel.coinsCount = Prefs.PlayerData.GetCoinsCount ();
+		_playerDataModel.crystalsCount = Prefs.PlayerData.GetCrystalsCount ();
+		_playerDataModel.isDoubleCoin = Prefs.PlayerData.GetDoubleCoin () == 1;
+		_playerDataModel.playedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 	}
 
-	private void UpdatePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
+	#region public methods
+	public void UpdatePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
 	{
 		int absCount = Mathf.Abs (count);
 
@@ -118,7 +105,7 @@ public class PlayerDataController : Controller
 					else
 						Prefs.PlayerData.DebitCoins (absCount);
 
-					game.model.coinsCount += count;
+					_playerDataModel.coinsCount += count;
 					break;
 				}
 
@@ -129,7 +116,7 @@ public class PlayerDataController : Controller
 					else
 						Prefs.PlayerData.DebitCrystals (absCount);
 
-					game.model.crystalsCount += count;
+					_playerDataModel.crystalsCount += count;
 					break;
 				}
 					
@@ -139,21 +126,27 @@ public class PlayerDataController : Controller
 			Notify (N.PlayerItemCountChange__, NotifyType.ALL, itemType, count);
 	}
 
-	private void OnClickDailyGiftElement(DailyGiftElementId elementId)
+	public void OnPlayerBuySkin(int skinId)
+	{
+		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
+
+		UpdatePlayerItemCount (ItemTypes.Coin, -skinPrice);
+	}
+	#endregion
+
+	private void OnClickDailyGiftElement(DailyGiftElementId elementId, int giftCoinsCount)
 	{
 		switch (elementId)
 		{
 			case DailyGiftElementId.GiftHour_00:
 				{
-					UpdatePlayerItemCount (ItemTypes.Coin, 10);
+					UpdatePlayerItemCount (ItemTypes.Coin, giftCoinsCount);
 					break;
 				}
 
 			default:
 				{
-					int coinsGiftCount = Mathf.Clamp( Prefs.PlayerTimers.GetDaysReturn () * 10, 10, 100);
-
-					UpdatePlayerItemCount (ItemTypes.Coin, coinsGiftCount);
+					UpdatePlayerItemCount (ItemTypes.Coin, giftCoinsCount);
 
 					break;
 				}
@@ -164,11 +157,11 @@ public class PlayerDataController : Controller
 
 	private void OnAddScore()
 	{
-		_gameModel.currentScore++;
+		_playerDataModel.currentScore++;
 
-		if (_gameModel.currentScore > _gameModel.playerRecord)
+		if (_playerDataModel.currentScore > _playerDataModel.playerRecord)
 		{
-			OnNewRecord (_gameModel.currentScore);
+			OnNewRecord (_playerDataModel.currentScore);
 		}
 
 		Notify (N.GameAddScore);
@@ -177,16 +170,8 @@ public class PlayerDataController : Controller
 	private void OnNewRecord(int score)
 	{
 		Prefs.PlayerData.SetRecord (score);
-		_gameModel.playerRecord = score;
+		_playerDataModel.playerRecord = score;
 		Notify (N.OnPlayerNewRecord_, NotifyType.ALL, score);
-	}
-
-
-	private void OnPlayerBuySkin(int skinId)
-	{
-		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
-
-		UpdatePlayerItemCount (ItemTypes.Coin, -skinPrice);
 	}
 
 	private void OnPlayerImpactItem(ItemView itemView)
@@ -197,7 +182,7 @@ public class PlayerDataController : Controller
 		{
 			case ItemTypes.Coin:
 				{
-					int coinsCount = (_gameModel.isDoubleCoin ? 2 : 1);
+					int coinsCount = (_playerDataModel.isDoubleCoin ? 2 : 1);
 
 					UpdatePlayerItemCount(ItemTypes.Coin, coinsCount, false);
 					break;
@@ -228,9 +213,9 @@ public class PlayerDataController : Controller
 			currentPlayedGamesCount = Prefs.PlayerData.GetPlayedGamesCount();
 		}
 
-		Prefs.PlayerData.IncreaseSkinPlayedGamesStatistics (_gameModel.playerModel.currentSkinId);
+		Prefs.PlayerData.IncreaseSkinPlayedGamesStatistics (game.model.playerModel.currentSkinId);
 
-		_gameModel.playedGamesCount = currentPlayedGamesCount;
+		_playerDataModel.playedGamesCount = currentPlayedGamesCount;
 	}
 		
 }

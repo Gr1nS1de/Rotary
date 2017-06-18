@@ -45,9 +45,10 @@ public class DailyGiftController : Controller
 					break;
 				}
 
-			case N.OnPlayerGetDailyGift_:
+			case N.OnPlayerGetDailyGift__:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
+					int giftCoinsCount = (int)data [1];
 
 					OnClickDailyGiftElement(dailyGiftElementId);
 					break;

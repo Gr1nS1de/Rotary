@@ -38,7 +38,7 @@ public class GameSpeedController : Controller
 
 	private void CheckGameSpeedState()
 	{
-		int currentScore = game.model.currentScore;
+		int currentScore = core.playerDataModel.currentScore;
 		GameSpeedState correctGameSpeedState = GameSpeedState.Speed_1;
 
 		if (currentScore < 5)

@@ -30,6 +30,7 @@ public class GameController : Controller
 	#endregion
 
 	private GameModel 				_gameModel	{ get { return game.model;}}
+	private PlayerDataModel 		_playerDataModel	{ get { return core.playerDataModel;}}
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -77,9 +78,24 @@ public class GameController : Controller
 					break;
 				}
 
+			case N.GameAddScore:
+				{
+					_gameModel.gameOverData.ScoreCount++;
+					break;
+				}
+
 			case N.GameContinue:
 				{
 					GoGameState( GameState.Playing);
+					break;
+				}
+
+			case N.OnPlayerNewRecord_:
+				{
+					int score = (int)data[0];
+
+					if (_gameModel.gameState == GameState.Playing)
+						_gameModel.gameOverData.IsNewRecord = true;
 					break;
 				}
 		}
@@ -106,13 +122,12 @@ public class GameController : Controller
 
 	private void OnGameStartPlay()
 	{
-		_gameModel.currentScore = 0;
-
 		_gameModel.gameOverData.CoinsCount = 0;
 		_gameModel.gameOverData.CrystalsCount = 0;
 		_gameModel.gameOverData.ScoreCount = 0;
 		_gameModel.gameOverData.MagnetsCount = 0;
 		_gameModel.gameOverData.GameType = _gameModel.gameType;
+		_gameModel.gameOverData.IsNewRecord = false;
 
 		//m_PointText.text = _pointScore.ToString();
 	}
@@ -132,7 +147,7 @@ public class GameController : Controller
 		{
 			case ItemTypes.Coin:
 				{
-					int coinsCount = (_gameModel.isDoubleCoin ? 2 : 1);
+					int coinsCount = (core.playerDataModel.isDoubleCoin ? 2 : 1);
 
 					_gameModel.gameOverData.CoinsCount += coinsCount;
 					break;

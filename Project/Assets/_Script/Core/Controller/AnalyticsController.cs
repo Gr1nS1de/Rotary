@@ -6,6 +6,7 @@ using UnityEngine;
 public class AnalyticsController : Controller
 {
 	private int _lastScore = 0;
+	private PlayerDataModel 				_playerDataModel	{ get { return core.playerDataModel;}}
 
 	public override void OnNotification( string alias, Object target, params object[] data )
 	{
@@ -27,13 +28,13 @@ public class AnalyticsController : Controller
 						Parameters = new Dictionary<string, object>() { { string.Format("01_{0}GameStart", game.model.gameType.ToString()), null } }
 					});
 
-					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 100)
+					if(_playerDataModel.playedGamesCount >= 0 && _playerDataModel.playedGamesCount <= 100)
 					{
 						CustomEventDelegate.OnEvent (new CEAnalytics
 						{
 							EventName = AnalyticsEventName.First100Games_v1,
 							IsHasEventValue = false,
-							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameStart", game.model.playedGamesCount, game.model.gameType.ToString()), null } }
+							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameStart", _playerDataModel.playedGamesCount, game.model.gameType.ToString()), null } }
 						});
 					}
 
@@ -85,13 +86,13 @@ public class AnalyticsController : Controller
 						Parameters = new Dictionary<string, object>() { { string.Format("04_{0}GameOver", gameOverData.GameType.ToString()), null } }
 					});
 
-					if(game.model.playedGamesCount >= 0 && game.model.playedGamesCount <= 101)
+					if(_playerDataModel.playedGamesCount >= 0 && _playerDataModel.playedGamesCount <= 101)
 					{
 						CustomEventDelegate.OnEvent (new CEAnalytics
 						{
 							EventName = AnalyticsEventName.First100Games_v1,
 							IsHasEventValue = false,
-							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameOver", game.model.playedGamesCount, gameOverData.GameType.ToString()), null } }
+							Parameters = new Dictionary<string, object>() { { string.Format("{0:00}_{1}GameOver", _playerDataModel.playedGamesCount, gameOverData.GameType.ToString()), null } }
 						});
 					}
 
@@ -99,9 +100,9 @@ public class AnalyticsController : Controller
 					{
 						progressionStatus = GameAnalyticsSDK.GAProgressionStatus.Complete,
 						progression01 = string.Format("{0}Game", gameOverData.GameType.ToString()),
-						progression02 = string.Format("{0:00}_GameCompleted",game.model.playedGamesCount),
+						progression02 = string.Format("{0:00}_GameCompleted",_playerDataModel.playedGamesCount),
 						progression03 = null,
-						value = game.model.currentScore
+						value = _playerDataModel.currentScore
 					});
 
 					break;

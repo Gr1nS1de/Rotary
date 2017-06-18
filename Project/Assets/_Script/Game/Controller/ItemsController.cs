@@ -48,8 +48,6 @@ public class ItemsController : Controller
 	{
 		ItemTypes itemType = itemView.ItemType;
 
-		itemView.OnPlayerImpact ();
-
 		switch (itemType)
 		{
 			case ItemTypes.Coin:
@@ -73,6 +71,8 @@ public class ItemsController : Controller
 					break;
 				}
 		}
+
+		itemView.OnPlayerImpact ();
 	}
 
 	private void SetCrystalFractureCount(ItemView itemCrystal)

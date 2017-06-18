@@ -43,14 +43,14 @@ public class PlayerController : Controller
 					break;
 				}
 
-			case N.OnPlayerSelectSkin__:
+			case N.OnPlayerSelectSkin___:
 				{
 					int skinId = (int)data [0];
-					bool isAvailable = (bool)data [1];
+					bool isActive = (bool)data [1];
+					bool isAvailable = (bool)data [2];
 
-					if(isAvailable)
+					if(!isAvailable && isActive)
 						SetupPlayerSkin (skinId);
-
 					break;
 				}
 

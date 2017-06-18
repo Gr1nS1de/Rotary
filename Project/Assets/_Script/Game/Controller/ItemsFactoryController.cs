@@ -57,7 +57,7 @@ public class ItemsFactoryController : Controller
 	//Check item spawn on platform invisible
 	private void CheckItemSpawn(PlatformView platformView)
 	{
-		int scoreCount = game.model.currentScore;
+		int scoreCount = core.playerDataModel.currentScore;
 		float randomItemSpawn = Random.value;
 
 		_itemsNotSpawnedRow++;
@@ -118,7 +118,7 @@ public class ItemsFactoryController : Controller
 		ItemTypes randomPenaltyItemType = ItemTypes.Coin;
 		string[] itemNames = System.Enum.GetNames (typeof(ItemTypes));
 		List<float> itemsChances = new List<float>();
-		int scoreCount = game.model.currentScore;
+		int scoreCount = core.playerDataModel.currentScore;
 
 		//Debug.LogFormat ("1. Get random item. Game speed state: {0}", game.model.gameSpeedState);
 
@@ -172,7 +172,7 @@ public class ItemsFactoryController : Controller
 		ItemTypes randomItemType = ItemTypes.Coin;
 		string[] itemNames = System.Enum.GetNames (typeof(ItemTypes));
 		List<float> itemsChances = new List<float>();
-		int scoreCount = game.model.currentScore;
+		int scoreCount = core.playerDataModel.currentScore;
 
 		//Debug.LogFormat ("1. Get random item. Game speed state: {0}", game.model.gameSpeedState);
 

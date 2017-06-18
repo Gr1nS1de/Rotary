@@ -28,7 +28,7 @@ public class PlayerSkinWindowController : Controller
 					if (windowState == UIWindowState.PlayerSkin)
 					{
 						UpdateAvailableSkins ();
-						ui.model.mainMenuPanelModel.textPlayerSkinGeneralGamesPlayed.text = string.Format("{0}", game.model.playedGamesCount);
+						ui.model.mainMenuPanelModel.textPlayerSkinGeneralGamesPlayed.text = string.Format("{0}", core.playerDataModel.playedGamesCount);
 						UpdatePlayerSkinStatistics (_currentSkinId);
 					}
 					break;
@@ -59,20 +59,25 @@ public class PlayerSkinWindowController : Controller
 					break;
 				}
 
-			case N.OnPlayerSelectSkin__:
+			case N.OnPlayerSelectSkin___:
 				{
 					int skinId = (int)data [0];
-					bool isAvailable = (bool)data [1];
+					bool isActive = (bool)data [1];
+					bool isAvailable = (bool)data [2];
 
-					if (!isAvailable && _isStoreInited)
+					if (!isAvailable && !isActive && _isStoreInited)
 					{
 						ui.controller.GoToWindowState (UIWindowState.Store);
 					}
-					else if (isAvailable)
+					else if (!isAvailable && isActive)
 					{
 						UpdatePlayerSkinStatistics (skinId);
+					}else
+					if (!isActive && isAvailable)
+					{
+						core.playerDataController.OnPlayerBuySkin (skinId);
+						Notify (N.OnPlayerBuySkin_, NotifyType.ALL, skinId);
 					}
-
 					break;
 				}
 		}
@@ -129,7 +134,7 @@ public class PlayerSkinWindowController : Controller
 			if (playerSkinView.IsActive)
 				continue;
 			
-			if (playerSkinView.SkinPrice <= game.model.coinsCount)
+			if (playerSkinView.SkinPrice <= core.playerDataModel.coinsCount)
 			{
 				playerSkinView.SetAvailable (true);
 			}

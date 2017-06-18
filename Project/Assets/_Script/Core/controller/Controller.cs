@@ -7,6 +7,5 @@ public abstract class Controller : Element
 
 	public GameApplication game 	{ get { return (GameApplication)m_Game; } }
 	public UIApplication ui			{ get { return (UIApplication)m_UI; } }
-	//public Core core			{ get { return (Core)m_Core; } }
-
+	public Core core				{ get { return (Core)m_Core; } }
 }

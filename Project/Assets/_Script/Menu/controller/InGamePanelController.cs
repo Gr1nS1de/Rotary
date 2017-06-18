@@ -23,7 +23,7 @@ public class InGamePanelController : Controller
 
 			case N.GameAddScore:
 				{
-					_inGamePanelModel.textScore.text = string.Format("{0}", game.model.currentScore);
+					_inGamePanelModel.textScore.text = string.Format("{0}", core.playerDataModel.currentScore);
 
 					break;
 				}

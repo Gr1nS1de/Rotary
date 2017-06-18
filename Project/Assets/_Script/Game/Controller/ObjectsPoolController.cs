@@ -205,6 +205,22 @@ public class ObjectsPoolController : Controller
 		if (!itemView.gameObject.activeInHierarchy)
 			itemView.gameObject.SetActive (true);
 
+		int itemAddCount = 0;
+
+		switch (itemType)
+		{
+			case ItemTypes.Coin:
+				{
+					itemAddCount = core.playerDataModel.isDoubleCoin ? 2 : 1;
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					break;
+				}
+		}
+
 		itemView.OnInit ();
 
 		_instantiatedObjectsList.Add (itemView);

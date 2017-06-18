@@ -7,11 +7,10 @@ using DG.Tweening;
 
 public class MainMenuPanelController : Controller
 {
-	private MainMenuPanelModel 		_mainMenuPanelModel			{ get { return ui.model.mainMenuPanelModel; } }
+	private MainMenuPanelModel 		_mainMenuPanelModel					{ get { return ui.model.mainMenuPanelModel; } }
+	private PlayerDataModel 		_playerDataModel					{ get { return core.playerDataModel;}}
 
-	private bool					_isHourGiftActive			= false;
-	private bool					_isStorePricesInited		= false;
-	private Tween					_dailyGiftBowTieTween		= null;
+	private Sequence				_leftStatisticsTabCountingSequence 	= null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -29,47 +28,29 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
-			case N.PurchaseProductsLoaded_:
+			case N.OnPlayerBuySkin_:
+			case N.OnPurchasedCoinsPack_00:
+			case N.OnPurchasedCoinsPack_01:
+			case N.OnPurchasedDoubleCoin:
 				{
-					bool isSuccess = (bool)data[0];
-
-					InitStorePrices (isSuccess);
+					InitLeftStatistics ();
 					break;
 				}
 
-			case N.OnStartShowAdVideo:
+			case N.OnPlayerGetDailyGift__:
 				{
-					break;
-				}
+					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
+					int giftCoinsCount = (int)data [1];
 
-			case N.OnEndShowAdVideo_:
-				{
-					
-					break;
-				}
-
-			case N.PlayerItemCountChange__:
-				{
-					//ItemTypes itemType = (ItemTypes)data [0];
-					//int count = (int)data [1];
-
-					UpdateLeftStatistics ();
-					break;
-				}
-
-			case N.OnDailyGiftAvailable_:
-				{
-					bool isAvailable = (bool)data [0];
-
-					SetDailyGiftAvailable (isAvailable);
+					StartItemCountUpdateAnimation (ItemTypes.Coin, giftCoinsCount);
 					break;
 				}
 
 			case N.GameOver_:
 				{
-					//GameOverData gameOverData = (GameOverData)data[0];
+					GameOverData gameOverData = (GameOverData)data[0];
 
-					OnGameOver ();
+					OnGameOver (gameOverData);
 					break;
 				}
 		}
@@ -78,92 +59,144 @@ public class MainMenuPanelController : Controller
 	private void OnStart()
 	{
 		//TODO: Update statistics with pop animation.
-		RegisterEvents();
-		UpdateLeftStatistics ();
+		InitLeftStatistics ();
 
-	}
-
-	private void RegisterEvents()
-	{
-		LanguageManager.Instance.OnChangeLanguage += OnLanguageChanged;
-	}
-
-	private void OnLanguageChanged(LanguageManager langManager)
-	{
-		OnUpdateStorePricesLang ();
 	}
 		
-	private void OnGameOver()
+	private void OnGameOver(GameOverData gameOverData)
 	{
-		UpdateLeftStatistics ();
+		StartLeftStatisticsBarGameOverAnimation (gameOverData);
 	}
 
-	private void UpdateLeftStatistics()
+	private void InitLeftStatistics()
 	{
-		_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(game.model.playerRecord));
-		_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(game.model.coinsCount));
-		_mainMenuPanelModel.textCrystalsCount.text = string.Format("{0}", Utils.SweetMoney(game.model.crystalsCount));
+		_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.playerRecord));
+		_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount));
+		_mainMenuPanelModel.textCrystalsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount));
 
 		Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 	}
 
-	private void SetDailyGiftAvailable(bool isGiftAvailable)
+	private void StartLeftStatisticsBarGameOverAnimation(GameOverData gameOverData)
 	{
-		if (_dailyGiftBowTieTween == null)
+		if (_leftStatisticsTabCountingSequence != null && _leftStatisticsTabCountingSequence.IsActive ())
+			_leftStatisticsTabCountingSequence.Kill ();
+
+		_leftStatisticsTabCountingSequence = DOTween.Sequence ();
+
+		_leftStatisticsTabCountingSequence
+			.Append (_mainMenuPanelModel.textLastScore.DOFade (1f, 0.5f))
+			.Join (_mainMenuPanelModel.textLastScore.transform.DOPunchScale (new Vector3 (0.2f, 0.2f, 0f), 0.5f, 1));
+
+		if (gameOverData.ScoreCount > 0)
 		{
-			_dailyGiftBowTieTween = ui.model.mainMenuPanelModel.imageDailyGiftBowTie.transform
-				.DOPunchScale (new Vector3 (0.1f, 0.1f, 0f), 0.5f, 1)
-				.SetAutoKill(false)
-				.SetRecyclable(true)
-				.SetLoops(-1);
+			_mainMenuPanelModel.textLastScore.text = string.Format("{0}: <size=22>{1}</size>", Localization.CheckKey("TK_SCORE_NAME").ToUpper(), 0);
+
+			_leftStatisticsTabCountingSequence
+				.Append(DOVirtual.Float (0f, (float)gameOverData.ScoreCount, Mathf.Clamp(gameOverData.ScoreCount % 10, 1f, 3f), (val ) =>
+				{
+					int intVal = (int)val;	
+
+					_mainMenuPanelModel.textLastScore.text = string.Format("{0}: <size=22>{1}</size>", Localization.CheckKey("TK_SCORE_NAME").ToUpper(), Utils.SweetMoney(intVal));
+				
+					if(int.Parse(_mainMenuPanelModel.textRecord.text) < intVal)
+					{
+						_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(intVal));
+					}
+				
+				}).SetEase(Ease.Linear))
+				.Append(_mainMenuPanelModel.textLastScore.GetComponent<RectTransform>().DOShakeAnchorPos(0.3f, new Vector2(10f, 0f), 5, 180f))
+				.AppendInterval(0.5f);
 		}
 
-		if (isGiftAvailable)
+		if (gameOverData.CoinsCount > 0)
 		{
-			_dailyGiftBowTieTween.Play ();
-			ui.model.mainMenuPanelModel.imageDailyGiftBowTie.DOFade (1f, 0.3f);
+			StartItemCountUpdateAnimation (ItemTypes.Coin, gameOverData.CoinsCount, _leftStatisticsTabCountingSequence);
 		}
-		else
+
+		if (gameOverData.CrystalsCount > 0)
 		{
-			_dailyGiftBowTieTween.Rewind ();
-			ui.model.mainMenuPanelModel.imageDailyGiftBowTie.DOFade (0f, 0.3f);
+			StartItemCountUpdateAnimation (ItemTypes.Crystal, gameOverData.CrystalsCount, _leftStatisticsTabCountingSequence);
 		}
 	}
 
-	private void InitStorePrices(bool isSuccessConnection)
+	private void StartItemCountUpdateAnimation(ItemTypes itemType, int count, Sequence countingSequence = null)
 	{
-		if (isSuccessConnection)
-		{
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.DOUBLE_COIN).LocalizedPrice);
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_00).LocalizedPrice);
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - {1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), AndroidInAppPurchaseManager.Client.Inventory.GetProductDetails (PurchaseController.COINS_PACK_01).LocalizedPrice);
+		if (countingSequence == null)
+			countingSequence = DOTween.Sequence ();
 
-			_isStorePricesInited = true;
-		}
-		else
+		switch (itemType)
 		{
-			OnUpdateStorePricesLang ();
-		}
+			case ItemTypes.Coin:
+				{
+					RectTransform textCoinsAddRectTransform = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ();
+					Vector2 initTextPosition = textCoinsAddRectTransform.anchoredPosition;
+					Vector2 moveOffset = new Vector2 (0f, 20f);
 
+					_mainMenuPanelModel.textCoinsAdd.text = string.Format("+{0}", Utils.SweetMoney(count));
+					textCoinsAddRectTransform.anchoredPosition = initTextPosition + moveOffset;
+
+					countingSequence
+						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y, 0.5f))
+						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(1f, 0.5f))
+						.Append(DOVirtual.Float ((float)count, 0f, Mathf.Clamp(count % 10, 1f, 2f), (val ) =>
+						{
+							int intVal = (int)val;
+
+							_mainMenuPanelModel.textCoinsAdd.text = string.Format("+{0}", Utils.SweetMoney(intVal));
+							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", _playerDataModel.coinsCount - intVal);
+
+							_mainMenuPanelModel.imageCoinIcon.GetComponent<RectTransform>()
+								.DOPunchScale(new Vector3(0.1f, 0.1f), 0.01f, 1)
+								.OnComplete(()=>
+								{
+									_mainMenuPanelModel.imageCoinIcon.GetComponent<RectTransform>().localScale = Vector3.one;
+								});
+						}).SetEase(Ease.Linear))
+						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y - moveOffset.y, 0.3f))
+						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(0f, 0.3f))
+						.AppendCallback (() =>
+						{
+							textCoinsAddRectTransform.anchoredPosition = initTextPosition;
+						});
+					break;
+				}
+
+			case ItemTypes.Crystal:
+				{
+					RectTransform textCrystalsAddRectTransform = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ();
+					Vector2 initTextPosition = textCrystalsAddRectTransform.anchoredPosition;
+					Vector2 moveOffset = new Vector2 (0f, 20f);
+
+					_mainMenuPanelModel.textCrystalsAdd.text = string.Format("+{0}", Utils.SweetMoney(count));
+					textCrystalsAddRectTransform.anchoredPosition = initTextPosition + moveOffset;
+
+					countingSequence
+						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y, 0.5f))
+						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (1f, 0.5f))
+						.Append (DOVirtual.Float ((float)count, 0f, Mathf.Clamp (count % 10, 1f, 2f), (val ) =>
+						{
+							int intVal = (int)val;
+
+							_mainMenuPanelModel.textCrystalsAdd.text = string.Format ("+{0}", Utils.SweetMoney (intVal));
+							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", _playerDataModel.crystalsCount - intVal);
+
+							_mainMenuPanelModel.imageCrystalIcon.GetComponent<RectTransform> ()
+								.DOPunchScale (new Vector3 (0.1f, 0.1f), 0.01f, 1)
+								.OnComplete (() =>
+								{
+									_mainMenuPanelModel.imageCrystalIcon.GetComponent<RectTransform> ().localScale = Vector3.one;
+								});
+						}).SetEase (Ease.Linear))
+						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y - moveOffset.y, 0.5f))
+						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (0f, 0.5f))
+						.AppendCallback (() =>
+						{
+							textCrystalsAddRectTransform.anchoredPosition = initTextPosition;
+						});
+					break;
+				}
+		}
 	}
-
-	private void OnUpdateStorePricesLang()
-	{
-		if (_isStorePricesInited)
-		{
-			string[] doubleCoinTextSplitted = _mainMenuPanelModel.textDoubleCoin.text.Split ('-');
-			string[] coinsPack_00TextSplitted = _mainMenuPanelModel.textCoinsPack_00.text.Split ('-');
-			string[] coinsPack_01TextSplitted = _mainMenuPanelModel.textCoinsPack_01.text.Split ('-');
-
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper (), doubleCoinTextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper (), coinsPack_00TextSplitted [1]);
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} -{1}", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper (), coinsPack_01TextSplitted [1]);
-		}
-		else
-		{
-			_mainMenuPanelModel.textDoubleCoin.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_DOUBLE_COIN_NAME").ToUpper());
-			_mainMenuPanelModel.textCoinsPack_00.text = string.Format ("{0} - :(", Localization.CheckKey ("TK_COINS_PACK_00_NAME").ToUpper ());
-			_mainMenuPanelModel.textCoinsPack_01.text = string.Format ("{0} - ;(", Localization.CheckKey ("TK_COINS_PACK_01_NAME").ToUpper ());
-		}
-	}
+		
 }

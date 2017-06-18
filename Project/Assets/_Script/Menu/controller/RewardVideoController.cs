@@ -30,7 +30,7 @@ public class RewardVideoController : Controller
 			case N.GameOver_:
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];
-					int playedGames = game.model.playedGamesCount;
+					int playedGames = core.playerDataModel.playedGamesCount;
 
 					if (playedGames == 5)
 					{

@@ -10,7 +10,7 @@ public class DailyGiftElementView : View
 
 	private Button 					_button;
 	private Sequence 				_activeSequence;
-	private DailyGiftState				_giftState;
+	private DailyGiftState			_giftState;
 
 	void Start()
 	{
@@ -91,7 +91,9 @@ public class DailyGiftElementView : View
 
 	private void OnButtonClick()
 	{
-		Notify (N.OnPlayerGetDailyGift_, NotifyType.ALL, ElementId);
+		int giftCoinsCount = ElementId == DailyGiftElementId.GiftHour_00 ? 10 : Mathf.Clamp( Prefs.PlayerTimers.GetDaysReturn () * 10, 10, 100);
+
+		Notify (N.OnPlayerGetDailyGift__, NotifyType.ALL, ElementId, giftCoinsCount);
 	}
 }
 

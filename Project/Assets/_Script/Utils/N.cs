@@ -54,9 +54,9 @@ public class N : MonoBehaviour
 	public const string UIShowRewardVideoAd			= "ui.show.reward.video.ad";
 	public const string OnStartShowAdVideo			= "on.start.show.ad.video";
 	public const string OnEndShowAdVideo_			= "on.end.show.ad.video";
-	public const string OnPlayerGetDailyGift_		= "on.player.get.daily.gift";
+	public const string OnPlayerGetDailyGift__		= "on.player.get.daily.gift";
 	public const string OnPlayerBuySkin_			= "on.player.buy.skin";
-	public const string OnPlayerSelectSkin__		= "on.player.select.skin";
+	public const string OnPlayerSelectSkin___		= "on.player.select.skin";
 	public const string OnDailyGiftAvailable_		= "on.daily.gift.available";
 	#endregion
 

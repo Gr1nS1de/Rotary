@@ -23,7 +23,25 @@ public class MainMenuPanelModel : Model
 	public Text		 							textPlayerCurrentSkinGamesPlayed	{ get { return _textPlayerCurrentSkinGamesPlayed; } }
 	public bool		 							isDailyGiftAvailable				{ get { return _isDailyGiftAvailable; } set {_isDailyGiftAvailable = value;}}
 	public Image	 							imageDailyGiftBowTie				{ get { return _imageDailyGiftBowTie; } }
+	public Text	 								textLastScore						{ get { return _textLastScore; } }
+	public Text	 								textNewRecord						{ get { return _textNewRecord; } }
+	public Text	 								textCoinsAdd						{ get { return _textCoinsAdd; } }
+	public Text	 								textCrystalsAdd						{ get { return _textCrystalsAdd; } }
+	public Image	 							imageCoinIcon						{ get { return _imageCoinIcon; } }
+	public Image	 							imageCrystalIcon					{ get { return _imageCrystalIcon; } }
 
+	[SerializeField]
+	private Image								_imageCrystalIcon;
+	[SerializeField]
+	private Image								_imageCoinIcon;
+	[SerializeField]
+	private Text								_textCrystalsAdd;
+	[SerializeField]
+	private Text								_textCoinsAdd;
+	[SerializeField]
+	private Text								_textNewRecord;
+	[SerializeField]
+	private Text								_textLastScore;
 	[SerializeField]
 	private Image								_imageDailyGiftBowTie;
 	private bool								_isDailyGiftAvailable;

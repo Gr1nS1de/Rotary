@@ -19,6 +19,13 @@ TK_SKIN_STATISTICS_NAME,статистика скина,skin statistics
 TK_PLAYED_GAMES_SKIN_NAME,игр,games
 TK_ON_NAME,вкл.,on
 TK_OFF_NAME,выкл.,off
+TK_NEW_RECORD_NAME,новый рекорд,new record
+TK_SCORE_NAME,очки,score
+,,
+,,
+,,
+,,
+,,
 ,,
 TK_NOTICE_BUY_TITLE,новое приобретение,new acquisition
 TK_NOTICE_BUY_SKIN_DESCRIPTION,поздравляю с новым скином,congrats with new skin

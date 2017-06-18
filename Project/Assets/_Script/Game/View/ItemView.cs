@@ -33,7 +33,7 @@ public class ItemView : PoolingObjectView
 	//	OnInit ();
 	//}
 
-	public void OnInit() //OnInit
+	public void OnInit(int itemCount = 0) //OnInit
 	{
 		//Debug.LogFormat ("Init item {0}", transform.name);
 		_isWasVisible = false;
@@ -45,7 +45,7 @@ public class ItemView : PoolingObjectView
 		if(CoinRenderer != null)
 			CoinRenderer.color = new Color (CoinRenderer.color.r, CoinRenderer.color.g, CoinRenderer.color.b, 1f);
 
-		InitItem ();
+		InitItem (itemCount);
 
 		if (_itemInitSequence == null)
 			SetupItemTweening ();
@@ -53,13 +53,13 @@ public class ItemView : PoolingObjectView
 			_itemInitSequence.Restart ();
 	}
 
-	private void InitItem()
+	private void InitItem(int itemCount = 0)
 	{
 		switch (ItemType)
 		{
 			case ItemTypes.Coin:
 				{
-					ActivateRendererCount (false, ItemType, game.model.isDoubleCoin ? 2 : 1);
+					ActivateRendererCount (false, ItemType, itemCount);
 					break;
 				}
 
