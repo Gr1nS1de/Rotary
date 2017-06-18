@@ -260,7 +260,7 @@ public class ItemView : PoolingObjectView
 		Notify (N.OnItemInvisible_, NotifyType.GAME, this);
 	}
 
-	public void OnPlayerImpact()
+	public void OnPlayerImpact(Vector2 contactPoint)
 	{
 		if (_isPlayerImpact)
 			return;
@@ -294,7 +294,7 @@ public class ItemView : PoolingObjectView
 							_itemImpactSequence
 								.Insert(0.05f, renderer.transform.DOLocalMoveY(2f, 0.5f))
 								.Insert(0.05f, renderer.DOFade(1f, 0.1f));
-							}
+						}
 					}
 
 					_itemImpactSequence.Play ();
@@ -320,6 +320,15 @@ public class ItemView : PoolingObjectView
 
 							crystalFragment.gameObject.layer = LayerMask.NameToLayer("DestroyedItemBack");
 						});
+
+						foreach (var renderer in CountRenderers)
+						{
+							Vector3 newPos = transform.position - ( new Vector3 (contactPoint.x, contactPoint.y, renderer.transform.position.z) - transform.position) * 2f;
+							newPos.z = renderer.transform.position.z;
+							_itemImpactSequence
+								.Insert(0.05f, renderer.transform.DOMove(newPos, 0.5f))
+								.Insert(0.05f, renderer.DOFade(1f, 0.1f));
+						}
 
 						_itemImpactSequence
 							.SetRecyclable(true)

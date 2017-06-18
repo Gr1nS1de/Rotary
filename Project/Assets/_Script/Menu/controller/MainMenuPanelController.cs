@@ -94,7 +94,7 @@ public class MainMenuPanelController : Controller
 			_mainMenuPanelModel.textLastScore.text = string.Format("{0}: <size=25>{1}</size>", Localization.CheckKey("TK_SCORE_NAME").ToUpper(), 0);
 
 			_leftStatisticsTabCountingSequence
-				.Append(DOVirtual.Float (0f, (float)gameOverData.ScoreCount, Mathf.Clamp(gameOverData.ScoreCount % 10, 1f, 3f), (val ) =>
+				.Append(DOVirtual.Float (0f, (float)gameOverData.ScoreCount, Mathf.Clamp(gameOverData.ScoreCount % 10, 0.5f, 2f), (val ) =>
 				{
 					int intVal = (int)val;	
 
@@ -148,12 +148,12 @@ public class MainMenuPanelController : Controller
 						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y, 0.5f))
 						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(1f, 0.5f))
 						.AppendInterval(0.5f)
-						.Append(DOVirtual.Float ((float)count, 0f, Mathf.Clamp(count % 10, 0.5f, 2f), (val ) =>
+						.Append(DOVirtual.Float ((float)count, 0f, Mathf.Clamp(count % 10, 0.5f, 1.5f), (val ) =>
 						{
 							int intVal = (int)val;
 
 							_mainMenuPanelModel.textCoinsAdd.text = string.Format("+{0}", Utils.SweetMoney(intVal));
-							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", _playerDataModel.coinsCount - intVal);
+							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount - intVal));
 
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 
@@ -171,7 +171,7 @@ public class MainMenuPanelController : Controller
 							textCoinsAddRectTransform.anchoredPosition = initTextPosition;
 						}).OnKill(()=>
 						{
-							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", _playerDataModel.coinsCount);
+							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount));
 						});
 					break;
 				}
@@ -189,12 +189,12 @@ public class MainMenuPanelController : Controller
 						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y, 0.5f))
 						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (1f, 0.5f))
 						.AppendInterval(0.5f)
-						.Append (DOVirtual.Float ((float)count, 0f, Mathf.Clamp (count % 10, 0.5f, 2f), (val ) =>
+						.Append (DOVirtual.Float ((float)count, 0f, Mathf.Clamp (count % 10, 0.5f, 1.5f), (val ) =>
 						{
 							int intVal = (int)val;
 
 							_mainMenuPanelModel.textCrystalsAdd.text = string.Format ("+{0}", Utils.SweetMoney (intVal));
-							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", _playerDataModel.crystalsCount - intVal);
+							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount - intVal));
 
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 
@@ -212,7 +212,7 @@ public class MainMenuPanelController : Controller
 							textCrystalsAddRectTransform.anchoredPosition = initTextPosition;
 						}).OnKill(()=>
 						{
-							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", _playerDataModel.crystalsCount);
+							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount));
 						});
 					break;
 				}

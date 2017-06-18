@@ -16,7 +16,7 @@ public class ItemsController : Controller
 					break;
 				}
 
-			case N.GameStart:
+			case N.GameAddScore:
 				{
 					UpdateCrystalFractureCount();
 					break;
@@ -65,7 +65,6 @@ public class ItemsController : Controller
 			case ItemTypes.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
-					UpdateCrystalFractureCount();
 					game.controller.distructibleController.BreakItem(itemType, itemView.CrystalRenderer, itemView.CrystalFractureCount, contactPoint);
 
 					Destroy (itemView.gameObject, itemView.CrystalDestroyTime + 1f);
@@ -78,7 +77,7 @@ public class ItemsController : Controller
 				}
 		}
 
-		itemView.OnPlayerImpact ();
+		itemView.OnPlayerImpact (contactPoint);
 	}
 
 	private void UpdateCrystalFractureCount()
