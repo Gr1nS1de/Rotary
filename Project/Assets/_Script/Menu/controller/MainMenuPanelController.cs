@@ -44,7 +44,7 @@ public class MainMenuPanelController : Controller
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];
 					int giftCoinsCount = (int)data [1];
 
-					StartItemCountUpdateAnimation (ItemTypes.Coin, giftCoinsCount);
+					StartItemCountUpdateAnimation (ItemType.Coin, giftCoinsCount);
 					break;
 				}
 
@@ -131,16 +131,16 @@ public class MainMenuPanelController : Controller
 
 		if (gameOverData.CoinsCount > 0)
 		{
-			StartItemCountUpdateAnimation (ItemTypes.Coin, gameOverData.CoinsCount, _leftStatisticsTabCountingSequence);
+			StartItemCountUpdateAnimation (ItemType.Coin, gameOverData.CoinsCount, _leftStatisticsTabCountingSequence);
 		}
 
 		if (gameOverData.CrystalsCount > 0)
 		{
-			StartItemCountUpdateAnimation (ItemTypes.Crystal, gameOverData.CrystalsCount, _leftStatisticsTabCountingSequence);
+			StartItemCountUpdateAnimation (ItemType.Crystal, gameOverData.CrystalsCount, _leftStatisticsTabCountingSequence);
 		}
 	}
 
-	private void StartItemCountUpdateAnimation(ItemTypes itemType, int count, Sequence countingSequence = null)
+	private void StartItemCountUpdateAnimation(ItemType itemType, int count, Sequence countingSequence = null)
 	{
 		if (countingSequence == null)
 		{
@@ -154,7 +154,7 @@ public class MainMenuPanelController : Controller
 
 		switch (itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					RectTransform textCoinsAddRectTransform = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ();
 					Vector2 initTextPosition = textCoinsAddRectTransform.anchoredPosition;
@@ -189,7 +189,7 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					RectTransform textCrystalsAddRectTransform = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ();
 					Vector2 initTextPosition = textCrystalsAddRectTransform.anchoredPosition;

@@ -140,14 +140,14 @@ public class PurchaseController : Controller
 		{
 			case COINS_PACK_00:
 				{
-					core.playerDataController.UpdatePlayerItemCount (ItemTypes.Coin, 3000);
+					core.playerDataController.UpdatePlayerItemCount (ItemType.Coin, 3000);
 					Notify (N.OnPurchasedCoinsPack_00);
 					break;
 				}
 
 			case COINS_PACK_01:
 				{
-					core.playerDataController.UpdatePlayerItemCount (ItemTypes.Coin, 15000);
+					core.playerDataController.UpdatePlayerItemCount (ItemType.Coin, 15000);
 					Notify (N.OnPurchasedCoinsPack_01);
 					break;
 				}

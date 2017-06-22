@@ -15,14 +15,14 @@ public class PlatformViewEditor : Editor
 
 		switch (data.PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					_mainRenderer = serializedObject.FindProperty ("HorizontalPlatformRenderer");
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical_Moving:
+			case PlatformType.Vertical:
 				{
 					_mainRenderer = serializedObject.FindProperty ("VerticalPlatformRenderers");
 					break;
@@ -35,7 +35,7 @@ public class PlatformViewEditor : Editor
 		serializedObject.Update();
 
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
-		data.PlatformType = (PlatformTypes)EditorGUILayout.EnumPopup("Platform Type", data.PlatformType);  
+		data.PlatformType = (PlatformType)EditorGUILayout.EnumPopup("Platform Type", data.PlatformType);  
 
 		EditorGUILayout.PropertyField(_mainRenderer, true);
 

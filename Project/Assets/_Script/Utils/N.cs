@@ -31,6 +31,7 @@ public class N : MonoBehaviour
 
 	public const string OnPlatformInvisible_		= "on.platform.invisible";
 	public const string OnItemInvisible_			= "on.item.invisible";
+	public const string OnRocketInvisible_			= "on.rocket.invisible";
 	public const string OnPlayerInvisible			= "on.player.invisible";
 
 	public const string OnPlayerNewRecord_			= "on.player.new.record";

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ItemTypes
+public enum ItemType
 {
 	Coin,
 	Crystal,
@@ -15,7 +15,7 @@ public class ItemModel : Model
 	[SerializeField]
 	private int	_crystalFractureCount;
 
-	public Vector3 GetItemRendererSize(ItemTypes itemType)
+	public Vector3 GetItemRendererSize(ItemType itemType)
 	{
 		return game.model.itemsFactoryModel.itemsPrefabsList.Find (item => item.ItemType == itemType).GetMainRendererSize();
 	}

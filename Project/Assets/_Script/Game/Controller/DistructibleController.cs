@@ -35,7 +35,7 @@ public class DistructibleController : Controller
 	private void OnStart()
 	{}
 
-	public void BreakItem(ItemTypes itemType, D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
+	public void BreakItem(ItemType itemType, D2dDestructible destructible, int fractureCount, Vector2 collisionPoint = default(Vector2))
 	{
 		// Store explosion point (used in OnEndSplit)
 		if (collisionPoint == Vector2.zero || collisionPoint ==  default(Vector2))
@@ -45,7 +45,7 @@ public class DistructibleController : Controller
 
 		switch(itemType)
 		{
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					destructible.gameObject.layer = LayerMask.NameToLayer ("DestroyedItem");
 
@@ -68,7 +68,7 @@ public class DistructibleController : Controller
 		//Utils.ActivateTransformChildrens (destructible.transform, false);
 
 		ItemView itemView = destructible.transform.parent.GetComponent<ItemView> ();
-		ItemTypes itemType = itemView.ItemType;
+		ItemType itemType = itemView.ItemType;
 		
 		// Go through all clones in the clones list
 
@@ -80,7 +80,7 @@ public class DistructibleController : Controller
 
 			switch(itemType)
 			{
-				case ItemTypes.Crystal:
+				case ItemType.Crystal:
 					{
 						rigidbody.bodyType = RigidbodyType2D.Dynamic;
 

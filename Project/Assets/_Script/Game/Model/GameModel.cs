@@ -40,7 +40,7 @@ public struct GameTheme
 	public List<PlatformView> PlatformsViewList;
 	public BackgroundView BackgroundView;
 
-	public Vector3 GetPlatformRendererSize(PlatformTypes platformType)
+	public Vector3 GetPlatformRendererSize(PlatformType platformType)
 	{
 		return PlatformsViewList.Find (platform => platform.PlatformType == platformType).GetMainRendererSize();
 	}

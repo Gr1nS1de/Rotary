@@ -8,7 +8,7 @@ using tk2dRuntime;
 //ItemViewEditor
 public class ItemView : PoolingObjectView
 {
-	public ItemTypes	ItemType;
+	public ItemType	ItemType;
 	public int 			CrystalFractureCount = 5;
 	public float 		CrystalDestroyTime = 2f;
 
@@ -21,8 +21,7 @@ public class ItemView : PoolingObjectView
 	public tk2dTextMesh[] CountRenderers;
 	public WeaponTrail MagnetTrail;
 
-	private bool _isWasVisible = false;
-	private bool _isInPool = true;
+	private bool _isInPool = false;
 	private bool _isPlayerImpact = false;
 	private Tween _magnetTurnTween = null;
 	private Sequence _itemInitSequence = null;
@@ -33,10 +32,11 @@ public class ItemView : PoolingObjectView
 	//	OnInit ();
 	//}
 
-	public void OnInit(int itemCount = 0) //OnInit
+	public void Init(int itemCount = 0) //OnInit
 	{
 		//Debug.LogFormat ("Init item {0}", transform.name);
-		_isWasVisible = false;
+		GoToVisibleState (PoolingObjectState.WAIT_FOR_VISIBLE);
+
 		_isInPool = false;
 		_isPlayerImpact = false;
 
@@ -57,20 +57,20 @@ public class ItemView : PoolingObjectView
 	{
 		switch (ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					ActivateRendererCount (false, ItemType, itemCount);
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					CrystalFractureCount = itemCount;
 					ActivateRendererCount (false, ItemType, CrystalFractureCount);
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					MagnetRenderer.transform.eulerAngles = new Vector3 (0f, 0f, Random.Range(0f, 180f));
 					break;
@@ -96,7 +96,7 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					_itemInitSequence
 						.Append(CoinRenderer.transform.DOPunchScale (new Vector3(0.25f, 0.25f, 0f), 0.6f, 1, 1f).SetEase(Ease.InBounce))
@@ -106,7 +106,7 @@ public class ItemView : PoolingObjectView
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					_itemInitSequence
 						.Append(CrystalRenderer.transform.DORotate (new Vector3(0f, 0f, 360f), 1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
@@ -128,19 +128,19 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					rendererSize = CoinRenderer.bounds.size;
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					rendererSize = CrystalRenderer.GetComponent<MeshRenderer> ().bounds.size;
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					rendererSize = MagnetRenderer.bounds.size;
 					break;
@@ -157,19 +157,19 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					isVisible = CoinRenderer.isVisible;
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					isVisible = CrystalRenderer.GetComponent<MeshRenderer> ().isVisible;
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					isVisible = MagnetRenderer.isVisible;
 					break;
@@ -184,14 +184,14 @@ public class ItemView : PoolingObjectView
 		if (_isInPool || _isPlayerImpact)
 			return;
 
-		if (!_isWasVisible)
+		if (ObjectVisibleState == PoolingObjectState.WAIT_FOR_VISIBLE)
 		{
 			if (IsObjectVisible())
 			{
 				OnVisible ();
 			}
 		}else
-			if (_isWasVisible)
+			if (ObjectVisibleState == PoolingObjectState.VISIBLE)
 			{
 				UpdateItemOnVisible ();
 
@@ -207,7 +207,7 @@ public class ItemView : PoolingObjectView
 	{
 		switch (ItemType)
 		{
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					Vector3 currentPlayerPosition = game.view.playerView.PlayerRenderer.transform.position;
 					//Debug.LogErrorFormat ("Distance to player: {0}", Vector2.Distance (currentPlayerPosition, transform.position));
@@ -252,11 +252,13 @@ public class ItemView : PoolingObjectView
 
 	public void OnVisible()
 	{
-		_isWasVisible = true;
+		GoToVisibleState (PoolingObjectState.VISIBLE);
 	}
 
 	public void OnInvisible()
 	{
+		GoToVisibleState (PoolingObjectState.WAS_VISIBLE);
+
 		Notify (N.OnItemInvisible_, NotifyType.GAME, this);
 	}
 
@@ -275,7 +277,7 @@ public class ItemView : PoolingObjectView
 
 		switch (ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					if (_itemImpactSequence == null)
 					{
@@ -301,7 +303,7 @@ public class ItemView : PoolingObjectView
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					//Debug.LogErrorFormat ("On player impact me. {0}",transform.name);
 					if (_itemImpactSequence == null)
@@ -342,7 +344,7 @@ public class ItemView : PoolingObjectView
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					break;
 				}
@@ -350,7 +352,7 @@ public class ItemView : PoolingObjectView
 	}
 
 
-	private void ActivateRendererCount(bool isAcivate, ItemTypes ItemType, int count = -1)
+	private void ActivateRendererCount(bool isAcivate, ItemType ItemType, int count = -1)
 	{
 		foreach (var renderer in CountRenderers)
 		{
@@ -372,14 +374,14 @@ public class ItemView : PoolingObjectView
 	{
 		switch (ItemType)
 		{
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					break;
 				}
 		}
 	}
 
-	public void OnAddToPool()
+	public override void OnAddToPool()
 	{
 		if(_itemInitSequence != null)
 			_itemInitSequence.Rewind ();

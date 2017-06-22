@@ -20,8 +20,8 @@ public class LastPooledPlatform
 {
 	public Vector3 platformPosition;
 	public float platformWidth;
-	public PlatformTypes platformType;
-	public PlatformTypes prevPlatformType;
+	public PlatformType platformType;
+	public PlatformType prevPlatformType;
 
 }
 

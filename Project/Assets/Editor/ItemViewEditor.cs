@@ -15,19 +15,19 @@ public class ItemViewEditor : Editor
 
 		switch (data.ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					_mainRenderer = serializedObject.FindProperty ("CoinRenderer");
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					_mainRenderer = serializedObject.FindProperty ("CrystalRenderer");
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					_mainRenderer = serializedObject.FindProperty ("MagnetRenderer");
 					break;
@@ -41,13 +41,13 @@ public class ItemViewEditor : Editor
 		serializedObject.Update();
 
 		data.PoolingType = (PoolingObjectType)EditorGUILayout.EnumPopup("Pooling Type", data.PoolingType); 
-		data.ItemType = (ItemTypes)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
+		data.ItemType = (ItemType)EditorGUILayout.EnumPopup("Platform Type", data.ItemType);  
 
 		EditorGUILayout.PropertyField(_mainRenderer, true);
 
 		switch (data.ItemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					data.DoubleCoinRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Double Coin Renderer", data.DoubleCoinRenderer, typeof(SpriteRenderer), true);
 					//data.CountRenderers = (tk2dTextMesh[])EditorGUILayout.ObjectField ("Count Renderers", data.CountRenderers, typeof(tk2dTextMesh[]));
@@ -57,7 +57,7 @@ public class ItemViewEditor : Editor
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					data.CrystalFractureCount = EditorGUILayout.IntField ("Crystal Fracture Count", data.CrystalFractureCount);
 					data.CrystalDestroyTime = EditorGUILayout.FloatField ("Crystal Destroy Time", data.CrystalDestroyTime);
@@ -65,7 +65,7 @@ public class ItemViewEditor : Editor
 					EditorGUILayout.PropertyField(serializedObject.FindProperty("CountRenderers"), true); //(tk2dTextMesh[])EditorGUILayout.ObjectField ("Count Renderers", data.CountRenderers, typeof(tk2dTextMesh[]));
 					break;
 				}
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					data.MagnetTrail = (WeaponTrail)EditorGUILayout.ObjectField ("Magnet Renderer", data.MagnetTrail, typeof(WeaponTrail));
 

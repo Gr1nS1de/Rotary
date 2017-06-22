@@ -48,7 +48,7 @@ public class PlayerDataController : Controller
 					{
 						int rewardCoinsCount = 50;
 
-						UpdatePlayerItemCount (ItemTypes.Coin, rewardCoinsCount);
+						UpdatePlayerItemCount (ItemType.Coin, rewardCoinsCount);
 					}
 					break;
 				}
@@ -67,7 +67,7 @@ public class PlayerDataController : Controller
 					GameOverData gameOverData = (GameOverData)data[0];
 
 					IncreasePlayedGamesCount ();
-					UpdatePlayerItemCount (ItemTypes.Coin, 0);//Just call update notification
+					UpdatePlayerItemCount (ItemType.Coin, 0);//Just call update notification
 					break;
 				}
 
@@ -85,13 +85,13 @@ public class PlayerDataController : Controller
 	}
 
 	#region public methods
-	public void UpdatePlayerItemCount(ItemTypes itemType, int count, bool isNotify = true)
+	public void UpdatePlayerItemCount(ItemType itemType, int count, bool isNotify = true)
 	{
 		int absCount = Mathf.Abs (count);
 
 		switch(itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					if (count > 0)
 						Prefs.PlayerData.CreditCoins (absCount);
@@ -102,7 +102,7 @@ public class PlayerDataController : Controller
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					if (count > 0)
 						Prefs.PlayerData.CreditCrystals (absCount);
@@ -123,7 +123,7 @@ public class PlayerDataController : Controller
 	{
 		int skinPrice = ui.view.GetPlayerSkinElement (skinId).SkinPrice;
 
-		UpdatePlayerItemCount (ItemTypes.Coin, -skinPrice);
+		UpdatePlayerItemCount (ItemType.Coin, -skinPrice);
 	}
 
 	public void ActivateDoubleCoin()
@@ -139,13 +139,13 @@ public class PlayerDataController : Controller
 		{
 			case DailyGiftElementId.GiftHour_00:
 				{
-					UpdatePlayerItemCount (ItemTypes.Coin, giftCoinsCount);
+					UpdatePlayerItemCount (ItemType.Coin, giftCoinsCount);
 					break;
 				}
 
 			default:
 				{
-					UpdatePlayerItemCount (ItemTypes.Coin, giftCoinsCount);
+					UpdatePlayerItemCount (ItemType.Coin, giftCoinsCount);
 
 					break;
 				}
@@ -175,23 +175,23 @@ public class PlayerDataController : Controller
 
 	private void OnPlayerImpactItem(ItemView itemView)
 	{
-		ItemTypes itemType = itemView.ItemType;
+		ItemType itemType = itemView.ItemType;
 
 		switch (itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					int coinsCount = (_playerDataModel.isDoubleCoin ? 2 : 1);
 
-					UpdatePlayerItemCount(ItemTypes.Coin, coinsCount, false);
+					UpdatePlayerItemCount(ItemType.Coin, coinsCount, false);
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					int crystalsCount = itemView.CrystalFractureCount;
 
-					UpdatePlayerItemCount (ItemTypes.Crystal, crystalsCount, false);
+					UpdatePlayerItemCount (ItemType.Crystal, crystalsCount, false);
 					break;
 				}
 		}

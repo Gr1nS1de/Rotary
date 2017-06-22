@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: 85a94056b3a7d46df981bfe9763c2a89
-timeCreated: 1498168559
+timeCreated: 1498169160
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: ExclamationMark
     21300002: ExclamationBackground
     21300004: DefailtRocket_3
+    21300006: AkertArrow
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -100,12 +101,12 @@ TextureImporter:
       name: ExclamationMark
       rect:
         serializedVersion: 2
-        x: 76
-        y: 392
+        x: 34
+        y: 395
         width: 30
         height: 97
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -118,7 +119,7 @@ TextureImporter:
         width: 231
         height: 222
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -130,6 +131,19 @@ TextureImporter:
         y: 108
         width: 165
         height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AkertArrow
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 415
+        width: 56
+        height: 55
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

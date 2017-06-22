@@ -3,9 +3,8 @@ using System.Collections;
 
 public interface IPoolObject
 {
-	void OnInit();
+	void Init();
 	void OnVisible();
 	void OnInvisible();
-	void OnAddToPool();
 }
 

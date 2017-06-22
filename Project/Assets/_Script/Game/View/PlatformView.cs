@@ -5,7 +5,7 @@ using DG.Tweening;
 //Custom editor: PlatformViewEditor
 public class PlatformView : PoolingObjectView, IPoolObject
 {
-	public PlatformTypes PlatformType;
+	public PlatformType PlatformType;
 
 	#region horizontal platform vars
 	[SerializeField]
@@ -17,28 +17,27 @@ public class PlatformView : PoolingObjectView, IPoolObject
 	private SpriteRenderer[] VerticalPlatformRenderers;
 	#endregion
 
-	private bool _isWasVisible = false;
 	private bool _isInPool = true;
 	private Sequence _platformInitSequence = null;
 	private float _verticalPlatformGapHeight;
 
 	private PlatformsFactoryModel platformsFactoryModel { get { return game.model.platformsFactoryModel;}} 
 
-	public void OnInit()
+	public void Init()
 	{
-		ObjectVisibleState = PoolingObjectState.WAIT_FOR_VISIBLE;
+		GoToVisibleState (PoolingObjectState.WAIT_FOR_VISIBLE);
 		_isInPool = false;
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					//Obsolete. Now set position directly for platform view.
 					//HorizontalPlatformRenderer.transform.localPosition = Vector3.zero;
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
+			case PlatformType.Vertical_Moving:
 				{
 					InitVerticalPlatform (game.model.playerModel.playerRendererSize.y);
 					Vector3 bottomPoint = new Vector3 (transform.position.x, (-GM.Instance.ScreenSize.y / 2f + _verticalPlatformGapHeight * 0.6f), transform.position.z);
@@ -46,7 +45,7 @@ public class PlatformView : PoolingObjectView, IPoolObject
 					transform.position = bottomPoint;
 					break;
 				}
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
 					InitVerticalPlatform ();
 					break;
@@ -65,17 +64,17 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					break;
 				}
 
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
+			case PlatformType.Vertical_Moving:
 				{
 					float screenHeight = GM.Instance.ScreenSize.y;
 
@@ -117,19 +116,19 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					isVisible = HorizontalPlatformRenderer.isVisible;
 					break;
 				}
 
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
 					isVisible = VerticalPlatformRenderers [0].isVisible;
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
+			case PlatformType.Vertical_Moving:
 				{
 					isVisible = VerticalPlatformRenderers [0].isVisible;
 					break;
@@ -145,19 +144,19 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 		switch (PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					rendererSize = HorizontalPlatformRenderer.bounds.size;
 					break;
 				}
 
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
 					rendererSize = VerticalPlatformRenderers [0].bounds.size;
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
+			case PlatformType.Vertical_Moving:
 				{
 					rendererSize = VerticalPlatformRenderers [0].bounds.size;
 					break;
@@ -190,16 +189,16 @@ public class PlatformView : PoolingObjectView, IPoolObject
 
 	public virtual void OnVisible()
 	{
-		ObjectVisibleState = PoolingObjectState.VISIBLE;
+		GoToVisibleState (PoolingObjectState.VISIBLE);
 	}
 
 	public virtual void OnInvisible()
 	{
+		GoToVisibleState (PoolingObjectState.WAS_VISIBLE);
 		Notify (N.OnPlatformInvisible_, NotifyType.GAME, this);
-		ObjectVisibleState = PoolingObjectState.WAS_VISIBLE;
 	}
 
-	public virtual void OnAddToPool()
+	public override void OnAddToPool()
 	{
 		_isInPool = true;
 

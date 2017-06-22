@@ -52,17 +52,17 @@ public class ItemsController : Controller
 
 	private void OnImpactItem(ItemView itemView, Vector2 contactPoint)
 	{
-		ItemTypes itemType = itemView.ItemType;
+		ItemType itemType = itemView.ItemType;
 
 		switch (itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					//Notify (N.DestructibleBreakEntity___, NotifyType.GAME, destructibleItem, itemView.DistructFractureCount, collision.contacts [0].point);
 					game.controller.distructibleController.BreakItem(itemType, itemView.CrystalRenderer, itemView.CrystalFractureCount, contactPoint);
@@ -71,7 +71,7 @@ public class ItemsController : Controller
 					break;
 				}
 
-			case ItemTypes.Magnet:
+			case ItemType.Magnet:
 				{
 					break;
 				}

@@ -149,17 +149,17 @@ public class PlayerController : Controller
 
 	private void OnPlayerImpactItem(ItemView itemView)
 	{
-		ItemTypes itemType = itemView.ItemType;
+		ItemType itemType = itemView.ItemType;
 
 		switch (itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					
 					break;

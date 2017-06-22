@@ -37,7 +37,7 @@ public class ObjectsPoolController : Controller
 
 					switch (itemView.ItemType)
 					{
-						case ItemTypes.Crystal:
+						case ItemType.Crystal:
 							{
 								if (_instantiatedObjectsList.Contains (itemView))
 									_instantiatedObjectsList.Remove (itemView);
@@ -82,7 +82,7 @@ public class ObjectsPoolController : Controller
 
 					//Debug.LogFormat ("Add platform to pool. {0}", platformView.name);
 
-					OnStoringPlatformToPool (platformView);
+					AddObjectToPool (platformView);
 					break;
 				}
 
@@ -90,8 +90,16 @@ public class ObjectsPoolController : Controller
 				{
 					ItemView itemView = (ItemView)poolingObject;
 
-					OnStoringItemToPool (itemView);
+					AddObjectToPool (itemView);
 
+					break;
+				}
+
+			case PoolingObjectType.ROCKET:
+				{
+					RocketView rocketView = (RocketView)poolingObject;
+
+					AddObjectToPool (rocketView);
 					break;
 				}
 		}
@@ -103,7 +111,7 @@ public class ObjectsPoolController : Controller
 		{
 			case PoolingObjectType.PLATFORM:
 				{
-					PlatformTypes platformType = (PlatformTypes)objectType;
+					PlatformType platformType = (PlatformType)objectType;
 
 					PoolPlatform (platformType, objectCount, objectPosition);
 					break;
@@ -111,12 +119,12 @@ public class ObjectsPoolController : Controller
 
 			case PoolingObjectType.ITEM:
 				{
-					ItemTypes itemType = (ItemTypes)objectType;
+					ItemType itemType = (ItemType)objectType;
 
 					// If want to pool Magnet at vertical platform - go swap to pool item. :)
-					if (itemType == ItemTypes.Magnet && (_objectsPoolModel.lastPooledPlatform.platformType == PlatformTypes.Vertical || _objectsPoolModel.lastPooledPlatform.platformType == PlatformTypes.Vertical_Moving))
+					if (itemType == ItemType.Magnet && (_objectsPoolModel.lastPooledPlatform.platformType == PlatformType.Vertical || _objectsPoolModel.lastPooledPlatform.platformType == PlatformType.Vertical_Moving))
 					{
-						itemType = Random.Range (0, 2) == 1 ? ItemTypes.Coin : ItemTypes.Crystal;
+						itemType = Random.Range (0, 2) == 1 ? ItemType.Coin : ItemType.Crystal;
 					}
 
 					PoolItem (itemType, objectCount, objectPosition);
@@ -125,6 +133,14 @@ public class ObjectsPoolController : Controller
 
 			case PoolingObjectType.BONUS:
 				{
+					break;
+				}
+
+			case PoolingObjectType.ROCKET:
+				{
+					RocketType rocketType = (RocketType)objectType;
+
+
 					break;
 				}
 		}
@@ -146,46 +162,30 @@ public class ObjectsPoolController : Controller
 	}
 	#endregion
 
-	private void OnStoringPlatformToPool(PlatformView platformView)
+
+	private void AddObjectToPool(PoolingObjectView poolingObjectview)
 	{
-		if (!_poolObjectsList.Contains (platformView))
+		if (!_poolObjectsList.Contains (poolingObjectview))
 		{
-			_poolObjectsList.Add (platformView);
+			_poolObjectsList.Add (poolingObjectview);
 
-			if (_instantiatedObjectsList.Contains (platformView))
-				_instantiatedObjectsList.Remove (platformView);
+			if (_instantiatedObjectsList.Contains (poolingObjectview))
+				_instantiatedObjectsList.Remove (poolingObjectview);
 
-			platformView.OnAddToPool ();
+			poolingObjectview.OnAddToPool ();
 
-			platformView.gameObject.SetActive (false);
-		}
-	}
-
-	private void OnStoringItemToPool(ItemView itemView)
-	{
-		ItemTypes itemType = itemView.ItemType;
-
-		if (!_poolObjectsList.Contains (itemView))
-		{
-			_poolObjectsList.Add (itemView);
-
-			if (_instantiatedObjectsList.Contains (itemView))
-				_instantiatedObjectsList.Remove (itemView);
-
-			itemView.OnAddToPool ();
-
-			itemView.gameObject.SetActive (false);
+			poolingObjectview.gameObject.SetActive (false);
 		}
 		else
 		{
-			Debug.LogErrorFormat ("Trying to add item that already in pool! {0}", itemView.name);
+			Debug.LogErrorFormat ("Trying to add pooling object that already in pool! {0}", poolingObjectview.name);
 		}
 	}
 
-	private void PoolItem(ItemTypes itemType, int count, Vector3? objectPosition)
+	private void PoolItem(ItemType itemType, int count, Vector3? objectPosition)
 	{
 		//Debug.LogFormat("Pool item {0}. count = {1}. position = {2}", itemType, count, objectPosition);
-		ItemView itemView = GetPoolListItem(itemType);
+		ItemView itemView = (ItemView)GetPoolingObjectByType (PoolingObjectType.ITEM, itemType);
 
 		if (itemView == null)
 		{
@@ -209,27 +209,27 @@ public class ObjectsPoolController : Controller
 
 		switch (itemType)
 		{
-			case ItemTypes.Coin:
+			case ItemType.Coin:
 				{
 					itemAddCount = core.playerDataModel.isDoubleCoin ? 2 : 1;
 					break;
 				}
 
-			case ItemTypes.Crystal:
+			case ItemType.Crystal:
 				{
 					itemAddCount = game.model.itemModel.crystalFractureCount;
 					break;
 				}
 		}
 
-		itemView.OnInit (itemAddCount);
+		itemView.Init (itemAddCount);
 
 		_instantiatedObjectsList.Add (itemView);
 	}
 
 
 
-	private Vector3 GetItemRandomPosition(ItemTypes itemType)
+	private Vector3 GetItemRandomPosition(ItemType itemType)
 	{
 		Vector3 randomPosition = Vector3.zero;
 		Vector3 lastPlatformPosition = _objectsPoolModel.lastPooledPlatform.platformPosition;
@@ -239,17 +239,17 @@ public class ObjectsPoolController : Controller
 
 		switch (_objectsPoolModel.lastPooledPlatform.platformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
-					float horizontalPlatformHeight = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.Horizontal).y;
+					float horizontalPlatformHeight = game.model.gameTheme.GetPlatformRendererSize (PlatformType.Horizontal).y;
 
 					randomPosition.x = Random.Range (lastPlatformPosition.x - lastPlatformWidth / 2f + itemRendererSize.x, lastPlatformPosition.x + lastPlatformWidth / 2f - itemRendererSize.x);
 					randomPosition.y = Random.Range (-screenHeight / 2f + itemRendererSize.y + horizontalPlatformHeight / 2f, screenHeight / 2f - itemRendererSize.y - horizontalPlatformHeight / 2f);
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical_Moving:
+			case PlatformType.Vertical:
 				{
 					float platformsGap = game.model.playerModel.playerRendererSize.y + _platformsFactoryModel.verticalPlatformsGap;
 					float randomY = Random.Range (lastPlatformPosition.y - platformsGap / 2f + itemRendererSize.y, lastPlatformPosition.y + platformsGap / 2f - itemRendererSize.y);
@@ -264,7 +264,7 @@ public class ObjectsPoolController : Controller
 		return randomPosition;
 	}
 
-	private void PoolPlatform(PlatformTypes platformType, int count, Vector3? platformPosition)
+	private void PoolPlatform(PlatformType platformType, int count, Vector3? platformPosition)
 	{
 		//Debug.LogFormat("Pool platform {0}. count = {1}. position = {2}", platformType, count, platformPosition);
 
@@ -282,7 +282,7 @@ public class ObjectsPoolController : Controller
 		}
 	}
 
-	private void OnPoolingPlatform(PlatformTypes platformType, Vector3? platformPosition)
+	private void OnPoolingPlatform(PlatformType platformType, Vector3? platformPosition)
 	{
 		PlatformView platformView = null;
 		bool isInPoolList = false;
@@ -290,7 +290,7 @@ public class ObjectsPoolController : Controller
 
 		//If platform already in pooling list and waiting for being pooled
 
-		platformView = GetPoolListPlatform (platformType);
+		platformView = (PlatformView)GetPoolingObjectByType(PoolingObjectType.PLATFORM, platformType);
 
 		if(platformView == null)
 		{
@@ -325,10 +325,10 @@ public class ObjectsPoolController : Controller
 
 		//Debug.LogFormat ("Pooling platform: {0}. Already instantiated: {1}",platformView.name, _instantiatedPlatformsList.Count);
 
-		platformView.OnInit ();
+		platformView.Init ();
 	}
 
-	private Vector3 GetPlatfromRandomPosition(PlatformTypes platformType)
+	private Vector3 GetPlatfromRandomPosition(PlatformType platformType)
 	{
 		Vector2 screenSize = GM.Instance.ScreenSize;
 		Vector3 platformRendererSize = game.model.gameTheme.GetPlatformRendererSize(platformType);
@@ -337,13 +337,13 @@ public class ObjectsPoolController : Controller
 
 		switch (platformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
 					randomY = Random.Range (-screenSize.y / 2f, screenSize.y / 2f);
 					break;
 				}
 
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
 					float platformsGap = game.model.playerModel.playerRendererSize.y / 2f + game.model.platformsFactoryModel.verticalPlatformsGap * 1.5f;	//Add 10% of player height to gap
 
@@ -359,54 +359,39 @@ public class ObjectsPoolController : Controller
 		return platformRandomPosition;
 	}
 
-	private PlatformView GetPoolListPlatform(PlatformTypes platformType)
+	private PoolingObjectView GetPoolingObjectByType(PoolingObjectType poolingObjectType, System.Enum objectType)
 	{
-		PlatformView pooledPlatform = null;
+		PoolingObjectView poolingObject = null;
 
-		foreach(var platformObj in _poolObjectsList)
+		switch (poolingObjectType)
 		{
-			if(platformObj is PlatformView)
-			{
-				PlatformView platform = (PlatformView)platformObj;
-
-				if(platform.PlatformType == platformType)
+			case PoolingObjectType.ITEM:
 				{
-					pooledPlatform = platform;
-
-					pooledPlatform.gameObject.SetActive (true);
-
-					_poolObjectsList.Remove (pooledPlatform);
+					poolingObject = _poolObjectsList.Find (obj => obj.PoolingType == poolingObjectType && ((ItemView)obj).ItemType == (ItemType)objectType);
 					break;
 				}
-			}
-		}
 
-		return pooledPlatform;
-	}
-
-	private ItemView GetPoolListItem(ItemTypes itemType)
-	{
-		ItemView pooledItem = null;
-
-		foreach(var itemObj in _poolObjectsList)
-		{
-			if (itemObj is ItemView)
-			{
-				ItemView item = (ItemView)itemObj;
-
-				if (item.ItemType == itemType)
+			case PoolingObjectType.PLATFORM:
 				{
-					pooledItem = item;
-
-					pooledItem.gameObject.SetActive (true);
-
-					_poolObjectsList.Remove (pooledItem);
+					poolingObject = _poolObjectsList.Find (obj => obj.PoolingType == poolingObjectType && ((PlatformView)obj).PlatformType == (PlatformType)objectType);
 					break;
 				}
-			}
+
+			case PoolingObjectType.ROCKET:
+				{
+					poolingObject = _poolObjectsList.Find (obj => obj.PoolingType == poolingObjectType && ((RocketView)obj).RocketType == (RocketType)objectType);
+					break;
+				}
 		}
 
-		return pooledItem;
+		if (poolingObject != null)
+		{
+			poolingObject.gameObject.SetActive (true);
+
+			_poolObjectsList.Remove (poolingObject);
+		}
+
+		return poolingObject;
 	}
 
 	/*

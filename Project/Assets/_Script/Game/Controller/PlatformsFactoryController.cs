@@ -51,12 +51,12 @@ public class PlatformsFactoryController : Controller
 
 	private void InitHorizontalPlatforms(int count)
 	{
-		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformTypes.Horizontal);
+		Vector3 platformSize = game.model.gameTheme.GetPlatformRendererSize(PlatformType.Horizontal);
 		Vector3 screenSize = GM.Instance.ScreenSize;
 
 		Vector3 platformPosition = new Vector3( screenSize.x / 2f + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.5f), 0f );
 
-		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformTypes.Horizontal);
+		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformType.Horizontal);
 	}
 
 	private void RestorePlatform(PlatformView platformView)
@@ -78,30 +78,30 @@ public class PlatformsFactoryController : Controller
 	{
 		switch (platformView.PlatformType)
 		{
-			case PlatformTypes.Horizontal:
+			case PlatformType.Horizontal:
 				{
-					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Horizontal);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformType.Horizontal);
 
 					if (Random.Range (0, 10) > 8)
 					{
-						game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Vertical);
+						game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformType.Vertical);
 							
 					}
 					break;
 				}
 			
-			case PlatformTypes.Vertical:
+			case PlatformType.Vertical:
 				{
-					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Horizontal);
-					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 2) == 1 ? PlatformTypes.Vertical : PlatformTypes.Vertical_Moving);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformType.Horizontal);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 2) == 1 ? PlatformType.Vertical : PlatformType.Vertical_Moving);
 
 					break;
 				}
 
-			case PlatformTypes.Vertical_Moving:
+			case PlatformType.Vertical_Moving:
 				{
-					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformTypes.Horizontal);
-					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 3) == 1 ? PlatformTypes.Vertical : PlatformTypes.Vertical_Moving);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, PlatformType.Horizontal);
+					game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, 1, null, Random.Range(0, 3) == 1 ? PlatformType.Vertical : PlatformType.Vertical_Moving);
 
 					break;
 				}

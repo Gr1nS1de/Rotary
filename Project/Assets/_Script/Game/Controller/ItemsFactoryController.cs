@@ -66,9 +66,9 @@ public class ItemsFactoryController : Controller
 		if (scoreCount >= 0 && scoreCount <= 3)
 		{
 			if (Random.Range (0, 4) == 0)
-				GoPoolItem (ItemTypes.Crystal);
+				GoPoolItem (ItemType.Crystal);
 			else if( Random.Range(0,11) < 7)
-				GoPoolItem( ItemTypes.Magnet) ;
+				GoPoolItem( ItemType.Magnet) ;
 			else if(Random.Range(0,3) == 0)
 				GoPoolItem(GetRandomItem());
 			else
@@ -101,22 +101,22 @@ public class ItemsFactoryController : Controller
 
 		if (_itemsNotSpawnedRow >= Random.Range (3, 5))
 		{
-			ItemTypes penaltyItem = GetRandomPenaltyItem ();
+			ItemType penaltyItem = GetRandomPenaltyItem ();
 			GoPoolItem (penaltyItem);
 		}
 	}
 
-	private void GoPoolItem(ItemTypes itemType, int count = 1)
+	private void GoPoolItem(ItemType itemType, int count = 1)
 	{
 		_itemsNotSpawnedRow = 0;
 
 		game.controller.objectsPoolController.PoolObject (PoolingObjectType.ITEM, count, null, itemType);
 	}
 
-	private ItemTypes GetRandomPenaltyItem()
+	private ItemType GetRandomPenaltyItem()
 	{
-		ItemTypes randomPenaltyItemType = ItemTypes.Coin;
-		string[] itemNames = System.Enum.GetNames (typeof(ItemTypes));
+		ItemType randomPenaltyItemType = ItemType.Coin;
+		string[] itemNames = System.Enum.GetNames (typeof(ItemType));
 		List<float> itemsChances = new List<float>();
 		int scoreCount = core.playerDataModel.currentScore;
 
@@ -124,9 +124,9 @@ public class ItemsFactoryController : Controller
 
 		for (int i = 0; i < itemNames.Length; i++) 
 		{
-			switch ((ItemTypes)System.Enum.Parse(typeof(ItemTypes), itemNames[i])) 
+			switch ((ItemType)System.Enum.Parse(typeof(ItemType), itemNames[i])) 
 			{
-				case ItemTypes.Coin:
+				case ItemType.Coin:
 					{
 						int coinChance = 5;
 
@@ -136,7 +136,7 @@ public class ItemsFactoryController : Controller
 						break;
 					}
 
-				case ItemTypes.Crystal:
+				case ItemType.Crystal:
 					{
 						int crystalChance = 10;
 
@@ -146,7 +146,7 @@ public class ItemsFactoryController : Controller
 						break;
 					}
 
-				case ItemTypes.Magnet:
+				case ItemType.Magnet:
 					{
 						int magnetChance = 85;
 
@@ -160,17 +160,17 @@ public class ItemsFactoryController : Controller
 
 		int choosedItemIndex = ChooseRandomItem (itemsChances);
 
-		randomPenaltyItemType = (ItemTypes)System.Enum.Parse (typeof(ItemTypes), itemNames [choosedItemIndex]);
+		randomPenaltyItemType = (ItemType)System.Enum.Parse (typeof(ItemType), itemNames [choosedItemIndex]);
 
 		//Debug.LogFormat ("5. Go pool {0}", randomItemType);
 
 		return randomPenaltyItemType;
 	}
 
-	private ItemTypes GetRandomItem()
+	private ItemType GetRandomItem()
 	{
-		ItemTypes randomItemType = ItemTypes.Coin;
-		string[] itemNames = System.Enum.GetNames (typeof(ItemTypes));
+		ItemType randomItemType = ItemType.Coin;
+		string[] itemNames = System.Enum.GetNames (typeof(ItemType));
 		List<float> itemsChances = new List<float>();
 		int scoreCount = core.playerDataModel.currentScore;
 
@@ -178,9 +178,9 @@ public class ItemsFactoryController : Controller
 
 		for (int i = 0; i < itemNames.Length; i++) 
 		{
-			switch ((ItemTypes)System.Enum.Parse(typeof(ItemTypes), itemNames[i])) 
+			switch ((ItemType)System.Enum.Parse(typeof(ItemType), itemNames[i])) 
 			{
-				case ItemTypes.Coin:
+				case ItemType.Coin:
 					{
 						int coinChance = GetCoinRandomChance ();
 
@@ -190,7 +190,7 @@ public class ItemsFactoryController : Controller
 						break;
 					}
 
-				case ItemTypes.Crystal:
+				case ItemType.Crystal:
 					{
 						int crystalChance = GetCrystalRandomChance ();
 
@@ -200,7 +200,7 @@ public class ItemsFactoryController : Controller
 						break;
 					}
 
-				case ItemTypes.Magnet:
+				case ItemType.Magnet:
 					{
 						int magnetChance = GetMagnetRandomChance ();
 
@@ -214,7 +214,7 @@ public class ItemsFactoryController : Controller
 
 		int choosedItemIndex = ChooseRandomItem (itemsChances);
 
-		randomItemType = (ItemTypes)System.Enum.Parse (typeof(ItemTypes), itemNames [choosedItemIndex]);
+		randomItemType = (ItemType)System.Enum.Parse (typeof(ItemType), itemNames [choosedItemIndex]);
 
 		//Debug.LogFormat ("5. Go pool {0}", randomItemType);
 

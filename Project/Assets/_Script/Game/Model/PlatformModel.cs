@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum PlatformTypes
+public enum PlatformType
 {
 	Horizontal,
 	Vertical,

@@ -47,7 +47,7 @@ public class PlatformInputController : Controller
 	private void OnStart()
 	{
 		_screenSize = GM.Instance.ScreenSize;
-		_horizontalPlatformSize = game.model.gameTheme.GetPlatformRendererSize (PlatformTypes.Horizontal);
+		_horizontalPlatformSize = game.model.gameTheme.GetPlatformRendererSize (PlatformType.Horizontal);
 	}
 
 	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
