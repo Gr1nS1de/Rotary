@@ -7,6 +7,7 @@ using DG.Tweening;
 public class DailyGiftElementView : View
 {
 	public DailyGiftElementId 		ElementId;
+	public Image					ImageActivatedInterlace;
 
 	private Button 					_button;
 	private Sequence 				_activeSequence;
@@ -41,6 +42,8 @@ public class DailyGiftElementView : View
 
 					if (transform.localScale != Vector3.one)
 						transform.DOScale (Vector3.one, 0.3f);
+
+					ImageActivatedInterlace.DOFade (0f, 0.3f);
 					
 					SetButtonInteractableActive (false);
 					break;
@@ -53,6 +56,8 @@ public class DailyGiftElementView : View
 
 					if (transform.localScale != Vector3.one)
 						transform.DOScale (Vector3.one, 0.3f);
+
+					ImageActivatedInterlace.DOFade (0f, 0.3f);
 					
 					SetButtonInteractableActive (true);
 					break;
@@ -62,6 +67,7 @@ public class DailyGiftElementView : View
 				{
 					SetButtonInteractableActive (false);
 					transform.DOScale(new Vector3(0.9f, 0.9f, 1f), 0.3f);
+					ImageActivatedInterlace.DOFade (0.3f, 0.3f);
 					break;
 				}
 		}

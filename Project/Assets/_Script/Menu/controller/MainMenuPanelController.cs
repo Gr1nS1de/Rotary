@@ -11,6 +11,8 @@ public class MainMenuPanelController : Controller
 	private PlayerDataModel 		_playerDataModel					{ get { return core.playerDataModel;}}
 
 	private Sequence				_leftStatisticsTabCountingSequence 	= null;
+	private Vector2					_initAddCoinsTextPosition;
+	private Vector2					_initAddCrystalsTextPosition;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -70,6 +72,9 @@ public class MainMenuPanelController : Controller
 
 	private void InitLeftStatistics()
 	{
+		_initAddCoinsTextPosition = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ().anchoredPosition;
+		_initAddCrystalsTextPosition = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ().anchoredPosition;
+
 		_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.playerRecord));
 		_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount));
 		_mainMenuPanelModel.textCrystalsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount));
@@ -79,20 +84,33 @@ public class MainMenuPanelController : Controller
 
 	private void StartLeftStatisticsBarGameOverAnimation(GameOverData gameOverData)
 	{
+		//Hide new record text
+		_mainMenuPanelModel.textNewRecord.DOFade (0f, 0.1f);
+
 		if (_leftStatisticsTabCountingSequence != null && _leftStatisticsTabCountingSequence.IsActive ())
 			_leftStatisticsTabCountingSequence.Kill ();
 
 		_leftStatisticsTabCountingSequence = DOTween.Sequence ();
 
 		_leftStatisticsTabCountingSequence
+			.AppendInterval(0.2f)
 			.Append (_mainMenuPanelModel.textLastScore.DOFade (1f, 0.5f))
 			.Join (_mainMenuPanelModel.textLastScore.transform.DOPunchScale (new Vector3 (0.2f, 0.2f, 0f), 0.5f, 1))
 			.AppendInterval(0.5f);
 
 		if (gameOverData.ScoreCount > 0)
 		{
-			_mainMenuPanelModel.textLastScore.text = string.Format("{0}: <size=25>{1}</size>", Localization.CheckKey("TK_SCORE_NAME").ToUpper(), 0);
+			_mainMenuPanelModel.textLastScore.text = string.Format("{0}: <size=25>{1}</size>", Localization.CheckKey("TK_SCORE_NAME").ToUpper(), gameOverData.ScoreCount);
 
+			if(int.Parse(_mainMenuPanelModel.textRecord.text) < gameOverData.ScoreCount)
+			{
+				_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(gameOverData.ScoreCount));
+				_leftStatisticsTabCountingSequence
+					.Append(_mainMenuPanelModel.textNewRecord.DOFade (1f, 0.5f))
+					.Join (_mainMenuPanelModel.textNewRecord.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0f), 1f, 3).SetEase(Ease.Flash))
+					.AppendInterval(0.5f);
+			}
+			/*
 			_leftStatisticsTabCountingSequence
 				.Append(DOVirtual.Float (0f, (float)gameOverData.ScoreCount, Mathf.Clamp(gameOverData.ScoreCount % 10, 0.5f, 2f), (val ) =>
 				{
@@ -108,6 +126,7 @@ public class MainMenuPanelController : Controller
 				}).SetEase(Ease.Linear))
 				.Append(_mainMenuPanelModel.textLastScore.GetComponent<RectTransform>().DOShakeAnchorPos(0.3f, new Vector2(10f, 0f), 5, 180f))
 				.AppendInterval(0.5f);
+				*/
 		}
 
 		if (gameOverData.CoinsCount > 0)
@@ -142,7 +161,7 @@ public class MainMenuPanelController : Controller
 					Vector2 moveOffset = new Vector2 (0f, 20f);
 
 					_mainMenuPanelModel.textCoinsAdd.text = string.Format("+{0}", Utils.SweetMoney(count));
-					textCoinsAddRectTransform.anchoredPosition = initTextPosition + moveOffset;
+					textCoinsAddRectTransform.anchoredPosition = _initAddCoinsTextPosition + moveOffset;
 
 					countingSequence
 						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y, 0.5f))
@@ -157,12 +176,6 @@ public class MainMenuPanelController : Controller
 
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 
-							_mainMenuPanelModel.imageCoinIcon.GetComponent<RectTransform>()
-								.DOPunchScale(new Vector3(0.1f, 0.1f), 0.01f, 1)
-								.OnComplete(()=>
-								{
-									_mainMenuPanelModel.imageCoinIcon.GetComponent<RectTransform>().localScale = Vector3.one;
-								});
 						}).SetEase(Ease.Linear))
 						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y - moveOffset.y, 0.3f))
 						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(0f, 0.3f))
@@ -197,13 +210,6 @@ public class MainMenuPanelController : Controller
 							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount - intVal));
 
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
-
-							_mainMenuPanelModel.imageCrystalIcon.GetComponent<RectTransform> ()
-								.DOPunchScale (new Vector3 (0.1f, 0.1f), 0.01f, 1)
-								.OnComplete (() =>
-								{
-									_mainMenuPanelModel.imageCrystalIcon.GetComponent<RectTransform> ().localScale = Vector3.one;
-								});
 						}).SetEase (Ease.Linear))
 						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y - moveOffset.y, 0.5f))
 						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (0f, 0.5f))

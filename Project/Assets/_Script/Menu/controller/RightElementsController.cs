@@ -15,6 +15,7 @@ public class RightElementsController : Controller
 	private bool					_isGameServicesIconColorInited = false;
 	private Color					_gameServicesGreenColor = new Color(77f/ 255f, 161f / 255f, 70f/255f, 1f);
 	private Tween					_likeButtonTween = null;
+	private Vector2					_initRightPanelPosition;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -78,6 +79,10 @@ public class RightElementsController : Controller
 
 	private void OnStart()
 	{
+		RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
+
+		_initRightPanelPosition = rightPanelRect.anchoredPosition;
+		 
 		ui.model.mainMenuPanelModel.isGameServicesOpened = false;
 		UpdateRightButtons (ui.model.uiWindowState);
 	}
@@ -85,7 +90,6 @@ public class RightElementsController : Controller
 	private void MoveRightPanel(System.Action callbackHidden)
 	{
 		RectTransform rightPanelRect = ui.model.rightElementsPanel.GetComponent<RectTransform> ();
-		Vector2 initRightPanelPosition = rightPanelRect.anchoredPosition;
 
 		if (_rightPanelMoveSequence != null && _rightPanelMoveSequence.IsActive ())
 			_rightPanelMoveSequence.Kill ();
@@ -101,7 +105,10 @@ public class RightElementsController : Controller
 			})
 			.OnComplete (() =>
 			{
-				rightPanelRect.anchoredPosition = initRightPanelPosition;		
+				rightPanelRect.anchoredPosition = _initRightPanelPosition;		
+			}).OnKill(()=>
+			{
+				rightPanelRect.anchoredPosition = _initRightPanelPosition;
 			});
 		
 			
@@ -170,13 +177,13 @@ public class RightElementsController : Controller
 
 			case RightElementId.ButtonGSAchievements:
 				{
-					uiState = UIWindowState.GS_Achievements;
+					isChangeWindowState = false;
 					break;
 				}
 
 			case RightElementId.ButtonLeaderboard:
 				{
-					uiState = UIWindowState.GS_Leaderboard;
+					isChangeWindowState = false;
 					break;
 				}
 		#endregion

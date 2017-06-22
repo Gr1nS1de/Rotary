@@ -6,7 +6,8 @@ public enum PoolingObjectType
 {
 	PLATFORM,
 	ITEM,
-	BONUS
+	BONUS,
+	ROCKET
 }
 
 public class PoolingObject
