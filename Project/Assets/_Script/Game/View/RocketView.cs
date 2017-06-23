@@ -31,6 +31,25 @@ public class RocketView : PoolingObjectView, IPoolObject
 		_rocketActionSequence = DOTween.Sequence ();
 
 	}
+
+	#region public methods
+	public Vector3 GetMainRendererSize()
+	{
+		Vector3 rendererSize = Vector3.zero;
+
+		switch (RocketType)
+		{
+			case RocketType.Default:
+				{
+					rendererSize = RocketRenderer.bounds.size;
+					break;
+				}
+
+		}
+
+		return rendererSize;
+	}
+	#endregion
 		
 	private bool IsObjectVisible()
 	{
@@ -77,6 +96,10 @@ public class RocketView : PoolingObjectView, IPoolObject
 	{
 		if (_isPlayerImpact)
 			return;
+
+		_isPlayerImpact = true;
+
+
 	}
 
 	private void UpdateItemOnVisible()

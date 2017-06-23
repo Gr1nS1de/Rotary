@@ -359,6 +359,43 @@ public class ObjectsPoolController : Controller
 		return platformRandomPosition;
 	}
 
+	private void OnPoolingRocket(RocketType rocketType, Vector3? rocketPosition)
+	{
+		RocketView rocketView = null;
+		bool isInPoolList = false;
+		Vector3 platformRendererSize = game.model.rocketModel.GetItemRendererSize(rocketType);
+
+		//If platform already in pooling list and waiting for being pooled
+
+		rocketView = (RocketView)GetPoolingObjectByType(PoolingObjectType.ROCKET, rocketType);
+
+		if (rocketView == null)
+		{
+			rocketView = (RocketView)
+				Instantiate (
+				game.model.rocketsFactoryModel.rocketsPrefabsList.Find (rocket => rocket.RocketType == rocketType),	//Find platformView in current theme list
+				game.view.cameraView.transform	//Set parent container 
+			);
+
+			rocketView.name = string.Format ("{0}Rocket_{1}", rocketType.ToString ().ToLower (), Random.Range (0, 100));
+		}
+
+		//If we got position where platform should be placed
+		if (rocketPosition != null)
+		{
+			//rocketView.transform.position = rocketPosition.GetValueOrDefault ();
+		}
+		else
+		{
+			//Get random position for platform
+			//rocketView.transform.position = GetPlatfromRandomPosition(rocketType);
+		}
+
+		_instantiatedObjectsList.Add (rocketView);
+
+		rocketView.Init ();
+	}
+
 	private PoolingObjectView GetPoolingObjectByType(PoolingObjectType poolingObjectType, System.Enum objectType)
 	{
 		PoolingObjectView poolingObject = null;

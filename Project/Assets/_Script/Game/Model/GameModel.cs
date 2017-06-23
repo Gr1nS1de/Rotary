@@ -102,7 +102,11 @@ public class GameModel : Model
 	public BonusesFactoryModel			bonusesFactoryModel		{ get { return _bonusesFactoryModel			= SearchLocal<BonusesFactoryModel>(			_bonusesFactoryModel,		typeof(BonusesFactoryModel).Name );}}
 	public ItemModel					itemModel				{ get { return _itemModel					= SearchLocal<ItemModel>(					_itemModel,					typeof(ItemModel).Name );}}
 	public PlatformModel				platformModel			{ get { return _platformModel				= SearchLocal<PlatformModel>(				_platformModel,				typeof(PlatformModel).Name );}}
+	public RocketsFactoryModel			rocketsFactoryModel		{ get { return _rocketsFactoryModel			= SearchLocal<RocketsFactoryModel>(			_rocketsFactoryModel,		typeof(RocketsFactoryModel).Name );}}
+	public RocketModel					rocketModel				{ get { return _rocketModel					= SearchLocal<RocketModel>(					_rocketModel,				typeof(RocketModel).Name );}}
 
+	private RocketModel			_rocketModel;
+	private RocketsFactoryModel			_rocketsFactoryModel;
 	private PlatformModel				_platformModel;
 	private ItemModel					_itemModel;
 	private BonusesFactoryModel			_bonusesFactoryModel;
