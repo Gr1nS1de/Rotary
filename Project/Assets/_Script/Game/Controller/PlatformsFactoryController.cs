@@ -30,7 +30,6 @@ public class PlatformsFactoryController : Controller
 
 					if (game.model.gameState == GameState.Playing)
 					{
-						RestorePlatform (platformView);
 						CheckPlatformSpawn (platformView);
 					}
 					break;
@@ -57,21 +56,6 @@ public class PlatformsFactoryController : Controller
 		Vector3 platformPosition = new Vector3( screenSize.x / 2f + platformSize.x / 2f, -screenSize.y / 2f + (platformSize.y / 2f * 1.5f), 0f );
 
 		game.controller.objectsPoolController.PoolObject(PoolingObjectType.PLATFORM, count, platformPosition, PlatformType.Horizontal);
-	}
-
-	private void RestorePlatform(PlatformView platformView)
-	{
-		if (game.controller.objectsPoolController.IsValidPoolingObject (platformView))
-		{
-			DG.Tweening.DOVirtual.DelayedCall (game.model.playerModel.invisibleBeforeDie, () =>
-			{
-				game.controller.objectsPoolController.StoreObjectToPool (PoolingObjectType.PLATFORM, platformView);
-			});
-		}else
-		{
-			Destroy (platformView.gameObject);
-			Debug.LogErrorFormat ("Trying to restore platform which not is pool valid. Strange behaviour!");
-		}
 	}
 
 	private void CheckPlatformSpawn(PlatformView platformView)

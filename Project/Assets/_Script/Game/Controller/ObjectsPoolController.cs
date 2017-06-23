@@ -47,6 +47,36 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
+			case N.OnItemInvisible_:
+				{
+					ItemView itemView = (ItemView)data [0];
+
+					if(game.model.gameState == GameState.Playing)
+						RestoreItem (itemView);
+					break;
+				}
+
+			case N.OnPlatformInvisible_:
+				{
+					PlatformView platformView = (PlatformView)data [0];
+
+					//Debug.LogFormat ("Platform is invisible: {0}", platformView.name);
+
+					if (game.model.gameState == GameState.Playing)
+					{
+						RestorePlatform (platformView);
+					}
+					break;
+				}
+
+			case N.OnRocketInvisible_:
+				{
+					RocketView rocketView = (RocketView)data [0];
+
+					AddObjectToPool (rocketView);
+					break;
+				}
+
 			case N.GameOver_:
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];
@@ -72,38 +102,6 @@ public class ObjectsPoolController : Controller
 	}
 
 	#region public methods
-	public void StoreObjectToPool(PoolingObjectType poolingObjectType, PoolingObjectView poolingObject)
-	{
-		switch (poolingObjectType)
-		{
-			case PoolingObjectType.PLATFORM:
-				{
-					PlatformView platformView = (PlatformView)poolingObject;
-
-					//Debug.LogFormat ("Add platform to pool. {0}", platformView.name);
-
-					AddObjectToPool (platformView);
-					break;
-				}
-
-			case PoolingObjectType.ITEM:
-				{
-					ItemView itemView = (ItemView)poolingObject;
-
-					AddObjectToPool (itemView);
-
-					break;
-				}
-
-			case PoolingObjectType.ROCKET:
-				{
-					RocketView rocketView = (RocketView)poolingObject;
-
-					AddObjectToPool (rocketView);
-					break;
-				}
-		}
-	}
 
 	public void PoolObject(PoolingObjectType poolingObjectType, int objectCount, Vector3? objectPosition, System.Enum objectType)
 	{
@@ -140,11 +138,45 @@ public class ObjectsPoolController : Controller
 				{
 					RocketType rocketType = (RocketType)objectType;
 
-
+					PoolRocket (rocketType, objectPosition);
 					break;
 				}
 		}
 
+	}
+	#endregion
+
+	private void StoreObjectToPool(PoolingObjectType poolingObjectType, PoolingObjectView poolingObject)
+	{
+		switch (poolingObjectType)
+		{
+			case PoolingObjectType.PLATFORM:
+				{
+					PlatformView platformView = (PlatformView)poolingObject;
+
+					//Debug.LogFormat ("Add platform to pool. {0}", platformView.name);
+
+					AddObjectToPool (platformView);
+					break;
+				}
+
+			case PoolingObjectType.ITEM:
+				{
+					ItemView itemView = (ItemView)poolingObject;
+
+					AddObjectToPool (itemView);
+
+					break;
+				}
+
+			case PoolingObjectType.ROCKET:
+				{
+					RocketView rocketView = (RocketView)poolingObject;
+
+					AddObjectToPool (rocketView);
+					break;
+				}
+		}
 	}
 
 	public bool IsValidPoolingObject(PoolingObjectView poolingObjectView)
@@ -160,8 +192,32 @@ public class ObjectsPoolController : Controller
 
 		return isValid;
 	}
-	#endregion
 
+	private void RestoreItem(ItemView itemView)
+	{
+		if (IsValidPoolingObject (itemView))
+			StoreObjectToPool(PoolingObjectType.ITEM, itemView);
+		else
+		{
+			Destroy (itemView.gameObject);
+		}
+	}
+
+
+	private void RestorePlatform(PlatformView platformView)
+	{
+		if (IsValidPoolingObject (platformView))
+		{
+			DG.Tweening.DOVirtual.DelayedCall (game.model.playerModel.invisibleBeforeDie, () =>
+			{
+				StoreObjectToPool (PoolingObjectType.PLATFORM, platformView);
+			});
+		}else
+		{
+			Destroy (platformView.gameObject);
+			Debug.LogErrorFormat ("Trying to restore platform which not is pool valid. Strange behaviour!");
+		}
+	}
 
 	private void AddObjectToPool(PoolingObjectView poolingObjectview)
 	{
@@ -359,7 +415,7 @@ public class ObjectsPoolController : Controller
 		return platformRandomPosition;
 	}
 
-	private void OnPoolingRocket(RocketType rocketType, Vector3? rocketPosition)
+	private void PoolRocket(RocketType rocketType, Vector3? rocketPosition)
 	{
 		RocketView rocketView = null;
 		bool isInPoolList = false;
@@ -374,7 +430,7 @@ public class ObjectsPoolController : Controller
 			rocketView = (RocketView)
 				Instantiate (
 				game.model.rocketsFactoryModel.rocketsPrefabsList.Find (rocket => rocket.RocketType == rocketType),	//Find platformView in current theme list
-				game.view.cameraView.transform	//Set parent container 
+					game.view.cameraView.transform.FindChild("_Rockets")	//Set parent container 
 			);
 
 			rocketView.name = string.Format ("{0}Rocket_{1}", rocketType.ToString ().ToLower (), Random.Range (0, 100));
@@ -383,13 +439,15 @@ public class ObjectsPoolController : Controller
 		//If we got position where platform should be placed
 		if (rocketPosition != null)
 		{
-			//rocketView.transform.position = rocketPosition.GetValueOrDefault ();
+			rocketView.transform.localPosition = rocketPosition.GetValueOrDefault ();
 		}
 		else
 		{
-			//Get random position for platform
-			//rocketView.transform.position = GetPlatfromRandomPosition(rocketType);
+			rocketView.transform.localPosition = Vector3.zero;
 		}
+
+		if (!rocketView.gameObject.activeInHierarchy)
+			rocketView.gameObject.SetActive (true);
 
 		_instantiatedObjectsList.Add (rocketView);
 

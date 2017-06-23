@@ -11,7 +11,6 @@ public class GameResourcesController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
-					LoadItems ();
 					LoadRockets ();
 					break;
 				}
@@ -26,15 +25,10 @@ public class GameResourcesController : Controller
 				}
 		}
 	}
-
-	private void LoadItems()
-	{
-		game.model.itemsFactoryModel.itemsPrefabsList.AddRange( Resources.LoadAll<ItemView> ("Items") );
-	}
-
+		
 	private void LoadRockets()
 	{
-		game.model.itemsFactoryModel.itemsPrefabsList.AddRange( Resources.LoadAll<ItemView> ("Items") );
+		game.model.rocketsFactoryModel.rocketsPrefabsList.AddRange( Resources.LoadAll<RocketView> ("Rockets") );
 
 	}
 

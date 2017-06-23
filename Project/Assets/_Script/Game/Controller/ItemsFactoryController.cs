@@ -33,15 +33,6 @@ public class ItemsFactoryController : Controller
 					break;
 				}
 
-			case N.OnItemInvisible_:
-				{
-					ItemView itemView = (ItemView)data [0];
-
-					if(game.model.gameState == GameState.Playing)
-						RestoreItem (itemView);
-					break;
-				}
-
 		}
 	}
 
@@ -400,17 +391,6 @@ public class ItemsFactoryController : Controller
 		}
 
 		return itemsProbs.Count - 1;
-	}
-
-
-	private void RestoreItem(ItemView itemView)
-	{
-		if (game.controller.objectsPoolController.IsValidPoolingObject (itemView))
-			game.controller.objectsPoolController.StoreObjectToPool(PoolingObjectType.ITEM, itemView);
-		else
-		{
-			Destroy (itemView.gameObject);
-		}
 	}
 }
 
