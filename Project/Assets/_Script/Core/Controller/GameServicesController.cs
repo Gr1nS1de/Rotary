@@ -23,13 +23,12 @@ public class GameServicesController : Controller
 					break;
 				}
 
-			case N.UIWindowStateChanged_:
+			case N.OnRightButtonPressed_:
 				{
-					UIWindowState windowState = (UIWindowState)data [0];
+					RightElementId rightElementId = (RightElementId)data [0];
 
-					if(windowState== UIWindowState.GS_Leaderboard)
+					if(rightElementId == RightElementId.ButtonLeaderboard)
 						GooglePlayManager.Instance.ShowLeaderBoardById (LEADERBOARD_ID);
-					
 					break;
 				}
 		}
@@ -45,11 +44,7 @@ public class GameServicesController : Controller
 	{
 		GooglePlayConnection.ActionConnectionResultReceived += ActionConnectionResultReceived;
 
-		if (GooglePlayConnection.State != GPConnectionState.STATE_CONNECTED)
-		{
-			GooglePlayConnection.Instance.Connect ();
-		}
-		else
+		if (GooglePlayConnection.State == GPConnectionState.STATE_CONNECTED)
 		{
 			OnGameServicesConnected (true);
 		}

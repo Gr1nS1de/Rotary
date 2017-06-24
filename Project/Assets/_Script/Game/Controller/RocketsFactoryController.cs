@@ -14,11 +14,9 @@ public class RocketsFactoryController : Controller
 					break;
 				}
 
-			case N.OnPlatformInvisible_:
+			case N.GameAddScore:
 				{
-					PlatformView platformView = (PlatformView)data [0];
-
-					CheckRocketSpawn (platformView);
+					CheckRocketSpawn ();
 					break;
 				}
 					
@@ -31,7 +29,7 @@ public class RocketsFactoryController : Controller
 		
 	}
 
-	private void CheckRocketSpawn(PlatformView platformView)
+	private void CheckRocketSpawn()
 	{
 		int scoreCount = core.playerDataModel.currentScore;
 

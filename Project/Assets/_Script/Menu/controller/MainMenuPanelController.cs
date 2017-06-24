@@ -39,6 +39,19 @@ public class MainMenuPanelController : Controller
 					break;
 				}
 
+			case N.OnEndShowAdVideo_:
+				{
+					bool isSuccess = (bool)data [0];
+
+					if (isSuccess)
+					{
+						int rewardCoinsCount = 50;
+
+						StartItemCountUpdateAnimation (ItemType.Coin, rewardCoinsCount);
+					}
+					break;
+				}
+
 			case N.OnPlayerGetDailyGift__:
 				{
 					DailyGiftElementId dailyGiftElementId = (DailyGiftElementId)data [0];

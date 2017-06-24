@@ -178,12 +178,14 @@ public class RightElementsController : Controller
 			case RightElementId.ButtonGSAchievements:
 				{
 					isChangeWindowState = false;
+					CloseGameServices();
 					break;
 				}
 
 			case RightElementId.ButtonLeaderboard:
 				{
 					isChangeWindowState = false;
+					CloseGameServices();
 					break;
 				}
 		#endregion

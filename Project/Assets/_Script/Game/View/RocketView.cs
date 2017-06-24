@@ -64,7 +64,8 @@ public class RocketView : PoolingObjectView, IPoolObject
 			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x, RocketMoveTime).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))
-			.Join(ExclamationBackground.transform.DOLocalMoveX(GM.Instance.ScreenSize.x, 0.1f));
+			.Join(ExclamationBackground.transform.DOLocalMoveX(GM.Instance.ScreenSize.x, 0.1f))
+			.Append(ExclamationBackground.DOFade (0f, 0.01f));
 
 		_rocketActionSequence.Play ();
 	}
