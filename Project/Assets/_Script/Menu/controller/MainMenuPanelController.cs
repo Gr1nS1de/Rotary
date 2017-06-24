@@ -60,9 +60,11 @@ public class MainMenuPanelController : Controller
 
 	private void OnStart()
 	{
+		_initAddCoinsTextPosition = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ().anchoredPosition;
+		_initAddCrystalsTextPosition = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ().anchoredPosition;
+
 		//TODO: Update statistics with pop animation.
 		InitLeftStatistics ();
-
 	}
 		
 	private void OnGameOver(GameOverData gameOverData)
@@ -72,9 +74,6 @@ public class MainMenuPanelController : Controller
 
 	private void InitLeftStatistics()
 	{
-		_initAddCoinsTextPosition = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ().anchoredPosition;
-		_initAddCrystalsTextPosition = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ().anchoredPosition;
-
 		_mainMenuPanelModel.textRecord.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.playerRecord));
 		_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount));
 		_mainMenuPanelModel.textCrystalsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount));
@@ -157,14 +156,13 @@ public class MainMenuPanelController : Controller
 			case ItemType.Coin:
 				{
 					RectTransform textCoinsAddRectTransform = _mainMenuPanelModel.textCoinsAdd.GetComponent<RectTransform> ();
-					Vector2 initTextPosition = textCoinsAddRectTransform.anchoredPosition;
 					Vector2 moveOffset = new Vector2 (0f, 20f);
 
 					_mainMenuPanelModel.textCoinsAdd.text = string.Format("+{0}", Utils.SweetMoney(count));
 					textCoinsAddRectTransform.anchoredPosition = _initAddCoinsTextPosition + moveOffset;
 
 					countingSequence
-						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y, 0.5f))
+						.Append(textCoinsAddRectTransform.DOAnchorPosY(_initAddCoinsTextPosition.y, 0.5f))
 						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(1f, 0.5f))
 						.AppendInterval(0.5f)
 						.Append(DOVirtual.Float ((float)count, 0f, Mathf.Clamp(count % 10, 0.5f, 1.5f), (val ) =>
@@ -177,11 +175,11 @@ public class MainMenuPanelController : Controller
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 
 						}).SetEase(Ease.Linear))
-						.Append(textCoinsAddRectTransform.DOAnchorPosY(initTextPosition.y - moveOffset.y, 0.3f))
+						.Append(textCoinsAddRectTransform.DOAnchorPosY(_initAddCoinsTextPosition.y - moveOffset.y, 0.3f))
 						.Join(_mainMenuPanelModel.textCoinsAdd.DOFade(0f, 0.3f))
 						.AppendCallback (() =>
 						{
-							textCoinsAddRectTransform.anchoredPosition = initTextPosition;
+							textCoinsAddRectTransform.anchoredPosition = _initAddCoinsTextPosition;
 						}).OnKill(()=>
 						{
 							_mainMenuPanelModel.textCoinsCount.text = string.Format("{0}", Utils.SweetMoney(_playerDataModel.coinsCount));
@@ -192,14 +190,13 @@ public class MainMenuPanelController : Controller
 			case ItemType.Crystal:
 				{
 					RectTransform textCrystalsAddRectTransform = _mainMenuPanelModel.textCrystalsAdd.GetComponent<RectTransform> ();
-					Vector2 initTextPosition = textCrystalsAddRectTransform.anchoredPosition;
 					Vector2 moveOffset = new Vector2 (0f, 20f);
 
 					_mainMenuPanelModel.textCrystalsAdd.text = string.Format("+{0}", Utils.SweetMoney(count));
-					textCrystalsAddRectTransform.anchoredPosition = initTextPosition + moveOffset;
+					textCrystalsAddRectTransform.anchoredPosition = _initAddCrystalsTextPosition + moveOffset;
 
 					countingSequence
-						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y, 0.5f))
+						.Append (textCrystalsAddRectTransform.DOAnchorPosY (_initAddCrystalsTextPosition.y, 0.5f))
 						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (1f, 0.5f))
 						.AppendInterval(0.5f)
 						.Append (DOVirtual.Float ((float)count, 0f, Mathf.Clamp (count % 10, 0.5f, 1.5f), (val ) =>
@@ -211,11 +208,11 @@ public class MainMenuPanelController : Controller
 
 							Utils.RebuildLayoutGroups (_mainMenuPanelModel.textCoinsCount.transform.parent.parent.GetComponent<RectTransform>());
 						}).SetEase (Ease.Linear))
-						.Append (textCrystalsAddRectTransform.DOAnchorPosY (initTextPosition.y - moveOffset.y, 0.5f))
+						.Append (textCrystalsAddRectTransform.DOAnchorPosY (_initAddCrystalsTextPosition.y - moveOffset.y, 0.5f))
 						.Join (_mainMenuPanelModel.textCrystalsAdd.DOFade (0f, 0.5f))
 						.AppendCallback (() =>
 						{
-							textCrystalsAddRectTransform.anchoredPosition = initTextPosition;
+							textCrystalsAddRectTransform.anchoredPosition = _initAddCrystalsTextPosition;
 						}).OnKill(()=>
 						{
 							_mainMenuPanelModel.textCrystalsCount.text = string.Format ("{0}", Utils.SweetMoney(_playerDataModel.crystalsCount));

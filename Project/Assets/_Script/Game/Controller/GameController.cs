@@ -70,6 +70,15 @@ public class GameController : Controller
 					break;
 				}
 
+			case N.PlayerImpactRocket__:
+				{
+					RocketView rocketView = (RocketView)data [0];
+					Vector2 contactPoint = (Vector2)data [1];
+
+					OnPlayerImpactRocket (rocketView);
+					break;
+				}
+
 			case N.OnPlayerInvisible:
 				{
 					GameOver ();
@@ -168,6 +177,25 @@ public class GameController : Controller
 			case ItemType.Magnet:
 				{
 					_gameModel.gameOverData.MagnetsCount++;
+
+					DOVirtual.DelayedCall (0.1f, () =>
+					{
+						GameOver ();
+
+					});
+					break;
+				}
+		}
+	}
+
+	private void OnPlayerImpactRocket(RocketView rocketView)
+	{
+		RocketType rocketType = rocketView.RocketType;
+
+		switch (rocketType)
+		{
+			case RocketType.Default:
+				{
 
 					DOVirtual.DelayedCall (0.1f, () =>
 					{

@@ -60,6 +60,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 			//4. Wait for delay before rocket starts moving
 			.AppendInterval(RocketLaunchDelay)
 			//5. Start move rocket
+			.AppendCallback(()=>{RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);})
 			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x, RocketMoveTime).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))

@@ -59,9 +59,9 @@ public class GameServicesController : Controller
 	{
 		if(result.IsSuccess) 
 		{
-			Debug.Log("Connected!");
+			Debug.Log("GS Connected!");
 		} else {
-			Debug.Log("Cnnection failed with code: " + result.code.ToString());
+			Debug.Log("GS Cnnection failed with code: " + result.code.ToString());
 		}
 
 		OnGameServicesConnected (result.IsSuccess);

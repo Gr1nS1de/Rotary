@@ -128,6 +128,14 @@ public class PlayerView : View
 					break;
 				}
 
+			case PoolingObjectType.ROCKET:
+				{
+					RocketView rocketView = (RocketView)poolingObject;
+
+					Notify (N.PlayerImpactRocket__, NotifyType.GAME, rocketView, collision.contacts [0].point);
+					break;
+				}
+
 			default:
 				{
 					break;

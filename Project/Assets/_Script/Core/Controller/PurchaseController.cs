@@ -172,7 +172,7 @@ public class PurchaseController : Controller
 		{
 			OnProcessingPurchasedProduct (result.Purchase);
 		} else {
-			AndroidMessage.Create("Product Purchase Failed", result.Response.ToString() + " " + result.Message);
+			//AndroidMessage.Create("Product Purchase Failed", result.Response.ToString() + " " + result.Message);
 		}
 
 		Debug.Log ("Purchased Responce: " + result.Response.ToString() + " " + result.Message);
@@ -186,7 +186,7 @@ public class PurchaseController : Controller
 		{
 			OnProcessingConsumeProduct (result.Purchase);
 		} else {
-			AndroidMessage.Create("Product Cousume Failed", result.Response.ToString() + " " + result.Message);
+			//AndroidMessage.Create("Product Cousume Failed", result.Response.ToString() + " " + result.Message);
 		}
 
 		Debug.Log ("Cousume Responce: " + result.Response.ToString() + " " + result.Message);

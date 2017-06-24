@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using DG.Tweening;
+using DG.Tweening;
 
 public class ObjectsPoolController : Controller
 {
@@ -11,6 +11,7 @@ public class ObjectsPoolController : Controller
 
 	private List<PoolingObjectView>		_poolObjectsList			{ get { return game.model.objectsPoolModel.poolObjectsList;}}
 	private List<PoolingObjectView>		_instantiatedObjectsList	{ get { return game.model.objectsPoolModel.instantiatedObjectsList;}}
+	private const string				PlatformHideDelayTween		= "platformHideDelayTween";
 	//private List<PoolingObjectView>		_waitPoolingObjectsList		= new List<PoolingObjectView>();
 
 	public override void OnNotification (string alias, Object target, params object[] data)
@@ -73,7 +74,7 @@ public class ObjectsPoolController : Controller
 				{
 					RocketView rocketView = (RocketView)data [0];
 
-					AddObjectToPool (rocketView);
+					StoreObjectToPool (PoolingObjectType.ROCKET, rocketView);
 					break;
 				}
 
@@ -81,6 +82,9 @@ public class ObjectsPoolController : Controller
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];
 					List<PoolingObjectView> copyInstantiatedObjectsList = new List<PoolingObjectView> (_instantiatedObjectsList);
+
+					if (DOTween.IsTweening (PlatformHideDelayTween))
+						DOTween.Kill (PlatformHideDelayTween);
 
 					copyInstantiatedObjectsList.ForEach(obj=>
 					{
@@ -211,7 +215,7 @@ public class ObjectsPoolController : Controller
 			DG.Tweening.DOVirtual.DelayedCall (game.model.playerModel.invisibleBeforeDie, () =>
 			{
 				StoreObjectToPool (PoolingObjectType.PLATFORM, platformView);
-			});
+			}).SetId(PlatformHideDelayTween);
 		}else
 		{
 			Destroy (platformView.gameObject);
