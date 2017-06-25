@@ -33,6 +33,15 @@ public class PlayerController : Controller
 					break;
 				}
 
+			case N.PlayerImpactRocket__:
+				{
+					RocketView rocketView = (RocketView)data [0];
+					Vector2 contactPoint = (Vector2)data [1];
+
+					OnPlayerImpactRocket (rocketView);
+					break;
+				}
+
 			case N.OnPlatformInvisible_:
 				{
 					PlatformView platformView = (PlatformView)data [0];
@@ -129,6 +138,12 @@ public class PlayerController : Controller
 				{
 					break;
 				}
+
+			case PlayerState.RocketExplode:
+				{
+					_playerView.SetStaticPlayer (true);
+					break;
+				}
 		}
 
 		_playerModel.playerState = playerState;
@@ -168,6 +183,20 @@ public class PlayerController : Controller
 			default:
 				{
 					
+					break;
+				}
+		}
+	}
+
+	private void OnPlayerImpactRocket(RocketView rocketView)
+	{
+		RocketType rocketType = rocketView.RocketType;
+
+		switch (rocketType)
+		{
+			case RocketType.Default:
+				{
+					GoToPlayerState (PlayerState.RocketExplode);
 					break;
 				}
 		}

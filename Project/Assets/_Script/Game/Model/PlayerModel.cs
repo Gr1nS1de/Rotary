@@ -7,7 +7,8 @@ public enum PlayerState
 	MainMenu,
 	PlayerSkinWindow,
 	GamePlay,
-	GamePause
+	GamePause,
+	RocketExplode
 }
 
 public class PlayerModel : Model 

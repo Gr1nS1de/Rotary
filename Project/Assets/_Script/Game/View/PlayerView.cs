@@ -10,6 +10,7 @@ public class PlayerView : View
 	public List<PlatformView>	ScorePlatformsList	= new List<PlatformView>();
 	public SpriteRenderer		PlayerRenderer;
 	public Transform 			PlayerTriggerDetector;
+	public ParticleSystem		PlayerRocketExplodeParticleSystem;
 
 	private PlayerModel 		_playerModel	{ get { return game.model.playerModel; } }
 	//private Rigidbody2D 		_playerRB;
@@ -22,7 +23,7 @@ public class PlayerView : View
 
 	//initialize values 
 	void Start() 
-	{ 
+	{
 		//_playerRB = PlayerRenderer.GetComponent<Rigidbody2D>();
 	} 
 
@@ -131,8 +132,17 @@ public class PlayerView : View
 			case PoolingObjectType.ROCKET:
 				{
 					RocketView rocketView = (RocketView)poolingObject;
+					Vector2 contactPoint = collision.contacts [0].point;
 
-					Notify (N.PlayerImpactRocket__, NotifyType.GAME, rocketView, collision.contacts [0].point);
+					Debug.LogErrorFormat ("Contant point y: {0}. rocketRendererPositionY: {1}. rocket renderer size: {2}", contactPoint.y, rocketView.RocketRenderer.transform.position.y, rocketView.GetMainRendererSize ().y);
+
+					//If player is higher than rocket - just roll on it. :)
+					if (contactPoint.y < rocketView.RocketRenderer.transform.position.y + rocketView.GetMainRendererSize ().y / 2f)
+					{
+						PlayerRocketExplodeParticleSystem.Play ();
+
+						Notify (N.PlayerImpactRocket__, NotifyType.GAME, rocketView, contactPoint);
+					}
 					break;
 				}
 
@@ -167,6 +177,7 @@ public class PlayerView : View
 					ItemView itemView = (ItemView)poolingObject;
 
 					Notify (N.PlayerImpactItem__, NotifyType.GAME, itemView, Vector2.zero);
+
 					break;
 				}
 

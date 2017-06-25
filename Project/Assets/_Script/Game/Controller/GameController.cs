@@ -197,7 +197,7 @@ public class GameController : Controller
 			case RocketType.Default:
 				{
 
-					DOVirtual.DelayedCall (0.1f, () =>
+					DOVirtual.DelayedCall (1f, () =>
 					{
 						GameOver ();
 
