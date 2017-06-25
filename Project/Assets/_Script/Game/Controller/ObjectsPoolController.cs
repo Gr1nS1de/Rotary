@@ -11,7 +11,7 @@ public class ObjectsPoolController : Controller
 
 	private List<PoolingObjectView>		_poolObjectsList			{ get { return game.model.objectsPoolModel.poolObjectsList;}}
 	private List<PoolingObjectView>		_instantiatedObjectsList	{ get { return game.model.objectsPoolModel.instantiatedObjectsList;}}
-	private const string				PlatformHideDelayTween		= "platformHideDelayTween";
+	private const string				ObjectHideDelayTween		= "objectHideDelayTween";
 	//private List<PoolingObjectView>		_waitPoolingObjectsList		= new List<PoolingObjectView>();
 
 	public override void OnNotification (string alias, Object target, params object[] data)
@@ -74,7 +74,14 @@ public class ObjectsPoolController : Controller
 				{
 					RocketView rocketView = (RocketView)data [0];
 
-					StoreObjectToPool (PoolingObjectType.ROCKET, rocketView);
+					if (game.model.gameState == GameState.Playing)
+					{
+						DOVirtual.DelayedCall (0.5f, () =>
+						{
+							StoreObjectToPool (PoolingObjectType.ROCKET, rocketView);
+						})
+						.SetId (ObjectHideDelayTween);
+					}
 					break;
 				}
 
@@ -83,8 +90,8 @@ public class ObjectsPoolController : Controller
 					//GameOverData gameOverData = (GameOverData)data[0];
 					List<PoolingObjectView> copyInstantiatedObjectsList = new List<PoolingObjectView> (_instantiatedObjectsList);
 
-					if (DOTween.IsTweening (PlatformHideDelayTween))
-						DOTween.Kill (PlatformHideDelayTween);
+					if (DOTween.IsTweening (ObjectHideDelayTween))
+						DOTween.Kill (ObjectHideDelayTween);
 
 					copyInstantiatedObjectsList.ForEach(obj=>
 					{
@@ -215,7 +222,7 @@ public class ObjectsPoolController : Controller
 			DG.Tweening.DOVirtual.DelayedCall (game.model.playerModel.invisibleBeforeDie, () =>
 			{
 				StoreObjectToPool (PoolingObjectType.PLATFORM, platformView);
-			}).SetId(PlatformHideDelayTween);
+			}).SetId(ObjectHideDelayTween);
 		}else
 		{
 			Destroy (platformView.gameObject);

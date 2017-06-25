@@ -30,7 +30,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 	private void ResetElements()
 	{
-		RocketRenderer.transform.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + GetMainRendererSize().x, 0f, 0f);
+		RocketRenderer.transform.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + GetMainRendererSize().x * 2f, 0f, 0f);
 		ExclamationBackground.transform.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + ExclamationBackground.bounds.size.x, 0f, 0f);
 		ExclamationBackground.transform.localScale = Vector3.one;
 		ExclamationBackground.DOFade (0f, 0.01f);
@@ -45,7 +45,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 		_rocketActionSequence
 			//1. Show exclamation mark
-			.Append(ExclamationBackground.transform.DOLocalMoveX (GM.Instance.ScreenSize.x * 0.5f - ExclamationBackground.bounds.size.x - 0.05f, 0.3f))
+			.Append(ExclamationBackground.transform.DOLocalMoveX (GM.Instance.ScreenSize.x * 0.5f - ExclamationBackground.bounds.size.x - 0.01f, 0.5f))
 			//2. Move exclamation mark for player
 			.Append (DOVirtual.DelayedCall (RocketStartDelay, () =>
 			{
@@ -61,7 +61,8 @@ public class RocketView : PoolingObjectView, IPoolObject
 			.AppendInterval(RocketLaunchDelay)
 			//5. Start move rocket
 			.AppendCallback(()=>{RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);})
-			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x, RocketMoveTime).SetEase(Ease.Linear))
+			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 1.5f, RocketMoveTime).SetEase(Ease.Linear))
+			.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))
 			.Join(ExclamationBackground.transform.DOLocalMoveX(GM.Instance.ScreenSize.x, 0.1f))

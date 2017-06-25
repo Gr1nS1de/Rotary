@@ -137,7 +137,7 @@ public class PlayerView : View
 					Debug.LogErrorFormat ("Contant point y: {0}. rocketRendererPositionY: {1}. rocket renderer size: {2}", contactPoint.y, rocketView.RocketRenderer.transform.position.y, rocketView.GetMainRendererSize ().y);
 
 					//If player is higher than rocket - just roll on it. :)
-					if (contactPoint.y < rocketView.RocketRenderer.transform.position.y + rocketView.GetMainRendererSize ().y / 2f)
+					if (contactPoint.y < rocketView.RocketRenderer.transform.position.y + rocketView.GetMainRendererSize ().y / 3f)
 					{
 						PlayerRocketExplodeParticleSystem.Play ();
 
