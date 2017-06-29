@@ -43,6 +43,8 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 		_rocketActionSequence = DOTween.Sequence ();
 
+		RocketRenderer.gameObject.SetActive (false);
+
 		_rocketActionSequence
 			//1. Show exclamation mark
 			.Append(ExclamationBackground.transform.DOLocalMoveX (GM.Instance.ScreenSize.x * 0.5f - ExclamationBackground.bounds.size.x - 0.01f, 0.5f))
@@ -60,7 +62,11 @@ public class RocketView : PoolingObjectView, IPoolObject
 			//4. Wait for delay before rocket starts moving
 			.AppendInterval(RocketLaunchDelay)
 			//5. Start move rocket
-			.AppendCallback(()=>{RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);})
+			.AppendCallback(()=>
+			{
+				RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);
+				RocketRenderer.gameObject.SetActive(true);
+			})
 			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 1.5f, RocketMoveTime).SetEase(Ease.Linear))
 			.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
