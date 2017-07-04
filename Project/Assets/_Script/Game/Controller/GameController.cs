@@ -6,7 +6,7 @@ using DG.Tweening;
 public class GameController : Controller
 {
 	#region Declare controllers reference
-	public CameraController					cameraController				{ get { return _cameraController 			= SearchLocal<CameraController>(			_cameraController,				typeof(CameraController).Name ); } }
+	//public CameraController					cameraController				{ get { return _cameraController 			= SearchLocal<CameraController>(			_cameraController,				typeof(CameraController).Name ); } }
 	public GameSoundController				gameSoundController				{ get { return _gameSoundController			= SearchLocal<GameSoundController>(			_gameSoundController,			typeof(GameSoundController).Name ); } }
 	public GameResourcesController			resourcesController				{ get { return _resourcesController 		= SearchLocal<GameResourcesController>(		_resourcesController,			typeof(GameResourcesController).Name ); } }
 	public ObjectsPoolController			objectsPoolController			{ get { return _objectsPoolController 		= SearchLocal<ObjectsPoolController> (		_objectsPoolController, 		typeof(ObjectsPoolController).Name);}}
@@ -27,7 +27,7 @@ public class GameController : Controller
 	private BonusesFactoryController		_bonusesFactoryController;
 	private ItemsFactoryController			_itemsFactoryController;
 	private PlayerController				_playerController;
-	private CameraController				_cameraController;
+	//private CameraController				_cameraController;
 	private GameSoundController				_gameSoundController;
 	private GameResourcesController			_resourcesController;
 	private ObjectsPoolController 			_objectsPoolController;
@@ -119,11 +119,6 @@ public class GameController : Controller
 	{
 		_gameModel.gameTheme = gameTheme;
 
-		if (game.view.backgroundView != null)
-			Destroy (game.view.backgroundView.gameObject);
-
-		BackgroundView backgroundView = (BackgroundView)Instantiate (_gameModel.gameTheme.BackgroundView, game.view.cameraView.transform);//.cameraView.transform);
-	
 		Notify (N.GameThemeChanged_, NotifyType.GAME, gameTheme);
 	}
 	#endregion

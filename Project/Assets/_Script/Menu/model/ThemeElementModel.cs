@@ -19,7 +19,10 @@ public enum CenterElementId
 	Settings_ButtonSFX			= 9,
 	Settings_ButtonMusic		= 10,
 
-	ButtonShowRewardVideo		= 11
+	ButtonShowRewardVideo		= 11,
+
+	ButtomTheme_DarkBlueGarage	= 12,
+	ButtomTheme_PinkCity		= 13
 }
 
 public enum RightElementId

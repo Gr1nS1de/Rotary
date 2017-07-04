@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a3fc73d3e543446d387bab09ff2253e2
-timeCreated: 1498692179
+guid: 6cab0505c83f84adbb0425799d4f58f1
+timeCreated: 1496502701
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -36,10 +36,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 235, y: 50, z: 235, w: 50}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -94,7 +94,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: MenuIcons
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -29,6 +29,7 @@ public struct UITheme
 {
 	public GameThemeType GameThemeType;
 	public Color IconsColor;
+	public Color BackgroundColor;
 	public Sprite PlayButtonBGSprite;
 	public Sprite CenterButtonsBGSprite;
 	public Sprite RightButtonsBGSPrite;
@@ -40,7 +41,7 @@ public class UIModel : Model
 
 	#region UI Model
 	public UIPanelState			uiMainState				{ get { return _uiPanelState; } 	set { _uiPanelState 	= value;} }
-	public UITheme 				menuTheme				{ get { return _menuTheme; } 		set { _menuTheme 		= value;} }
+	public UITheme		 		menuTheme				{ get { return _menuTheme; } 		set { _menuTheme 		= value;} }
 	public UIWindowState		uiWindowState			{ get { return _uiWindowState; } 	set { _uiWindowState 	= value; } }
 	public CanvasGroup 			mainMenuWindow			{ get { return _mainMenuWindow; } }
 	public CanvasGroup 			storeWindow				{ get { return _storeWindow; } }

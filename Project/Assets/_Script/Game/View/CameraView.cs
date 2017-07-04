@@ -2,16 +2,23 @@
 using System.Collections;
 using DG.Tweening;
 
+[RequireComponent(typeof(Camera))]
 public class CameraView : View<GameActivity>
 {
+	public Camera 			Camera;
+
 	private CameraModel 	_cameraModel	{ get { return game.model.cameraModel; } }
-	private Camera 			_camera;
 	private PlayerView		_playerView		{ get { return game.view.playerView; } }
 	private float			_moveSpeed		{ get { return _cameraModel.moveSpeed; } }
 
+	void Awake()
+	{
+		Camera = GetComponent<Camera> ();
+	}
+
 	void Start()
 	{
-		_camera = GetComponent<Camera> ();
+
 	}
 
 	public void OnInit()
@@ -24,11 +31,11 @@ public class CameraView : View<GameActivity>
 		if (game.model.gameState != GameState.Playing)
 			return;
 
-		Vector3 cameraPosition = _camera.transform.position;
+		Vector3 cameraPosition = Camera.transform.position;
 
 		cameraPosition.x += _moveSpeed * game.model.gameSpeed;
 
-		_camera.transform.position = Vector3.Lerp(_camera.transform.position, cameraPosition, Time.deltaTime);
+		Camera.transform.position = Vector3.Lerp(Camera.transform.position, cameraPosition, Time.deltaTime);
 	}
 
 	//void Update()

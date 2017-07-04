@@ -21,6 +21,7 @@ public class GM : Controller
 	public bool 				IsLoggsEnabled = true;
 
 	private AnalyticsManager 	_analyticsManager = null;
+	private int					_gameOversCounter = 0;
 
 	void Awake()
 	{
@@ -79,6 +80,14 @@ public class GM : Controller
 			case N.GameOver_:
 				{
 					GameOverData gameOverData = (GameOverData)data[0];
+
+					_gameOversCounter++;
+
+					if (_gameOversCounter > 10)
+					{
+						_gameOversCounter = 0;
+						Resources.UnloadUnusedAssets ();
+					}
 					break;
 				}
 		}

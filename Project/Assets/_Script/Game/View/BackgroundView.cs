@@ -7,27 +7,43 @@ public class BackgroundView : View
 {
 	public ParticleSystem	ParticlesDust;
 	public ParticleSystem	ParticleWorryDust;
-	public List<SpriteRenderer> TiledRenderers;
+	public List<MovingSprite> TiledRenderers;
 
 	private Sequence _tilingSequence = null;
+	private float _renderersSizeX;
 
 	void Start()
 	{
-		if (_tilingSequence == null)
+	}
+
+	public void Play(float moveSpeed)
+	{
+		foreach (MovingSprite tiledBG in TiledRenderers)
 		{
-			_tilingSequence = DOTween.Sequence ();
-
-			foreach(SpriteRenderer tiledBG in TiledRenderers)
-			{
-			_tilingSequence
-					.Append(DOVirtual.Float(GM.Instance.ScreenSize.x, GM.Instance.ScreenSize.x*3.6f, 3f, (val)=>
-					{
-						tiledBG.size = new Vector2(val, tiledBG.size.y);
-					}).SetEase(Ease.Linear))
-					.SetLoops(-1);
-
-			}
+			tiledBG.CurrentSizeX = tiledBG.ItemRenderer.sprite.bounds.size.x * 3f;
+			tiledBG.ItemRenderer.size = new Vector2 (tiledBG.ItemRenderer.sprite.bounds.size.x * 3f, tiledBG.ItemRenderer.sprite.bounds.size.y);
 		}
+	}
+
+	public void Stop()
+	{
+
+	}
+
+	void Update()
+	{
+
+	}
+	/*
+	public void Init()
+	{
+
+	}*/
+
+	void OnDestroy()
+	{
+		if (_tilingSequence != null && _tilingSequence.IsActive ())
+			_tilingSequence.Kill ();
 	}
 }
 

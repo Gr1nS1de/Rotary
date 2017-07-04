@@ -24,6 +24,14 @@ public class CameraController : Controller
 					break;
 				}
 
+			case N.UIThemeChanged_:
+				{
+					UITheme uiTheme = (UITheme)data [0];
+
+					_cameraView.Camera.DOColor(uiTheme.BackgroundColor, 0.3f);
+					break;
+				}
+
 			case N.GameOver_:
 				{
 					//GameOverData gameOverData = (GameOverData)data[0];

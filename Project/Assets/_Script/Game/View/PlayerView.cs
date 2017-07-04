@@ -134,7 +134,7 @@ public class PlayerView : View
 					RocketView rocketView = (RocketView)poolingObject;
 					Vector2 contactPoint = collision.contacts [0].point;
 
-					Debug.LogErrorFormat ("Contant point y: {0}. rocketRendererPositionY: {1}. rocket renderer size: {2}", contactPoint.y, rocketView.RocketRenderer.transform.position.y, rocketView.GetMainRendererSize ().y);
+					//Debug.LogErrorFormat ("Contant point y: {0}. rocketRendererPositionY: {1}. rocket renderer size: {2}", contactPoint.y, rocketView.RocketRenderer.transform.position.y, rocketView.GetMainRendererSize ().y);
 
 					//If player is higher than rocket - just roll on it. :)
 					if (contactPoint.y < rocketView.RocketRenderer.transform.position.y + rocketView.GetMainRendererSize ().y / 3f)

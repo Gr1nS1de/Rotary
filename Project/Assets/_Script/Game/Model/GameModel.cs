@@ -13,7 +13,8 @@ public enum GameState
 
 public enum GameThemeType
 {
-	DarkBlueGarage	= 0
+	DarkBlueGarage	= 0,
+	PinkCity		= 1
 }
 
 public enum GameSpeedState

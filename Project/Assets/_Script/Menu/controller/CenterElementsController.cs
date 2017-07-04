@@ -148,6 +148,20 @@ public class CenterElementsController : Controller
 						Notify (N.PurchaseDoubleCoin);
 					break;
 				}
+
+				#region theme buttons
+			case CenterElementId.ButtomTheme_DarkBlueGarage:
+				{
+					GM.Instance.SetGameTheme(GameThemeType.DarkBlueGarage);
+					break;
+				}
+
+			case CenterElementId.ButtomTheme_PinkCity:
+				{
+					GM.Instance.SetGameTheme(GameThemeType.PinkCity);
+					break;
+				}
+				#endregion
 		}
 	}
 

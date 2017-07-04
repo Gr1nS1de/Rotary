@@ -45,6 +45,15 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 		RocketRenderer.gameObject.SetActive (false);
 
+		Sequence rocketShakeSequence = DOTween.Sequence ();
+
+		rocketShakeSequence
+			.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+			.SetLoops (100);
+
 		_rocketActionSequence
 			//1. Show exclamation mark
 			.Append(ExclamationBackground.transform.DOLocalMoveX (GM.Instance.ScreenSize.x * 0.5f - ExclamationBackground.bounds.size.x - 0.01f, 0.5f))
@@ -67,8 +76,8 @@ public class RocketView : PoolingObjectView, IPoolObject
 				RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);
 				RocketRenderer.gameObject.SetActive(true);
 			})
-			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 1.5f, RocketMoveTime).SetEase(Ease.Linear))
-			.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
+			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime).SetEase(Ease.Linear))
+			//.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))
 			.Join(ExclamationBackground.transform.DOLocalMoveX(GM.Instance.ScreenSize.x, 0.1f))

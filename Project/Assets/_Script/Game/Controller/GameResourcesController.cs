@@ -60,7 +60,7 @@ public class GameResourcesController : Controller
 		List<Sprite> centerButtonsSprites = new List<Sprite>( Resources.LoadAll<Sprite> (string.Format ("Theme/{0:00}_{1}/CenterButtons", (int)gameThemeType, gameThemeType)));
 		UIThemeModel themeModel = Resources.LoadAll<UIThemeModel> (string.Format ("Theme/{0:00}_{1}", (int)gameThemeType, gameThemeType))[0];
 
-		UITheme menuTheme = new UITheme 
+		UITheme menuTheme = new UITheme
 		{
 			GameThemeType = gameThemeType,
 		};
@@ -79,6 +79,7 @@ public class GameResourcesController : Controller
 		}
 
 		menuTheme.IconsColor = themeModel.IconsColor;
+		menuTheme.BackgroundColor = themeModel.BackgroundColor;
 
 		ui.controller.SetMenuTheme (menuTheme);
 
