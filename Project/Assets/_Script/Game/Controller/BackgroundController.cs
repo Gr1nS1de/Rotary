@@ -4,9 +4,9 @@ using System.Collections;
 [System.Serializable]
 public class MovingSprite
 {
-	public  float LoopMoveTime;
+	public  float MoveSpeed;
 	public SpriteRenderer ItemRenderer;
-	public float CurrentSizeX;
+	public Vector2 CurrentSize;
 }
 
 public class BackgroundController : Controller
@@ -25,6 +25,20 @@ public class BackgroundController : Controller
 			case N.GameThemeChanged_:
 				{
 					OnGameThemeChanged ();
+					break;
+				}
+
+			case N.GameStart:
+				{
+					game.view.backgroundView.Play ();
+					break;
+				}
+
+			case N.GameOver_:
+				{
+					//GameOverData gameOverData = (GameOverData)data[0];
+
+					game.view.backgroundView.Stop ();
 					break;
 				}
 		}

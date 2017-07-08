@@ -8,6 +8,9 @@ public class RocketView : PoolingObjectView, IPoolObject
 	public RocketType			RocketType;
 	public SpriteRenderer		RocketRenderer;
 	public SpriteRenderer		ExclamationBackground;
+	public SpriteRenderer		ExclamationMark;
+	public SpriteRenderer 		AttentionArrow;
+	public Color				ExclamationMarkBlinkColor;
 	public float				RocketMoveTime				= 2f;
 	public float 				RocketStartDelay			= 3f;
 	public float				RocketLaunchDelay			= 0.3f;
@@ -15,9 +18,13 @@ public class RocketView : PoolingObjectView, IPoolObject
 	private Sequence			_rocketActionSequence;
 	private bool 				_isInPool 					= false;
 	private bool 				_isPlayerImpact 			= false;
+	private Color?				_exclamationMarkInitColor	= null;
 
 	public void Init()
 	{
+		if (_exclamationMarkInitColor == null)
+			_exclamationMarkInitColor = ExclamationMark.color;
+		
 		GoToVisibleState (PoolingObjectState.WAIT_FOR_VISIBLE);
 
 		_isInPool = false;
@@ -45,28 +52,43 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 		RocketRenderer.gameObject.SetActive (false);
 
-		Sequence rocketShakeSequence = DOTween.Sequence ();
-
-		rocketShakeSequence
-			.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-			.SetLoops (100);
-
 		_rocketActionSequence
-			//1. Show exclamation mark
+			//1. Show exclamation mark and arrow - move them from right
 			.Append(ExclamationBackground.transform.DOLocalMoveX (GM.Instance.ScreenSize.x * 0.5f - ExclamationBackground.bounds.size.x - 0.01f, 0.5f))
-			//2. Move exclamation mark for player
+			.Join(AttentionArrow.DOFade(1f, 0.1f))
+			//2. Move exclamation mark and arrow to player during rocket start delay
 			.Append (DOVirtual.DelayedCall (RocketStartDelay, () =>
 			{
 
-			}).OnUpdate (() =>
-			{
-				ExclamationBackground.transform.DOLocalMoveY (game.view.playerView.PlayerRenderer.transform.position.y, 2f);
-			}))
+			})
+				.OnStart(()=>
+				{
+					float blinkStepTime = 0.3f;
+					int loopSteps = (int)(RocketStartDelay / blinkStepTime);
+
+					ExclamationMark
+						.DOColor(ExclamationMarkBlinkColor, blinkStepTime)
+						.OnComplete(()=>
+						{
+							ExclamationMark.DOColor(_exclamationMarkInitColor.GetValueOrDefault(), blinkStepTime);	
+						}).SetLoops(loopSteps);
+
+					AttentionArrow.transform.localPosition = new Vector3(0.85f, 0f, 0f);
+
+					Sequence arrowMoveSequence = DOTween.Sequence ();
+
+					arrowMoveSequence
+						.Append(AttentionArrow.transform.DOLocalMoveX(1.1f, blinkStepTime ))
+						.Append(AttentionArrow.transform.DOLocalMoveX(0.85f, blinkStepTime))
+						.SetLoops(loopSteps);
+				})
+				.OnUpdate (() =>
+				{
+					ExclamationBackground.transform.DOLocalMoveY (game.view.playerView.PlayerRenderer.transform.position.y, 2f);
+				}))
 			//3. Start fade in with punch scale background of exclamation mark (begin rocket launch)
 			.Append (ExclamationBackground.DOFade (1f, 0.1f))
+			.Append(AttentionArrow.DOFade(0f, 0.1f))
 			.Join (ExclamationBackground.transform.DOPunchScale (new Vector3 (0.2f, 0.2f, 0f), 0.15f, 2))
 			//4. Wait for delay before rocket starts moving
 			.AppendInterval(RocketLaunchDelay)
@@ -75,6 +97,17 @@ public class RocketView : PoolingObjectView, IPoolObject
 			{
 				RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);
 				RocketRenderer.gameObject.SetActive(true);
+
+				Sequence rocketShakeSequence = DOTween.Sequence ();
+
+				RocketRenderer.transform.localEulerAngles = new Vector3 (0f, 0f, 90f);
+
+				rocketShakeSequence
+					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
 			})
 			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime).SetEase(Ease.Linear))
 			//.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))

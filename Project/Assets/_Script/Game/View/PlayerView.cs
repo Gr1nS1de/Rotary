@@ -11,20 +11,23 @@ public class PlayerView : View
 	public SpriteRenderer		PlayerRenderer;
 	public Transform 			PlayerTriggerDetector;
 	public ParticleSystem		PlayerRocketExplodeParticleSystem;
+	public LayerMask 			JumpRayMask;
 
 	private PlayerModel 		_playerModel	{ get { return game.model.playerModel; } }
-	//private Rigidbody2D 		_playerRB;
+	private Rigidbody2D 		_playerRB;
 	private Vector3 			_playerInitPosition;
 	private float 				_initCameraDistanceX = 0f;
 	//private float 			_lastCameraDistance = 0f;
 	private float? 				_lastInvisibleTimestamp = 0f;
 	private float 				_offsetBackspeedRate = 0f;
 	private float 				_backOffsetSpeed = 0f;
+	private RaycastHit2D		_jumpRaycast;
+	private float				_lastJumpTimestamp;
 
 	//initialize values 
 	void Start() 
 	{
-		//_playerRB = PlayerRenderer.GetComponent<Rigidbody2D>();
+		_playerRB = PlayerRenderer.GetComponent<Rigidbody2D>();
 	} 
 
 	public void OnInit(Vector3 initPosition)
@@ -51,6 +54,7 @@ public class PlayerView : View
 		{
 			MovePlayer ();
 			RotatePlayer ();
+			CheckJumpRay ();
 
 			if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
 				Notify (N.OnPlayerInvisible);
@@ -58,6 +62,20 @@ public class PlayerView : View
 
 		//Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
 		
+	}
+
+	private void CheckJumpRay()
+	{
+		_jumpRaycast = Physics2D.Raycast(new Vector2(PlayerRenderer.transform.position.x, PlayerRenderer.transform.position.y - PlayerRenderer.size.y / 4f), (Vector2)PlayerRenderer.transform.position + Vector2.right, PlayerRenderer.size.x, JumpRayMask);
+
+		if (_jumpRaycast.collider != null)
+		{
+			if (_lastJumpTimestamp < Time.time)
+			{
+				_lastJumpTimestamp = Time.time + 1f;
+				_playerRB.AddForce (Vector2.up * 4f, ForceMode2D.Impulse);
+			}
+		}
 	}
 
 	private void MovePlayer()
@@ -225,17 +243,15 @@ public class PlayerView : View
 
 	public void SetStaticPlayer(bool isStatic)
 	{
-		Rigidbody2D rigitBody = PlayerRenderer.GetComponent<Rigidbody2D> ();
-
 		if (isStatic)
 		{
-			if(rigitBody.bodyType != RigidbodyType2D.Static)
-				rigitBody.bodyType = RigidbodyType2D.Static;
+			if(_playerRB.bodyType != RigidbodyType2D.Static)
+				_playerRB.bodyType = RigidbodyType2D.Static;
 		}
 		else
 		{
-			if(rigitBody.bodyType != RigidbodyType2D.Dynamic)
-				rigitBody.bodyType = RigidbodyType2D.Dynamic;
+			if(_playerRB.bodyType != RigidbodyType2D.Dynamic)
+				_playerRB.bodyType = RigidbodyType2D.Dynamic;
 		}
 	}
 
