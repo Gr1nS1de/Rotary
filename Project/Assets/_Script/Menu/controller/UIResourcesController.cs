@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class UIResourcesController : Controller
 {
+	private List<RuntimeAnimatorController> _playerSkinsAnimationControllersList = null;
 
 	public override void OnNotification (string alias, Object target, params object[] data)
 	{
@@ -11,6 +12,7 @@ public class UIResourcesController : Controller
 		{
 			case N.RCAwakeLoad:
 				{
+					OnInit ();
 					LoadPlayerSkins ();
 					break;
 				}
@@ -24,12 +26,17 @@ public class UIResourcesController : Controller
 		}
 	}
 
+	private void OnInit()
+	{
+		_playerSkinsAnimationControllersList = new List<RuntimeAnimatorController>(Resources.LoadAll<RuntimeAnimatorController> (string.Format("Player")));
+	}
+
 	private void LoadPlayerSkins()
 	{
 		PlayerSkinView playerSkinPrefab = ui.model.mainMenuPanelModel.playerSkinPrefab;
 		//Get player skins sprites
 		List<Sprite> playerSkinsSpritesList = new List<Sprite>( Resources.LoadAll<Sprite> (string.Format ("PlayerSkinSprites")));
-		List<PlayerSkinView> playerSkinsViewList = new List<PlayerSkinView> ();;
+		List<PlayerSkinView> playerSkinsViewList = new List<PlayerSkinView> ();
 
 
 		//Load this views to ui model for PlayerSkinController
@@ -37,6 +44,8 @@ public class UIResourcesController : Controller
 		{
 			PlayerSkinView playerSkin = Instantiate (playerSkinPrefab, ui.model.mainMenuPanelModel.playerSkinElementsPanel.transform) as PlayerSkinView;
 			Sprite skinSprite = playerSkinsSpritesList [i];
+
+			playerSkin.SkinAnimationController = _playerSkinsAnimationControllersList.Find(skinAnimationItem=>skinAnimationItem.name.Contains( skinSprite.name));
 
 			playerSkin.name = string.Format ("PlayerSkin_{0:00}", i);
 			playerSkin.SkinId = i;
@@ -50,6 +59,10 @@ public class UIResourcesController : Controller
 		}
 
 		ui.controller.PlayerSkinWindowController.InitPlayerSkins (playerSkinsViewList);
+
+		_playerSkinsAnimationControllersList = null;
+
+		Resources.UnloadUnusedAssets ();
 	}
 
 }

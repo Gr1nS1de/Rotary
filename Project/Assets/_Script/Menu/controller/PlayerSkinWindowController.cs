@@ -67,6 +67,7 @@ public class PlayerSkinWindowController : Controller
 
 					if (!isAvailable && !isActive && _isStoreInited)
 					{
+						//TODO: Modale window with offer to go to store
 						ui.controller.GoToWindowState (UIWindowState.Store);
 					}
 					else if (!isAvailable && isActive)

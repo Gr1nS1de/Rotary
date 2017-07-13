@@ -7,6 +7,7 @@ public class PlayerSkinView : View
 {
 	public Image 				SkinImage;
 	public CanvasGroup 			SkinPricePanel;
+	public RuntimeAnimatorController	SkinAnimationController;
 	[HideInInspector]
 	public int	 				SkinId;
 	[HideInInspector]

@@ -11,6 +11,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 	public SpriteRenderer		ExclamationMark;
 	public SpriteRenderer 		AttentionArrow;
 	public Color				ExclamationMarkBlinkColor;
+	public ParticleSystem		ExplodeParticleSystem;
 	public float				RocketMoveTime				= 2f;
 	public float 				RocketStartDelay			= 3f;
 	public float				RocketLaunchDelay			= 0.3f;
@@ -84,7 +85,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 				})
 				.OnUpdate (() =>
 				{
-					ExclamationBackground.transform.DOLocalMoveY (game.view.playerView.PlayerRenderer.transform.position.y, 2f);
+					transform.DOLocalMoveY (game.view.playerView.PlayerRenderer.transform.position.y, 2f);
 				}))
 			//3. Start fade in with punch scale background of exclamation mark (begin rocket launch)
 			.Append (ExclamationBackground.DOFade (1f, 0.1f))
@@ -95,7 +96,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 			//5. Start move rocket
 			.AppendCallback(()=>
 			{
-				RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);
+				//RocketRenderer.transform.position = new Vector3(RocketRenderer.transform.position.x, ExclamationBackground.transform.position.y, RocketRenderer.transform.position.z);
 				RocketRenderer.gameObject.SetActive(true);
 
 				Sequence rocketShakeSequence = DOTween.Sequence ();
@@ -104,12 +105,13 @@ public class RocketView : PoolingObjectView, IPoolObject
 				RocketRenderer.transform.localPosition = new Vector3(RocketRenderer.transform.localPosition.x, 0f, 0f);
 
 				rocketShakeSequence
-					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Join(RocketRenderer.transform.DOLocalMoveY(0.1f, 0.05f).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Join(RocketRenderer.transform.DOLocalMoveY(-0.1f, 0.05f).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Join(RocketRenderer.transform.DOLocalMoveY(0.1f, 0.1f).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Join(RocketRenderer.transform.DOLocalMoveY(-0.1f, 0.1f).SetEase(Ease.Linear))
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Join(RocketRenderer.transform.DOLocalMoveY(0f, 0.05f).SetEase(Ease.Linear))
 					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
 			})
 			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime).SetEase(Ease.Linear))
@@ -138,6 +140,12 @@ public class RocketView : PoolingObjectView, IPoolObject
 		}
 
 		return rendererSize;
+	}
+
+	public void PlayExplode(Vector3 contantPoint)
+	{
+		ExplodeParticleSystem.transform.position = contantPoint;
+		ExplodeParticleSystem.Play ();
 	}
 	#endregion
 		

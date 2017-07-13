@@ -10,7 +10,6 @@ public class PlayerView : View
 	public List<PlatformView>	ScorePlatformsList	= new List<PlatformView>();
 	public SpriteRenderer		PlayerRenderer;
 	public Transform 			PlayerTriggerDetector;
-	public ParticleSystem		PlayerRocketExplodeParticleSystem;
 	public LayerMask 			JumpRayMask;
 
 	private PlayerModel 		_playerModel	{ get { return game.model.playerModel; } }
@@ -23,11 +22,13 @@ public class PlayerView : View
 	private float 				_backOffsetSpeed = 0f;
 	private RaycastHit2D		_jumpRaycast;
 	private float				_lastJumpTimestamp;
+	private Animator			_playerAnimator;
 
 	//initialize values 
 	void Start() 
 	{
 		_playerRB = PlayerRenderer.GetComponent<Rigidbody2D>();
+		_playerAnimator = PlayerRenderer.GetComponent<Animator> ();
 	} 
 
 	public void OnInit(Vector3 initPosition)
@@ -36,6 +37,22 @@ public class PlayerView : View
 
 		_initCameraDistanceX = Mathf.Abs (- GM.Instance.ScreenSize.x / 2f + (GM.Instance.ScreenSize.x * _playerModel.initScreenPosX)  - game.view.cameraView.transform.position.x);
 
+	}
+
+	public void SetupSkin(PlayerSkinView playerSkinView)
+	{
+		if (playerSkinView.SkinAnimationController != null)
+		{
+
+			_playerAnimator.enabled = true;
+			_playerAnimator.runtimeAnimatorController = playerSkinView.SkinAnimationController;
+		}
+		else
+		{
+			_playerAnimator.enabled = false;
+			_playerAnimator.runtimeAnimatorController = null;
+			PlayerRenderer.sprite = playerSkinView.SkinSprite;
+		}
 	}
 
 	public override void OnInvisible(ViewVisibleDetect visibleDetector)
@@ -157,8 +174,6 @@ public class PlayerView : View
 					//If player is higher than rocket - just roll on it. :)
 					if (contactPoint.y < rocketView.RocketRenderer.transform.position.y + rocketView.GetMainRendererSize ().y / 3f)
 					{
-						PlayerRocketExplodeParticleSystem.Play ();
-
 						Notify (N.PlayerImpactRocket__, NotifyType.GAME, rocketView, contactPoint);
 					}
 					break;

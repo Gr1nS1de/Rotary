@@ -153,7 +153,8 @@ public class PlayerController : Controller
 	{
 		PlayerSkinView selectedSkinView = ui.view.GetPlayerSkinElement (skinId);
 
-		_playerView.PlayerRenderer.sprite = selectedSkinView.SkinSprite;
+		_playerView.SetupSkin (selectedSkinView);
+
 
 		if (_playerModel.currentSkinId != skinId)
 		{

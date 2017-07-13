@@ -13,6 +13,15 @@ public class RocketsController : Controller
 
 					break;
 				}
+
+			case N.PlayerImpactRocket__:
+				{
+					RocketView rocketView = (RocketView)data [0];
+					Vector2 contactPoint = (Vector2)data [1];
+
+					rocketView.PlayExplode ((Vector3)contactPoint);
+					break;
+				}
 		}
 
 	}
