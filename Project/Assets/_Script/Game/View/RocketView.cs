@@ -101,11 +101,14 @@ public class RocketView : PoolingObjectView, IPoolObject
 				Sequence rocketShakeSequence = DOTween.Sequence ();
 
 				RocketRenderer.transform.localEulerAngles = new Vector3 (0f, 0f, 90f);
+				RocketRenderer.transform.localPosition = new Vector3(RocketRenderer.transform.localPosition.x, 0f, 0f);
 
 				rocketShakeSequence
 					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Join(RocketRenderer.transform.DOLocalMoveY(0.1f, 0.05f).SetEase(Ease.Linear))
 					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
 					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
+					.Join(RocketRenderer.transform.DOLocalMoveY(-0.1f, 0.05f).SetEase(Ease.Linear))
 					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.05f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
 					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
 			})

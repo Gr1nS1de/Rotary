@@ -24,6 +24,8 @@ public class BackgroundController : Controller
 
 			case N.GameThemeChanged_:
 				{
+					GameTheme gameTheme = (GameTheme)data [0];
+
 					OnGameThemeChanged ();
 					break;
 				}
@@ -59,7 +61,7 @@ public class BackgroundController : Controller
 		if (!backgroundView.gameObject.activeInHierarchy)
 			backgroundView.gameObject.SetActive (true);
 
-		//backgroundView.Init ();
+		backgroundView.Init ();
 	}
 }
 

@@ -31,6 +31,30 @@ public class ObjectsPoolController : Controller
 					break;
 				}
 
+			case N.GameThemeChanged_:
+				{
+					GameTheme gameTheme = (GameTheme)data [0];
+					List<PoolingObjectView> destroyList = new List<PoolingObjectView> ();
+
+					_poolObjectsList.ForEach (poolView =>
+					{
+						if(poolView.PoolingType == PoolingObjectType.PLATFORM)
+							destroyList.Add(poolView);
+					});
+
+					_poolObjectsList.RemoveAll (view => view.PoolingType == PoolingObjectType.PLATFORM);
+
+					destroyList.ForEach (destroyView =>
+					{
+						Destroy(destroyView.gameObject);
+					});
+
+					destroyList.Clear ();
+					destroyList = null;
+
+					break;
+				}
+
 			case N.PlayerImpactItem__:
 				{
 					ItemView itemView = (ItemView)data [0];

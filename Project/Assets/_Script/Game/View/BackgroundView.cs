@@ -17,6 +17,18 @@ public class BackgroundView : View
 	{
 	}
 
+	public void Init()
+	{
+		if (TiledRenderers.Count > 0)
+		{
+			foreach (MovingSprite tiledBG in TiledRenderers)
+			{
+				tiledBG.CurrentSize = new Vector2 (tiledBG.ItemRenderer.sprite.bounds.size.x * 3f, tiledBG.ItemRenderer.sprite.bounds.size.y);
+				tiledBG.ItemRenderer.size = tiledBG.CurrentSize;
+			}
+		}
+	}
+
 	public void Play()
 	{
 		if (TiledRenderers.Count > 0)
@@ -55,7 +67,7 @@ public class BackgroundView : View
 
 				tiledBG.CurrentSize.x = Mathf.Clamp(tiledBG.CurrentSize.x + tiledBG.MoveSpeed * game.model.gameSpeed * Time.deltaTime, spriteWidth * 3f, spriteWidth * 9f);
 
-				if (tiledBG.CurrentSize.x == spriteWidth * 9f)
+				if (tiledBG.CurrentSize.x >= spriteWidth * 8.99f)
 				{
 					tiledBG.CurrentSize.x = spriteWidth * 3f;
 				}
@@ -64,11 +76,7 @@ public class BackgroundView : View
 			}
 		}
 	}
-	/*
-	public void Init()
-	{
-
-	}*/
+		
 
 	void OnDestroy()
 	{

@@ -53,7 +53,7 @@ public class PlayerView : View
 		if (_playerModel.playerState == PlayerState.GamePlay)
 		{
 			MovePlayer ();
-			RotatePlayer ();
+			//RotatePlayer ();
 			CheckJumpRay ();
 
 			if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)

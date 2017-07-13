@@ -21,6 +21,8 @@ public class GameResourcesController : Controller
 
 					LoadGameTheme (gameThemeType);
 					LoadMenuTheme (gameThemeType);
+
+					Resources.UnloadUnusedAssets ();
 					break;
 				}
 		}
@@ -50,6 +52,7 @@ public class GameResourcesController : Controller
 
 		backgroundView = null;
 		platformsViewList = null;
+
 	}
 
 	private void LoadMenuTheme(GameThemeType gameThemeType)
