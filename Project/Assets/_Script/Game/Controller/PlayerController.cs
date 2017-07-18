@@ -107,6 +107,7 @@ public class PlayerController : Controller
 		_playerModel.currentSkinId = Prefs.PlayerData.GetCurrentSkinId ();
 
 		SetupPlayerSkin (_playerModel.currentSkinId);
+		ResetPlayer ();
 	}
 
 	private void GoToPlayerState(PlayerState playerState)
@@ -116,6 +117,7 @@ public class PlayerController : Controller
 			case PlayerState.MainMenu:
 				{
 					_playerView.SetStaticPlayer (false);
+					_playerView.gameObject.SetActive (false);
 					break;
 				}
 
@@ -124,6 +126,7 @@ public class PlayerController : Controller
 					Vector3 currentSkinImageWorldPosition = ui.model.mainMenuPanelModel.imageCurrentPlayerSkin.GetComponent<RectTransform>().TransformPoint(Camera.main.ScreenToWorldPoint( ui.model.mainMenuPanelModel.imageCurrentPlayerSkin.GetComponent<RectTransform>().rect.center));
 
 					_playerView.SetStaticPlayer (true);
+					_playerView.gameObject.SetActive (true);
 					_playerView.PlayerRenderer.transform.DOMove (currentSkinImageWorldPosition, 0.6f);
 					break;
 				}
@@ -136,6 +139,7 @@ public class PlayerController : Controller
 
 			case PlayerState.GamePlay:
 				{
+
 					break;
 				}
 
@@ -214,7 +218,7 @@ public class PlayerController : Controller
 		playerRB.transform.DOMove (Vector3.zero, 0.5f)
 			.OnComplete (() =>
 			{
-
+				_playerView.gameObject.SetActive (true);
 				playerRB.velocity = Vector2.zero;
 
 				if (_playerModel.forceOnInit != 0f)
@@ -228,7 +232,7 @@ public class PlayerController : Controller
 	private void ResetPlayer()
 	{
 		GoToPlayerState (PlayerState.MainMenu);
-		_playerView.PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f);
+		//_playerView.PlayerRenderer.transform.DOMove (Vector3.zero, 0.5f);
 		_playerView.ScorePlatformsList.Clear ();
 		_playerView.PlayerRenderer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 	}

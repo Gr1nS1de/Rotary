@@ -28,7 +28,7 @@ public static class Utils
 			return;
 		}
 
-		List<LayoutGroup> layoutsList = new List<LayoutGroup>(element.GetComponentsInChildren<LayoutGroup> ());
+		List<LayoutGroup> layoutsList = new List<LayoutGroup>(element.GetComponentsInChildren<LayoutGroup> (true));
 
 		if (layoutsList.Count > 0)
 		{

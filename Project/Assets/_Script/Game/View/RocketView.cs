@@ -93,6 +93,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 			.Join (ExclamationBackground.transform.DOPunchScale (new Vector3 (0.2f, 0.2f, 0f), 0.15f, 2))
 			//4. Wait for delay before rocket starts moving
 			.AppendInterval(RocketLaunchDelay)
+			.Join (ExclamationBackground.transform.DOShakePosition (RocketLaunchDelay, new Vector3 (0.5f, 0.5f, 0f), 5))
 			//5. Start move rocket
 			.AppendCallback(()=>
 			{
@@ -114,7 +115,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 					.Join(RocketRenderer.transform.DOLocalMoveY(0f, 0.05f).SetEase(Ease.Linear))
 					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
 			})
-			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime).SetEase(Ease.Linear))
+			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime -  Mathf.Clamp( game.model.gameSpeed / 10f, 0.1f, 2f) ).SetEase(Ease.Linear))
 			//.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))

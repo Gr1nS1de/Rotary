@@ -37,6 +37,7 @@ public class N : MonoBehaviour
 	public const string OnPlayerNewRecord_			= "on.player.new.record";
 
 	public const string GameThemeChanged_			= "game.theme.changed";
+	public const string GameSpeedChanged_			= "game.speed.changed";
 
 	#region player notifications
 	//public const string DestructibleBreakEntity___ 	= "destructible.break.entity";

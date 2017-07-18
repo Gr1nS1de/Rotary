@@ -157,6 +157,8 @@ public class GameSpeedController : Controller
 		}
 
 		game.model.gameSpeedState = speedState;
+
+		Notify (N.GameSpeedChanged_, NotifyType.GAME, speedState);
 	}
 
 	private void DestroyIncreasingSpeedTween()

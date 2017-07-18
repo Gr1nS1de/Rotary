@@ -23,6 +23,7 @@ public class PlayerView : View
 	private RaycastHit2D		_jumpRaycast;
 	private float				_lastJumpTimestamp;
 	private Animator			_playerAnimator;
+	private bool				_isRotatable;
 
 	//initialize values 
 	void Start() 
@@ -46,12 +47,14 @@ public class PlayerView : View
 
 			_playerAnimator.enabled = true;
 			_playerAnimator.runtimeAnimatorController = playerSkinView.SkinAnimationController;
+			_isRotatable = false;
 		}
 		else
 		{
 			_playerAnimator.enabled = false;
 			_playerAnimator.runtimeAnimatorController = null;
 			PlayerRenderer.sprite = playerSkinView.SkinSprite;
+			_isRotatable = true;
 		}
 	}
 
@@ -70,7 +73,10 @@ public class PlayerView : View
 		if (_playerModel.playerState == PlayerState.GamePlay)
 		{
 			MovePlayer ();
-			//RotatePlayer ();
+			if (_isRotatable)
+			{
+				RotatePlayer ();
+			}
 			CheckJumpRay ();
 
 			if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
