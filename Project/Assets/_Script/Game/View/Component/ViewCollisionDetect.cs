@@ -14,7 +14,7 @@ public class ViewCollisionDetect : MonoBehaviour
 		if (collision.transform.parent == null)
 			return;
 
-		View viewObject = collision.transform.parent.GetComponent<View> ();
+		View viewObject = collision.transform.GetComponentInParent<View> ();
 
 		if (viewObject == null)
 			return;
@@ -30,7 +30,7 @@ public class ViewCollisionDetect : MonoBehaviour
 		if (collision.transform.parent == null)
 			return;
 
-		View viewObject = collision.transform.parent.GetComponent<View> ();
+		View viewObject = collision.transform.GetComponentInParent<View> ();
 
 		if (viewObject == null)
 			return;

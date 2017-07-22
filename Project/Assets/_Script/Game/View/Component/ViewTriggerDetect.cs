@@ -14,7 +14,7 @@ public class ViewTriggerDetect : MonoBehaviour
 		if (otherCollider.transform.parent == null)
 			return;
 
-		View viewObject = otherCollider.transform.parent.GetComponent<View> ();
+		View viewObject = otherCollider.transform.GetComponentInParent<View> ();
 
 		if (viewObject == null)
 			return;
@@ -30,7 +30,7 @@ public class ViewTriggerDetect : MonoBehaviour
 		if (otherCollider.transform.parent == null)
 			return;
 
-		View viewObject = otherCollider.transform.parent.GetComponent<View> ();
+		View viewObject = otherCollider.transform.GetComponentInParent<View> ();
 
 		if (viewObject == null)
 			return;

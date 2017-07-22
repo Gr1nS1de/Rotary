@@ -148,11 +148,11 @@ public class PlayerView : View
 		if (collision.transform.parent == null)
 			return;
 		
-		PoolingObjectView poolingObject = collision.transform.parent.GetComponent<PoolingObjectView> ();
+		PoolingObjectView poolingObject = collision.transform.GetComponentInParent<PoolingObjectView> ();
 
 		if (poolingObject == null)
 			return;
-		
+
 		switch(poolingObject.PoolingType)
 		{
 			case PoolingObjectType.PLATFORM:
@@ -197,7 +197,7 @@ public class PlayerView : View
 		if (game.model.gameState != GameState.Playing)
 			return;
 		
-		PoolingObjectView poolingObject = otherCollider.transform.parent.GetComponent<PoolingObjectView> ();
+		PoolingObjectView poolingObject = otherCollider.transform.GetComponentInParent<PoolingObjectView> ();
 
 		if (poolingObject == null)
 			return;
@@ -232,7 +232,7 @@ public class PlayerView : View
 		if (game.model.gameState != GameState.Playing)
 			return;
 		
-		PoolingObjectView poolingObject = otherCollider.transform.parent.GetComponent<PoolingObjectView> ();
+		PoolingObjectView poolingObject = otherCollider.transform.GetComponentInParent<PoolingObjectView> ();
 
 		if (poolingObject == null)
 			return;

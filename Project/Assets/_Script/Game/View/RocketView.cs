@@ -21,6 +21,41 @@ public class RocketView : PoolingObjectView, IPoolObject
 	private bool 				_isPlayerImpact 			= false;
 	private Color?				_exclamationMarkInitColor	= null;
 
+	void OnEnable_Test()
+	{
+		Sequence rocketShakeSequence = DOTween.Sequence ();
+
+		float initRocketRotationAngleZ = 90f;
+		float rocketShakeTime = 0.1f;
+		float rocketShakeRotateDegree = 25f;
+		float rocketMoveOffsetY = 0.1f;
+		Ease rocketMoveEase = Ease.Linear;
+
+		RocketRenderer.transform.localEulerAngles = new Vector3 (0f, 0f, initRocketRotationAngleZ);
+		RocketRenderer.transform.localPosition = new Vector3(RocketRenderer.transform.localPosition.x, 0f, 0f);
+
+		//RocketRenderer.transform.DOShakeRotation (0.1f, new Vector3 (0f, 0f, 10f)).SetLoops(-1);
+
+		rocketShakeSequence
+			.Append(RocketRenderer.transform.DOShakeRotation (0.1f, new Vector3 (0f, 0f, 5f)))
+			.Join(RocketRenderer.transform.DOShakePosition (0.2f, new Vector3 (0f, 0.1f, 0f)))
+			.SetLoops(-1);
+			/*.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ - rocketShakeRotateDegree), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+			.Join(RocketRenderer.transform.DOLocalMoveY(rocketMoveOffsetY, rocketShakeTime).SetEase(rocketMoveEase))
+
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+			.Join(RocketRenderer.transform.DOLocalMoveY(0f, rocketShakeTime).SetEase(rocketMoveEase))
+
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ + rocketShakeRotateDegree), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+			.Join(RocketRenderer.transform.DOLocalMoveY(-rocketMoveOffsetY, rocketShakeTime).SetEase(rocketMoveEase))
+
+			.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+			.Join(RocketRenderer.transform.DOLocalMoveY(0f, rocketShakeTime).SetEase(rocketMoveEase))
+			.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
+
+		rocketShakeSequence.Pause ();*/
+	}
+
 	public void Init()
 	{
 		if (_exclamationMarkInitColor == null)
@@ -38,7 +73,7 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 	private void ResetElements()
 	{
-		RocketRenderer.transform.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + GetMainRendererSize().x * 2f, 0f, 0f);
+		RocketRenderer.transform.parent.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + GetMainRendererSize().x * 2f, 0f, 0f);
 		ExclamationBackground.transform.localPosition = new Vector3 (GM.Instance.ScreenSize.x * 0.5f + ExclamationBackground.bounds.size.x, 0f, 0f);
 		ExclamationBackground.transform.localScale = Vector3.one;
 		ExclamationBackground.DOFade (0f, 0.01f);
@@ -102,20 +137,33 @@ public class RocketView : PoolingObjectView, IPoolObject
 
 				Sequence rocketShakeSequence = DOTween.Sequence ();
 
-				RocketRenderer.transform.localEulerAngles = new Vector3 (0f, 0f, 90f);
-				RocketRenderer.transform.localPosition = new Vector3(RocketRenderer.transform.localPosition.x, 0f, 0f);
+				float initRocketRotationAngleZ = 90f;
+				float rocketShakeTime = 0.3f;
+				float rocketShakeRotateDegree = 2f;
+				float rocketMoveOffsetY = 0.03f;
+				Ease rocketMoveEase = Ease.InOutSine;
 
+				RocketRenderer.transform.localEulerAngles = new Vector3 (0f, 0f, initRocketRotationAngleZ);
+				RocketRenderer.transform.parent.localPosition = new Vector3(RocketRenderer.transform.parent.localPosition.x, 0f, 0f);
 				rocketShakeSequence
-					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 85f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Join(RocketRenderer.transform.DOLocalMoveY(0.1f, 0.1f).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 95f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Join(RocketRenderer.transform.DOLocalMoveY(-0.1f, 0.1f).SetEase(Ease.Linear))
-					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, 90f), 0.1f, RotateMode.FastBeyond360).SetEase(Ease.Linear))
-					.Join(RocketRenderer.transform.DOLocalMoveY(0f, 0.05f).SetEase(Ease.Linear))
-					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);
+					.Append(RocketRenderer.transform.DOShakeRotation (0.1f, new Vector3 (0f, 0f, 5f)))
+					.Join(RocketRenderer.transform.DOShakePosition (0.2f, new Vector3 (0f, 0.1f, 0f)))
+					.SetLoops((int)(RocketMoveTime / (0.1f * 2)) + 1);
+				/*rocketShakeSequence
+					.Append (RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ - rocketShakeRotateDegree), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+					.Join(RocketRenderer.transform.DOLocalMoveY(rocketMoveOffsetY, rocketShakeTime).SetEase(rocketMoveEase))
+
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+					.Join(RocketRenderer.transform.DOLocalMoveY(0f, rocketShakeTime).SetEase(rocketMoveEase))
+
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ + rocketShakeRotateDegree), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+					.Join(RocketRenderer.transform.DOLocalMoveY(-rocketMoveOffsetY, rocketShakeTime).SetEase(rocketMoveEase))
+
+					.Append(RocketRenderer.transform.DOLocalRotate (new Vector3 (0f, 0f, initRocketRotationAngleZ), rocketShakeTime, RotateMode.FastBeyond360).SetEase(rocketMoveEase))
+					.Join(RocketRenderer.transform.DOLocalMoveY(0f, rocketShakeTime).SetEase(rocketMoveEase))
+					.SetLoops ((int)(RocketMoveTime / (0.1f * 2)) + 1);*/
 			})
-			.Append (RocketRenderer.transform.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime -  Mathf.Clamp( game.model.gameSpeed / 10f, 0.1f, 2f) ).SetEase(Ease.Linear))
+			.Append (RocketRenderer.transform.parent.DOLocalMoveX (-(GM.Instance.ScreenSize.x * 0.5f) - GetMainRendererSize ().x * 3f, RocketMoveTime -  Mathf.Clamp( game.model.gameSpeed * 0.1f, 0.1f, 2f) * 1.3f ).SetEase(Ease.Linear))
 			//.Join(RocketRenderer.transform.DOShakeRotation(RocketMoveTime, new Vector3(0f, 0f, 90f), 50, 10).SetEase(Ease.Linear))
 			//6. Hide exclamation mark
 			.Join(ExclamationBackground.transform.DOScale(0f, 0.1f))
