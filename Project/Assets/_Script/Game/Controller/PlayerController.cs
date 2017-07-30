@@ -155,9 +155,14 @@ public class PlayerController : Controller
 
 	private void SetupPlayerSkin(int skinId)
 	{
+		//Debug.LogFormat ("Setup player skin. id: {0}", skinId);
+
 		PlayerSkinView selectedSkinView = ui.view.GetPlayerSkinElement (skinId);
 
-		_playerView.SetupSkin (selectedSkinView);
+		if (selectedSkinView == null)
+			Debug.LogErrorFormat ("selectedSkinView == null!! skinId: {0}", skinId);
+		else
+			_playerView.SetupSkin (selectedSkinView);
 
 
 		if (_playerModel.currentSkinId != skinId)

@@ -70,7 +70,7 @@ public class GM : Controller
 	{		
 
 		SetGameTheme(DefaultGameTheme);
-		Notify(N.OnStart);
+		NotifyNextFrame(N.OnStart);
 	}
 		
 	public override void OnNotification (string alias, Object target, params object[] data)

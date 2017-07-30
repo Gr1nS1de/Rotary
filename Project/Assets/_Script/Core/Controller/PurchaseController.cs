@@ -51,11 +51,13 @@ public class PurchaseController : Controller
 
 	private void OnStart()
 	{
-		InitProducts ();
-		ConnectAndroidPurchaser ();
+		#if UNITY_ANDROID
+		InitProductsAndroid ();
+		ConnectPurchaserAndroid ();
+		#endif
 	}
 
-	private void InitProducts()
+	private void InitProductsAndroid()
 	{
 		GoogleProductTemplate doubleCoin = new GoogleProductTemplate()
 		{
@@ -86,7 +88,7 @@ public class PurchaseController : Controller
 		AndroidInAppPurchaseManager.Client.AddProduct (coinsPack_01);
 	}
 
-	private void ConnectAndroidPurchaser()
+	private void ConnectPurchaserAndroid()
 	{
 		AndroidInAppPurchaseManager.ActionProductPurchased += OnProductPurchased;
 		AndroidInAppPurchaseManager.ActionProductConsumed += OnProductConsumed;

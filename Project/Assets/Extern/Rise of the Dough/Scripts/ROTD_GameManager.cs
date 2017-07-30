@@ -156,11 +156,11 @@ public class ROTD_GameManager : MonoBehaviour
 		// set the orthographic size of the main and GUI cameras based on the platform
 		
 #if UNITY_IPHONE
-		switch (iPhone.generation)
+		switch (UnityEngine.iOS.Device.generation)
 		{
-		case iPhoneGeneration.iPad1Gen:
-		case iPhoneGeneration.iPad2Gen:
-		case iPhoneGeneration.iPad3Gen:
+		case UnityEngine.iOS.DeviceGeneration.iPad1Gen:
+		case UnityEngine.iOS.DeviceGeneration.iPad2Gen:
+		case UnityEngine.iOS.DeviceGeneration.iPad3Gen:
 			mainCamera.orthographicSize = 384.0f;
 			guiManager.guiCamera.orthographicSize = 384.0f;
 			break;	

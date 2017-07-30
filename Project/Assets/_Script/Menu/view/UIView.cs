@@ -49,7 +49,7 @@ public class UIView : View
 
 		foreach (PlayerSkinView playerSkinElement in playerSkinsElementsArray)
 		{
-			if (playerSkinElement.SkinId == playerSkinId)
+			if (playerSkinElement != null && playerSkinElement.SkinId == playerSkinId)
 			{
 				playerSkinElementView = playerSkinElement;
 				break;

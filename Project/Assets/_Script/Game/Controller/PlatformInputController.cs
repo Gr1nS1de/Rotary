@@ -52,7 +52,8 @@ public class PlatformInputController : Controller
 
 	private void OnDragPlatform (Transform selectedPlatform, Vector3 inputPoint, FingerMotionPhase gesturePhase)
 	{
-		//Debug.Log ("Drag platform = " + selectedPlatform.gameObject.name + " point " + inputPoint);
+		//Debug.Log ("OnDragPlatform. Drag platform = " + selectedPlatform.gameObject.name + " point " + inputPoint + " screenSize: "+_screenSize);
+
 		PlatformView platformView = selectedPlatform.GetComponentInParent<PlatformView>();
 
 		if (platformView == null)

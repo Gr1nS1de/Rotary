@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameServicesController : Controller
 {
+	#if UNITY_ANDROID || UNITY_EDITOR
 	private const string LEADERBOARD_ID = "CgkI-OTq2vYEEAIQAA";
 
 	public override void OnNotification (string alias, Object target, params object[] data)
@@ -102,5 +103,6 @@ public class GameServicesController : Controller
 		if (GooglePlayConnection.State == GPConnectionState.STATE_CONNECTED)
 			GooglePlayManager.Instance.SubmitScoreById(LEADERBOARD_ID, score);
 	}
+	#endif
 }
 

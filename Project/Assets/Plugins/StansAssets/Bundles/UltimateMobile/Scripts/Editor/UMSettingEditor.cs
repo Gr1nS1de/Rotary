@@ -408,7 +408,7 @@ public class UMSettingEditor : Editor {
 			
 			#if UNITY_IOS || UNITY_IPHONE
 			
-			PlayerSettings.bundleIdentifier = "com.iosnative.preview";
+			PlayerSettings.applicationIdentifier = "com.iosnative.preview";
 			
 			
 			#endif

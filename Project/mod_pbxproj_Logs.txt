@@ -1,0 +1,12 @@
+add_file System/Library/Frameworks/StoreKit.framework
+add_file System/Library/Frameworks/GameKit.framework
+add_file System/Library/Frameworks/Accounts.framework
+add_file System/Library/Frameworks/Social.framework
+add_file System/Library/Frameworks/MessageUI.framework
+add_file System/Library/Frameworks/MobileCoreServices.framework
+add_file System/Library/Frameworks/StoreKit.framework
+add_file System/Library/Frameworks/GameKit.framework
+add_file System/Library/Frameworks/Accounts.framework
+add_file System/Library/Frameworks/Social.framework
+add_file System/Library/Frameworks/MessageUI.framework
+add_file System/Library/Frameworks/MobileCoreServices.framework
