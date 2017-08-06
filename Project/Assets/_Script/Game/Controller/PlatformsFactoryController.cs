@@ -40,7 +40,6 @@ public class PlatformsFactoryController : Controller
 
 	private void OnStart()
 	{
-		
 	}
 
 	private void OnGamePlay()

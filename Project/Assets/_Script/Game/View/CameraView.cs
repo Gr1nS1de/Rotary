@@ -23,6 +23,14 @@ public class CameraView : View<GameActivity>
 
 	public void OnInit()
 	{
+		Vector3 cameraPosition = Camera.transform.position;
+
+		cameraPosition.x += GM.Instance.ScreenSize.x;
+
+		transform.DOMove (cameraPosition, 0.5f).OnComplete (() =>
+		{
+			Notify(N.GamePlay);
+		}).SetEase(Ease.Linear);
 		
 	}
 

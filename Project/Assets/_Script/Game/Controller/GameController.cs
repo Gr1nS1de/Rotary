@@ -56,7 +56,11 @@ public class GameController : Controller
 			case N.GameStart:
 				{
 					OnGameStartPlay ();
+					break;
+				}
 
+			case N.GamePlay:
+				{
 					GoGameState (GameState.Playing);
 					break;
 				}

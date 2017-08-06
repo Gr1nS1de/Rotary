@@ -20,6 +20,13 @@ public class PlayerController : Controller
 
 			case N.GameStart:
 				{
+
+					_playerView.OnInit ();
+					break;
+				}
+
+			case N.GamePlay:
+				{
 					InitPlayer ();
 					break;
 				}
@@ -215,22 +222,18 @@ public class PlayerController : Controller
 	private void InitPlayer()
 	{
 		Vector2 screenSize = GM.Instance.ScreenSize;
-		Vector3 playerInitPosition = new Vector3(-screenSize.x / 2f, screenSize.y / 2f * 0.5f, 0f);
+		Vector3 playerInitPosition = new Vector3(screenSize.x/2f - _playerModel.playerRendererSize.x, screenSize.y /2f - screenSize.y / 5f, 0f);
 		Rigidbody2D playerRB = _playerView.PlayerRenderer.GetComponent<Rigidbody2D> ();
 
-		_playerView.OnInit (playerInitPosition);
+		_playerView.PlayerRenderer.transform.position = playerInitPosition;
 
-		playerRB.transform.DOMove (Vector3.zero, 0.5f)
-			.OnComplete (() =>
-			{
-				_playerView.gameObject.SetActive (true);
-				playerRB.velocity = Vector2.zero;
+		_playerView.gameObject.SetActive (true);
+		playerRB.velocity = Vector2.zero;
 
-				if (_playerModel.forceOnInit != 0f)
-					playerRB.AddForce (new Vector2 (1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
+		if (_playerModel.forceOnInit != 0f)
+			playerRB.AddForce (new Vector2 (1f, 1f) * _playerModel.forceOnInit, ForceMode2D.Impulse);
 
-				GoToPlayerState (PlayerState.GamePlay);
-			});
+		GoToPlayerState (PlayerState.GamePlay);
 		
 	}
 

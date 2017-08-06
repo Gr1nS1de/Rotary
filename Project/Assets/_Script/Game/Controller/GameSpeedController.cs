@@ -17,9 +17,9 @@ public class GameSpeedController : Controller
 					break;
 				}
 
-			case N.GameStart:
+			case N.GamePlay:
 				{
-					SetGameSpeed (GameSpeedState.Speed_5);
+					SetGameSpeed (GameSpeedState.Speed_1);
 					break;
 				}
 

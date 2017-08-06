@@ -14,10 +14,9 @@ public class PlayerView : View
 
 	private PlayerModel 		_playerModel	{ get { return game.model.playerModel; } }
 	private Rigidbody2D 		_playerRB;
-	private Vector3 			_playerInitPosition;
 	private float 				_initCameraDistanceX = 0f;
 	//private float 			_lastCameraDistance = 0f;
-	private float? 				_lastInvisibleTimestamp = 0f;
+	private float? 				_lastInvisibleTimestamp = null;
 	private float 				_offsetBackspeedRate = 0f;
 	private float 				_backOffsetSpeed = 0f;
 	private RaycastHit2D		_jumpRaycast;
@@ -32,9 +31,8 @@ public class PlayerView : View
 		_playerAnimator = PlayerRenderer.GetComponent<Animator> ();
 	} 
 
-	public void OnInit(Vector3 initPosition)
+	public void OnInit()
 	{
-		_playerInitPosition = initPosition;
 
 		_initCameraDistanceX = Mathf.Abs (- GM.Instance.ScreenSize.x / 2f + (GM.Instance.ScreenSize.x * _playerModel.initScreenPosX)  - game.view.cameraView.transform.position.x);
 
@@ -80,7 +78,12 @@ public class PlayerView : View
 			CheckJumpRay ();
 
 			if (_lastInvisibleTimestamp != null && _lastInvisibleTimestamp < Time.time)
+			{
+
+				_lastInvisibleTimestamp = null;
+
 				Notify (N.OnPlayerInvisible);
+			}
 		}
 
 		//Debug.LogFormat("Current camera offset = {0}. back offset speed = {1}",currentOffset, _backOffsetSpeed );
